@@ -1,1 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wasel Auto — Bahrain's Auto Parts Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--red:#CE1126;--red2:#e8253a;--dark:#111111;--dark2:#1e1e1e;--bg:#f4f4f4;--surf:#fff;--surf2:#f0f0f0;--bdr:#e2e2e2;--txt:#111;--mut:#666;--grn:#15803d;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;}
+.topbar{background:var(--red);color:white;text-align:center;padding:7px 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:60px;background:var(--dark);border-bottom:3px solid var(--red);position:sticky;top:0;z-index:200;}
+.logo-w{font-family:'Barlow';font-weight:900;font-size:1.7rem;color:white;letter-spacing:-1px;line-height:1;}
+.logo-a{font-family:'Barlow';font-weight:700;font-size:0.95rem;color:var(--red);font-style:italic;margin-left:5px;margin-bottom:3px;letter-spacing:1px;}
+.ntabs{display:flex;gap:2px;}
+.ntab{padding:6px 14px;border-radius:6px;border:none;background:transparent;color:#999;font-family:'Barlow';font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.15s;text-transform:uppercase;}
+.ntab.on{background:var(--red);color:white;}
+.ntab:hover:not(.on){color:white;background:rgba(255,255,255,0.07);}
+.nbadge{background:white;color:var(--red);font-size:0.58rem;padding:1px 5px;border-radius:99px;margin-left:4px;font-weight:800;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:6px;border:none;cursor:pointer;font-family:'Barlow';font-size:0.82rem;font-weight:700;transition:all 0.15s;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap;text-decoration:none;}
+.btn-r{background:var(--red);color:white;}.btn-r:hover{background:var(--red2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(224,31,31,0.4);}
+.btn-r:disabled{opacity:0.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-d{background:var(--dark);color:white;}.btn-d:hover{background:var(--dark2);}
+.btn-ol{background:transparent;color:var(--red);border:2px solid var(--red);}.btn-ol:hover{background:var(--red);color:white;}
+.btn-olw{background:transparent;color:white;border:2px solid rgba(255,255,255,0.35);}.btn-olw:hover{background:white;color:var(--dark);}
+.btn-gh{background:var(--surf2);color:var(--txt);border:1px solid var(--bdr);}.btn-gh:hover{border-color:var(--red);color:var(--red);}
+.btn-sm{padding:5px 13px;font-size:0.73rem;}.btn-lg{padding:13px 28px;font-size:0.88rem;}
+.lhero{background:var(--dark);color:white;padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+.lhero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(224,31,31,0.12),transparent);pointer-events:none;}
+.lhero-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(224,31,31,0.14);border:1px solid rgba(224,31,31,0.35);color:#ff8080;font-size:0.68rem;font-weight:700;letter-spacing:0.16em;padding:5px 13px;border-radius:99px;text-transform:uppercase;margin-bottom:1.3rem;}
+.lhero h1{font-family:'Barlow';font-size:clamp(2.1rem,4vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:1.1rem;}
+.lhero h1 em{font-style:normal;color:var(--red);}
+.lhero p{color:#aaa;font-size:0.97rem;line-height:1.75;margin-bottom:1.8rem;}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap;}
+.mock{background:var(--dark2);border:2px solid #2a2a2a;border-radius:18px;padding:1.1rem;position:relative;}
+.mock::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:var(--red);border-radius:18px 18px 0 0;}
+.mock-bar{display:flex;align-items:center;gap:7px;margin-bottom:.9rem;padding-bottom:.8rem;border-bottom:1px solid #222;}
+.mdot{width:8px;height:8px;border-radius:50%;}
+.murl{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:3px 9px;font-family:'JetBrains Mono';font-size:0.62rem;color:#555;flex:1;}
+.mpart{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:7px;padding:.75rem;display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.mpart:last-child{margin-bottom:0;}
+.mpn{font-size:0.75rem;font-weight:700;color:white;}
+.mpp{font-size:0.67rem;color:var(--red);font-weight:700;margin-top:1px;font-family:'JetBrains Mono';}
+.mbadge{font-size:0.57rem;padding:1px 6px;border-radius:3px;font-weight:700;text-transform:uppercase;}
+.mb-g{background:white;color:black;}.mb-a{background:var(--red);color:white;}
+.sstrip{background:var(--red);padding:1.8rem 2rem;}
+.sinner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;}
+.sn{font-family:'Barlow';font-size:1.9rem;font-weight:900;color:white;}
+.sl{font-size:0.67rem;font-weight:700;color:rgba(255,255,255,0.75);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+.sec{padding:4.5rem 2rem;}.sec.dark{background:var(--dark);color:white;}.sec.white{background:white;}
+.sec-inner{max-width:1100px;margin:0 auto;}
+.sec-lbl{font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:.7rem;}
+.sec-h{font-family:'Barlow';font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;line-height:1.1;letter-spacing:-.5px;margin-bottom:.9rem;}
+.sec.dark .sec-h{color:white;}
+.sec-sub{color:var(--mut);font-size:.97rem;line-height:1.7;max-width:580px;margin-bottom:2.8rem;}
+.sec.dark .sec-sub{color:#888;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;}
+.prob-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:1.3rem;}
+.prob-n{font-family:'Barlow';font-size:1.9rem;font-weight:900;color:var(--red);line-height:1;}
+.prob-card h4{font-family:'Barlow';font-weight:700;font-size:.93rem;color:white;margin:.5rem 0 .3rem;}
+.prob-card p{font-size:.8rem;color:#777;line-height:1.6;}
+.sol-card{background:white;border:1.5px solid var(--bdr);border-top:3px solid var(--red);border-radius:10px;padding:1.3rem;}
+.sol-card h4{font-family:'Barlow';font-weight:700;font-size:.92rem;margin:.5rem 0 .3rem;}
+.sol-card p{font-size:.78rem;color:var(--mut);line-height:1.6;}
+.mkt-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:1.3rem;text-align:center;}
+.mkt-n{font-family:'Barlow';font-size:1.7rem;font-weight:900;color:var(--red);}
+.mkt-l{font-size:.72rem;color:#888;font-weight:600;margin-top:4px;line-height:1.4;}
+.rmap{display:flex;gap:0;position:relative;margin-top:1rem;}
+.rmap::before{content:'';position:absolute;top:19px;left:20px;right:20px;height:2px;background:var(--red);opacity:.25;}
+.ritem{flex:1;text-align:center;position:relative;padding-top:.4rem;}
+.rdot{width:38px;height:38px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto .7rem;font-weight:900;font-size:.82rem;color:white;position:relative;z-index:1;border:3px solid var(--dark);}
+.rdot.off{background:#2a2a2a;color:#555;}
+.rph{font-size:.63rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.1em;}
+.rt{font-weight:700;font-size:.82rem;color:white;margin:2px 0;}
+.rd{font-size:.7rem;color:#666;line-height:1.5;}
+.cta-sec{background:var(--red);padding:4.5rem 2rem;text-align:center;}
+.cta-sec h2{font-family:'Barlow';font-size:clamp(1.9rem,4vw,2.9rem);font-weight:900;color:white;margin-bottom:.9rem;letter-spacing:-.5px;}
+.cta-sec p{color:rgba(255,255,255,.8);font-size:.97rem;margin-bottom:1.8rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.footer{background:#0a0a0a;color:#555;padding:1.8rem;text-align:center;font-size:.76rem;border-top:2px solid var(--red);}
+.anav{display:flex;align-items:center;gap:4px;padding:.7rem 1.5rem;background:white;border-bottom:1px solid var(--bdr);flex-wrap:wrap;}
+.atab{padding:6px 13px;border-radius:6px;border:none;background:transparent;color:var(--mut);font-family:'Barlow';font-size:.76rem;font-weight:700;cursor:pointer;transition:all .15s;text-transform:uppercase;}
+.atab.on{background:var(--dark);color:white;}
+.atab:hover:not(.on){color:var(--txt);background:var(--surf2);}
+.atabadge{background:var(--red);color:white;font-size:.57rem;padding:1px 5px;border-radius:99px;margin-left:4px;font-weight:800;}
+.panel{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05);}
+.ph{padding:.9rem 1.3rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:11px;background:var(--dark);color:white;}
+.phi{width:30px;height:30px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0;}
+.pt{font-family:'Barlow';font-weight:700;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;}
+.ps{font-size:.68rem;color:#aaa;margin-top:1px;}
+.pb{padding:1.3rem;}
+.aifinder{max-width:840px;margin:0 auto;padding:1.3rem 1.5rem;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-bottom:1.1rem;}
+.ig{display:flex;flex-direction:column;gap:5px;}
+.il{font-size:.66rem;font-weight:700;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;}
+.ifield{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:9px 13px;color:var(--txt);font-family:'JetBrains Mono';font-size:.83rem;outline:none;transition:border .15s;width:100%;}
+.ifield:focus{border-color:var(--red);background:white;}
+.ifield::placeholder{color:#bbb;}
+.dzone{border:2px dashed var(--bdr);border-radius:9px;padding:1.4rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--surf2);}
+.dzone:hover,.dzone.on{border-color:var(--red);background:rgba(224,31,31,.03);}
+.dzone img{max-height:120px;border-radius:7px;object-fit:cover;}
+.dzt{color:var(--mut);font-size:.78rem;margin-top:6px;}
+.aibox{background:var(--dark);color:white;border-radius:9px;padding:1.2rem;margin-top:1.1rem;border-left:4px solid var(--red);}
+.aiconf{font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:99px;text-transform:uppercase;font-family:'JetBrains Mono';}
+.aiconf.high{background:rgba(21,128,61,.2);color:#4ade80;border:1px solid rgba(21,128,61,.4);}
+.aiconf.medium{background:rgba(224,31,31,.2);color:#ff9090;border:1px solid rgba(224,31,31,.3);}
+.aiconf.low{background:rgba(255,255,255,.07);color:#aaa;border:1px solid rgba(255,255,255,.12);}
+.ainm{font-family:'Barlow';font-size:1.15rem;font-weight:900;color:white;margin-top:4px;}
+.aitags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+.aitag{font-size:.67rem;font-family:'JetBrains Mono';background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:2px 8px;color:#ccc;}
+.aitag-r{background:rgba(224,31,31,.2);border-color:rgba(224,31,31,.35);color:#ff9090;}
+.ainotes{margin-top:8px;font-size:.78rem;color:#888;line-height:1.6;}
+.psec{padding:1.5rem 2rem;max-width:1260px;margin:0 auto;}
+.shr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:8px;}
+.sh{font-family:'Barlow';font-size:1.25rem;font-weight:900;text-transform:uppercase;}
+.sh span{color:var(--red);}
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.1rem;align-items:center;}
+.pill{padding:4px 13px;border-radius:6px;border:1.5px solid var(--bdr);background:white;color:var(--mut);font-family:'Barlow';font-size:.71rem;font-weight:700;cursor:pointer;transition:all .15s;text-transform:uppercase;}
+.pill.on{background:var(--dark);color:white;border-color:var(--dark);}
+.pill:hover:not(.on){border-color:var(--red);color:var(--red);}
+.ttog{display:flex;background:var(--surf2);border:1.5px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.tbtn{padding:5px 12px;border:none;background:transparent;font-family:'Barlow';font-size:.71rem;font-weight:700;cursor:pointer;transition:all .15s;text-transform:uppercase;color:var(--mut);}
+.tbtn.on{background:var(--dark);color:white;}
+.sbar{display:flex;align-items:center;gap:7px;background:white;border:1.5px solid var(--bdr);border-radius:7px;padding:6px 12px;flex:1;max-width:290px;transition:border .15s;}
+.sbar:focus-within{border-color:var(--red);}
+.sbar input{background:none;border:none;outline:none;color:var(--txt);font-family:'Barlow';font-size:.85rem;width:100%;}
+.sbar input::placeholder{color:#bbb;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1rem;}
+.pcard{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1rem 1rem .9rem;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;}
+.pcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background .15s;}
+.pcard:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 5px 18px rgba(224,31,31,.1);}
+.pcard:hover::before,.pcard.hl::before{background:var(--red);}
+.pcard.hl{border-color:var(--red);box-shadow:0 3px 14px rgba(224,31,31,.09);}
+.ptyp{position:absolute;top:10px;right:10px;font-size:.59rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;}
+.ptyp-g{background:var(--dark);color:white;}.ptyp-a{background:var(--red);color:white;}
+.paib{position:absolute;top:10px;left:10px;font-size:.57rem;font-weight:700;color:var(--red);background:rgba(224,31,31,.1);border:1px solid rgba(224,31,31,.22);padding:2px 6px;border-radius:4px;text-transform:uppercase;}
+.cico{font-size:1.6rem;margin:.3rem 0 .6rem;}
+.csku{font-family:'JetBrains Mono';font-size:.59rem;color:var(--mut);margin-bottom:2px;}
+.cnm{font-family:'Barlow';font-weight:700;font-size:.9rem;margin-bottom:2px;line-height:1.3;padding-right:54px;}
+.cbr{font-size:.71rem;color:var(--mut);font-weight:600;margin-bottom:6px;}
+.cco{font-size:.71rem;color:var(--mut);margin-bottom:8px;}
+.cpr{font-family:'Barlow';font-size:1.3rem;font-weight:900;color:var(--dark);}
+.cpr span{font-size:.7rem;font-weight:600;color:var(--mut);margin-left:2px;}
+.cft{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);}
+.wtag{font-size:.61rem;font-weight:700;color:var(--grn);background:rgba(21,128,61,.07);border:1px solid rgba(21,128,61,.17);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono';}
+.qtag{font-size:.64rem;color:var(--mut);font-family:'JetBrains Mono';}
+.csup{font-size:.67rem;color:var(--mut);margin-top:5px;font-weight:600;}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.mod{background:white;border-radius:14px;max-width:460px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.2);}
+.mh{background:var(--dark);color:white;padding:1.3rem 1.4rem;border-bottom:3px solid var(--red);position:relative;}
+.mclose{position:absolute;top:.9rem;right:.9rem;background:rgba(255,255,255,.08);border:none;color:white;border-radius:5px;width:27px;height:27px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.82rem;}
+.mpn2{font-family:'Barlow';font-size:1.15rem;font-weight:900;margin-top:4px;}
+.mpr{font-family:'Barlow';font-size:1.9rem;font-weight:900;color:var(--red);margin-top:2px;}
+.mbody{padding:1.2rem 1.4rem;}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:.82rem;}
+.mrow:last-of-type{border-bottom:none;}
+.mrl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);}
+.macts{padding:0 1.4rem 1.3rem;display:flex;gap:8px;}
+.sport{max-width:840px;margin:0 auto;padding:1.4rem 2rem;}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.ff{grid-column:1/-1;}
+.fsec{margin-bottom:1.7rem;}
+.fsect{font-size:.66rem;font-weight:700;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-bottom:.8rem;padding-bottom:6px;border-bottom:2px solid var(--bdr);}
+.sel{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:9px 13px;color:var(--txt);font-family:'Barlow';font-size:.86rem;font-weight:600;outline:none;cursor:pointer;appearance:none;width:100%;transition:border .15s;}
+.sel:focus{border-color:var(--red);}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;padding:1.3rem 2rem;max-width:1260px;margin:0 auto;}
+.scard{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1.2rem;transition:all .15s;position:relative;overflow:hidden;}
+.scard:hover{border-color:var(--red);box-shadow:0 4px 16px rgba(224,31,31,.08);}
+.sacc{position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);}
+.snm{font-family:'Barlow';font-weight:900;font-size:.95rem;}
+.sloc{font-size:.74rem;color:var(--mut);font-weight:600;margin:3px 0 8px;}
+.vtag{font-size:.59rem;color:var(--grn);border:1px solid rgba(21,128,61,.3);background:rgba(21,128,61,.07);padding:2px 6px;border-radius:4px;font-weight:700;text-transform:uppercase;margin-left:7px;font-family:'JetBrains Mono';}
+.stars{color:var(--red);font-size:.8rem;}
+.imod{background:white;border-radius:14px;max-width:510px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.2);max-height:90vh;overflow-y:auto;}
+.imh{background:var(--dark);color:white;padding:1.4rem;border-bottom:3px solid var(--red);position:relative;}
+.imb{padding:1.4rem;}
+.isuccess{text-align:center;padding:2rem;}
+.toast{position:fixed;bottom:1.4rem;right:1.4rem;background:var(--dark);color:white;padding:.85rem 1.2rem;border-radius:8px;font-size:.8rem;z-index:999;animation:su .25s ease;border-left:3px solid var(--red);font-weight:600;}
+@keyframes su{from{transform:translateY(18px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.loading{display:flex;align-items:center;gap:9px;color:var(--red);font-size:.8rem;padding:.9rem 0;font-weight:600;}
+.spin{width:15px;height:15px;border:2px solid var(--bdr);border-top-color:var(--red);border-radius:50%;animation:sp .65s linear infinite;flex-shrink:0;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.empty{text-align:center;padding:3.5rem;color:var(--mut);}
+.empty h3{font-family:'Barlow';font-weight:900;color:var(--txt);margin-bottom:.3rem;}
+.hlbanner{background:rgba(224,31,31,.05);border:1.5px solid rgba(224,31,31,.17);border-radius:7px;padding:.55rem 1rem;display:flex;align-items:center;gap:8px;margin-bottom:1rem;font-size:.78rem;color:var(--red);font-weight:700;}
+.int-ref{margin-top:1.3rem;padding:.9rem 1rem;background:rgba(224,31,31,.05);border:1px solid rgba(224,31,31,.18);border-radius:8px;font-size:.77rem;color:var(--mut);line-height:1.8;}
+.session-counter{position:fixed;bottom:1.4rem;left:1.4rem;background:var(--dark);color:white;padding:6px 11px;border-radius:6px;font-size:.68rem;font-family:'JetBrains Mono';border:1px solid #333;border-left:3px solid var(--red);z-index:100;}
+@media(max-width:768px){.lhero-grid{grid-template-columns:1fr;}.g3{grid-template-columns:1fr 1fr;}.g4,.sinner{grid-template-columns:1fr 1fr;}.rmap{flex-direction:column;gap:1rem;}.rmap::before{display:none;}.mock,.ntabs{display:none;}}
+@media(max-width:520px){.g3,.fgr,.fgrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useRef,useEffect} = React;
 
+const PARTS=[
+  {id:1,supplier:"Nasser Auto Parts",sku:"TOY-GEN-4210",name:"Toyota Genuine Oil Filter",category:"Engine",make:"Toyota",model:"Land Cruiser",yearFrom:2018,yearTo:2025,price:4.800,currency:"BHD",type:"Genuine",brand:"Toyota",qty:24,image:"🔧",location:"Sitra Industrial Area, Bahrain",phone:"+97317001234",warranty:"12 months"},
+  {id:2,supplier:"Nasser Auto Parts",sku:"NIS-GEN-7732",name:"Nissan Genuine Brake Pads Front",category:"Brakes",make:"Nissan",model:"Patrol",yearFrom:2016,yearTo:2025,price:38.500,currency:"BHD",type:"Genuine",brand:"Nissan",qty:12,image:"🛑",location:"Sitra Industrial Area, Bahrain",phone:"+97317001234",warranty:"12 months"},
+  {id:3,supplier:"Gulf Auto Traders",sku:"BMW-GEN-9910",name:"BMW Genuine Alternator 180A",category:"Electronics",make:"BMW",model:"X5",yearFrom:2019,yearTo:2024,price:285.000,currency:"BHD",type:"Genuine",brand:"BMW",qty:3,image:"⚡",location:"Hamad Town, Bahrain",phone:"+97317665678",warranty:"24 months"},
+  {id:4,supplier:"Gulf Auto Traders",sku:"MBZ-GEN-3341",name:"Mercedes Genuine Radiator",category:"Cooling",make:"Mercedes",model:"C-Class",yearFrom:2018,yearTo:2023,price:320.000,currency:"BHD",type:"Genuine",brand:"Mercedes-Benz",qty:2,image:"🌡️",location:"Hamad Town, Bahrain",phone:"+97317665678",warranty:"24 months"},
+  {id:5,supplier:"Al Moayyed Auto",sku:"HON-GEN-5520",name:"Honda Genuine Timing Belt Kit",category:"Engine",make:"Honda",model:"CR-V",yearFrom:2017,yearTo:2022,price:95.000,currency:"BHD",type:"Genuine",brand:"Honda",qty:6,image:"⚙️",location:"Muharraq, Bahrain",phone:"+97317999000",warranty:"12 months"},
+  {id:6,supplier:"Al Moayyed Auto",sku:"TOY-GEN-1182",name:"Toyota Genuine Suspension Kit Front",category:"Suspension",make:"Toyota",model:"Camry",yearFrom:2018,yearTo:2024,price:145.000,currency:"BHD",type:"Genuine",brand:"Toyota",qty:4,image:"🔩",location:"Muharraq, Bahrain",phone:"+97317999000",warranty:"12 months"},
+  {id:7,supplier:"Nasser Auto Parts",sku:"AFT-BOX-4421",name:"Bosch Brake Pads Universal Fit",category:"Brakes",make:"Toyota",model:"Corolla",yearFrom:2015,yearTo:2024,price:12.900,currency:"BHD",type:"Aftermarket",brand:"Bosch",qty:30,image:"🛑",location:"Sitra Industrial Area, Bahrain",phone:"+97317001234",warranty:"6 months"},
+  {id:8,supplier:"Gulf Auto Traders",sku:"AFT-DEN-8810",name:"Denso Spark Plugs Set 4x",category:"Engine",make:"Nissan",model:"Altima",yearFrom:2014,yearTo:2023,price:8.500,currency:"BHD",type:"Aftermarket",brand:"Denso",qty:40,image:"🔥",location:"Hamad Town, Bahrain",phone:"+97317665678",warranty:"6 months"},
+  {id:9,supplier:"Al Moayyed Auto",sku:"AFT-MAN-2290",name:"Mann Air Filter Premium",category:"Engine",make:"BMW",model:"3 Series",yearFrom:2017,yearTo:2024,price:9.800,currency:"BHD",type:"Aftermarket",brand:"Mann",qty:18,image:"💨",location:"Muharraq, Bahrain",phone:"+97317999000",warranty:"6 months"},
+  {id:10,supplier:"Nasser Auto Parts",sku:"AFT-GAT-5510",name:"Gates Timing Belt",category:"Engine",make:"Honda",model:"Civic",yearFrom:2016,yearTo:2022,price:22.000,currency:"BHD",type:"Aftermarket",brand:"Gates",qty:10,image:"⚙️",location:"Sitra Industrial Area, Bahrain",phone:"+97317001234",warranty:"12 months"},
+  {id:11,supplier:"Gulf Auto Traders",sku:"AFT-TRW-3312",name:"TRW Front Shock Absorbers Pair",category:"Suspension",make:"Mercedes",model:"E-Class",yearFrom:2016,yearTo:2023,price:78.000,currency:"BHD",type:"Aftermarket",brand:"TRW",qty:5,image:"🔩",location:"Hamad Town, Bahrain",phone:"+97317665678",warranty:"12 months"},
+  {id:12,supplier:"Al Moayyed Auto",sku:"AFT-VAL-7710",name:"Valeo Alternator 140A",category:"Electronics",make:"Ford",model:"Explorer",yearFrom:2015,yearTo:2022,price:65.000,currency:"BHD",type:"Aftermarket",brand:"Valeo",qty:7,image:"⚡",location:"Muharraq, Bahrain",phone:"+97317999000",warranty:"6 months"},
+];
+
+const SUPS=[
+  {id:1,name:"Nasser Auto Parts",location:"Sitra Industrial Area",rating:4.9,parts:182,verified:true,since:"1998",speciality:"Toyota & Nissan"},
+  {id:2,name:"Gulf Auto Traders",location:"Hamad Town",rating:4.7,parts:134,verified:true,since:"2005",speciality:"European Brands"},
+  {id:3,name:"Al Moayyed Auto",location:"Muharraq",rating:4.6,parts:97,verified:true,since:"2011",speciality:"Honda & Ford"},
+];
+
+const CATS=["All","Engine","Brakes","Suspension","Cooling","Electronics","Transmission"];
+const PTYPES=["All Types","Genuine","Aftermarket"];
+
+async function askAI(prompt,b64){
+  const content=[];
+  if(b64) content.push({type:"image",source:{type:"base64",media_type:"image/jpeg",data:b64}});
+  content.push({type:"text",text:prompt});
+  const res=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
+      system:`You are a GCC automotive parts expert. Identify parts from VIN, description or image. Respond ONLY with valid JSON no markdown: {"partName":string,"category":string,"makes":[string],"models":[string],"yearRange":{"from":number,"to":number},"confidence":"high"|"medium"|"low","partTypes":[string],"topBrands":[string],"notes":string}`,
+      messages:[{role:"user",content}]})
+  });
+  const d=await res.json();
+  const t=d.content?.map(b=>b.text||"").join("")||"{}";
+  try{return JSON.parse(t.replace(/```json|```/g,"").trim());}catch{return null;}
+}
+
+function PartCard({part,onClick,hl}){
+  return(
+    <div className={`pcard${hl?" hl":""}`} onClick={onClick}>
+      {hl&&<div className="paib">AI Match</div>}
+      <div className={`ptyp ${part.type==="Genuine"?"ptyp-g":"ptyp-a"}`}>{part.type}</div>
+      <div className="cico">{part.image}</div>
+      <div className="csku">{part.sku}</div>
+      <div className="cnm">{part.name}</div>
+      <div className="cbr">{part.brand}</div>
+      <div className="cco">{part.make} {part.model} · {part.yearFrom}–{part.yearTo}</div>
+      <div className="cpr">{part.price.toFixed(3)} <span>{part.currency}</span></div>
+      <div className="cft">
+        <span className="wtag">✓ {part.warranty}</span>
+        <span className="qtag">{part.qty} in stock</span>
+      </div>
+      <div className="csup">📍 {part.location}</div>
+    </div>
+  );
+}
+
+function Landing({goPlatform,goInterest}){
+  return(
+    <div>
+      <div className="lhero">
+        <div className="lhero-bg"/>
+        <div className="lhero-grid">
+          <div>
+            <div className="eyebrow">🇧🇭 Launching in Bahrain · GCC Expansion Planned</div>
+            <h1>The <em>Smarter</em> Way to Find Auto Parts in Bahrain</h1>
+            <p>Wasel Auto is Bahrain's first AI-powered auto parts marketplace — connecting garages with certified suppliers of Genuine and Aftermarket parts. Instantly. No phone calls. No guesswork.</p>
+            <div className="hbtns">
+              <button className="btn btn-r btn-lg" onClick={goPlatform}>🚀 View Live Demo</button>
+              <button className="btn btn-olw btn-lg" onClick={goInterest}>🤝 Partner With Us</button>
+            </div>
+          </div>
+          <div className="mock">
+            <div className="mock-bar">
+              <div className="mdot" style={{background:"#ff5f57"}}/>
+              <div className="mdot" style={{background:"#febc2e"}}/>
+              <div className="mdot" style={{background:"#28c840"}}/>
+              <div className="murl">wasel-auto.com · AI Part Finder</div>
+            </div>
+            <div style={{background:"#1a1a1a",borderRadius:7,padding:".75rem",marginBottom:8}}>
+              <div style={{fontSize:".62rem",color:"#555",fontFamily:"'JetBrains Mono'",marginBottom:3}}>VIN IDENTIFIED</div>
+              <div style={{fontSize:".8rem",fontWeight:700,color:"white"}}>Toyota Land Cruiser 2021</div>
+              <div style={{fontSize:".66rem",color:"var(--red)",marginTop:2}}>3 matching parts found ↓</div>
+            </div>
+            {[["🛑","Genuine Brake Pads","38.500 BHD","g"],["🔧","OEM Oil Filter","4.800 BHD","g"],["⚙️","Bosch Air Filter","9.200 BHD","a"]].map(([i,n,p,t])=>(
+              <div key={n} className="mpart">
+                <span style={{fontSize:"1.2rem"}}>{i}</span>
+                <div style={{flex:1}}><div className="mpn">{n}</div><div className="mpp">{p}</div></div>
+                <span className={`mbadge ${t==="g"?"mb-g":"mb-a"}`}>{t==="g"?"OEM":"AFT"}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="sstrip">
+        <div className="sinner">
+          {[["$2.8B+","GCC Auto Parts Market"],["12,000+","Garages in Bahrain & KSA"],["400+","Parts at Launch"],["< 5s","AI Identification"]].map(([n,l])=>(
+            <div key={l}><div className="sn">{n}</div><div className="sl">{l}</div></div>
+          ))}
+        </div>
+      </div>
+
+      <div className="sec dark">
+        <div className="sec-inner">
+          <div className="sec-lbl">The Problem</div>
+          <div className="sec-h">Bahrain's Auto Parts Industry is Still Running Manually</div>
+          <div className="sec-sub">Garages waste hours calling suppliers. Suppliers have no digital presence. Parts go unfound. Sales are lost. Every single day.</div>
+          <div className="g3">
+            {[["01","No Digital Discovery","Garages call 5–10 suppliers to find one part. No search, no comparison, no pricing transparency."],
+              ["02","Inventory is Invisible","Suppliers hold thousands of parts with zero online presence. Buyers simply don't know they exist."],
+              ["03","Wrong Parts Ordered","Without VIN-based lookup, wrong parts are ordered constantly — wasting time and money."]].map(([n,t,d])=>(
+              <div key={n} className="prob-card"><div className="prob-n">{n}</div><h4>{t}</h4><p>{d}</p></div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="sec white">
+        <div className="sec-inner">
+          <div className="sec-lbl">Our Solution</div>
+          <div className="sec-h">One Platform. Every Part. Any Garage. Any Supplier.</div>
+          <div className="sec-sub">Wasel Auto digitises the entire parts discovery and procurement journey for Bahrain.</div>
+          <div className="g3">
+            {[["🤖","AI Part Finder","Enter a VIN or upload a photo. AI identifies the exact part and shows live pricing instantly."],
+              ["🏪","Live Marketplace","Browse Genuine and Aftermarket parts from verified Bahraini suppliers instantly."],
+              ["📦","Supplier Portal","Suppliers list their full inventory in minutes. Every part goes live with WhatsApp-direct contact."],
+              ["💬","WhatsApp Native","GCC-native buying flow. Garages enquire through Wasel Auto via WhatsApp. We connect them with the right supplier — keeping all transactions on platform."],
+              ["✅","Verified Suppliers","Every supplier on Wasel Auto is manually vetted and certified."],
+              ["📊","Smart Analytics","Suppliers see which parts are being searched in real-time."]].map(([i,t,d])=>(
+              <div key={t} className="sol-card"><div style={{fontSize:"1.5rem",marginBottom:5}}>{i}</div><h4>{t}</h4><p>{d}</p></div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="sec dark">
+        <div className="sec-inner">
+          <div className="sec-lbl">Market Opportunity</div>
+          <div className="sec-h">A Massive Market With Zero Digital Incumbents</div>
+          <div className="sec-sub">The GCC auto parts market is large, fragmented, and almost entirely offline.</div>
+          <div className="g4">
+            {[["$2.8B","GCC Aftermarket Market 2024"],["$420M","Bahrain + KSA Addressable"],["8.2%","Annual Growth CAGR"],["0","Digital Incumbents in BH"]].map(([n,l])=>(
+              <div key={l} className="mkt-card"><div className="mkt-n">{n}</div><div className="mkt-l">{l}</div></div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="sec dark">
+        <div className="sec-inner">
+          <div className="sec-lbl">Roadmap</div>
+          <div className="sec-h">Phased Launch Plan</div>
+          <div className="rmap">
+            {[["Phase 1","Now","Genuine & Aftermarket parts. Bahrain launch with certified suppliers.",false],
+              ["Phase 2","Q1 2027","Used parts marketplace. Scrap yard digitalisation begins.",true],
+              ["Phase 3","Q1 2028","Saudi Arabia & UAE expansion. Mobile app launch.",true],
+              ["Phase 4","Q3 2028","GCC-wide platform. Fleet & workshop B2B accounts.",true]].map(([ph,ti,de,off])=>(
+              <div key={ph} className="ritem">
+                <div className={`rdot${off?" off":""}`}>{off?"○":"✓"}</div>
+                <div className="rph">{ph}</div>
+                <div className="rt">{ti}</div>
+                <div className="rd">{de}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="cta-sec">
+        <h2>Ready to See It in Action?</h2>
+        <p>Explore the live platform — search for parts, try the AI finder, and see exactly what garages and suppliers will experience.</p>
+        <div className="cta-btns">
+          <button className="btn btn-d btn-lg" onClick={goPlatform}>🚀 Launch Live Demo</button>
+          <button className="btn btn-olw btn-lg" onClick={goInterest}>🤝 Express Interest</button>
+        </div>
+      </div>
+
+      <div className="footer">
+        <div style={{marginBottom:7}}>
+          <span style={{fontFamily:"'Barlow'",fontWeight:900,color:"white",fontSize:"1rem"}}>Wasel</span>
+          <span style={{fontFamily:"'Barlow'",fontWeight:700,color:"var(--red)",fontStyle:"italic",marginLeft:5}}>Auto</span>
+        </div>
+        <div>© 2025 Wasel Auto · Bahrain · <span style={{color:"var(--red)"}}>Confidential — Investor & Supplier Review Only</span></div>
+      </div>
+    </div>
+  );
+}
+
+function InterestModal({onClose,onSubmit}){
+  const [done,setDone]=useState(false);
+  const ref="WAI-"+Date.now().toString().slice(-6);
+  const [f,sf]=useState({company:"",contact:"",phone:"",email:"",location:"",speciality:"",inventory:"",intent:"supplier",message:""});
+  const up=(k,v)=>sf(p=>({...p,[k]:v}));
+  const submit=()=>{
+    if(!f.company||!f.contact||!f.phone) return;
+    onSubmit(f); setDone(true);
+  };
+  return(
+    <div className="ov" onClick={onClose}>
+      <div className="imod" onClick={e=>e.stopPropagation()}>
+        <div className="imh">
+          <button className="mclose" onClick={onClose}>✕</button>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <div style={{width:34,height:34,background:"var(--red)",borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1rem"}}>🤝</div>
+            <div>
+              <div style={{fontSize:".63rem",color:"#888",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}}>Partnership Enquiry</div>
+              <div style={{fontFamily:"'Barlow'",fontWeight:900,fontSize:"1.05rem"}}>Express Your Interest</div>
+            </div>
+          </div>
+          <div style={{fontSize:".76rem",color:"#888",marginTop:7,lineHeight:1.6}}>Our team will contact you within 24 hours with a formal Letter of Intent.</div>
+        </div>
+        {done?(
+          <div className="isuccess" style={{padding:"2rem",textAlign:"center"}}>
+            <div style={{fontSize:"2.8rem",marginBottom:".9rem"}}>🎉</div>
+            <h3 style={{fontFamily:"'Barlow'",fontSize:"1.2rem",fontWeight:900,marginBottom:".4rem"}}>Interest Registered!</h3>
+            <p style={{color:"var(--mut)",fontSize:".87rem",lineHeight:1.6}}>Thank you, <strong>{f.company}</strong>. Our team will contact <strong>{f.phone}</strong> within 24 hours with a formal Letter of Intent.</p>
+            <div className="int-ref">
+              📋 Reference: <strong style={{fontFamily:"'JetBrains Mono'"}}>{ref}</strong><br/>
+              📞 Contact: <strong>{f.phone}</strong>
+              {f.email&&<span><br/>📧 <strong>{f.email}</strong></span>}
+            </div>
+            <button className="btn btn-r" style={{marginTop:"1.1rem"}} onClick={onClose}>Close</button>
+          </div>
+        ):(
+          <div className="imb">
+            <div style={{display:"flex",gap:7,marginBottom:"1.1rem"}}>
+              {[["supplier","🏭 Supplier"],["investor","💼 Investor"],["garage","🔧 Garage"]].map(([v,l])=>(
+                <button key={v} onClick={()=>up("intent",v)} style={{flex:1,padding:"8px 5px",borderRadius:7,border:`2px solid ${f.intent===v?"var(--red)":"var(--bdr)"}`,background:f.intent===v?"var(--red)":"white",color:f.intent===v?"white":"var(--mut)",cursor:"pointer",fontSize:".71rem",fontFamily:"'Barlow'",fontWeight:700,transition:"all .15s"}}>{l}</button>
+              ))}
+            </div>
+            <div className="fgr" style={{gap:".85rem"}}>
+              <div className="ig ff"><label className="il">Company / Name *</label><input className="ifield" placeholder="e.g. Nasser Auto Parts" value={f.company} onChange={e=>up("company",e.target.value)}/></div>
+              <div className="ig"><label className="il">Contact Person *</label><input className="ifield" placeholder="Full name" value={f.contact} onChange={e=>up("contact",e.target.value)}/></div>
+              <div className="ig"><label className="il">WhatsApp / Phone *</label><input className="ifield" placeholder="+973 XXXX XXXX" value={f.phone} onChange={e=>up("phone",e.target.value)}/></div>
+              <div className="ig"><label className="il">Email</label><input className="ifield" placeholder="you@company.com" value={f.email} onChange={e=>up("email",e.target.value)}/></div>
+              <div className="ig"><label className="il">Location</label><input className="ifield" placeholder="e.g. Manama, Bahrain" value={f.location} onChange={e=>up("location",e.target.value)}/></div>
+              {f.intent==="supplier"&&<>
+                <div className="ig ff"><label className="il">Parts Speciality</label><input className="ifield" placeholder="e.g. Toyota, European brands…" value={f.speciality} onChange={e=>up("speciality",e.target.value)}/></div>
+                <div className="ig ff"><label className="il">Inventory Size</label><select className="sel" value={f.inventory} onChange={e=>up("inventory",e.target.value)}><option value="">Select range</option><option>Under 100 SKUs</option><option>100–500 SKUs</option><option>500–2,000 SKUs</option><option>2,000+ SKUs</option></select></div>
+              </>}
+              <div className="ig ff"><label className="il">Message (optional)</label><textarea className="ifield" rows={3} placeholder="Any questions or requirements…" value={f.message} onChange={e=>up("message",e.target.value)} style={{resize:"vertical"}}/></div>
+            </div>
+            <div style={{marginTop:"1rem",padding:".75rem .9rem",background:"rgba(224,31,31,.04)",border:"1px solid rgba(224,31,31,.13)",borderRadius:7,fontSize:".73rem",color:"var(--mut)",lineHeight:1.6}}>
+              🔒 Your information is kept strictly confidential and used only for Wasel Auto partnership discussions.
+            </div>
+            <button className="btn btn-r" style={{width:"100%",justifyContent:"center",padding:"12px",marginTop:"1.1rem",fontSize:".86rem"}} onClick={submit}>
+              ✓ Submit — We Will Contact You Within 24 Hours
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Platform({onInterest}){
+  const [at,setAt]=useState("finder");
+  const [parts,setParts]=useState(PARTS);
+  const [cat,setCat]=useState("All");
+  const [pt,setPt]=useState("All Types");
+  const [srch,setSrch]=useState("");
+  const [aiRes,setAiRes]=useState(null);
+  const [aiLoad,setAiLoad]=useState(false);
+  const [vin,setVin]=useState("");
+  const [dsc,setDsc]=useState("");
+  const [img,setImg]=useState(null);
+  const [b64,setB64]=useState(null);
+  const [drag,setDrag]=useState(false);
+  const [hls,setHls]=useState([]);
+  const [sel,setSel]=useState(null);
+  const [toast,setToast]=useState(null);
+  const [f,sf]=useState({name:"",sku:"",cat:"Engine",type:"Genuine",brand:"",make:"",model:"",yf:"",yt:"",price:"",war:"12 months",qty:"",loc:"",phone:""});
+  const fref=useRef();
+
+  const filtered=parts.filter(p=>(cat==="All"||p.category===cat)&&(pt==="All Types"||p.type===pt)&&(!srch||[p.name,p.make,p.model,p.brand,p.supplier].some(v=>v.toLowerCase().includes(srch.toLowerCase()))));
+
+  const hdImg=(e)=>{
+    e.preventDefault();setDrag(false);
+    const file=e.dataTransfer?.files[0]||e.target.files?.[0];if(!file)return;
+    const r=new FileReader();
+    r.onload=ev=>{setImg(ev.target.result);setB64(ev.target.result.split(",")[1]);};
+    r.readAsDataURL(file);
+  };
+
+  const runAI=async()=>{
+    if(!vin&&!dsc&&!b64)return;
+    setAiLoad(true);setAiRes(null);setHls([]);
+    try{
+      const res=await askAI(`VIN/Chassis: ${vin||"not provided"}\nDescription: ${dsc||"not provided"}\n${b64?"Image attached.":""}`,b64);
+      setAiRes(res);
+      if(res){
+        const ids=PARTS.filter(p=>
+          res.models?.some(m=>p.model.toLowerCase().includes(m.toLowerCase()))||
+          res.makes?.some(m=>p.make.toLowerCase().includes(m.toLowerCase()))||
+          (res.category&&p.category.toLowerCase()===res.category.toLowerCase())||
+          (res.partName&&p.name.toLowerCase().includes(res.partName.toLowerCase().split(" ")[0]))
+        ).map(p=>p.id);
+        setHls(ids);
+      }
+    }catch(e){console.error(e);}
+    setAiLoad(false);
+  };
+
+  const clr=()=>{setVin("");setDsc("");setImg(null);setB64(null);setAiRes(null);setHls([]);};
+  const tst=m=>{setToast(m);setTimeout(()=>setToast(null),3000);};
+  const upf=(k,v)=>sf(p=>({...p,[k]:v}));
+
+  const publish=()=>{
+    if(!f.name||!f.price)return;
+    setParts(prev=>[{id:Date.now(),supplier:"Your Company",sku:f.sku||"SKU-"+Date.now().toString().slice(-5),name:f.name,category:f.cat,type:f.type,brand:f.brand||f.type,make:f.make||"Universal",model:f.model||"All",yearFrom:Number(f.yf)||2015,yearTo:Number(f.yt)||2025,price:Number(f.price),currency:"BHD",warranty:f.war,qty:Number(f.qty)||1,image:"🔧",location:f.loc||"Bahrain",phone:f.phone||""},...prev]);
+    tst("Part published to marketplace!");
+    sf({name:"",sku:"",cat:"Engine",type:"Genuine",brand:"",make:"",model:"",yf:"",yt:"",price:"",war:"12 months",qty:"",loc:"",phone:""});
+  };
+
+  return(
+    <div>
+      <div className="anav">
+        <span style={{fontFamily:"'Barlow'",fontWeight:700,fontSize:".73rem",color:"var(--mut)",textTransform:"uppercase",letterSpacing:".05em",marginRight:3}}>Platform:</span>
+        {[["finder","🔍 AI Finder",true],["market","🏪 Marketplace",false],["supplier","➕ List Parts",false],["suppliers","🏭 Suppliers",false]].map(([id,lb,ai])=>(
+          <button key={id} className={`atab${at===id?" on":""}`} onClick={()=>setAt(id)}>
+            {lb}{ai&&<span className="atabadge">AI</span>}
+          </button>
+        ))}
+        <div style={{marginLeft:"auto"}}><button className="btn btn-ol btn-sm" onClick={onInterest}>🤝 Partner With Us</button></div>
+      </div>
+
+      {at==="finder"&&(
+        <>
+          <div style={{background:"var(--dark)",padding:"2.2rem 2rem 2.8rem",textAlign:"center",borderBottom:"3px solid var(--red)"}}>
+            <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".2em",color:"var(--red)",textTransform:"uppercase",marginBottom:".8rem"}}>⚡ AI-Powered</div>
+            <h2 style={{fontFamily:"'Barlow'",fontSize:"clamp(1.7rem,4vw,2.7rem)",fontWeight:900,color:"white",marginBottom:".7rem",letterSpacing:"-.5px"}}>Find the Exact Part. In Seconds.</h2>
+            <p style={{color:"#888",fontSize:".92rem",maxWidth:490,margin:"0 auto"}}>Enter a VIN, describe the part, or upload a photo. AI identifies it and shows live Genuine & Aftermarket pricing from certified Bahraini suppliers.</p>
+          </div>
+          <div className="aifinder">
+            <div className="panel">
+              <div className="ph"><div className="phi">🤖</div><div><div className="pt">AI Part Finder</div><div className="ps">VIN · Description · Photo — any combination works</div></div></div>
+              <div className="pb">
+                <div className="fgrid">
+                  <div className="ig">
+                    <label className="il">🚗 VIN / Chassis Number</label>
+                    <input className="ifield" placeholder="e.g. JTDZN3EU0E3298001" value={vin} onChange={e=>setVin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&runAI()}/>
+                    <div style={{fontSize:".65rem",color:"var(--mut)",fontWeight:600}}>Toyota · Nissan · BMW · Mercedes · Honda · Ford</div>
+                  </div>
+                  <div className="ig">
+                    <label className="il">📝 Part Name or Description</label>
+                    <input className="ifield" placeholder="e.g. front brake pads, alternator…" value={dsc} onChange={e=>setDsc(e.target.value)} onKeyDown={e=>e.key==="Enter"&&runAI()}/>
+                  </div>
+                </div>
+                <div className="ig" style={{marginBottom:"1.1rem"}}>
+                  <label className="il">📷 Part Photo — optional</label>
+                  <div className={`dzone${drag?" on":""}`} onDragOver={e=>{e.preventDefault();setDrag(true);}} onDragLeave={()=>setDrag(false)} onDrop={hdImg} onClick={()=>fref.current.click()}>
+                    {img?<img src={img} alt="part"/>:<><div style={{fontSize:"1.8rem"}}>📷</div><div className="dzt">Drop a photo or tap to browse<br/><span style={{fontSize:".66rem"}}>JPG · PNG · WEBP</span></div></>}
+                    <input ref={fref} type="file" accept="image/*" style={{display:"none"}} onChange={hdImg}/>
+                  </div>
+                </div>
+                <div style={{display:"flex",gap:8}}>
+                  <button className="btn btn-r" style={{flex:1,justifyContent:"center",padding:"11px"}} onClick={runAI} disabled={aiLoad||(!vin&&!dsc&&!b64)}>
+                    {aiLoad?"⏳ Identifying Part…":"🔍 Identify & Find with AI"}
+                  </button>
+                  {(vin||dsc||img)&&<button className="btn btn-gh" onClick={clr}>✕ Clear</button>}
+                </div>
+                {aiLoad&&<div className="loading"><div className="spin"/>Reading VIN, cross-referencing GCC parts database…</div>}
+                {aiRes&&(
+                  <div className="aibox">
+                    <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:10}}>
+                      <div>
+                        <div style={{fontSize:".61rem",color:"#666",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}}>AI Identified</div>
+                        <div className="ainm">{aiRes.partName||"Auto Part"}</div>
+                      </div>
+                      <span className={`aiconf ${aiRes.confidence||"medium"}`}>{aiRes.confidence||"medium"} confidence</span>
+                    </div>
+                    <div className="aitags">
+                      {aiRes.category&&<span className="aitag">📂 {aiRes.category}</span>}
+                      {aiRes.makes?.map(m=><span key={m} className="aitag">🚘 {m}</span>)}
+                      {aiRes.models?.map(m=><span key={m} className="aitag">📋 {m}</span>)}
+                      {aiRes.yearRange&&<span className="aitag">📅 {aiRes.yearRange.from}–{aiRes.yearRange.to}</span>}
+                      {aiRes.partTypes?.map(t=><span key={t} className="aitag aitag-r">{t}</span>)}
+                      {aiRes.topBrands?.map(b=><span key={b} className="aitag">🏷 {b}</span>)}
+                    </div>
+                    {aiRes.notes&&<div className="ainotes">💡 {aiRes.notes}</div>}
+                    {hls.length>0
+                      ?<div style={{marginTop:".8rem",padding:"6px 10px",background:"rgba(21,128,61,.12)",border:"1px solid rgba(21,128,61,.3)",borderRadius:6,fontSize:".75rem",color:"#4ade80",fontWeight:700}}>✓ {hls.length} matching part{hls.length>1?"s":""} found — shown below</div>
+                      :<div style={{marginTop:".8rem",padding:"6px 10px",background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:6,fontSize:".75rem",color:"#888",fontWeight:600}}>No exact match in demo inventory — browse the full marketplace</div>}
+                  </div>
+                )}
+              </div>
+            </div>
+            {hls.length>0&&(
+              <div style={{marginTop:"1.8rem"}}>
+                <div className="hlbanner">⚡ {hls.length} AI-matched result{hls.length>1?"s":""} — live pricing & availability</div>
+                <div className="pgrid">{parts.filter(p=>hls.includes(p.id)).map(p=><PartCard key={p.id} part={p} onClick={()=>setSel(p)} hl/>)}</div>
+                <div style={{textAlign:"center",marginTop:"1.1rem"}}><button className="btn btn-gh" onClick={()=>setAt("market")}>Browse Full Marketplace →</button></div>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {at==="market"&&(
+        <div className="psec">
+          <div style={{paddingTop:"1rem"}}>
+            <div className="shr"><div className="sh">Parts <span>Marketplace</span></div><div style={{fontSize:".76rem",color:"var(--mut)",fontWeight:700}}>{filtered.length} parts available</div></div>
+            <div className="frow">
+              <div className="sbar"><span style={{color:"var(--mut)"}}>🔍</span><input placeholder="Search name, brand, make…" value={srch} onChange={e=>setSrch(e.target.value)}/></div>
+              <div className="ttog">{PTYPES.map(t=><button key={t} className={`tbtn${pt===t?" on":""}`} onClick={()=>setPt(t)}>{t}</button>)}</div>
+              {CATS.map(c=><button key={c} className={`pill${cat===c?" on":""}`} onClick={()=>setCat(c)}>{c}</button>)}
+            </div>
+            {filtered.length===0
+              ?<div className="empty"><div style={{fontSize:"2.3rem",marginBottom:".7rem"}}>🔎</div><h3>No Parts Found</h3><p>Try adjusting your filters</p></div>
+              :<div className="pgrid">{filtered.map(p=><PartCard key={p.id} part={p} onClick={()=>setSel(p)}/>)}</div>}
+          </div>
+        </div>
+      )}
+
+      {at==="supplier"&&(
+        <div className="sport">
+          <div style={{marginBottom:"1.6rem"}}>
+            <div style={{fontFamily:"'Barlow'",fontSize:"1.45rem",fontWeight:900,textTransform:"uppercase",marginBottom:".3rem"}}>Supplier Portal</div>
+            <div style={{color:"var(--mut)",fontSize:".88rem"}}>List your Genuine & Aftermarket inventory. Reach garages across Bahrain instantly.</div>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"1.6rem"}}>
+            {[["📣","Instant Reach","Your parts shown to garages searching right now"],["💬","WhatsApp Direct","Buyers contact you directly — no middleman"],["📊","Live Analytics","See which parts are being searched in real-time"]].map(([i,t,d])=>(
+              <div key={t} style={{background:"white",border:"1.5px solid var(--bdr)",borderTop:"3px solid var(--red)",borderRadius:10,padding:"1rem"}}>
+                <div style={{fontSize:"1.4rem",marginBottom:5}}>{i}</div>
+                <div style={{fontFamily:"'Barlow'",fontWeight:700,fontSize:".86rem",marginBottom:3}}>{t}</div>
+                <div style={{fontSize:".74rem",color:"var(--mut)"}}>{d}</div>
+              </div>
+            ))}
+          </div>
+          <div className="panel">
+            <div className="ph"><div className="phi">📦</div><div><div className="pt">List a New Part</div><div className="ps">Published immediately to the marketplace</div></div></div>
+            <div className="pb">
+              <div className="fsec"><div className="fsect">Part Details</div>
+                <div className="fgr">
+                  <div className="ig ff"><label className="il">Part Name *</label><input className="ifield" placeholder="e.g. Toyota Genuine Brake Pads" value={f.name} onChange={e=>upf("name",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Part Type</label><select className="sel" value={f.type} onChange={e=>upf("type",e.target.value)}><option>Genuine</option><option>Aftermarket</option></select></div>
+                  <div className="ig"><label className="il">Brand</label><input className="ifield" placeholder="e.g. Toyota, Bosch, Denso" value={f.brand} onChange={e=>upf("brand",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Category</label><select className="sel" value={f.cat} onChange={e=>upf("cat",e.target.value)}>{CATS.filter(c=>c!=="All").map(c=><option key={c}>{c}</option>)}</select></div>
+                  <div className="ig"><label className="il">SKU / Part Number</label><input className="ifield" placeholder="e.g. TOY-GEN-44060" value={f.sku} onChange={e=>upf("sku",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Warranty</label><select className="sel" value={f.war} onChange={e=>upf("war",e.target.value)}><option>3 months</option><option>6 months</option><option>12 months</option><option>24 months</option></select></div>
+                  <div className="ig"><label className="il">Qty in Stock</label><input className="ifield" type="number" placeholder="10" value={f.qty} onChange={e=>upf("qty",e.target.value)}/></div>
+                </div>
+              </div>
+              <div className="fsec"><div className="fsect">Vehicle Compatibility</div>
+                <div className="fgr">
+                  <div className="ig"><label className="il">Make</label><input className="ifield" placeholder="e.g. Toyota" value={f.make} onChange={e=>upf("make",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Model</label><input className="ifield" placeholder="e.g. Land Cruiser" value={f.model} onChange={e=>upf("model",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Year From</label><input className="ifield" type="number" placeholder="2018" value={f.yf} onChange={e=>upf("yf",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Year To</label><input className="ifield" type="number" placeholder="2025" value={f.yt} onChange={e=>upf("yt",e.target.value)}/></div>
+                </div>
+              </div>
+              <div className="fsec"><div className="fsect">Pricing & Contact</div>
+                <div className="fgr">
+                  <div className="ig"><label className="il">Price (BHD) *</label><input className="ifield" type="number" step="0.001" placeholder="e.g. 38.500" value={f.price} onChange={e=>upf("price",e.target.value)}/></div>
+                  <div className="ig"><label className="il">Your Location</label><input className="ifield" placeholder="e.g. Sitra Industrial Area" value={f.loc} onChange={e=>upf("loc",e.target.value)}/></div>
+                  <div className="ig ff"><label className="il">WhatsApp / Phone</label><input className="ifield" placeholder="+973 17XX XXXX" value={f.phone} onChange={e=>upf("phone",e.target.value)}/></div>
+                </div>
+              </div>
+              <button className="btn btn-r" style={{width:"100%",justifyContent:"center",padding:"12px",fontSize:".88rem"}} onClick={publish}>🚀 Publish to Marketplace Now</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {at==="suppliers"&&(
+        <div>
+          <div style={{padding:"1.4rem 2rem .5rem",maxWidth:1260,margin:"0 auto"}}>
+            <div style={{fontFamily:"'Barlow'",fontSize:"1.4rem",fontWeight:900,textTransform:"uppercase",marginBottom:".3rem"}}>Certified Suppliers</div>
+            <div style={{color:"var(--mut)",fontSize:".86rem"}}>Bahrain's trusted Genuine & Aftermarket parts distributors — all verified by Wasel Auto.</div>
+          </div>
+          <div className="sgrid">
+            {SUPS.map(s=>(
+              <div key={s.id} className="scard">
+                <div className="sacc"/>
+                <div style={{fontSize:"2rem",marginBottom:".65rem"}}>🏭</div>
+                <div style={{display:"flex",alignItems:"center",flexWrap:"wrap",marginBottom:3}}>
+                  <div className="snm">{s.name}</div>
+                  {s.verified&&<span className="vtag">✓ verified</span>}
+                </div>
+                <div className="sloc">📍 {s.location}, Bahrain</div>
+                <div style={{fontSize:".71rem",color:"var(--mut)",marginBottom:3,fontWeight:600}}>Speciality: {s.speciality}</div>
+                <div style={{fontSize:".68rem",color:"var(--mut)",marginBottom:9}}>Est. {s.since}</div>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:11}}>
+                  <div><span className="stars">{"★".repeat(Math.floor(s.rating))}</span> <span style={{fontSize:".73rem",fontWeight:700,color:"var(--mut)"}}>{s.rating}</span></div>
+                  <div style={{fontSize:".68rem",color:"var(--mut)",fontWeight:700,fontFamily:"'JetBrains Mono'"}}>{s.parts} parts</div>
+                </div>
+                <div style={{display:"flex",gap:7}}>
+                  <button className="btn btn-gh btn-sm" style={{flex:1}} onClick={()=>setAt("market")}>View Parts</button>
+                  <button className="btn btn-ol btn-sm" onClick={onInterest}>Partner</button>
+                </div>
+              </div>
+            ))}
+            <div className="scard" style={{border:"2px dashed var(--bdr)",background:"transparent",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",minHeight:190}}>
+              <div style={{fontSize:"1.7rem",marginBottom:8}}>🤝</div>
+              <div style={{fontFamily:"'Barlow'",fontWeight:900,fontSize:".93rem",marginBottom:5,textTransform:"uppercase"}}>List Your Business</div>
+              <div style={{color:"var(--mut)",fontSize:".74rem",marginBottom:13,lineHeight:1.6}}>Join Bahrain's fastest-growing auto parts network</div>
+              <button className="btn btn-r btn-sm" onClick={onInterest}>Express Interest</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {sel&&(
+        <div className="ov" onClick={()=>setSel(null)}>
+          <div className="mod" onClick={e=>e.stopPropagation()}>
+            <div className="mh">
+              <button className="mclose" onClick={()=>setSel(null)}>✕</button>
+              <div style={{display:"flex",gap:9,alignItems:"flex-start"}}>
+                <span style={{fontSize:"1.9rem"}}>{sel.image}</span>
+                <div>
+                  <div style={{display:"flex",gap:6,marginBottom:4}}>
+                    <span className={`ptyp ${sel.type==="Genuine"?"ptyp-g":"ptyp-a"}`} style={{position:"static"}}>{sel.type}</span>
+                    <span style={{fontSize:".64rem",color:"#888",fontFamily:"'JetBrains Mono'"}}>{sel.sku}</span>
+                  </div>
+                  <div className="mpn2">{sel.name}</div>
+                  <div style={{fontSize:".78rem",color:"#888",marginTop:2}}>by {sel.brand}</div>
+                </div>
+              </div>
+              <div className="mpr">{sel.price.toFixed(3)} <span style={{fontSize:".88rem",color:"#888"}}>{sel.currency}</span></div>
+            </div>
+            <div className="mbody">
+              {[["Warranty",sel.warranty],["Stock",`${sel.qty} unit${sel.qty>1?"s":""} available`],["Fits",`${sel.make} ${sel.model} (${sel.yearFrom}–${sel.yearTo})`],["Area",sel.location],["Category",sel.category]].map(([l,v])=>(
+                <div key={l} className="mrow"><span className="mrl">{l}</span><span style={{fontSize:".82rem",fontWeight:600}}>{v}</span></div>
+              ))}
+              <div style={{marginTop:"1rem",padding:".75rem",background:"rgba(206,17,38,.05)",border:"1px solid rgba(206,17,38,.15)",borderRadius:7,fontSize:".75rem",color:"var(--mut)",lineHeight:1.6}}>
+                🔒 Supplier details are managed by Wasel Auto. Submit an enquiry below and we will connect you with the right supplier within minutes.
+              </div>
+            </div>
+            <div className="macts">
+              <a className="btn btn-r" style={{flex:1,justifyContent:"center",textDecoration:"none"}} href={`https://wa.me/97333844859?text=Hi Wasel Auto, I am enquiring about: ${sel.name} (${sel.sku}) — ${sel.make} ${sel.model} ${sel.yearFrom}–${sel.yearTo}. Price listed: ${sel.price.toFixed(3)} BHD. Please confirm availability and connect me with the supplier.`} target="_blank" rel="noopener noreferrer">💬 Enquire via Wasel Auto</a>
+              <button className="btn btn-gh" onClick={()=>setSel(null)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {toast&&<div className="toast">✅ {toast}</div>}
+    </div>
+  );
+}
+
+function App(){
+  const [page,setPage]=useState("landing");
+  const [showInt,setShowInt]=useState(false);
+  const [interests,setInterests]=useState([]);
+  const [toast,setToast]=useState(null);
+  const tst=m=>{setToast(m);setTimeout(()=>setToast(null),3500);};
+  const onSubmit=f=>{setInterests(p=>[...p,{...f,id:Date.now()}]);tst("✓ Interest registered from "+f.company);};
+
+  return(
+    <div>
+      <div className="topbar">🚀 Wasel Auto · MVP Preview · Investor & Supplier Confidential</div>
+      <nav className="nav">
+        <div style={{cursor:"pointer",display:"flex",alignItems:"flex-end"}} onClick={()=>setPage("landing")}>
+          <span className="logo-w">Wasel</span><span className="logo-a">Auto</span>
+        </div>
+        <div className="ntabs">
+          <button className={`ntab${page==="landing"?" on":""}`} onClick={()=>setPage("landing")}>🏠 Overview</button>
+          <button className={`ntab${page==="platform"?" on":""}`} onClick={()=>setPage("platform")}>🚀 Live Demo <span className="nbadge">LIVE</span></button>
+        </div>
+        <div style={{display:"flex",gap:8}}>
+          <button className="btn btn-ol btn-sm" onClick={()=>setShowInt(true)}>🤝 Express Interest</button>
+          {page==="landing"
+            ?<button className="btn btn-r btn-sm" onClick={()=>setPage("platform")}>Launch Demo →</button>
+            :<button className="btn btn-gh btn-sm" onClick={()=>setPage("landing")}>← Overview</button>}
+        </div>
+      </nav>
+      {page==="landing"&&<Landing goPlatform={()=>setPage("platform")} goInterest={()=>setShowInt(true)}/>}
+      {page==="platform"&&<Platform onInterest={()=>setShowInt(true)}/>}
+      {showInt&&<InterestModal onClose={()=>setShowInt(false)} onSubmit={onSubmit}/>}
+      {interests.length>0&&<div className="session-counter">📋 {interests.length} interest{interests.length>1?"s":""} registered this session</div>}
+      {toast&&<div className="toast">{toast}</div>}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
