@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -7,9 +6,9 @@
 <title>Wasel Auto — Bahrain's Auto Parts Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--red:#CE1126;--red2:#e8253a;--dark:#111111;--dark2:#1e1e1e;--bg:#f4f4f4;--surf:#fff;--surf2:#f0f0f0;--bdr:#e2e2e2;--txt:#111;--mut:#666;--grn:#15803d;}
@@ -199,7 +198,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;}
 </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root"><div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#111;flex-direction:column;gap:16px;font-family:'Barlow',sans-serif;"><div style="width:40px;height:40px;border:3px solid #333;border-top-color:#CE1126;border-radius:50%;animation:spin 0.7s linear infinite;"></div><div style="color:#CE1126;font-size:0.9rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Loading Wasel Auto…</div><style>@keyframes spin{to{transform:rotate(360deg);}}</style></div></div>
 <script type="text/babel">
 const {useState,useRef,useEffect} = React;
 
