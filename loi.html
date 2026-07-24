@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wasel Auto — Partner Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--red:#CE1126;--red2:#e8253a;--dark:#111;--dark2:#1e1e1e;--bg:#f4f4f4;--surf:#fff;--surf2:#f7f7f7;--bdr:#e2e2e2;--txt:#111;--mut:#666;--grn:#15803d;}
+body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-height:100vh;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:58px;background:var(--dark);border-bottom:3px solid var(--red);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:flex-end;cursor:pointer;text-decoration:none;}
+.logo-w{font-family:'Barlow';font-weight:900;font-size:1.6rem;color:white;letter-spacing:-1px;}
+.logo-a{font-family:'Barlow';font-weight:700;font-size:0.9rem;color:var(--red);font-style:italic;margin-left:5px;margin-bottom:3px;}
+.nav-back{background:transparent;border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 14px;border-radius:6px;font-family:'Barlow';font-size:0.75rem;font-weight:700;cursor:pointer;text-transform:uppercase;text-decoration:none;}
+.nav-back:hover{background:rgba(255,255,255,0.08);}
+
+/* HERO */
+.hero{background:var(--dark);padding:3rem 1.5rem 2.5rem;text-align:center;border-bottom:3px solid var(--red);}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(206,17,38,0.15);border:1px solid rgba(206,17,38,0.35);color:#ff8080;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;padding:5px 13px;border-radius:99px;text-transform:uppercase;margin-bottom:1rem;}
+.hero h1{font-family:'Barlow';font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:white;margin-bottom:0.7rem;letter-spacing:-0.5px;}
+.hero h1 em{font-style:normal;color:var(--red);}
+.hero p{color:#999;font-size:0.92rem;max-width:500px;margin:0 auto;line-height:1.7;}
+
+/* VALUE PROPS */
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:680px;margin:2rem auto 0;padding:0 1.5rem;}
+.prop{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1rem;text-align:center;}
+.prop-icon{font-size:1.5rem;margin-bottom:6px;}
+.prop-title{font-family:'Barlow';font-weight:700;font-size:0.82rem;color:white;margin-bottom:3px;}
+.prop-desc{font-size:0.72rem;color:#777;line-height:1.5;}
+
+/* TABS */
+.tabs{display:flex;max-width:500px;margin:2rem auto 0;gap:8px;padding:0 1.5rem;}
+.tab{flex:1;padding:13px;border-radius:8px;border:2px solid var(--bdr);background:white;font-family:'Barlow';font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.15s;text-align:center;text-transform:uppercase;}
+.tab.on{background:var(--red);color:white;border-color:var(--red);}
+.tab:hover:not(.on){border-color:var(--red);color:var(--red);}
+
+/* FORM */
+.wrap{max-width:640px;margin:0 auto;padding:2rem 1.5rem;}
+.card{background:white;border:1px solid var(--bdr);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.card-head{background:var(--dark);padding:1.1rem 1.4rem;display:flex;align-items:center;gap:10px;border-bottom:3px solid var(--red);}
+.card-icon{width:32px;height:32px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.card-title{font-family:'Barlow';font-weight:700;font-size:0.9rem;color:white;text-transform:uppercase;letter-spacing:0.04em;}
+.card-sub{font-size:0.68rem;color:#aaa;margin-top:1px;}
+.card-body{padding:1.5rem;}
+.fsec{margin-bottom:1.5rem;}
+.fsec-title{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;margin-bottom:0.8rem;padding-bottom:6px;border-bottom:2px solid var(--bdr);}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+.ff{grid-column:1/-1;}
+.ig{display:flex;flex-direction:column;gap:5px;}
+.il{font-size:0.67rem;font-weight:700;letter-spacing:0.1em;color:var(--mut);text-transform:uppercase;}
+.ifield{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:10px 13px;color:var(--txt);font-family:'Barlow';font-size:0.88rem;outline:none;transition:border 0.15s;width:100%;}
+.ifield:focus{border-color:var(--red);background:white;}
+.ifield::placeholder{color:#bbb;}
+.sel{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:10px 13px;color:var(--txt);font-family:'Barlow';font-size:0.88rem;font-weight:600;outline:none;cursor:pointer;appearance:none;width:100%;transition:border 0.15s;}
+.sel:focus{border-color:var(--red);}
+
+/* TRUST BADGES */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.2rem;}
+.tbadge{background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;padding:8px;text-align:center;font-size:0.7rem;font-weight:700;color:var(--mut);}
+.tbadge span{display:block;font-size:1rem;margin-bottom:3px;}
+
+/* TERMS */
+.terms{display:flex;align-items:flex-start;gap:10px;background:rgba(206,17,38,0.04);border:1px solid rgba(206,17,38,0.15);border-radius:8px;padding:1rem;margin-bottom:1.2rem;}
+.terms input{width:18px;height:18px;accent-color:var(--red);flex-shrink:0;margin-top:2px;cursor:pointer;}
+.terms label{font-size:0.8rem;color:var(--mut);line-height:1.6;cursor:pointer;}
+.terms label strong{color:var(--txt);}
+.submit-btn{width:100%;padding:14px;background:var(--red);color:white;border:none;border-radius:8px;font-family:'Barlow';font-size:0.92rem;font-weight:700;cursor:pointer;transition:all 0.15s;text-transform:uppercase;letter-spacing:0.04em;}
+.submit-btn:hover{background:var(--red2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(206,17,38,0.4);}
+
+/* HOW IT WORKS */
+.how{max-width:640px;margin:0 auto;padding:0 1.5rem 3rem;}
+.how-title{font-family:'Barlow';font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;color:var(--mut);text-align:center;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.step{background:white;border:1.5px solid var(--bdr);border-top:3px solid var(--red);border-radius:10px;padding:1rem;text-align:center;}
+.step-num{font-family:'Barlow';font-size:1.5rem;font-weight:900;color:var(--red);}
+.step-title{font-family:'Barlow';font-weight:700;font-size:0.82rem;margin:4px 0;}
+.step-desc{font-size:0.72rem;color:var(--mut);line-height:1.5;}
+
+/* SUCCESS */
+.success{text-align:center;padding:2rem 1rem;}
+.success-icon{font-size:3.5rem;margin-bottom:1rem;}
+.success h2{font-family:'Barlow';font-size:1.5rem;font-weight:900;margin-bottom:0.5rem;}
+.success p{color:var(--mut);font-size:0.9rem;line-height:1.7;max-width:400px;margin:0 auto 1.5rem;}
+.ref-box{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;text-align:left;}
+.ref-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:0.83rem;}
+.ref-row:last-child{border-bottom:none;}
+.ref-label{color:var(--mut);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;}
+.ref-val{font-weight:700;font-family:'JetBrains Mono';font-size:0.8rem;}
+
+/* LOI DOC */
+.loi-doc{background:white;border:2px solid var(--bdr);border-radius:10px;padding:2rem;margin-bottom:1.5rem;text-align:left;position:relative;overflow:hidden;}
+.loi-doc::before{content:'WASEL AUTO';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:5rem;font-weight:900;color:rgba(206,17,38,0.04);white-space:nowrap;pointer-events:none;font-family:'Barlow';}
+.loi-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:3px solid var(--red);}
+.loi-logo{font-family:'Barlow';font-weight:900;font-size:1.3rem;}
+.loi-logo em{font-style:italic;color:var(--red);}
+.loi-contact-info{font-size:0.68rem;color:var(--mut);margin-top:3px;line-height:1.6;}
+.loi-meta{text-align:right;font-family:'JetBrains Mono';font-size:0.68rem;color:var(--mut);}
+.loi-meta strong{color:var(--txt);display:block;margin-bottom:3px;}
+.loi-stamp{background:rgba(206,17,38,0.08);color:var(--red);border:1px solid rgba(206,17,38,0.2);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:4px;display:inline-block;letter-spacing:0.08em;}
+.loi-h{font-family:'Barlow';font-size:0.95rem;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.2rem;color:var(--dark);border-bottom:1px solid var(--bdr);padding-bottom:8px;}
+.loi-body{font-size:0.8rem;line-height:1.85;color:#333;}
+.loi-body p{margin-bottom:0.85rem;}
+.loi-body strong{color:var(--dark);}
+.loi-body .detail-block{background:var(--surf2);border-left:3px solid var(--red);border-radius:0 6px 6px 0;padding:0.8rem 1rem;margin:0.8rem 0;font-size:0.78rem;}
+.loi-body .detail-block div{padding:2px 0;}
+.loi-sigs{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.8rem;padding-top:1rem;border-top:1px solid var(--bdr);}
+.sig-box{padding-top:8px;border-top:1.5px solid var(--dark);}
+.sig-name{font-weight:700;font-size:0.82rem;font-family:'Barlow';}
+.sig-role{font-size:0.7rem;color:var(--mut);margin-top:1px;}
+.sig-date{font-size:0.68rem;color:var(--mut);margin-top:2px;font-family:'JetBrains Mono';}
+
+/* ACTION BTNS */
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#25D366;color:white;border:none;border-radius:8px;font-family:'Barlow';font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.15s;text-transform:uppercase;text-decoration:none;margin-bottom:10px;}
+.wa-btn:hover{background:#1ebe5d;transform:translateY(-1px);}
+.sec-btn{width:100%;padding:11px;background:var(--surf2);color:var(--txt);border:1.5px solid var(--bdr);border-radius:8px;font-family:'Barlow';font-size:0.85rem;font-weight:700;cursor:pointer;text-transform:uppercase;margin-bottom:8px;}
+.sec-btn:hover{border-color:var(--red);color:var(--red);}
+
+@media print{
+  .nav,.hero,.props,.tabs,.trust,.terms,.submit-btn,.wa-btn,.sec-btn,.how,.hero-badge{display:none!important;}
+  .card{box-shadow:none;border:none;}
+  body{background:white;}
+}
+@media(max-width:520px){
+  .fgrid,.loi-sigs,.steps,.props,.trust{grid-template-columns:1fr;}
+  .tabs{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="https://wasel-auto.vercel.app" class="logo">
+    <span class="logo-w">Wasel</span><span class="logo-a">Auto</span>
+  </a>
+  <a href="https://wasel-auto.vercel.app" class="nav-back">← Back to Platform</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🇧🇭 Bahrain's Auto Parts Marketplace</div>
+  <h1>Join <em>Wasel Auto</em></h1>
+  <p>Register your interest as a supplier or garage. Takes under 2 minutes. We will contact you within 24 hours.</p>
+
+  <div class="props">
+    <div class="prop">
+      <div class="prop-icon">🆓</div>
+      <div class="prop-title">Free to Join</div>
+      <div class="prop-desc">Zero listing fees during our launch phase</div>
+    </div>
+    <div class="prop">
+      <div class="prop-icon">⚡</div>
+      <div class="prop-title">Instant Reach</div>
+      <div class="prop-desc">Your parts visible to garages searching 24/7</div>
+    </div>
+    <div class="prop">
+      <div class="prop-icon">💬</div>
+      <div class="prop-title">WhatsApp Native</div>
+      <div class="prop-desc">All enquiries managed through Wasel Auto</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs" id="tabRow">
+  <button class="tab on" onclick="switchType('supplier',this)">🏭 I am a Supplier</button>
+  <button class="tab" onclick="switchType('garage',this)">🔧 I am a Garage</button>
+</div>
+
+<!-- FORM -->
+<div class="wrap" id="formWrap">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" id="cardIcon">📦</div>
+      <div>
+        <div class="card-title" id="cardTitle">Supplier Registration</div>
+        <div class="card-sub" id="cardSub">List your parts inventory and reach garages across Bahrain</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <!-- TRUST -->
+      <div class="trust">
+        <div class="tbadge"><span>🔒</span>Confidential</div>
+        <div class="tbadge"><span>⚡</span>24hr Response</div>
+        <div class="tbadge"><span>🆓</span>Free to List</div>
+      </div>
+
+      <!-- YOUR INFO -->
+      <div class="fsec">
+        <div class="fsec-title">Your Information</div>
+        <div class="fgrid">
+          <div class="ig ff">
+            <label class="il">Company / Business Name *</label>
+            <input class="ifield" id="company" placeholder="e.g. Nasser Auto Parts"/>
+          </div>
+          <div class="ig">
+            <label class="il">Your Full Name *</label>
+            <input class="ifield" id="contact" placeholder="Full name"/>
+          </div>
+          <div class="ig">
+            <label class="il">Your Role</label>
+            <input class="ifield" id="role" placeholder="e.g. Owner, Manager"/>
+          </div>
+          <div class="ig">
+            <label class="il">WhatsApp Number *</label>
+            <input class="ifield" id="phone" placeholder="+973 XXXX XXXX" type="tel"/>
+          </div>
+          <div class="ig">
+            <label class="il">Email Address</label>
+            <input class="ifield" id="email" placeholder="you@company.com" type="email"/>
+          </div>
+          <div class="ig">
+            <label class="il">Location / Area</label>
+            <input class="ifield" id="location" placeholder="e.g. Sitra, Bahrain"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPPLIER FIELDS -->
+      <div class="fsec" id="supplierFields">
+        <div class="fsec-title">Parts & Inventory Details</div>
+        <div class="fgrid">
+          <div class="ig">
+            <label class="il">Parts Speciality</label>
+            <input class="ifield" id="speciality" placeholder="e.g. Toyota, BMW, Brakes…"/>
+          </div>
+          <div class="ig">
+            <label class="il">Inventory Size</label>
+            <select class="sel" id="inventory">
+              <option value="">Select range</option>
+              <option>Under 100 SKUs</option>
+              <option>100 – 500 SKUs</option>
+              <option>500 – 2,000 SKUs</option>
+              <option>2,000+ SKUs</option>
+            </select>
+          </div>
+          <div class="ig">
+            <label class="il">Parts Type You Supply</label>
+            <select class="sel" id="partsType">
+              <option value="">Select type</option>
+              <option>Genuine Parts Only</option>
+              <option>Aftermarket Parts Only</option>
+              <option>Both Genuine & Aftermarket</option>
+              <option>All Types</option>
+            </select>
+          </div>
+          <div class="ig">
+            <label class="il">Years in Business</label>
+            <select class="sel" id="years">
+              <option value="">Select range</option>
+              <option>Less than 1 year</option>
+              <option>1 – 3 years</option>
+              <option>3 – 10 years</option>
+              <option>10 – 20 years</option>
+              <option>20+ years</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- GARAGE FIELDS -->
+      <div class="fsec" id="garageFields" style="display:none;">
+        <div class="fsec-title">Garage Details</div>
+        <div class="fgrid">
+          <div class="ig">
+            <label class="il">Number of Mechanics</label>
+            <select class="sel" id="mechanics">
+              <option value="">Select range</option>
+              <option>1 – 3</option>
+              <option>4 – 10</option>
+              <option>10 – 25</option>
+              <option>25+</option>
+            </select>
+          </div>
+          <div class="ig">
+            <label class="il">Vehicle Types Serviced</label>
+            <select class="sel" id="vehicles">
+              <option value="">Select type</option>
+              <option>All Makes & Models</option>
+              <option>Japanese Vehicles</option>
+              <option>European Vehicles</option>
+              <option>American Vehicles</option>
+              <option>Heavy Vehicles & Trucks</option>
+            </select>
+          </div>
+          <div class="ig">
+            <label class="il">Monthly Parts Spend (BHD)</label>
+            <select class="sel" id="spend">
+              <option value="">Estimate range</option>
+              <option>Under BD 500</option>
+              <option>BD 500 – 2,000</option>
+              <option>BD 2,000 – 5,000</option>
+              <option>BD 5,000+</option>
+            </select>
+          </div>
+          <div class="ig">
+            <label class="il">Biggest Challenge</label>
+            <select class="sel" id="challenge">
+              <option value="">Select</option>
+              <option>Finding specific parts quickly</option>
+              <option>Comparing prices across suppliers</option>
+              <option>Availability uncertainty</option>
+              <option>Time wasted calling suppliers</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TERMS -->
+      <div class="terms">
+        <input type="checkbox" id="agree"/>
+        <label for="agree">
+          I confirm that the information above is accurate and I wish to register my interest in partnering with <strong>Wasel Auto</strong>. I understand that Wasel Auto will contact me within <strong>24 hours</strong> to discuss next steps. This registration is <strong>free and non-binding</strong>.
+        </label>
+      </div>
+
+      <button class="submit-btn" onclick="generateLOI()">
+        ✓ Register My Interest — Get Contacted in 24hrs
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how" id="howSection">
+  <div class="how-title">How It Works</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Register Here</div>
+      <div class="step-desc">Fill in your details. Takes under 2 minutes.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">We Contact You</div>
+      <div class="step-desc">Wasel Auto calls you within 24 hours to confirm.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Go Live</div>
+      <div class="step-desc">Your parts or garage listed on the platform immediately.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS PAGE -->
+<div class="wrap" id="successWrap" style="display:none;">
+  <div class="card">
+    <div class="card-body">
+      <div class="success">
+        <div class="success-icon">✅</div>
+        <h2>Registration Confirmed!</h2>
+        <p>Thank you <strong id="successName"></strong>. Your registration has been received. Wasel Auto will contact you on <strong id="successPhone"></strong> within 24 hours.</p>
+
+        <div class="ref-box">
+          <div class="ref-row">
+            <span class="ref-label">Reference Number</span>
+            <span class="ref-val" id="refNum"></span>
+          </div>
+          <div class="ref-row">
+            <span class="ref-label">Date</span>
+            <span class="ref-val" id="refDate"></span>
+          </div>
+          <div class="ref-row">
+            <span class="ref-label">Registration Type</span>
+            <span class="ref-val" id="refType"></span>
+          </div>
+          <div class="ref-row">
+            <span class="ref-label">Status</span>
+            <span class="ref-val" style="color:var(--grn);">✓ Received</span>
+          </div>
+          <div class="ref-row">
+            <span class="ref-label">Expected Response</span>
+            <span class="ref-val">Within 24 Hours</span>
+          </div>
+        </div>
+
+        <!-- LOI DOCUMENT -->
+        <div class="loi-doc" id="loiDoc">
+          <div class="loi-top">
+            <div>
+              <div class="loi-logo">Wasel <em>Auto</em></div>
+              <div class="loi-contact-info">
+                wasel-auto.vercel.app<br/>
+                +973 3384 4859<br/>
+                Manama, Kingdom of Bahrain
+              </div>
+            </div>
+            <div class="loi-meta">
+              <strong id="loiRef">—</strong>
+              <span id="loiDate">—</span>
+              <div class="loi-stamp">NON-BINDING · CONFIDENTIAL</div>
+            </div>
+          </div>
+
+          <div class="loi-h">Partnership Registration — <span id="loiTypeTitle"></span></div>
+
+          <div class="loi-body">
+            <p>This document confirms the registration of interest submitted to <strong>Wasel Auto</strong> — Bahrain's first AI-powered auto parts marketplace — by the party named below.</p>
+
+            <div class="detail-block">
+              <div><strong>Company / Name:</strong> <span id="loiCompany"></span></div>
+              <div><strong>Representative:</strong> <span id="loiContact"></span><span id="loiRoleSpan"></span></div>
+              <div><strong>WhatsApp:</strong> <span id="loiPhone"></span><span id="loiEmailSpan"></span></div>
+              <div><strong>Location:</strong> <span id="loiLocation"></span></div>
+            </div>
+
+            <div class="detail-block" id="loiSpecificBlock"></div>
+
+            <p>By submitting this registration, the above party confirms their genuine interest in joining the Wasel Auto platform as a <strong><span id="loiTypeInline"></span></strong>. Wasel Auto commits to making contact within <strong>24 hours</strong> to discuss onboarding, terms, and next steps.</p>
+
+            <p>This registration is <strong>free of charge</strong>, entirely <strong>non-binding</strong>, and does not constitute a formal contractual agreement. A formal partnership agreement will be presented separately following initial discussions.</p>
+
+            <p>Reference: <strong><span id="loiRef2"></span></strong></p>
+          </div>
+
+          <div class="loi-sigs">
+            <div>
+              <div style="height:36px;"></div>
+              <div class="sig-box">
+                <div class="sig-name" id="sigName"></div>
+                <div class="sig-role" id="sigRole"></div>
+                <div class="sig-date" id="sigDate"></div>
+              </div>
+            </div>
+            <div>
+              <div style="height:36px;"></div>
+              <div class="sig-box">
+                <div class="sig-name">Sahaam</div>
+                <div class="sig-role">Founder, Wasel Auto</div>
+                <div class="sig-date" id="sigDate2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="wa-btn" id="waLink" href="#" target="_blank">
+          💬 Send to Wasel Auto via WhatsApp
+        </a>
+        <button class="sec-btn" onclick="window.print()">🖨️ Save as PDF / Print</button>
+        <button class="sec-btn" onclick="resetForm()">← Submit Another Registration</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentType='supplier';
+
+function switchType(type,btn){
+  currentType=type;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('supplierFields').style.display=type==='supplier'?'':'none';
+  document.getElementById('garageFields').style.display=type==='garage'?'':'none';
+  const cfg={
+    supplier:{icon:'📦',title:'Supplier Registration',sub:'List your parts inventory and reach garages across Bahrain'},
+    garage:{icon:'🔧',title:'Garage Registration',sub:'Access live parts availability and pricing from certified suppliers'}
+  };
+  document.getElementById('cardIcon').textContent=cfg[type].icon;
+  document.getElementById('cardTitle').textContent=cfg[type].title;
+  document.getElementById('cardSub').textContent=cfg[type].sub;
+}
+
+function generateLOI(){
+  const company=document.getElementById('company').value.trim();
+  const contact=document.getElementById('contact').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const agree=document.getElementById('agree').checked;
+  if(!company||!contact||!phone){alert('Please fill in Company Name, Your Name and WhatsApp Number.');return;}
+  if(!agree){alert('Please confirm the terms by ticking the checkbox.');return;}
+
+  const role=document.getElementById('role').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const location=document.getElementById('location').value.trim()||'Bahrain';
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const ref='WAR-'+now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+'-'+Math.floor(Math.random()*9000+1000);
+  const typeLabel=currentType==='supplier'?'Parts Supplier':'Garage';
+
+  let specificHTML='';
+  if(currentType==='supplier'){
+    const s=document.getElementById('speciality').value;
+    const i=document.getElementById('inventory').value;
+    const p=document.getElementById('partsType').value;
+    const y=document.getElementById('years').value;
+    specificHTML=(s?'<div><strong>Parts Speciality:</strong> '+s+'</div>':'')+(p?'<div><strong>Parts Type:</strong> '+p+'</div>':'')+(i?'<div><strong>Inventory Size:</strong> '+i+'</div>':'')+(y?'<div><strong>Years in Business:</strong> '+y+'</div>':'');
+  } else {
+    const m=document.getElementById('mechanics').value;
+    const v=document.getElementById('vehicles').value;
+    const sp=document.getElementById('spend').value;
+    const c=document.getElementById('challenge').value;
+    specificHTML=(m?'<div><strong>Number of Mechanics:</strong> '+m+'</div>':'')+(v?'<div><strong>Vehicle Types:</strong> '+v+'</div>':'')+(sp?'<div><strong>Monthly Parts Spend:</strong> '+sp+'</div>':'')+(c?'<div><strong>Main Challenge:</strong> '+c+'</div>':'');
+  }
+
+  document.getElementById('successName').textContent=contact;
+  document.getElementById('successPhone').textContent=phone;
+  document.getElementById('refNum').textContent=ref;
+  document.getElementById('refDate').textContent=dateStr;
+  document.getElementById('refType').textContent=typeLabel+' Registration';
+  document.getElementById('loiRef').textContent=ref;
+  document.getElementById('loiRef2').textContent=ref;
+  document.getElementById('loiDate').textContent=dateStr;
+  document.getElementById('loiTypeTitle').textContent=typeLabel;
+  document.getElementById('loiTypeInline').textContent=typeLabel;
+  document.getElementById('loiCompany').textContent=company;
+  document.getElementById('loiContact').textContent=contact;
+  document.getElementById('loiRoleSpan').innerHTML=role?' — <strong>'+role+'</strong>':'';
+  document.getElementById('loiPhone').textContent=phone;
+  document.getElementById('loiEmailSpan').innerHTML=email?' · <strong>'+email+'</strong>':'';
+  document.getElementById('loiLocation').textContent=location;
+  document.getElementById('loiSpecificBlock').innerHTML=specificHTML;
+  document.getElementById('sigName').textContent=contact;
+  document.getElementById('sigRole').textContent=role||(typeLabel+', '+company);
+  document.getElementById('sigDate').textContent=dateStr;
+  document.getElementById('sigDate2').textContent=dateStr;
+
+  const waMsg=encodeURIComponent(
+    'Hello Wasel Auto,\n\nI have just registered my interest on your platform.\n\n'+
+    '📋 Reference: '+ref+'\n'+
+    '🏢 Company: '+company+'\n'+
+    '👤 Name: '+contact+(role?' — '+role:'')+'\n'+
+    '🤝 Type: '+typeLabel+'\n'+
+    '📍 Location: '+location+'\n\n'+
+    'Please contact me to discuss next steps.\n\nThank you.'
+  );
+  document.getElementById('waLink').href='https://wa.me/97333844859?text='+waMsg;
+
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('howSection').style.display='none';
+  document.getElementById('tabRow').style.display='none';
+  document.getElementById('successWrap').style.display='';
+  window.scrollTo(0,0);
+}
+
+function resetForm(){
+  document.getElementById('formWrap').style.display='';
+  document.getElementById('howSection').style.display='';
+  document.getElementById('tabRow').style.display='flex';
+  document.getElementById('successWrap').style.display='none';
+  ['company','contact','role','phone','email','location','speciality'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  document.getElementById('agree').checked=false;
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
