@@ -1,6 +1,23 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/loi",
+      "dest": "/loi.html"
+    },
+    {
+      "src": "/loi.html",
+      "dest": "/loi.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
   ]
 }
