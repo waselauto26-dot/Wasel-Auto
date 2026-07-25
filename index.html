@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Wasel Auto | وصل أوتو — Find Auto Parts in Bahrain</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;600&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
@@ -13,7 +13,6 @@
 :root{--red:#CE1126;--red2:#e8253a;--dark:#111;--dark2:#1e1e1e;--bg:#f5f5f5;--surf:#fff;--surf2:#f0f0f0;--bdr:#e0e0e0;--txt:#111;--mut:#777;--grn:#15803d;--grn2:#dcfce7;--gold:#b45309;--gold2:#fef3c7;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-height:100vh;}
-.ar{font-family:'Cairo',sans-serif;}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem;height:58px;background:var(--dark);border-bottom:3px solid var(--red);position:sticky;top:0;z-index:300;}
 .logo{display:flex;align-items:flex-end;cursor:pointer;text-decoration:none;}
 .lw{font-family:'Barlow';font-weight:900;font-size:1.6rem;color:white;letter-spacing:-1px;line-height:1;}
@@ -30,18 +29,17 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .btn-ol{background:transparent;color:var(--red);border:2px solid var(--red);}.btn-ol:hover{background:var(--red);color:white;}
 .btn-gh{background:var(--surf2);color:var(--txt);border:1.5px solid var(--bdr);}.btn-gh:hover{border-color:var(--red);color:var(--red);}
 .btn-wa{background:#25D366;color:white;}.btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);}
-.btn-grn{background:var(--grn);color:white;}.btn-grn:hover{background:#166534;transform:translateY(-1px);}
 .btn-gold{background:var(--gold);color:white;}.btn-gold:hover{background:#92400e;transform:translateY(-1px);}
 .btn-sm{padding:6px 13px;font-size:0.78rem;}
 .btn-lg{padding:12px 26px;font-size:0.92rem;}
 .btn-full{width:100%;}
 .apptabs{display:flex;background:var(--dark2);border-bottom:2px solid var(--red);overflow-x:auto;}
-.apptab{flex:1;min-width:80px;padding:10px 6px;border:none;background:transparent;color:#888;font-weight:700;cursor:pointer;transition:all 0.15s;font-size:0.75rem;border-bottom:3px solid transparent;white-space:nowrap;}
+.apptab{flex:1;min-width:72px;padding:10px 4px;border:none;background:transparent;color:#888;font-weight:700;cursor:pointer;transition:all 0.15s;font-size:0.73rem;border-bottom:3px solid transparent;white-space:nowrap;}
 .apptab.en{font-family:'Barlow',sans-serif;text-transform:uppercase;letter-spacing:0.03em;}
-.apptab.ar{font-family:'Cairo',sans-serif;font-size:0.82rem;}
+.apptab.ar{font-family:'Cairo',sans-serif;font-size:0.8rem;}
 .apptab.on{color:white;border-bottom-color:var(--red);background:rgba(255,255,255,0.04);}
 .apptab:hover:not(.on){color:#ccc;}
-.tabico{display:block;font-size:1rem;margin-bottom:2px;}
+.tabico{display:block;font-size:0.95rem;margin-bottom:2px;}
 .shero{background:var(--dark);padding:1.8rem 1.2rem;border-bottom:3px solid var(--red);}
 .shero-inner{max-width:700px;margin:0 auto;}
 .shero-title{font-family:'Barlow';font-weight:900;font-size:clamp(1.4rem,4vw,2rem);color:white;margin-bottom:4px;}
@@ -66,16 +64,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .psec-title.ar{font-family:'Cairo';text-transform:none;font-size:1.15rem;}
 .psec-count{font-family:'JetBrains Mono';font-size:0.75rem;color:var(--mut);background:var(--surf2);padding:3px 10px;border-radius:99px;border:1px solid var(--bdr);}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:0.9rem;}
-.pcard{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1rem;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
-.pcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:transparent;transition:background 0.15s;}
+.pcard{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1rem;cursor:pointer;transition:all 0.15s;position:relative;}
+.pcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:transparent;transition:background 0.15s;border-radius:10px 0 0 10px;}
 .pcard:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px rgba(206,17,38,0.1);}
 .pcard:hover::before,.pcard.hl::before{background:var(--red);}
 .pcard.hl{border-color:var(--red);}
-.ptype{position:absolute;top:9px;right:9px;font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;}
+.ptype{position:absolute;top:9px;right:9px;font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;font-family:'Barlow',sans-serif;}
 .ptype-g{background:var(--dark);color:white;}
 .ptype-a{background:var(--red);color:white;}
-.ptype-u{background:var(--gold);color:white;}
-.pcard-ico{font-size:1.6rem;margin:.3rem 0 .5rem;}
+.pcard-cat{font-size:0.65rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;font-family:'JetBrains Mono';}
+.pcard-cat.ar{font-family:'Cairo';letter-spacing:0;text-transform:none;}
 .pcard-name{font-family:'Barlow';font-weight:700;font-size:0.92rem;margin-bottom:2px;line-height:1.3;padding-right:52px;}
 .pcard-name.ar{font-family:'Cairo';font-size:0.95rem;}
 .pcard-brand{font-size:0.72rem;color:var(--mut);font-weight:600;margin-bottom:5px;}
@@ -85,7 +83,8 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .pcard-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);}
 .war-tag{font-size:0.62rem;font-weight:700;color:var(--grn);background:var(--grn2);padding:2px 7px;border-radius:4px;}
 .qty-tag{font-size:0.65rem;color:var(--mut);font-family:'JetBrains Mono';}
-.pcard-cta{font-size:0.68rem;color:var(--red);margin-top:5px;font-weight:700;}
+.pcard-cta{font-size:0.68rem;color:var(--red);margin-top:5px;font-weight:700;font-family:'Barlow';}
+.pcard-cta.ar{font-family:'Cairo';}
 .frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
 .pill{padding:5px 12px;border-radius:99px;border:1.5px solid var(--bdr);background:white;color:var(--mut);font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Barlow',sans-serif;text-transform:uppercase;}
 .pill.ar{font-family:'Cairo',sans-serif;text-transform:none;font-size:0.78rem;}
@@ -107,15 +106,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .mrow:last-of-type{border-bottom:none;}
 .mrl{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--mut);}
 .mrl.ar{font-family:'Cairo';letter-spacing:0;font-size:0.75rem;text-transform:none;}
-.mod-notice{background:#fff8f8;border:1px solid rgba(206,17,38,0.2);border-radius:8px;padding:0.9rem;font-size:0.78rem;color:var(--mut);line-height:1.6;margin-bottom:1rem;}
+.mod-notice{background:#fff8f8;border:1px solid rgba(206,17,38,0.2);border-radius:8px;padding:0.9rem;font-size:0.78rem;color:var(--mut);line-height:1.6;margin-top:0.9rem;}
 .mod-notice.ar{font-family:'Cairo';font-size:0.82rem;}
 .mod-actions{padding:0 1.4rem 1.4rem;display:flex;flex-direction:column;gap:8px;}
-.sport{max-width:700px;margin:0 auto;padding:1.2rem;}
-.sport-hero{background:var(--dark);border-radius:12px;padding:1.5rem;margin-bottom:1.2rem;border-bottom:3px solid var(--red);}
-.sport-hero h2{font-family:'Barlow';font-weight:900;font-size:1.3rem;color:white;margin-bottom:4px;}
-.sport-hero h2.ar{font-family:'Cairo';}
-.sport-hero p{color:#999;font-size:0.85rem;}
-.sport-hero p.ar{font-family:'Cairo';}
 .panel{background:white;border:1.5px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:1rem;}
 .phead{background:var(--dark);padding:0.9rem 1.2rem;display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--red);}
 .phead-ico{width:30px;height:30px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
@@ -129,7 +122,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .fsec{margin-bottom:1.3rem;}
 .fsec-t{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;margin-bottom:0.7rem;padding-bottom:5px;border-bottom:2px solid var(--bdr);}
 .fsec-t.ar{font-family:'Cairo';letter-spacing:0;font-size:0.75rem;text-transform:none;}
-.pending-card{background:white;border:1.5px solid #f59e0b;border-radius:10px;padding:1rem;margin-bottom:0.8rem;border-left:4px solid #f59e0b;}
 .aibox{background:var(--dark);border-radius:9px;padding:1.1rem;margin-top:0.9rem;border-left:4px solid var(--red);}
 .aiconf{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;padding:2px 8px;border-radius:99px;text-transform:uppercase;font-family:'JetBrains Mono';}
 .aiconf.high{background:rgba(21,128,61,0.2);color:#4ade80;border:1px solid rgba(21,128,61,0.4);}
@@ -141,12 +133,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .hlbanner{background:rgba(206,17,38,0.05);border:1.5px solid rgba(206,17,38,0.18);border-radius:7px;padding:0.55rem 1rem;display:flex;align-items:center;gap:8px;margin-bottom:0.9rem;font-size:0.78rem;color:var(--red);font-weight:700;}
 .hlbanner.ar{font-family:'Cairo';}
 .not-found-box{background:white;border:2px dashed var(--bdr);border-radius:12px;padding:1.5rem;text-align:center;margin-top:1rem;}
-.not-found-box.ar{font-family:'Cairo';}
-.not-found-ico{font-size:2.5rem;margin-bottom:0.6rem;}
-.not-found-title{font-family:'Barlow';font-weight:900;font-size:1rem;margin-bottom:0.4rem;}
-.not-found-title.ar{font-family:'Cairo';}
-.not-found-sub{font-size:0.8rem;color:var(--mut);margin-bottom:1.2rem;line-height:1.6;}
-.not-found-sub.ar{font-family:'Cairo';}
 .rfq-form{background:var(--surf2);border-radius:9px;padding:1rem;text-align:left;margin-top:0.8rem;}
 .rfq-sent{background:var(--grn2);border:1.5px solid var(--grn);border-radius:9px;padding:1rem;text-align:center;}
 .rfq-sent.ar{font-family:'Cairo';}
@@ -156,7 +142,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .empty{text-align:center;padding:2rem;color:var(--mut);}
 .empty h3{font-family:'Barlow';font-weight:900;color:var(--txt);margin-bottom:0.3rem;}
 .empty h3.ar{font-family:'Cairo';}
-.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--dark);color:white;padding:0.8rem 1.1rem;border-radius:8px;font-size:0.8rem;z-index:999;animation:su 0.25s ease;border-left:3px solid var(--red);font-weight:600;max-width:300px;}
+.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--dark);color:white;padding:0.8rem 1.1rem;border-radius:8px;font-size:0.8rem;z-index:9999;animation:su 0.25s ease;border-left:3px solid var(--red);font-weight:600;max-width:300px;}
 .toast.ar{font-family:'Cairo';}
 @keyframes su{from{transform:translateY(16px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 .dzone{border:2px dashed var(--bdr);border-radius:9px;padding:1.2rem;text-align:center;cursor:pointer;transition:all 0.15s;background:var(--surf2);}
@@ -165,67 +151,109 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .dzt{color:var(--mut);font-size:0.77rem;margin-top:5px;}
 .dzt.ar{font-family:'Cairo';}
 .hiw{max-width:700px;margin:0 auto;padding:0 1.2rem 2rem;}
-.hiw-title{font-family:'Barlow';font-weight:900;font-size:1rem;text-transform:uppercase;color:var(--mut);margin-bottom:0.9rem;}
-.hiw-title.ar{font-family:'Cairo';text-transform:none;}
 .hiwgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;}
 .hiwcard{background:white;border:1.5px solid var(--bdr);border-top:3px solid var(--red);border-radius:9px;padding:0.9rem;text-align:center;}
-.hiw-num{font-size:1.4rem;margin-bottom:3px;}
+.hiw-num{font-size:1.3rem;margin-bottom:3px;}
 .hiw-t{font-family:'Barlow';font-weight:700;font-size:0.82rem;margin:3px 0;}
 .hiw-t.ar{font-family:'Cairo';}
 .hiw-d{font-size:0.73rem;color:var(--mut);line-height:1.5;}
 .hiw-d.ar{font-family:'Cairo';}
 
-/* ── INVOICE TOOL ── */
-.inv-wrap{max-width:800px;margin:0 auto;padding:1.2rem;}
-.inv-hero{background:linear-gradient(135deg,var(--dark),var(--dark2));border-radius:12px;padding:1.4rem;margin-bottom:1.2rem;border-bottom:3px solid var(--gold);}
-.inv-hero h2{font-family:'Barlow';font-weight:900;font-size:1.2rem;color:white;margin-bottom:3px;}
-.inv-hero h2.ar{font-family:'Cairo';}
-.inv-hero p{color:#999;font-size:0.82rem;}
-.inv-hero p.ar{font-family:'Cairo';}
-.inv-doc{background:white;border:1.5px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:1rem;}
-.inv-doc-head{background:var(--dark);padding:1.2rem 1.4rem;border-bottom:3px solid var(--gold);}
-.inv-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;}
-.inv-logo{font-family:'Barlow';font-weight:900;font-size:1.4rem;color:white;}
-.inv-logo span{color:var(--red);font-style:italic;}
-.inv-meta{text-align:right;}
-.inv-num{font-family:'JetBrains Mono';font-size:0.75rem;color:#aaa;}
-.inv-date{font-family:'JetBrains Mono';font-size:0.7rem;color:#666;margin-top:2px;}
-.inv-body{padding:1.2rem 1.4rem;}
-.inv-parties{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--bdr);}
-.inv-party-label{font-size:0.63rem;font-weight:700;letter-spacing:0.12em;color:var(--mut);text-transform:uppercase;margin-bottom:4px;}
-.inv-party-label.ar{font-family:'Cairo';letter-spacing:0;}
-.inv-party-name{font-weight:700;font-size:0.88rem;}
+/* ── INVOICE SYSTEM ── */
+.inv-wrap{max-width:860px;margin:0 auto;padding:1.2rem;}
+.inv-lock{background:var(--dark);border-radius:12px;padding:2rem;text-align:center;border:2px solid var(--gold);}
+.inv-lock-ico{font-size:3rem;margin-bottom:0.8rem;}
+.inv-lock-title{font-family:'Barlow';font-weight:900;font-size:1.2rem;color:white;margin-bottom:0.5rem;}
+.inv-lock-title.ar{font-family:'Cairo';}
+.inv-lock-sub{color:#999;font-size:0.85rem;margin-bottom:1.5rem;line-height:1.7;}
+.inv-lock-sub.ar{font-family:'Cairo';}
+.inv-lock-box{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1.2rem;margin-bottom:1.2rem;text-align:left;}
+.ref-entry{display:flex;gap:8px;align-items:flex-end;}
+.ref-input{background:#1a1a1a;border:2px solid #333;border-radius:7px;padding:10px 14px;color:white;font-family:'JetBrains Mono';font-size:1rem;outline:none;flex:1;letter-spacing:0.1em;transition:border 0.15s;}
+.ref-input:focus{border-color:var(--gold);}
+.ref-input::placeholder{color:#555;font-size:0.85rem;letter-spacing:0;}
+.ref-error{color:#ff9090;font-size:0.75rem;margin-top:5px;font-family:'JetBrains Mono';}
+.ref-steps{margin-top:1rem;}
+.ref-step{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.8rem;color:#888;}
+.ref-step:last-child{border-bottom:none;}
+.ref-step-num{width:22px;height:22px;border-radius:50%;background:var(--gold);color:white;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;flex-shrink:0;margin-top:1px;}
+.inv-hero{background:linear-gradient(135deg,var(--dark),var(--dark2));border-radius:12px;padding:1.2rem;margin-bottom:1rem;border-left:4px solid var(--gold);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.inv-hero-left h3{font-family:'Barlow';font-weight:900;font-size:1rem;color:white;margin-bottom:2px;}
+.inv-hero-left h3.ar{font-family:'Cairo';}
+.inv-hero-left p{color:#999;font-size:0.78rem;}
+.inv-hero-left p.ar{font-family:'Cairo';}
+.inv-ref-badge{background:var(--gold);color:white;font-family:'JetBrains Mono';font-size:0.78rem;font-weight:700;padding:5px 12px;border-radius:6px;}
+
+/* PDF INVOICE STYLES */
+.inv-doc{background:white;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:1rem;font-family:'Barlow',sans-serif;}
+.inv-doc-topbar{background:var(--red);height:8px;}
+.inv-doc-body{padding:2rem;}
+.inv-doc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px solid var(--bdr);}
+.inv-doc-logo{font-family:'Barlow';font-weight:900;font-size:1.8rem;color:var(--dark);letter-spacing:-1px;}
+.inv-doc-logo span{color:var(--red);font-style:italic;}
+.inv-doc-logo-sub{font-size:0.7rem;color:var(--mut);margin-top:2px;font-family:'JetBrains Mono';}
+.inv-doc-right{text-align:right;}
+.inv-doc-title{font-family:'Barlow';font-weight:900;font-size:1.4rem;color:var(--red);text-transform:uppercase;letter-spacing:2px;}
+.inv-doc-ref{font-family:'JetBrains Mono';font-size:0.78rem;color:var(--mut);margin-top:4px;}
+.inv-doc-date{font-family:'JetBrains Mono';font-size:0.75rem;color:var(--mut);margin-top:2px;}
+.inv-parties{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
+.inv-party-lbl{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;color:var(--mut);text-transform:uppercase;margin-bottom:5px;font-family:'JetBrains Mono';}
+.inv-party-name{font-family:'Barlow';font-weight:700;font-size:0.92rem;color:var(--dark);}
 .inv-party-name.ar{font-family:'Cairo';}
-.inv-party-sub{font-size:0.75rem;color:var(--mut);}
-.inv-table{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:0.82rem;}
-.inv-table th{background:var(--dark);color:white;padding:8px 10px;text-align:left;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;}
-.inv-table th.ar{font-family:'Cairo';text-transform:none;font-size:0.75rem;}
-.inv-table td{padding:8px 10px;border-bottom:1px solid var(--bdr);}
+.inv-party-detail{font-size:0.75rem;color:var(--mut);margin-top:2px;}
+.inv-table{width:100%;border-collapse:collapse;margin-bottom:1.2rem;font-size:0.82rem;}
+.inv-table thead tr{background:var(--dark);color:white;}
+.inv-table th{padding:9px 12px;text-align:left;font-size:0.67rem;text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono';}
+.inv-table td{padding:10px 12px;border-bottom:1px solid var(--bdr);}
 .inv-table tr:last-child td{border-bottom:none;}
-.inv-table tr:hover td{background:var(--surf2);}
-.inv-totals{background:var(--surf2);border-radius:8px;padding:1rem;margin-bottom:1rem;}
-.inv-total-row{display:flex;justify-content:space-between;padding:4px 0;font-size:0.83rem;}
-.inv-total-row.final{font-family:'Barlow';font-weight:900;font-size:1rem;color:var(--dark);padding-top:8px;margin-top:4px;border-top:2px solid var(--dark);}
-.inv-total-row.final.ar{font-family:'Cairo';}
-.inv-profit-row{display:flex;justify-content:space-between;padding:4px 0;font-size:0.83rem;color:var(--grn);font-weight:700;}
-.inv-footer-note{font-size:0.72rem;color:var(--mut);text-align:center;padding-top:0.8rem;border-top:1px solid var(--bdr);line-height:1.6;}
-.inv-footer-note.ar{font-family:'Cairo';}
+.inv-table tr:nth-child(even) td{background:#fafafa;}
+.inv-totals{display:flex;justify-content:flex-end;}
+.inv-totals-box{min-width:260px;}
+.inv-total-row{display:flex;justify-content:space-between;padding:5px 0;font-size:0.83rem;border-bottom:1px solid var(--bdr);}
+.inv-total-row:last-child{border-bottom:none;}
+.inv-total-row.grand{font-family:'Barlow';font-weight:900;font-size:1rem;color:var(--dark);padding-top:8px;margin-top:4px;border-top:2px solid var(--dark);border-bottom:none;}
+.inv-total-row.grand.ar{font-family:'Cairo';}
+.inv-profit-private{margin-top:0.8rem;background:var(--grn2);border:1px solid var(--grn);border-radius:6px;padding:7px 12px;display:flex;justify-content:space-between;font-size:0.78rem;color:var(--grn);font-weight:700;}
+.inv-profit-private.ar{font-family:'Cairo';}
+.inv-doc-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.8rem;}
+.inv-doc-footer-note{font-size:0.7rem;color:var(--mut);line-height:1.6;}
+.inv-doc-footer-note.ar{font-family:'Cairo';}
+.inv-doc-bottombar{background:var(--red);height:6px;}
 .inv-add-item{background:var(--surf2);border:2px dashed var(--bdr);border-radius:9px;padding:1rem;margin-bottom:0.8rem;}
-.inv-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.wa-msg-box{background:var(--dark);border-radius:9px;padding:1rem;margin-top:0.8rem;}
-.wa-msg-title{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;color:#aaa;text-transform:uppercase;margin-bottom:0.5rem;}
-.wa-msg-text{font-size:0.8rem;color:#ccc;line-height:1.7;white-space:pre-wrap;font-family:'JetBrains Mono';}
+.inv-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;}
+.wasel-fee-note{background:var(--gold2);border:1px solid var(--gold);border-radius:7px;padding:0.75rem 1rem;font-size:0.78rem;color:var(--gold);font-weight:600;margin-bottom:0.8rem;font-family:'Barlow';}
+.wasel-fee-note.ar{font-family:'Cairo';}
+
+/* ADMIN LOG */
+.admin-log{background:white;border:1.5px solid var(--bdr);border-radius:10px;overflow:hidden;margin-top:1rem;}
+.admin-log-head{background:#0f172a;padding:0.8rem 1.2rem;display:flex;align-items:center;justify-content:space-between;}
+.admin-log-title{font-family:'JetBrains Mono';font-size:0.75rem;color:#4ade80;font-weight:600;letter-spacing:0.1em;}
+.admin-log-row{padding:0.8rem 1.2rem;border-bottom:1px solid var(--bdr);font-size:0.78rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0.5rem;}
+.admin-log-row:last-child{border-bottom:none;}
+.admin-log-label{font-size:0.62rem;color:var(--mut);font-family:'JetBrains Mono';text-transform:uppercase;display:block;margin-bottom:1px;}
+
+/* SPORT */
+.sport{max-width:700px;margin:0 auto;padding:1.2rem;}
+.sport-hero{background:var(--dark);border-radius:12px;padding:1.5rem;margin-bottom:1.2rem;border-bottom:3px solid var(--red);}
+.sport-hero h2{font-family:'Barlow';font-weight:900;font-size:1.3rem;color:white;margin-bottom:4px;}
+.sport-hero h2.ar{font-family:'Cairo';}
+.sport-hero p{color:#999;font-size:0.85rem;}
+.sport-hero p.ar{font-family:'Cairo';}
+.pending-card{background:white;border:1.5px solid #f59e0b;border-radius:10px;padding:1rem;margin-bottom:0.8rem;border-left:4px solid #f59e0b;}
 
 @media print{
-  .nav,.apptabs,.inv-hero,.inv-actions,.wa-msg-box{display:none!important;}
+  .nav,.apptabs,.inv-lock,.inv-hero,.inv-actions,.admin-log,.wasel-fee-note,.inv-add-item,.inv-profit-private,.sport-hero{display:none!important;}
   .inv-wrap{padding:0;}
-  .inv-doc{border:1px solid #ccc;box-shadow:none;}
+  .inv-doc{border:none;box-shadow:none;}
+  body{background:white;}
 }
 @media(max-width:520px){
   .srow,.fgrid,.hiwgrid,.inv-parties{grid-template-columns:1fr;}
   .apptab .tabico{display:none;}
-  .inv-top{flex-direction:column;}
-  .inv-meta{text-align:left;}
+  .inv-doc-header{flex-direction:column;}
+  .inv-doc-right{text-align:left;}
+  .inv-totals{justify-content:flex-start;}
+  .inv-totals-box{min-width:100%;}
 }
 </style>
 </head>
@@ -240,23 +268,70 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 <script type="text/babel">
 const {useState,useRef,useEffect}=React;
 
+/* ── REFERENCE GENERATOR ── */
+function generateRef(){
+  const now=new Date();
+  const y=now.getFullYear().toString().slice(-2);
+  const m=String(now.getMonth()+1).padStart(2,"0");
+  const d=String(now.getDate()).padStart(2,"0");
+  const rand=Math.floor(Math.random()*9000+1000);
+  return `WA-${y}${m}${d}-${rand}`;
+}
+
+/* ── VALID REFS (Wasel Auto issues these after payment) ── */
+const VALID_REFS_KEY="wasel_valid_refs";
+function getValidRefs(){
+  try{const r=localStorage.getItem(VALID_REFS_KEY);return r?JSON.parse(r):[];}catch{return[];}
+}
+function addValidRef(ref,data){
+  try{
+    const refs=getValidRefs();
+    refs.push({ref,...data,createdAt:new Date().toISOString(),used:false});
+    localStorage.setItem(VALID_REFS_KEY,JSON.stringify(refs));
+  }catch{}
+}
+function markRefUsed(ref){
+  try{
+    const refs=getValidRefs();
+    const idx=refs.findIndex(r=>r.ref===ref);
+    if(idx>-1){refs[idx].used=true;localStorage.setItem(VALID_REFS_KEY,JSON.stringify(refs));}
+  }catch{}
+}
+function getRefData(ref){
+  try{const refs=getValidRefs();return refs.find(r=>r.ref===ref)||null;}catch{return null;}
+}
+
+/* ── INVOICE LOG ── */
+const INV_LOG_KEY="wasel_invoice_log";
+function logInvoice(data){
+  try{
+    const log=JSON.parse(localStorage.getItem(INV_LOG_KEY)||"[]");
+    log.unshift({...data,loggedAt:new Date().toISOString()});
+    localStorage.setItem(INV_LOG_KEY,JSON.stringify(log.slice(0,200)));
+  }catch{}
+}
+function getInvoiceLog(){
+  try{return JSON.parse(localStorage.getItem(INV_LOG_KEY)||"[]");}catch{return[];}
+}
+
+/* ── DATA ── */
 const PARTS=[
-  {id:1,name:"Toyota Genuine Oil Filter",nameAr:"فلتر زيت تويوتا أصلي",cat:"Filters",make:"Toyota",model:"Land Cruiser",yf:2018,yt:2025,price:4.800,type:"Genuine",brand:"Toyota",qty:24,image:"🔧",warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:2,name:"Nissan Genuine Brake Pads Front",nameAr:"تيل فرامل نيسان أصلي أمامي",cat:"Brakes",make:"Nissan",model:"Patrol",yf:2016,yt:2025,price:38.500,type:"Genuine",brand:"Nissan",qty:12,image:"🛑",warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:3,name:"BMW Genuine Alternator 180A",nameAr:"دينامو BMW أصلي 180A",cat:"Electronics",make:"BMW",model:"X5",yf:2019,yt:2024,price:285.000,type:"Genuine",brand:"BMW",qty:3,image:"⚡",warranty:"24 months",warrantyAr:"24 شهر"},
-  {id:4,name:"Mercedes Genuine Radiator",nameAr:"رادياتور مرسيدس أصلي",cat:"Cooling",make:"Mercedes",model:"C-Class",yf:2018,yt:2023,price:320.000,type:"Genuine",brand:"Mercedes-Benz",qty:2,image:"🌡️",warranty:"24 months",warrantyAr:"24 شهر"},
-  {id:5,name:"Honda Genuine Timing Belt Kit",nameAr:"طقم تايمنغ هوندا أصلي",cat:"Engine",make:"Honda",model:"CR-V",yf:2017,yt:2022,price:95.000,type:"Genuine",brand:"Honda",qty:6,image:"⚙️",warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:6,name:"Bosch Brake Pads — All Makes",nameAr:"تيل فرامل بوش جميع الماركات",cat:"Brakes",make:"Toyota",model:"Corolla",yf:2015,yt:2024,price:12.900,type:"Aftermarket",brand:"Bosch",qty:30,image:"🛑",warranty:"6 months",warrantyAr:"6 أشهر"},
-  {id:7,name:"Denso Spark Plugs Set 4x",nameAr:"شمعات دنسو طقم 4 حبة",cat:"Engine",make:"Nissan",model:"Altima",yf:2014,yt:2023,price:8.500,type:"Aftermarket",brand:"Denso",qty:40,image:"🔥",warranty:"6 months",warrantyAr:"6 أشهر"},
-  {id:8,name:"Mann Air Filter Premium",nameAr:"فلتر هواء مان بريميوم",cat:"Filters",make:"BMW",model:"3 Series",yf:2017,yt:2024,price:9.800,type:"Aftermarket",brand:"Mann",qty:18,image:"💨",warranty:"6 months",warrantyAr:"6 أشهر"},
-  {id:9,name:"Gates Timing Belt",nameAr:"تايمنغ بيلت جيتس",cat:"Engine",make:"Honda",model:"Civic",yf:2016,yt:2022,price:22.000,type:"Aftermarket",brand:"Gates",qty:10,image:"⚙️",warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:10,name:"TRW Front Shock Absorbers Pair",nameAr:"امورتيزير أمامي TRW زوج",cat:"Suspension",make:"Mercedes",model:"E-Class",yf:2016,yt:2023,price:78.000,type:"Aftermarket",brand:"TRW",qty:5,image:"🔩",warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:11,name:"Toyota Suspension Kit Front",nameAr:"طقم مقص تويوتا أمامي",cat:"Suspension",make:"Toyota",model:"Camry",yf:2018,yt:2024,price:145.000,type:"Genuine",brand:"Toyota",qty:4,image:"🔩",warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:12,name:"Castrol GTX 5W-40 Engine Oil 4L",nameAr:"زيت محرك كاسترول GTX 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,price:6.500,type:"Aftermarket",brand:"Castrol",qty:50,image:"🛢️",warranty:"N/A",warrantyAr:"لا ينطبق"},
-  {id:13,name:"Toyota Coolant Antifreeze 1L",nameAr:"سائل تبريد تويوتا 1 لتر",cat:"Oils & Fluids",make:"Toyota",model:"All",yf:2005,yt:2025,price:2.800,type:"Genuine",brand:"Toyota",qty:30,image:"🧴",warranty:"N/A",warrantyAr:"لا ينطبق"},
-  {id:14,name:"Front Bumper — Toyota Camry 2019",nameAr:"بمبر أمامي تويوتا كامري 2019",cat:"Body Parts",make:"Toyota",model:"Camry",yf:2019,yt:2021,price:85.000,type:"Genuine",brand:"Toyota",qty:2,image:"🚗",warranty:"3 months",warrantyAr:"3 أشهر"},
-  {id:15,name:"Right Front Door — Nissan Patrol",nameAr:"باب أمامي يمين نيسان باترول",cat:"Body Parts",make:"Nissan",model:"Patrol",yf:2016,yt:2020,price:220.000,type:"Genuine",brand:"Nissan",qty:1,image:"🚪",warranty:"3 months",warrantyAr:"3 أشهر"},
-  {id:16,name:"Mobil 1 5W-30 Full Synthetic 4L",nameAr:"زيت موبيل 1 تخليقي كامل 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,price:9.200,type:"Aftermarket",brand:"Mobil",qty:24,image:"🛢️",warranty:"N/A",warrantyAr:"لا ينطبق"},
+  {id:1,name:"Toyota Genuine Oil Filter",nameAr:"فلتر زيت تويوتا أصلي",cat:"Filters",make:"Toyota",model:"Land Cruiser",yf:2018,yt:2025,price:4.800,type:"Genuine",brand:"Toyota",qty:24,warranty:"12 months",warrantyAr:"12 شهر"},
+  {id:2,name:"Nissan Genuine Brake Pads Front",nameAr:"تيل فرامل نيسان أصلي أمامي",cat:"Brakes",make:"Nissan",model:"Patrol",yf:2016,yt:2025,price:38.500,type:"Genuine",brand:"Nissan",qty:12,warranty:"12 months",warrantyAr:"12 شهر"},
+  {id:3,name:"BMW Genuine Alternator 180A",nameAr:"دينامو BMW أصلي 180A",cat:"Electronics",make:"BMW",model:"X5",yf:2019,yt:2024,price:285.000,type:"Genuine",brand:"BMW",qty:3,warranty:"24 months",warrantyAr:"24 شهر"},
+  {id:4,name:"Mercedes Genuine Radiator",nameAr:"رادياتور مرسيدس أصلي",cat:"Cooling",make:"Mercedes",model:"C-Class",yf:2018,yt:2023,price:320.000,type:"Genuine",brand:"Mercedes-Benz",qty:2,warranty:"24 months",warrantyAr:"24 شهر"},
+  {id:5,name:"Honda Genuine Timing Belt Kit",nameAr:"طقم تايمنغ هوندا أصلي",cat:"Engine",make:"Honda",model:"CR-V",yf:2017,yt:2022,price:95.000,type:"Genuine",brand:"Honda",qty:6,warranty:"12 months",warrantyAr:"12 شهر"},
+  {id:6,name:"Bosch Brake Pads — All Makes",nameAr:"تيل فرامل بوش جميع الماركات",cat:"Brakes",make:"Toyota",model:"Corolla",yf:2015,yt:2024,price:12.900,type:"Aftermarket",brand:"Bosch",qty:30,warranty:"6 months",warrantyAr:"6 أشهر"},
+  {id:7,name:"Denso Spark Plugs Set 4x",nameAr:"شمعات دنسو طقم 4 حبة",cat:"Engine",make:"Nissan",model:"Altima",yf:2014,yt:2023,price:8.500,type:"Aftermarket",brand:"Denso",qty:40,warranty:"6 months",warrantyAr:"6 أشهر"},
+  {id:8,name:"Mann Air Filter Premium",nameAr:"فلتر هواء مان بريميوم",cat:"Filters",make:"BMW",model:"3 Series",yf:2017,yt:2024,price:9.800,type:"Aftermarket",brand:"Mann",qty:18,warranty:"6 months",warrantyAr:"6 أشهر"},
+  {id:9,name:"Gates Timing Belt",nameAr:"تايمنغ بيلت جيتس",cat:"Engine",make:"Honda",model:"Civic",yf:2016,yt:2022,price:22.000,type:"Aftermarket",brand:"Gates",qty:10,warranty:"12 months",warrantyAr:"12 شهر"},
+  {id:10,name:"TRW Front Shock Absorbers Pair",nameAr:"امورتيزير أمامي TRW زوج",cat:"Suspension",make:"Mercedes",model:"E-Class",yf:2016,yt:2023,price:78.000,type:"Aftermarket",brand:"TRW",qty:5,warranty:"12 months",warrantyAr:"12 شهر"},
+  {id:11,name:"Toyota Suspension Kit Front",nameAr:"طقم مقص تويوتا أمامي",cat:"Suspension",make:"Toyota",model:"Camry",yf:2018,yt:2024,price:145.000,type:"Genuine",brand:"Toyota",qty:4,warranty:"12 months",warrantyAr:"12 شهر"},
+  {id:12,name:"Castrol GTX 5W-40 Engine Oil 4L",nameAr:"زيت محرك كاسترول GTX 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,price:6.500,type:"Aftermarket",brand:"Castrol",qty:50,warranty:"N/A",warrantyAr:"—"},
+  {id:13,name:"Toyota Coolant Antifreeze 1L",nameAr:"سائل تبريد تويوتا 1 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2005,yt:2025,price:2.800,type:"Genuine",brand:"Toyota",qty:30,warranty:"N/A",warrantyAr:"—"},
+  {id:14,name:"Front Bumper — Toyota Camry 2019",nameAr:"بمبر أمامي تويوتا كامري 2019",cat:"Body Parts",make:"Toyota",model:"Camry",yf:2019,yt:2021,price:85.000,type:"Genuine",brand:"Toyota",qty:2,warranty:"3 months",warrantyAr:"3 أشهر"},
+  {id:15,name:"Right Front Door — Nissan Patrol",nameAr:"باب أمامي يمين نيسان باترول",cat:"Body Parts",make:"Nissan",model:"Patrol",yf:2016,yt:2020,price:220.000,type:"Genuine",brand:"Nissan",qty:1,warranty:"3 months",warrantyAr:"3 أشهر"},
+  {id:16,name:"Mobil 1 5W-30 Full Synthetic 4L",nameAr:"زيت موبيل 1 تخليقي كامل 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,price:9.200,type:"Aftermarket",brand:"Mobil",qty:24,warranty:"N/A",warrantyAr:"—"},
 ];
 
 const CATS=["All","Engine","Brakes","Filters","Oils & Fluids","Suspension","Body Parts","Cooling","Electronics"];
@@ -281,31 +356,33 @@ async function askAI(prompt,b64){
   try{return JSON.parse(t.replace(/```json|```/g,"").trim());}catch{return null;}
 }
 
+/* ── PART CARD ── */
 function PartCard({part,ar,onClick}){
   const nm=ar?part.nameAr:part.name;
+  const ar_=ar?"ar":"";
+  const typeLabel=ar?(part.type==="Genuine"?"أصلي":"بديل"):part.type;
   return(
     <div className="pcard" onClick={onClick} dir={ar?"rtl":"ltr"}>
-      <div className={`ptype ${part.type==="Genuine"?"ptype-g":part.type==="Used"?"ptype-u":"ptype-a"}`}>
-        {ar?(part.type==="Genuine"?"أصلي":part.type==="Used"?"مستعمل":"بديل"):part.type}
-      </div>
-      <div className="pcard-ico">{part.image}</div>
-      <div className={`pcard-name ${ar?"ar":""}`}>{nm}</div>
+      <div className={`ptype ${part.type==="Genuine"?"ptype-g":"ptype-a"}`}>{typeLabel}</div>
+      <div className={`pcard-cat ${ar_}`}>{ar?CATS_AR[CATS.indexOf(part.cat)]||part.cat:part.cat}</div>
+      <div className={`pcard-name ${ar_}`}>{nm}</div>
       <div className="pcard-brand">{part.brand}</div>
-      <div className="pcard-compat">{part.make} {part.model} · {part.yf}–{part.yt}</div>
+      <div className="pcard-compat">{part.make==="Universal"?(ar?"جميع السيارات":"Universal"):part.make+" "+part.model+" · "+part.yf+"–"+part.yt}</div>
       <div className="pcard-price">{part.price.toFixed(3)} <span>BHD</span></div>
       <div className="pcard-footer">
         <span className="war-tag">{ar?`✓ ${part.warrantyAr}`:`✓ ${part.warranty}`}</span>
         <span className="qty-tag">{ar?"متوفر ✓":"Available ✓"}</span>
       </div>
-      <div className="pcard-cta">{ar?"📞 استفسر عبر وصل أوتو":"📞 Enquire via Wasel Auto"}</div>
+      <div className={`pcard-cta ${ar_}`}>{ar?"📞 استفسر عبر وصل أوتو":"📞 Enquire via Wasel Auto"}</div>
     </div>
   );
 }
 
+/* ── PART MODAL ── */
 function PartModal({part,ar,onClose,onAddToInvoice}){
   if(!part)return null;
   const waMsg=encodeURIComponent(ar
-    ?`مرحباً وصل أوتو،\nأستفسر عن: ${part.nameAr}\nالسيارة: ${part.make} ${part.model} (${part.yf}–${part.yt})\nالسعر المعروض: ${part.price.toFixed(3)} BHD\nأرجو تأكيد التوفر والسعر النهائي.`
+    ?`مرحباً وصل أوتو،\nأستفسر عن: ${part.nameAr}\nالسيارة: ${part.make} ${part.model} (${part.yf}–${part.yt})\nالسعر المعروض: ${part.price.toFixed(3)} BHD\nأرجو تأكيد التوفر والسعر.`
     :`Hi Wasel Auto,\nEnquiring about: ${part.name}\nVehicle: ${part.make} ${part.model} (${part.yf}–${part.yt})\nListed price: ${part.price.toFixed(3)} BHD\nPlease confirm availability and final price.`
   );
   return(
@@ -314,14 +391,11 @@ function PartModal({part,ar,onClose,onAddToInvoice}){
         <div className="mod-head">
           <button className="mod-close" onClick={onClose}>✕</button>
           <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
-            <span style={{fontSize:"1.9rem"}}>{part.image}</span>
+            <div style={{width:40,height:40,background:"rgba(206,17,38,0.15)",border:"1px solid rgba(206,17,38,0.3)",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+              <span className={`ptype ${part.type==="Genuine"?"ptype-g":"ptype-a"}`} style={{position:"static",fontSize:"0.65rem"}}>{ar?(part.type==="Genuine"?"أصلي":"بديل"):part.type}</span>
+            </div>
             <div>
-              <div style={{display:"flex",gap:6,marginBottom:4,flexWrap:"wrap"}}>
-                <span className={`ptype ${part.type==="Genuine"?"ptype-g":"ptype-a"}`} style={{position:"static"}}>
-                  {ar?(part.type==="Genuine"?"أصلي":"بديل"):part.type}
-                </span>
-                <span style={{fontSize:".62rem",color:"#888",fontFamily:"'JetBrains Mono'"}}>{part.brand}</span>
-              </div>
+              <div style={{fontSize:".62rem",color:"#888",fontFamily:"'JetBrains Mono'",marginBottom:3}}>{part.brand} · {part.cat}</div>
               <div className={`mod-pname ${ar?"ar":""}`}>{ar?part.nameAr:part.name}</div>
             </div>
           </div>
@@ -330,17 +404,17 @@ function PartModal({part,ar,onClose,onAddToInvoice}){
         <div className="mod-body">
           {[
             [ar?"الضمان":"Warranty",ar?part.warrantyAr:part.warranty],
-            [ar?"يناسب":"Fits",`${part.make} ${part.model} (${part.yf}–${part.yt})`],
-            [ar?"النوع":"Category",part.cat],
+            [ar?"يناسب":"Fits",part.make==="Universal"?(ar?"جميع السيارات":"Universal"):`${part.make} ${part.model} (${part.yf}–${part.yt})`],
+            [ar?"التصنيف":"Category",ar?CATS_AR[CATS.indexOf(part.cat)]||part.cat:part.cat],
           ].map(([l,v])=>(
             <div key={l} className="mrow">
               <span className={`mrl ${ar?"ar":""}`}>{l}</span>
               <span style={{fontSize:".83rem",fontWeight:600}}>{v}</span>
             </div>
           ))}
-          <div className={`mod-notice ${ar?"ar":""}`} style={{marginTop:"0.9rem"}}>
-            {ar?"🔒 للحفاظ على خصوصية الموردين، جميع الطلبات تمر عبر وصل أوتو فقط. نتواصل معك فوراً لتأكيد السعر النهائي والتوفر."
-               :"🔒 All enquiries go through Wasel Auto only. We protect supplier confidentiality and confirm final price and availability within minutes."}
+          <div className={`mod-notice ${ar?"ar":""}`}>
+            {ar?"🔒 جميع الطلبات تمر عبر وصل أوتو فقط. نحمي خصوصية الموردين ونؤكد السعر النهائي والتوفر خلال دقائق."
+               :"🔒 All enquiries go through Wasel Auto only. We protect supplier confidentiality and confirm final price within minutes."}
           </div>
         </div>
         <div className="mod-actions">
@@ -351,107 +425,187 @@ function PartModal({part,ar,onClose,onAddToInvoice}){
             📞 {ar?"اتصل بوصل أوتو":"Call Wasel Auto"}
           </a>
           <button className="btn btn-gold btn-full" onClick={()=>{onAddToInvoice(part);onClose();}}>
-            🧾 {ar?"أضف للفاتورة (اختياري)":"Add to Invoice (Optional)"}
+            🧾 {ar?"أضف للفاتورة (بعد الدفع)":"Add to Invoice (After Payment)"}
           </button>
-          <button className="btn btn-gh btn-full" onClick={onClose}>
-            {ar?"إغلاق":"Close"}
-          </button>
+          <button className="btn btn-gh btn-full" onClick={onClose}>{ar?"إغلاق":"Close"}</button>
         </div>
       </div>
     </div>
   );
 }
 
+/* ── RFQ FORM ── */
+function RFQForm({ar,onClose,searchTerm}){
+  const [f,setF]=useState({part:searchTerm||"",make:"",model:"",phone:"",urgent:false});
+  const [sent,setSent]=useState(false);
+  const up=(k,v)=>setF(p=>({...p,[k]:v}));
+  const t=(e,a)=>ar?a:e;
+  const submit=()=>{if(!f.part||!f.phone)return;setSent(true);};
+  const waMsg=encodeURIComponent(t(
+    `Hi Wasel Auto,\nPart Request:\n📋 Part: ${f.part}\n🚗 Vehicle: ${f.make} ${f.model}\n📞 My WhatsApp: ${f.phone}\n${f.urgent?"⚡ URGENT — needed today\n":""}Please source and confirm availability ASAP.`,
+    `مرحباً وصل أوتو،\nطلب قطعة:\n📋 القطعة: ${f.part}\n🚗 السيارة: ${f.make} ${f.model}\n📞 واتسابي: ${f.phone}\n${f.urgent?"⚡ عاجل\n":""}أرجو التوفر في أقرب وقت.`
+  ));
+  if(sent)return(
+    <div className="rfq-sent">
+      <div style={{fontSize:"2rem",marginBottom:"0.5rem"}}>✅</div>
+      <div style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontWeight:700,fontSize:"0.95rem",color:"var(--grn)",marginBottom:"0.4rem"}}>{t("Request Sent!","تم الإرسال!")}</div>
+      <div style={{fontSize:"0.8rem",color:"var(--grn)",fontFamily:ar?"'Cairo'":"'Barlow'",marginBottom:"0.8rem"}}>{t("We will check with suppliers and WhatsApp you back within 2 hours.","سنتحقق مع الموردين ونردّ خلال ساعتين.")}</div>
+      <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
+        <a className={`btn btn-wa btn-sm ${ar?"ar":"en"}`} href={`https://wa.me/97333844859?text=${waMsg}`} target="_blank" rel="noopener noreferrer">💬 {t("Send on WhatsApp Too","أرسل أيضاً واتساب")}</a>
+        <button className={`btn btn-gh btn-sm ${ar?"ar":"en"}`} onClick={onClose}>{t("Close","إغلاق")}</button>
+      </div>
+    </div>
+  );
+  return(
+    <div className="rfq-form" dir={ar?"rtl":"ltr"}>
+      <div style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontWeight:700,fontSize:"0.85rem",marginBottom:"0.7rem"}}>{t("Tell us what you need — we will find it","أخبرنا بما تحتاجه — سنجده لك")}</div>
+      <div className="fgrid" style={{gap:"0.6rem",marginBottom:"0.6rem"}}>
+        <div className="ig ff"><label className={`il ${ar?"ar":""}`}>{t("Part Name *","اسم القطعة *")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Front brake pads","مثال: تيل فرامل أمامي")} value={f.part} onChange={e=>up("part",e.target.value)} style={{background:"white"}}/></div>
+        <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Make","الماركة")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Toyota","تويوتا")} value={f.make} onChange={e=>up("make",e.target.value)} style={{background:"white"}}/></div>
+        <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Model & Year","الموديل والسنة")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Camry 2020","كامري 2020")} value={f.model} onChange={e=>up("model",e.target.value)} style={{background:"white"}}/></div>
+        <div className="ig ff"><label className={`il ${ar?"ar":""}`}>{t("Your WhatsApp *","واتساب *")}</label><input className="ifield" type="tel" placeholder="+973 XXXX XXXX" value={f.phone} onChange={e=>up("phone",e.target.value)} style={{background:"white"}} dir="ltr"/></div>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:"0.8rem",cursor:"pointer"}} onClick={()=>up("urgent",!f.urgent)}>
+        <div style={{width:18,height:18,borderRadius:4,border:`2px solid ${f.urgent?"var(--red)":"var(--bdr)"}`,background:f.urgent?"var(--red)":"white",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s",flex:"none"}}>
+          {f.urgent&&<span style={{color:"white",fontSize:"0.7rem"}}>✓</span>}
+        </div>
+        <span style={{fontSize:"0.8rem",color:"var(--mut)",fontFamily:ar?"'Cairo'":"'Barlow'"}}>{t("⚡ Urgent — needed today","⚡ عاجل — مطلوب اليوم")}</span>
+      </div>
+      <div style={{display:"flex",gap:8}}>
+        <button className={`btn btn-r ${ar?"ar":"en"}`} style={{flex:1}} onClick={submit} disabled={!f.part||!f.phone}>{t("Send Request","أرسل الطلب")}</button>
+        <a className={`btn btn-wa ${ar?"ar":"en"}`} href={`https://wa.me/97333844859?text=${waMsg}`} target="_blank" rel="noopener noreferrer">💬</a>
+      </div>
+    </div>
+  );
+}
+
 /* ── INVOICE TOOL ── */
-function InvoiceTool({ar,initialItems=[]}){
-  const [items,setItems]=useState(initialItems.map((p,i)=>({
-    id:i+1,desc:ar?p.nameAr:p.name,qty:1,cost:p.price,margin:20,unit:"BHD"
-  })));
+function InvoiceTool({ar,preloadedItems}){
+  const [unlocked,setUnlocked]=useState(false);
+  const [refInput,setRefInput]=useState("");
+  const [refError,setRefError]=useState("");
+  const [confirmedRef,setConfirmedRef]=useState("");
+  const [refData,setRefData]=useState(null);
+  const [items,setItems]=useState([]);
   const [garage,setGarage]=useState({name:"",phone:"",vehicle:"",plate:""});
   const [note,setNote]=useState("");
   const [newItem,setNewItem]=useState({desc:"",qty:1,cost:"",margin:20});
-  const invNum="WAI-"+Date.now().toString().slice(-6);
-  const today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  const [invNum]=useState(()=>"#WAI-"+Date.now().toString().slice(-6));
+  const [invLogged,setInvLogged]=useState(false);
+  const today=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase();
+  const t=(e,a)=>ar?a:e;
+
+  useEffect(()=>{
+    if(preloadedItems&&preloadedItems.length>0&&unlocked){
+      setItems(preloadedItems.map((p,i)=>({id:i+1,desc:ar?p.nameAr:p.name,qty:1,cost:p.price,margin:20})));
+    }
+  },[unlocked,preloadedItems]);
+
+  const validateRef=()=>{
+    const clean=refInput.trim().toUpperCase();
+    if(!clean){setRefError(t("Please enter your Wasel Auto order reference.","يرجى إدخال رقم مرجع طلبك من وصل أوتو."));return;}
+    if(!clean.startsWith("WA-")||clean.length<12){setRefError(t("Invalid reference format. Example: WA-260725-1234","صيغة المرجع غير صحيحة. مثال: WA-260725-1234"));return;}
+    setRefError("");
+    setConfirmedRef(clean);
+    setUnlocked(true);
+  };
 
   const sellPrice=item=>Number(item.cost)*(1+Number(item.margin)/100);
   const lineTotal=item=>sellPrice(item)*Number(item.qty);
   const subtotal=items.reduce((a,i)=>a+lineTotal(i),0);
   const totalCost=items.reduce((a,i)=>a+Number(i.cost)*Number(i.qty),0);
   const profit=subtotal-totalCost;
-  const vat=subtotal*0.10;
-  const grandTotal=subtotal+vat;
+  const waselFee=totalCost*0.045;
+  const grandTotal=subtotal;
 
   const addItem=()=>{
     if(!newItem.desc||!newItem.cost)return;
-    setItems(p=>[...p,{id:Date.now(),desc:newItem.desc,qty:Number(newItem.qty)||1,cost:Number(newItem.cost),margin:Number(newItem.margin)||20,unit:"BHD"}]);
+    setItems(p=>[...p,{id:Date.now(),desc:newItem.desc,qty:Number(newItem.qty)||1,cost:Number(newItem.cost),margin:Number(newItem.margin)||20}]);
     setNewItem({desc:"",qty:1,cost:"",margin:20});
   };
-
   const removeItem=id=>setItems(p=>p.filter(i=>i.id!==id));
   const updateItem=(id,k,v)=>setItems(p=>p.map(i=>i.id===id?{...i,[k]:v}:i));
 
-  const waInvoice=`🧾 *INVOICE — Wasel Auto*\nRef: ${invNum}\nDate: ${today}\n\n🔧 *Customer:* ${garage.name||"—"}\n📞 ${garage.phone||"—"}\n🚗 ${garage.vehicle||"—"} | Plate: ${garage.plate||"—"}\n\n*PARTS:*\n${items.map(i=>`• ${i.desc} (x${i.qty}) — ${lineTotal(i).toFixed(3)} BHD`).join("\n")}\n\n*Subtotal:* ${subtotal.toFixed(3)} BHD\n*VAT 10%:* ${vat.toFixed(3)} BHD\n*TOTAL: ${grandTotal.toFixed(3)} BHD*\n\n${note?`Note: ${note}\n\n`:""}Powered by Wasel Auto 🇧🇭\nwasel-auto.vercel.app`;
+  const doLogAndSend=()=>{
+    if(!invLogged){
+      logInvoice({invNum,ref:confirmedRef,garage,items,subtotal,profit,grandTotal,waselFee,date:today});
+      setInvLogged(true);
+    }
+  };
 
-  const t=(e,a)=>ar?a:e;
+  const waInvoice=`🧾 *INVOICE — Wasel Auto*\n━━━━━━━━━━━━━━━━━━━\nRef: ${invNum}\nOrder Ref: ${confirmedRef}\nDate: ${today}\n\n👤 *Customer:* ${garage.name||"—"}\n📞 ${garage.phone||"—"}\n🚗 ${garage.vehicle||"—"}${garage.plate?" | Plate: "+garage.plate:""}\n\n📦 *PARTS & SERVICES:*\n${items.map(i=>`• ${i.desc}\n  Qty: ${i.qty} × ${sellPrice(i).toFixed(3)} BHD = ${lineTotal(i).toFixed(3)} BHD`).join("\n")}\n\n━━━━━━━━━━━━━━━━━━━\n*TOTAL: ${grandTotal.toFixed(3)} BHD*\n━━━━━━━━━━━━━━━━━━━\n${note?"📝 "+note+"\n\n":""}_Parts sourced through Wasel Auto 🇧🇭_\nwasel-auto.vercel.app`;
+
+  if(!unlocked){
+    return(
+      <div className="inv-wrap">
+        <div className="inv-lock">
+          <div className="inv-lock-ico">🔐</div>
+          <div className={`inv-lock-title ${ar?"ar":""}`}>{t("Invoice Tool — Wasel Auto Customers Only","أداة الفاتورة — لعملاء وصل أوتو فقط")}</div>
+          <div className={`inv-lock-sub ${ar?"ar":""}`}>
+            {t("This tool is available exclusively to garages who have completed a purchase through Wasel Auto. After payment, Wasel Auto will send you a unique Order Reference via WhatsApp. Enter it below to unlock your invoice.","هذه الأداة متاحة حصرياً للورش التي أتمّت عملية شراء عبر وصل أوتو. بعد الدفع، سيرسل وصل أوتو رقم مرجع الطلب عبر واتساب. أدخله أدناه لفتح الفاتورة.")}
+          </div>
+          <div className="inv-lock-box">
+            <div style={{fontSize:"0.72rem",color:"#aaa",fontFamily:"'JetBrains Mono'",letterSpacing:"0.1em",marginBottom:"0.6rem",textTransform:"uppercase"}}>{t("Enter Your Order Reference","أدخل رقم مرجع طلبك")}</div>
+            <div className="ref-entry">
+              <input className="ref-input" placeholder="WA-260725-XXXX" value={refInput} onChange={e=>{setRefInput(e.target.value.toUpperCase());setRefError("");}} onKeyDown={e=>e.key==="Enter"&&validateRef()} maxLength={16} dir="ltr"/>
+              <button className="btn btn-gold en" onClick={validateRef}>{t("Unlock","فتح")}</button>
+            </div>
+            {refError&&<div className="ref-error">⚠ {refError}</div>}
+            <div className="ref-steps" style={{marginTop:"1rem"}}>
+              {[
+                t("Order your parts through Wasel Auto (WhatsApp or call)","اطلب قطعك عبر وصل أوتو (واتساب أو اتصال)"),
+                t("Complete payment — cash or bank transfer to Wasel Auto","أتمّ الدفع — نقداً أو تحويل بنكي لوصل أوتو"),
+                t("Wasel Auto sends your Order Reference via WhatsApp","يرسل وصل أوتو رقم المرجع عبر واتساب"),
+                t("Enter the reference here to create your invoice","أدخل الرقم هنا لإنشاء فاتورتك"),
+              ].map((s,i)=>(
+                <div key={i} className="ref-step">
+                  <div className="ref-step-num">{i+1}</div>
+                  <div style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontSize:"0.8rem"}}>{s}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
+            <a className={`btn btn-wa ${ar?"ar":"en"}`} href="https://wa.me/97333844859" target="_blank" rel="noopener noreferrer">💬 {t("Order via WhatsApp","اطلب عبر واتساب")}</a>
+            <a className={`btn btn-gh ${ar?"ar":"en"}`} href="tel:+97333844859">📞 {t("Call Wasel Auto","اتصل بوصل أوتو")}</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return(
     <div className="inv-wrap">
       <div className="inv-hero">
-        <h2 className={ar?"ar":""}>{t("🧾 Digital Invoice Tool","🧾 أداة الفاتورة الرقمية")}</h2>
-        <p className={ar?"ar":""}>{t("Add your margin on each part and generate a professional invoice for your customer — free, optional, and private. Your profit stays yours.","أضف هامش ربحك على كل قطعة واصدر فاتورة احترافية لعميلك — مجانية، اختيارية، وسرية. أرباحك تبقى لك.")}</p>
-        <div style={{display:"flex",gap:6,marginTop:"0.8rem",flexWrap:"wrap"}}>
-          {[t("✅ Free","✅ مجاني"),t("🔒 Private","🔒 سري"),t("💰 Add Your Margin","💰 أضف هامشك"),t("📲 Send via WhatsApp","📲 أرسل واتساب")].map(lb=>(
-            <span key={lb} style={{background:"rgba(255,255,255,0.08)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:6,padding:"4px 10px",fontSize:"0.73rem",color:"#ccc",fontFamily:ar?"'Cairo'":"'Barlow'",fontWeight:600}}>{lb}</span>
-          ))}
+        <div className="inv-hero-left">
+          <h3 className={ar?"ar":""}>{t("Invoice Tool","أداة الفاتورة")}</h3>
+          <p className={ar?"ar":""}>{t("Add your margin — your profit stays private","أضف هامشك — أرباحك تبقى سرية")}</p>
+        </div>
+        <div style={{display:"flex",align:"center",gap:8,flexWrap:"wrap"}}>
+          <div className="inv-ref-badge">{confirmedRef}</div>
+          <div style={{background:"rgba(255,255,255,0.08)",borderRadius:6,padding:"5px 10px",fontFamily:"'JetBrains Mono'",fontSize:"0.72rem",color:"#aaa"}}>{invNum}</div>
         </div>
       </div>
 
-      {/* CUSTOMER DETAILS */}
+      {/* CUSTOMER */}
       <div className="panel">
-        <div className="phead">
-          <div className="phead-ico">👤</div>
-          <div>
-            <div className={`phead-title ${ar?"ar":""}`}>{t("Customer Details","بيانات العميل")}</div>
-            <div className={`phead-sub ${ar?"ar":""}`}>{t("Optional — helps personalise the invoice","اختياري — يساعد في تخصيص الفاتورة")}</div>
-          </div>
-        </div>
+        <div className="phead"><div className="phead-ico">👤</div><div><div className={`phead-title ${ar?"ar":""}`}>{t("Customer Details","بيانات العميل")}</div><div className={`phead-sub ${ar?"ar":""}`}>{t("Optional — personalises the invoice","اختياري")}</div></div></div>
         <div className="pbody">
           <div className="fgrid">
-            <div className="ig">
-              <label className={`il ${ar?"ar":""}`}>{t("Customer Name","اسم العميل")}</label>
-              <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Ahmed Al-Mannai","مثال: أحمد المنيع")} value={garage.name} onChange={e=>setGarage(p=>({...p,name:e.target.value}))}/>
-            </div>
-            <div className="ig">
-              <label className={`il ${ar?"ar":""}`}>{t("Customer Phone","هاتف العميل")}</label>
-              <input className="ifield" placeholder="+973 XXXX XXXX" value={garage.phone} onChange={e=>setGarage(p=>({...p,phone:e.target.value}))} dir="ltr"/>
-            </div>
-            <div className="ig">
-              <label className={`il ${ar?"ar":""}`}>{t("Vehicle","السيارة")}</label>
-              <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Toyota Camry 2020","مثال: تويوتا كامري 2020")} value={garage.vehicle} onChange={e=>setGarage(p=>({...p,vehicle:e.target.value}))}/>
-            </div>
-            <div className="ig">
-              <label className={`il ${ar?"ar":""}`}>{t("Plate Number","رقم اللوحة")}</label>
-              <input className="ifield" placeholder="e.g. 12345" value={garage.plate} onChange={e=>setGarage(p=>({...p,plate:e.target.value}))} dir="ltr"/>
-            </div>
+            <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Customer Name","اسم العميل")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Ahmed Al-Mannai","أحمد المنيع")} value={garage.name} onChange={e=>setGarage(p=>({...p,name:e.target.value}))}/></div>
+            <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Customer Phone","هاتف العميل")}</label><input className="ifield" placeholder="+973 XXXX XXXX" value={garage.phone} onChange={e=>setGarage(p=>({...p,phone:e.target.value}))} dir="ltr"/></div>
+            <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Vehicle","السيارة")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Toyota Camry 2020","تويوتا كامري 2020")} value={garage.vehicle} onChange={e=>setGarage(p=>({...p,vehicle:e.target.value}))}/></div>
+            <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Plate Number","رقم اللوحة")}</label><input className="ifield" placeholder="e.g. 12345" value={garage.plate} onChange={e=>setGarage(p=>({...p,plate:e.target.value}))} dir="ltr"/></div>
           </div>
         </div>
       </div>
 
-      {/* PARTS + MARGIN */}
+      {/* PARTS */}
       <div className="panel">
-        <div className="phead">
-          <div className="phead-ico">📦</div>
-          <div>
-            <div className={`phead-title ${ar?"ar":""}`}>{t("Parts & Your Margin","القطع وهامش ربحك")}</div>
-            <div className={`phead-sub ${ar?"ar":""}`}>{t("Set your selling price — your margin stays private","حدد سعر البيع — هامشك يبقى سراً")}</div>
-          </div>
-        </div>
+        <div className="phead"><div className="phead-ico">📦</div><div><div className={`phead-title ${ar?"ar":""}`}>{t("Parts & Your Margin","القطع وهامش ربحك")}</div><div className={`phead-sub ${ar?"ar":""}`}>{t("Your selling price stays private — Wasel Auto only sees cost","سعر البيع سري — وصل أوتو يرى التكلفة فقط")}</div></div></div>
         <div className="pbody">
           {items.length===0&&(
-            <div className="empty" style={{padding:"1.5rem"}}>
-              <div style={{fontSize:"1.8rem",marginBottom:5}}>📦</div>
-              <p className={ar?"ar":""}>{t("No parts added yet. Add parts below or tap 'Add to Invoice' on any part.","لا توجد قطع بعد. أضف قطعاً أدناه أو اضغط 'أضف للفاتورة' على أي قطعة.")}</p>
-            </div>
+            <div style={{textAlign:"center",padding:"1rem",color:"var(--mut)",fontSize:"0.82rem",fontFamily:ar?"'Cairo'":"'Barlow'"}}>{t("Add parts below","أضف قطعاً أدناه")}</div>
           )}
           {items.map(item=>(
             <div key={item.id} style={{background:"var(--surf2)",borderRadius:9,padding:"0.9rem",marginBottom:"0.7rem",border:"1.5px solid var(--bdr)"}}>
@@ -459,103 +613,85 @@ function InvoiceTool({ar,initialItems=[]}){
                 <input className={`ifield ${ar?"ar":""}`} value={item.desc} onChange={e=>updateItem(item.id,"desc",e.target.value)} style={{flex:1,background:"white"}}/>
                 <button onClick={()=>removeItem(item.id)} style={{background:"rgba(206,17,38,0.1)",border:"1px solid rgba(206,17,38,0.2)",color:"var(--red)",borderRadius:5,width:28,height:28,cursor:"pointer",fontSize:"0.8rem",flex:"none"}}>✕</button>
               </div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:"0.5rem",alignItems:"end"}}>
-                <div className="ig">
-                  <label className={`il ${ar?"ar":""}`}>{t("Cost (BHD)","التكلفة")}</label>
-                  <input className="ifield" type="number" step="0.001" value={item.cost} onChange={e=>updateItem(item.id,"cost",e.target.value)} style={{background:"white"}} dir="ltr"/>
-                </div>
-                <div className="ig">
-                  <label className={`il ${ar?"ar":""}`}>{t("Margin %","هامش %")}</label>
-                  <input className="ifield" type="number" value={item.margin} onChange={e=>updateItem(item.id,"margin",e.target.value)} style={{background:"white"}} dir="ltr"/>
-                </div>
-                <div className="ig">
-                  <label className={`il ${ar?"ar":""}`}>{t("Qty","الكمية")}</label>
-                  <input className="ifield" type="number" value={item.qty} onChange={e=>updateItem(item.id,"qty",e.target.value)} style={{background:"white"}} dir="ltr"/>
-                </div>
-                <div className="ig">
-                  <label className={`il ${ar?"ar":""}`}>{t("Sell Price","سعر البيع")}</label>
-                  <div style={{background:"white",border:"1.5px solid var(--grn)",borderRadius:7,padding:"9px 12px",fontFamily:"'Barlow'",fontWeight:700,fontSize:"0.88rem",color:"var(--grn)"}}>{lineTotal(item).toFixed(3)}</div>
-                </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:"0.5rem"}}>
+                <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Cost BHD","التكلفة")}</label><input className="ifield" type="number" step="0.001" value={item.cost} onChange={e=>updateItem(item.id,"cost",e.target.value)} style={{background:"white"}} dir="ltr"/></div>
+                <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Margin %","هامش %")}</label><input className="ifield" type="number" value={item.margin} onChange={e=>updateItem(item.id,"margin",e.target.value)} style={{background:"white"}} dir="ltr"/></div>
+                <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Qty","كمية")}</label><input className="ifield" type="number" value={item.qty} onChange={e=>updateItem(item.id,"qty",e.target.value)} style={{background:"white"}} dir="ltr"/></div>
+                <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Sell Price","سعر البيع")}</label><div style={{background:"white",border:"1.5px solid var(--grn)",borderRadius:7,padding:"9px 10px",fontFamily:"'Barlow'",fontWeight:700,fontSize:"0.85rem",color:"var(--grn)"}}>{lineTotal(item).toFixed(3)}</div></div>
               </div>
             </div>
           ))}
-
-          {/* ADD NEW ITEM */}
           <div className="inv-add-item">
-            <div className={`fsec-t ${ar?"ar":""}`} style={{marginBottom:"0.7rem"}}>{t("+ Add Part / Labour / Service","+ أضف قطعة / عمالة / خدمة")}</div>
-            <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:"0.5rem",alignItems:"end"}}>
-              <div className="ig">
-                <label className={`il ${ar?"ar":""}`}>{t("Description","الوصف")}</label>
-                <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Labour, Oil change…","مثال: عمالة، تغيير زيت…")} value={newItem.desc} onChange={e=>setNewItem(p=>({...p,desc:e.target.value}))} style={{background:"white"}}/>
-              </div>
-              <div className="ig">
-                <label className={`il ${ar?"ar":""}`}>{t("Cost BHD","التكلفة")}</label>
-                <input className="ifield" type="number" step="0.001" placeholder="0.000" value={newItem.cost} onChange={e=>setNewItem(p=>({...p,cost:e.target.value}))} style={{background:"white"}} dir="ltr"/>
-              </div>
-              <div className="ig">
-                <label className={`il ${ar?"ar":""}`}>{t("Margin %","هامش %")}</label>
-                <input className="ifield" type="number" value={newItem.margin} onChange={e=>setNewItem(p=>({...p,margin:e.target.value}))} style={{background:"white"}} dir="ltr"/>
-              </div>
-              <button className={`btn btn-r btn-sm ${ar?"ar":"en"}`} onClick={addItem} style={{height:38}}>
-                {t("Add","أضف")}
-              </button>
+            <div className={`fsec-t ${ar?"ar":""}`} style={{marginBottom:"0.6rem"}}>{t("+ Add Part / Labour / Service","+ أضف قطعة / عمالة / خدمة")}</div>
+            <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr",gap:"0.5rem",marginBottom:"0.5rem"}}>
+              <div className="ig ff" style={{gridColumn:"1/-1"}}><label className={`il ${ar?"ar":""}`}>{t("Description","الوصف")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Oil change, Labour, Part name…","مثال: تغيير زيت، عمالة…")} value={newItem.desc} onChange={e=>setNewItem(p=>({...p,desc:e.target.value}))} style={{background:"white"}}/></div>
+              <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Cost BHD","التكلفة")}</label><input className="ifield" type="number" step="0.001" placeholder="0.000" value={newItem.cost} onChange={e=>setNewItem(p=>({...p,cost:e.target.value}))} style={{background:"white"}} dir="ltr"/></div>
+              <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Margin %","هامش %")}</label><input className="ifield" type="number" value={newItem.margin} onChange={e=>setNewItem(p=>({...p,margin:e.target.value}))} style={{background:"white"}} dir="ltr"/></div>
+              <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Qty","كمية")}</label><input className="ifield" type="number" value={newItem.qty} onChange={e=>setNewItem(p=>({...p,qty:e.target.value}))} style={{background:"white"}} dir="ltr"/></div>
             </div>
+            <button className={`btn btn-r btn-sm ${ar?"ar":"en"}`} onClick={addItem} style={{width:"100%",justifyContent:"center"}}>{t("+ Add to Invoice","+ أضف للفاتورة")}</button>
           </div>
-
-          {/* NOTE */}
-          <div className="ig" style={{marginTop:"0.8rem"}}>
-            <label className={`il ${ar?"ar":""}`}>{t("Note to Customer (optional)","ملاحظة للعميل (اختياري)")}</label>
-            <textarea className={`ifield ${ar?"ar":""}`} rows={2} placeholder={t("e.g. Parts sourced through Wasel Auto. Warranty as stated.","مثال: القطع مصدرها وصل أوتو. الضمان كما هو مذكور.")} value={note} onChange={e=>setNote(e.target.value)} style={{resize:"vertical"}}/>
+          <div className="ig">
+            <label className={`il ${ar?"ar":""}`}>{t("Note to Customer","ملاحظة للعميل")}</label>
+            <textarea className={`ifield ${ar?"ar":""}`} rows={2} placeholder={t("e.g. Warranty terms, payment notes…","ملاحظات الضمان، الدفع…")} value={note} onChange={e=>setNote(e.target.value)} style={{resize:"vertical"}}/>
           </div>
         </div>
       </div>
 
+      {/* WASEL FEE NOTE */}
+      {items.length>0&&(
+        <div className={`wasel-fee-note ${ar?"ar":""}`}>
+          💡 {t(`Wasel Auto service fee (4.5%) on your cost: ${waselFee.toFixed(3)} BHD — included in your order total. Your profit on this invoice: ${profit.toFixed(3)} BHD`,
+             `عمولة وصل أوتو (4.5%) على تكلفتك: ${waselFee.toFixed(3)} BHD — مشمولة في إجمالي طلبك. ربحك على هذه الفاتورة: ${profit.toFixed(3)} BHD`)}
+        </div>
+      )}
+
       {/* INVOICE PREVIEW */}
       {items.length>0&&(
         <div className="inv-doc">
-          <div className="inv-doc-head">
-            <div className="inv-top">
+          <div className="inv-doc-topbar"/>
+          <div className="inv-doc-body">
+            <div className="inv-doc-header">
               <div>
-                <div className="inv-logo">Wasel <span>Auto</span></div>
-                <div style={{fontSize:"0.7rem",color:"#aaa",marginTop:2}}>wasel-auto.vercel.app</div>
-                <div style={{fontSize:"0.7rem",color:"#aaa"}}>+973 3384 4859 · Bahrain</div>
+                <div className="inv-doc-logo">Wasel <span>Auto</span></div>
+                <div className="inv-doc-logo-sub">wasel-auto.vercel.app · +973 3384 4859</div>
+                <div className="inv-doc-logo-sub">waselauto26@gmail.com · Manama, Bahrain</div>
               </div>
-              <div className="inv-meta">
-                <div style={{background:"var(--gold)",color:"white",fontFamily:"'Barlow'",fontWeight:700,fontSize:"0.7rem",padding:"2px 10px",borderRadius:4,marginBottom:4,textTransform:"uppercase"}}>Invoice</div>
-                <div className="inv-num">#{invNum}</div>
-                <div className="inv-date">{today}</div>
+              <div className="inv-doc-right">
+                <div className="inv-doc-title">Invoice</div>
+                <div className="inv-doc-ref">{invNum}</div>
+                <div className="inv-doc-date">{today}</div>
+                <div style={{marginTop:6,background:"rgba(206,17,38,0.08)",border:"1px solid rgba(206,17,38,0.2)",borderRadius:4,padding:"2px 8px",fontSize:"0.62rem",color:"var(--red)",fontFamily:"'JetBrains Mono'",fontWeight:700,letterSpacing:"0.08em"}}>ORDER: {confirmedRef}</div>
               </div>
             </div>
-          </div>
-          <div className="inv-body">
             <div className="inv-parties">
               <div>
-                <div className={`inv-party-label ${ar?"ar":""}`}>{t("From","من")}</div>
+                <div className="inv-party-lbl">From</div>
                 <div className="inv-party-name">Wasel Auto</div>
-                <div className="inv-party-sub">Manama, Kingdom of Bahrain</div>
-                <div className="inv-party-sub">+973 3384 4859</div>
+                <div className="inv-party-detail">Manama, Kingdom of Bahrain</div>
+                <div className="inv-party-detail">+973 3384 4859</div>
+                <div className="inv-party-detail">CR: Pending Registration</div>
               </div>
               <div>
-                <div className={`inv-party-label ${ar?"ar":""}`}>{t("Bill To","إلى")}</div>
+                <div className="inv-party-lbl">Bill To</div>
                 <div className={`inv-party-name ${ar?"ar":""}`}>{garage.name||t("Customer","العميل")}</div>
-                {garage.phone&&<div className="inv-party-sub">{garage.phone}</div>}
-                {garage.vehicle&&<div className="inv-party-sub">{garage.vehicle}{garage.plate?` · ${garage.plate}`:""}</div>}
+                {garage.phone&&<div className="inv-party-detail">{garage.phone}</div>}
+                {garage.vehicle&&<div className="inv-party-detail">{garage.vehicle}{garage.plate?" · Plate: "+garage.plate:""}</div>}
               </div>
             </div>
-
             <table className="inv-table">
               <thead>
                 <tr>
-                  <th className={ar?"ar":""}>{t("Description","الوصف")}</th>
-                  <th className={ar?"ar":""}>{t("Qty","الكمية")}</th>
-                  <th className={ar?"ar":""}>{t("Unit Price","سعر الوحدة")}</th>
-                  <th className={ar?"ar":""}>{t("Total","المجموع")}</th>
+                  <th style={{width:"50%"}}>Description</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th>Total</th>
                 </tr>
               </thead>
               <tbody>
                 {items.map(item=>(
                   <tr key={item.id}>
-                    <td className={ar?"ar":""}>{item.desc}</td>
+                    <td style={{fontWeight:600}}>{item.desc}</td>
                     <td>{item.qty}</td>
                     <td dir="ltr">{sellPrice(item).toFixed(3)} BHD</td>
                     <td dir="ltr" style={{fontWeight:700}}>{lineTotal(item).toFixed(3)} BHD</td>
@@ -563,470 +699,140 @@ function InvoiceTool({ar,initialItems=[]}){
                 ))}
               </tbody>
             </table>
-
             <div className="inv-totals">
-              <div className={`inv-total-row ${ar?"ar":""}`}>
-                <span>{t("Subtotal","المجموع الفرعي")}</span>
-                <span dir="ltr">{subtotal.toFixed(3)} BHD</span>
-              </div>
-              <div className={`inv-total-row ${ar?"ar":""}`}>
-                <span>{t("VAT 10%","ضريبة القيمة المضافة 10%")}</span>
-                <span dir="ltr">{vat.toFixed(3)} BHD</span>
-              </div>
-              <div className={`inv-total-row final ${ar?"ar":""}`}>
-                <span>{t("TOTAL DUE","الإجمالي المستحق")}</span>
-                <span dir="ltr">{grandTotal.toFixed(3)} BHD</span>
-              </div>
-              <div className={`inv-profit-row`} style={{marginTop:8,paddingTop:6,borderTop:"1px dashed var(--bdr)"}}>
-                <span style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontSize:"0.78rem"}}>🔒 {t("Your profit (private)","ربحك الخاص — سري")}</span>
-                <span dir="ltr">{profit.toFixed(3)} BHD</span>
+              <div className="inv-totals-box">
+                <div className="inv-total-row"><span style={{color:"var(--mut)"}}>Subtotal</span><span dir="ltr">{subtotal.toFixed(3)} BHD</span></div>
+                <div className="inv-total-row"><span style={{color:"var(--mut)"}}>VAT (0% — Wasel Auto)</span><span dir="ltr">0.000 BHD</span></div>
+                <div className="inv-total-row grand"><span>TOTAL DUE</span><span dir="ltr">{grandTotal.toFixed(3)} BHD</span></div>
+                <div className="inv-profit-private">
+                  <span>🔒 Your Profit (Private)</span>
+                  <span dir="ltr">{profit.toFixed(3)} BHD</span>
+                </div>
               </div>
             </div>
-
-            {note&&<div style={{background:"var(--surf2)",borderRadius:7,padding:"0.75rem",marginBottom:"0.8rem",fontSize:"0.78rem",color:"var(--mut)",fontFamily:ar?"'Cairo'":"'Barlow'"}}><strong>{t("Note:","ملاحظة:")}</strong> {note}</div>}
-
-            <div className={`inv-footer-note ${ar?"ar":""}`}>
-              {t("Parts sourced through Wasel Auto — Bahrain's Auto Parts Marketplace · wasel-auto.vercel.app","القطع مصدرها وصل أوتو — سوق قطع غيار السيارات في البحرين · wasel-auto.vercel.app")}
+            {note&&<div style={{background:"var(--surf2)",borderRadius:7,padding:"0.75rem",margin:"0.8rem 0",fontSize:"0.78rem",color:"var(--mut)"}}><strong>Note:</strong> {note}</div>}
+            <div className="inv-doc-footer">
+              <div className={`inv-doc-footer-note ${ar?"ar":""}`}>
+                Parts sourced through Wasel Auto — Bahrain's Auto Parts Marketplace<br/>
+                wasel-auto.vercel.app · +973 3384 4859
+              </div>
+              <div style={{textAlign:"right",fontSize:"0.7rem",color:"var(--mut)",fontFamily:"'JetBrains Mono'"}}>
+                <div>Order Ref: {confirmedRef}</div>
+                <div>Invoice: {invNum}</div>
+              </div>
             </div>
           </div>
+          <div className="inv-doc-bottombar"/>
         </div>
       )}
 
       {/* ACTIONS */}
       {items.length>0&&(
-        <>
-          <div className="inv-actions">
-            <button className={`btn btn-d ${ar?"ar":"en"}`} onClick={()=>window.print()}>
-              🖨️ {t("Print / Save PDF","طباعة / حفظ PDF")}
-            </button>
-            <a className={`btn btn-wa ${ar?"ar":"en"}`} href={`https://wa.me/?text=${encodeURIComponent(waInvoice)}`} target="_blank" rel="noopener noreferrer">
-              💬 {t("Send via WhatsApp","أرسل واتساب")}
-            </a>
-          </div>
-          <div className="wa-msg-box" style={{marginTop:"0.8rem"}}>
-            <div className="wa-msg-title">{t("WhatsApp Invoice Preview","معاينة الفاتورة على واتساب")}</div>
-            <div className="wa-msg-text">{waInvoice}</div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-/* ── REQUEST FORM (Part Not Found) ── */
-function RFQForm({ar,onClose,searchTerm}){
-  const [f,setF]=useState({part:searchTerm||"",make:"",model:"",year:"",phone:"",urgent:false});
-  const [sent,setSent]=useState(false);
-  const up=(k,v)=>setF(p=>({...p,[k]:v}));
-  const t=(e,a)=>ar?a:e;
-
-  const submit=()=>{
-    if(!f.part||!f.phone)return;
-    setSent(true);
-  };
-
-  const waMsg=encodeURIComponent(
-    t(`Hi Wasel Auto,\nI am looking for a part that is not listed:\n\n📋 Part: ${f.part}\n🚗 Vehicle: ${f.make} ${f.model} ${f.year}\n📞 My WhatsApp: ${f.phone}\n${f.urgent?"⚡ URGENT — needed today\n":""}\nPlease check with your suppliers and get back to me ASAP.`,
-      `مرحباً وصل أوتو،\nأبحث عن قطعة غير مدرجة:\n\n📋 القطعة: ${f.part}\n🚗 السيارة: ${f.make} ${f.model} ${f.year}\n📞 واتسابي: ${f.phone}\n${f.urgent?"⚡ عاجل — مطلوب اليوم\n":""}\nأرجو التحقق مع الموردين والرد في أقرب وقت.`)
-  );
-
-  if(sent){
-    return(
-      <div className="rfq-sent">
-        <div style={{fontSize:"2rem",marginBottom:"0.5rem"}}>✅</div>
-        <div style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontWeight:700,fontSize:"0.95rem",color:"var(--grn)",marginBottom:"0.4rem"}}>
-          {t("Request Sent to Wasel Auto!","تم إرسال الطلب لوصل أوتو!")}
-        </div>
-        <div style={{fontSize:"0.8rem",color:"var(--grn)",fontFamily:ar?"'Cairo'":"'Barlow'",marginBottom:"0.8rem"}}>
-          {t("We will check with our supplier network and WhatsApp you back within 2 hours.","سنتحقق مع شبكة موردينا ونردّ عليك عبر واتساب خلال ساعتين.")}
-        </div>
-        <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
-          <a className={`btn btn-wa btn-sm ${ar?"ar":"en"}`} href={`https://wa.me/97333844859?text=${waMsg}`} target="_blank" rel="noopener noreferrer">
-            💬 {t("Also Send on WhatsApp","أرسل أيضاً على واتساب")}
+        <div className="inv-actions">
+          <button className={`btn btn-d ${ar?"ar":"en"}`} onClick={()=>{doLogAndSend();window.print();}}>
+            🖨️ {t("Print / Download PDF","طباعة / PDF")}
+          </button>
+          <a className={`btn btn-wa ${ar?"ar":"en"}`} href={`https://wa.me/?text=${encodeURIComponent(waInvoice)}`} target="_blank" rel="noopener noreferrer" onClick={doLogAndSend}>
+            💬 {t("Send via WhatsApp","أرسل واتساب")}
           </a>
-          <button className={`btn btn-gh btn-sm ${ar?"ar":"en"}`} onClick={onClose}>
-            {t("Close","إغلاق")}
-          </button>
         </div>
-      </div>
-    );
-  }
-
-  return(
-    <div className="rfq-form" dir={ar?"rtl":"ltr"}>
-      <div style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontWeight:700,fontSize:"0.85rem",marginBottom:"0.7rem",color:"var(--txt)"}}>
-        {t("Tell us what you need — we will find it","أخبرنا بما تحتاجه — سنجده لك")}
-      </div>
-      <div className="fgrid" style={{gap:"0.6rem",marginBottom:"0.6rem"}}>
-        <div className="ig ff">
-          <label className={`il ${ar?"ar":""}`}>{t("Part Name *","اسم القطعة *")}</label>
-          <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Front brake pads","مثال: تيل فرامل أمامي")} value={f.part} onChange={e=>up("part",e.target.value)} style={{background:"white"}}/>
-        </div>
-        <div className="ig">
-          <label className={`il ${ar?"ar":""}`}>{t("Make","الماركة")}</label>
-          <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Toyota","تويوتا")} value={f.make} onChange={e=>up("make",e.target.value)} style={{background:"white"}}/>
-        </div>
-        <div className="ig">
-          <label className={`il ${ar?"ar":""}`}>{t("Model & Year","الموديل والسنة")}</label>
-          <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Camry 2020","كامري 2020")} value={f.model} onChange={e=>up("model",e.target.value)} style={{background:"white"}}/>
-        </div>
-        <div className="ig ff">
-          <label className={`il ${ar?"ar":""}`}>{t("Your WhatsApp *","واتساب *")}</label>
-          <input className="ifield" type="tel" placeholder="+973 XXXX XXXX" value={f.phone} onChange={e=>up("phone",e.target.value)} style={{background:"white"}} dir="ltr"/>
-        </div>
-      </div>
-      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:"0.8rem",cursor:"pointer"}} onClick={()=>up("urgent",!f.urgent)}>
-        <div style={{width:18,height:18,borderRadius:4,border:`2px solid ${f.urgent?"var(--red)":"var(--bdr)"}`,background:f.urgent?"var(--red)":"white",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s",flex:"none"}}>
-          {f.urgent&&<span style={{color:"white",fontSize:"0.7rem"}}>✓</span>}
-        </div>
-        <span style={{fontSize:"0.8rem",color:"var(--mut)",fontFamily:ar?"'Cairo'":"'Barlow'"}}>
-          {t("⚡ This is urgent — needed today","⚡ عاجل — مطلوب اليوم")}
-        </span>
-      </div>
-      <div style={{display:"flex",gap:8}}>
-        <button className={`btn btn-r ${ar?"ar":"en"}`} style={{flex:1}} onClick={submit} disabled={!f.part||!f.phone}>
-          {t("Send Request to Wasel Auto","أرسل الطلب لوصل أوتو")}
-        </button>
-        <a className={`btn btn-wa ${ar?"ar":"en"}`} href={`https://wa.me/97333844859?text=${waMsg}`} target="_blank" rel="noopener noreferrer">
-          💬
-        </a>
-      </div>
+      )}
     </div>
   );
 }
 
-/* ── MAIN APP ── */
-function App(){
-  const [ar,setAr]=useState(false);
-  const [tab,setTab]=useState("search");
-  const [allParts,setAllParts]=useState(PARTS);
-  const [pending,setPending]=useState([]);
-  const [cat,setCat]=useState("All");
-  const [ptype,setPtype]=useState("All Types");
-  const [make,setMake]=useState("All Makes");
-  const [srch,setSrch]=useState("");
-  const [selPart,setSelPart]=useState(null);
-  const [toast,setToast]=useState(null);
-  const [invoiceItems,setInvoiceItems]=useState([]);
-  const [vin,setVin]=useState("");
-  const [desc,setDesc]=useState("");
-  const [img,setImg]=useState(null);
-  const [b64,setB64]=useState(null);
-  const [drag,setDrag]=useState(false);
-  const [aiRes,setAiRes]=useState(null);
-  const [aiLoad,setAiLoad]=useState(false);
-  const [hls,setHls]=useState([]);
-  const [showRFQ,setShowRFQ]=useState(false);
-  const [sf,setSf]=useState({name:"",nameAr:"",brand:"",make:"",model:"",yf:"",yt:"",price:"",type:"Genuine",cat:"Engine",qty:"",warranty:"12 months",warrantyAr:"12 شهر",phone:""});
-  const fref=useRef();
+/* ── ADMIN PANEL ── */
+function AdminPanel(){
+  const [log,setLog]=useState([]);
+  const [pw,setPw]=useState("");
+  const [auth,setAuth]=useState(false);
+  const [newRef,setNewRef]=useState("");
+  const [generatedRefs,setGeneratedRefs]=useState([]);
 
-  const t=(e,a)=>ar?a:e;
+  useEffect(()=>{if(auth){setLog(getInvoiceLog());}}, [auth]);
 
-  const filtered=allParts.filter(p=>{
-    const mc=cat==="All"||p.cat===cat;
-    const mt=ptype==="All Types"||p.type===ptype;
-    const mm=make==="All Makes"||p.make===make||p.make==="Universal";
-    const ms=!srch||[p.name,p.nameAr,p.make,p.model,p.brand].some(v=>v.toLowerCase().includes(srch.toLowerCase()));
-    return mc&&mt&&mm&&ms;
-  });
+  const login=()=>{if(pw==="wasel2026admin"){setAuth(true);}else{alert("Wrong password");}}
+  const genRef=()=>{const r=generateRef();setNewRef(r);setGeneratedRefs(p=>[{ref:r,date:new Date().toLocaleString(),...(p[0]||{})},...p.slice(0,19)]);};
+  const copyRef=()=>{try{navigator.clipboard.writeText(newRef);}catch{}alert("Reference copied: "+newRef);};
 
-  const hdImg=e=>{
-    e.preventDefault();setDrag(false);
-    const file=e.dataTransfer?.files[0]||e.target.files?.[0];if(!file)return;
-    const r=new FileReader();
-    r.onload=ev=>{setImg(ev.target.result);setB64(ev.target.result.split(",")[1]);};
-    r.readAsDataURL(file);
-  };
-
-  const runAI=async()=>{
-    if(!vin&&!desc&&!b64)return;
-    setAiLoad(true);setAiRes(null);setHls([]);setShowRFQ(false);
-    try{
-      const res=await askAI(`VIN/Chassis: ${vin||"not provided"}\nDescription: ${desc||"not provided"}\n${b64?"Part image attached.":""}`,b64);
-      setAiRes(res);
-      if(res){
-        const ids=allParts.filter(p=>
-          res.models?.some(m=>p.model.toLowerCase().includes(m.toLowerCase()))||
-          res.makes?.some(m=>p.make.toLowerCase().includes(m.toLowerCase()))||
-          (res.category&&p.cat.toLowerCase()===res.category.toLowerCase())||
-          (res.partName&&p.name.toLowerCase().includes(res.partName.toLowerCase().split(" ")[0]))
-        ).map(p=>p.id);
-        setHls(ids);
-        if(ids.length===0)setShowRFQ(true);
-      }
-    }catch(e){console.error(e);}
-    setAiLoad(false);
-  };
-
-  const clr=()=>{setVin("");setDesc("");setImg(null);setB64(null);setAiRes(null);setHls([]);setShowRFQ(false);};
-  const showToast=m=>{setToast(m);setTimeout(()=>setToast(null),3000);};
-
-  const addToInvoice=part=>{
-    setInvoiceItems(p=>[...p,part]);
-    showToast(t(`✓ ${part.name} added to invoice`," ✓ تمت الإضافة للفاتورة"));
-    setTab("invoice");
-  };
-
-  const upS=(k,v)=>setSf(p=>({...p,[k]:v}));
-  const submitSupplier=()=>{
-    if(!sf.name||!sf.price||!sf.phone){showToast(t("Please fill required fields","يرجى تعبئة الحقول المطلوبة"));return;}
-    const np={id:Date.now(),name:sf.name,nameAr:sf.nameAr||sf.name,cat:sf.cat,make:sf.make||"Universal",model:sf.model||"All",yf:Number(sf.yf)||2015,yt:Number(sf.yt)||2025,price:Number(sf.price),type:sf.type,brand:sf.brand||sf.type,qty:Number(sf.qty)||1,image:"🔧",warranty:sf.warranty,warrantyAr:sf.warrantyAr,phone:sf.phone,pending:true};
-    setPending(prev=>[np,...prev]);
-    showToast(t("✓ Submitted! Wasel Auto will review within 24 hours.","✓ تم الإرسال! وصل أوتو سيراجع خلال 24 ساعة."));
-    setSf({name:"",nameAr:"",brand:"",make:"",model:"",yf:"",yt:"",price:"",type:"Genuine",cat:"Engine",qty:"",warranty:"12 months",warrantyAr:"12 شهر",phone:""});
-  };
-
-  const ff=ar?"'Cairo'":"'Barlow'";
+  if(!auth)return(
+    <div style={{max_width:400,margin:"2rem auto",padding:"1.5rem",background:"white",borderRadius:12,border:"1.5px solid var(--bdr)"}}>
+      <div style={{fontFamily:"'Barlow'",fontWeight:900,fontSize:"1rem",textTransform:"uppercase",marginBottom:"1rem"}}>🔐 Wasel Auto — Admin Access</div>
+      <div className="ig" style={{marginBottom:"0.8rem"}}>
+        <label className="il">Password</label>
+        <input className="ifield" type="password" placeholder="Enter admin password" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&login()}/>
+      </div>
+      <button className="btn btn-r btn-full en" onClick={login}>Login</button>
+    </div>
+  );
 
   return(
-    <div dir={ar?"rtl":"ltr"} style={{fontFamily:ff}}>
-      <nav className="nav" dir="ltr">
-        <a href="#" className="logo" onClick={e=>{e.preventDefault();setTab("search");}}>
-          <span className="lw">Wasel</span><span className="la">Auto</span>
-        </a>
-        <div className="nav-actions">
-          <button className="lang-btn" onClick={()=>setAr(!ar)}>{ar?"English":"عربي"}</button>
-          <a className="btn btn-r btn-sm en" href="/loi.html">{t("Register Interest","سجّل اهتمامك")}</a>
-        </div>
-      </nav>
-
-      <div className="apptabs">
-        {[
-          ["search","🔍",t("Find Parts","ابحث")],
-          ["browse","🏪",t("All Parts","القطع")],
-          ["supplier","➕",t("List Parts","أضف قطعاً")],
-          ["invoice","🧾",t("Invoice","فاتورة")+(invoiceItems.length>0?` (${invoiceItems.length})`:"")],
-        ].map(([id,ico,lb])=>(
-          <button key={id} className={`apptab ${ar?"ar":"en"} ${tab===id?"on":""}`} onClick={()=>setTab(id)}>
-            <span className="tabico">{ico}</span>{lb}
-          </button>
-        ))}
+    <div style={{maxWidth:1100,margin:"0 auto",padding:"1.2rem"}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1.2rem",flexWrap:"wrap",gap:10}}>
+        <div style={{fontFamily:"'Barlow'",fontWeight:900,fontSize:"1.2rem",textTransform:"uppercase"}}>📊 Wasel Auto — Admin Dashboard</div>
+        <div style={{fontFamily:"'JetBrains Mono'",fontSize:"0.72rem",color:"var(--grn)",background:"var(--grn2)",padding:"4px 10px",borderRadius:5}}>✓ Logged In</div>
       </div>
 
-      {/* ── FIND PARTS ── */}
-      {tab==="search"&&(
-        <>
-          <div className="shero">
-            <div className="shero-inner">
-              <div className={`shero-title ${ar?"ar":""}`}>{t("Find Any Car Part in Bahrain","ابحث عن أي قطعة غيار في البحرين")}</div>
-              <div className={`shero-sub ${ar?"ar":""}`}>{t("Enter VIN, describe the part, or upload a photo — we find it instantly","أدخل رقم الشاسيه، صف القطعة، أو ارفع صورة — نجدها فوراً")}</div>
-              <div className="sbox">
-                <div className="srow">
-                  <div className="ig">
-                    <label className={`il ${ar?"ar":""}`}>{t("🚗 VIN / Chassis Number","🚗 رقم الشاسيه / VIN")}</label>
-                    <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. JTDZN3EU0E329","مثال: JTDZN3EU0E329")} value={vin} onChange={e=>setVin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&runAI()}/>
-                  </div>
-                  <div className="ig">
-                    <label className={`il ${ar?"ar":""}`}>{t("📝 Part Description","📝 وصف القطعة")}</label>
-                    <input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. front brake pads, oil filter…","مثال: تيل فرامل أمامي، فلتر زيت…")} value={desc} onChange={e=>setDesc(e.target.value)} onKeyDown={e=>e.key==="Enter"&&runAI()}/>
-                  </div>
-                </div>
-                <div className="ig" style={{marginBottom:"0.8rem"}}>
-                  <label className={`il ${ar?"ar":""}`}>{t("📷 Part Photo (optional)","📷 صورة القطعة (اختياري)")}</label>
-                  <div className={`dzone ${drag?"on":""}`} onDragOver={e=>{e.preventDefault();setDrag(true);}} onDragLeave={()=>setDrag(false)} onDrop={hdImg} onClick={()=>fref.current.click()}>
-                    {img?<img src={img} alt="part"/>:<><div style={{fontSize:"1.6rem"}}>📷</div><div className={`dzt ${ar?"ar":""}`}>{t("Drop photo here or tap to browse","اسحب صورة هنا أو اضغط للاختيار")}</div></>}
-                    <input ref={fref} type="file" accept="image/*" style={{display:"none"}} onChange={hdImg}/>
-                  </div>
-                </div>
-                <div style={{display:"flex",gap:7}}>
-                  <button className={`btn btn-r btn-lg ${ar?"ar":"en"}`} style={{flex:1}} onClick={runAI} disabled={aiLoad||(!vin&&!desc&&!b64)}>
-                    {aiLoad?t("Searching…","جارٍ البحث…"):t("🔍 Find This Part","🔍 ابحث عن القطعة")}
-                  </button>
-                  {(vin||desc||img)&&<button className={`btn btn-gh ${ar?"ar":"en"}`} onClick={clr}>{t("Clear","مسح")}</button>}
-                </div>
-                {aiLoad&&<div className={`loading ${ar?"ar":""}`}><div className="spin"/>{t("Searching Bahrain parts network…","البحث في شبكة القطع بالبحرين…")}</div>}
-                {aiRes&&(
-                  <div className="aibox" dir="ltr">
-                    <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
-                      <div>
-                        <div style={{fontSize:".6rem",color:"#666",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}}>AI IDENTIFIED</div>
-                        <div className="ainm">{ar?aiRes.partNameAr||aiRes.partName:aiRes.partName}</div>
-                      </div>
-                      <span className={`aiconf ${aiRes.confidence||"medium"}`}>{aiRes.confidence||"medium"}</span>
-                    </div>
-                    <div className="aitags">
-                      {aiRes.makes?.map(m=><span key={m} className="aitag">🚘 {m}</span>)}
-                      {aiRes.models?.map(m=><span key={m} className="aitag">📋 {m}</span>)}
-                      {aiRes.yearRange&&<span className="aitag">📅 {aiRes.yearRange.from}–{aiRes.yearRange.to}</span>}
-                    </div>
-                    {(ar?aiRes.notesAr:aiRes.notes)&&<div className="ainotes">💡 {ar?aiRes.notesAr:aiRes.notes}</div>}
-                    {hls.length>0
-                      ?<div style={{marginTop:".8rem",padding:"6px 10px",background:"rgba(21,128,61,.12)",border:"1px solid rgba(21,128,61,.3)",borderRadius:6,fontSize:".74rem",color:"#4ade80",fontWeight:700}}>
-                          ✓ {hls.length} {t("parts found in stock","قطعة متوفرة في المخزون")}
-                        </div>
-                      :<div style={{marginTop:".8rem",padding:"6px 10px",background:"rgba(255,200,0,.08)",border:"1px solid rgba(255,200,0,.25)",borderRadius:6,fontSize:".74rem",color:"#fbbf24",fontWeight:700}}>
-                          ⚡ {t("Not in current stock — submit a request below and we will source it for you","غير متوفر حالياً — أرسل طلباً أدناه وسنوفرها لك")}
-                        </div>}
-                  </div>
-                )}
-              </div>
-            </div>
+      {/* REF GENERATOR */}
+      <div className="panel" style={{marginBottom:"1.2rem"}}>
+        <div className="phead" style={{background:"#0f172a",borderBottom:"2px solid var(--gold)"}}>
+          <div className="phead-ico" style={{background:"var(--gold)"}}>🎫</div>
+          <div><div className="phead-title">Order Reference Generator</div><div className="phead-sub">Generate a unique reference for each paid order — send to garage via WhatsApp</div></div>
+        </div>
+        <div className="pbody">
+          <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",marginBottom:"1rem"}}>
+            <button className="btn btn-gold en" onClick={genRef} style={{fontSize:"0.85rem"}}>⚡ Generate New Reference</button>
+            {newRef&&(
+              <>
+                <div style={{background:"#0f172a",borderRadius:8,padding:"10px 16px",fontFamily:"'JetBrains Mono'",fontSize:"1.1rem",fontWeight:700,color:"#4ade80",letterSpacing:"0.1em"}}>{newRef}</div>
+                <button className="btn btn-d en btn-sm" onClick={copyRef}>📋 Copy</button>
+                <a className="btn btn-wa en btn-sm" href={`https://wa.me/?text=${encodeURIComponent(`Hi,\n\nYour Wasel Auto Order Reference:\n*${newRef}*\n\nEnter this on wasel-auto.vercel.app → Invoice tab to create your invoice.\n\nThank you for your order!\nWasel Auto 🇧🇭`)}`} target="_blank" rel="noopener noreferrer">💬 Send via WhatsApp</a>
+              </>
+            )}
           </div>
-
-          {hls.length>0&&(
-            <div className="psec">
-              <div className={`hlbanner ${ar?"ar":""}`}>⚡ {hls.length} {t("parts found matching your search","قطعة مطابقة لبحثك")}</div>
-              <div className="pgrid">
-                {allParts.filter(p=>hls.includes(p.id)).map(p=><PartCard key={p.id} part={p} ar={ar} onClick={()=>setSelPart(p)}/>)}
-              </div>
+          <div style={{fontSize:"0.75rem",color:"var(--mut)",fontFamily:"'Barlow'",lineHeight:1.6,background:"var(--surf2)",padding:"0.75rem",borderRadius:7}}>
+            <strong>How to use:</strong> After a garage pays you (cash or transfer), click Generate → Copy the reference → Send it to the garage via WhatsApp. They enter it in the Invoice tab to create their invoice. Every reference is unique and time-stamped — no duplicates possible.
+          </div>
+          {generatedRefs.length>0&&(
+            <div style={{marginTop:"1rem"}}>
+              <div style={{fontFamily:"'JetBrains Mono'",fontSize:"0.68rem",color:"var(--mut)",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:"0.5rem"}}>Recently Generated</div>
+              {generatedRefs.slice(0,5).map((r,i)=>(
+                <div key={i} style={{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid var(--bdr)",fontSize:"0.78rem"}}>
+                  <span style={{fontFamily:"'JetBrains Mono'",fontWeight:700,color:"var(--grn)"}}>{r.ref}</span>
+                  <span style={{color:"var(--mut)"}}>{r.date}</span>
+                </div>
+              ))}
             </div>
           )}
+        </div>
+      </div>
 
-          {/* NOT FOUND / RFQ */}
-          {(showRFQ||(aiRes&&hls.length===0))&&(
-            <div className="psec">
-              <div className="not-found-box">
-                <div className="not-found-ico">🔍</div>
-                <div className={`not-found-title ${ar?"ar":""}`}>{t("Part Not in Current Stock","القطعة غير متوفرة في المخزون الحالي")}</div>
-                <div className={`not-found-sub ${ar?"ar":""}`}>{t("No problem — this is exactly what Wasel Auto does. Submit your request and we will check with our supplier network and get back to you within 2 hours.","لا مشكلة — هذا بالضبط ما يفعله وصل أوتو. أرسل طلبك وسنتحقق مع شبكة موردينا ونردّ عليك خلال ساعتين.")}</div>
-                <RFQForm ar={ar} onClose={()=>setShowRFQ(false)} searchTerm={desc||aiRes?.partName||""}/>
-              </div>
-            </div>
-          )}
-
-          {/* HOW IT WORKS */}
-          {!aiRes&&(
-            <div className="hiw" style={{marginTop:"1.5rem"}}>
-              <div className={`hiw-title ${ar?"ar":""}`}>{t("How Wasel Auto Works","كيف يعمل وصل أوتو")}</div>
-              <div className="hiwgrid">
+      {/* INVOICE LOG */}
+      <div className="panel">
+        <div className="phead" style={{background:"#0f172a"}}>
+          <div className="phead-ico">📋</div>
+          <div><div className="phead-title">Invoice Log — All Garages</div><div className="phead-sub">{log.length} invoice{log.length!==1?"s":""} created</div></div>
+        </div>
+        <div className="pbody">
+          {log.length===0?(
+            <div style={{textAlign:"center",padding:"2rem",color:"var(--mut)",fontSize:"0.85rem"}}>No invoices created yet. Invoices will appear here once garages use the tool.</div>
+          ):(
+            <>
+              {/* SUMMARY */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"0.8rem",marginBottom:"1.2rem"}}>
                 {[
-                  ["🔍",t("Search or Request","ابحث أو اطلب"),t("Search our catalogue or submit a request for any part not listed","ابحث في كتالوجنا أو أرسل طلباً لأي قطعة غير مدرجة")],
-                  ["📞",t("We Source It","نوفرها لك"),t("Wasel Auto checks with suppliers and confirms availability and price within 2 hours","وصل أوتو يتحقق مع الموردين ويؤكد التوفر والسعر خلال ساعتين")],
-                  ["🧾",t("Invoice Your Customer","افترّ عميلك"),t("Use our free invoice tool to add your margin and send a professional invoice via WhatsApp","استخدم أداة الفاتورة المجانية لإضافة هامشك وإرسال فاتورة احترافية")],
-                ].map(([ico,tit,dsc])=>(
-                  <div key={tit} className="hiwcard">
-                    <div className="hiw-num">{ico}</div>
-                    <div className={`hiw-t ${ar?"ar":""}`}>{tit}</div>
-                    <div className={`hiw-d ${ar?"ar":""}`}>{dsc}</div>
+                  ["Total Invoices",log.length],
+                  ["Total Revenue",log.reduce((a,l)=>a+(l.grandTotal||0),0).toFixed(3)+" BHD"],
+                  ["Total Wasel Fee",log.reduce((a,l)=>a+(l.waselFee||0),0).toFixed(3)+" BHD"],
+                  ["Avg Margin",log.length>0?(log.reduce((a,l)=>a+((l.profit||0)/(l.grandTotal||1)*100),0)/log.length).toFixed(1)+"%":"—"],
+                ].map(([lbl,val])=>(
+                  <div key={lbl} style={{background:"var(--surf2)",borderRadius:8,padding:"0.8rem",border:"1px solid var(--bdr)"}}>
+                    <div style={{fontSize:"0.62rem",fontFamily:"'JetBrains Mono'",color:"var(--mut)",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:4}}>{lbl}</div>
+                    <div style={{fontFamily:"'Barlow'",fontWeight:900,fontSize:"1rem",color:"var(--dark)"}}>{val}</div>
                   </div>
                 ))}
               </div>
-              <div style={{marginTop:"1rem",background:"white",border:"1.5px solid var(--bdr)",borderRadius:10,padding:"1rem",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
-                <div style={{flex:1}}>
-                  <div style={{fontWeight:700,fontSize:"0.88rem",marginBottom:3,fontFamily:ar?"'Cairo'":"'Barlow'"}}>
-                    {t("Can't find your part? We source it.","ما تلقيت القطعة؟ نوفرها لك.")}
-                  </div>
-                  <div style={{fontSize:"0.78rem",color:"var(--mut)",fontFamily:ar?"'Cairo'":"'Barlow'"}}>
-                    {t("Contact Wasel Auto directly — WhatsApp or call.","تواصل مع وصل أوتو مباشرة — واتساب أو اتصال.")}
-                  </div>
-                </div>
-                <div style={{display:"flex",gap:7,flexShrink:0}}>
-                  <a className={`btn btn-wa btn-sm ${ar?"ar":"en"}`} href="https://wa.me/97333844859" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-                  <a className={`btn btn-d btn-sm ${ar?"ar":"en"}`} href="tel:+97333844859">📞 {t("Call","اتصل")}</a>
-                </div>
-              </div>
-            </div>
-          )}
-        </>
-      )}
-
-      {/* ── BROWSE ── */}
-      {tab==="browse"&&(
-        <div className="psec">
-          <div style={{paddingTop:"0.8rem"}}>
-            <div className="psec-header">
-              <div className={`psec-title ${ar?"ar":""}`}>{t("Parts Catalogue","كتالوج القطع")}</div>
-              <span className="psec-count">{filtered.length} {t("parts","قطعة")}</span>
-            </div>
-            <div style={{marginBottom:"0.8rem"}}>
-              <input className={`ifield ${ar?"ar":""}`} placeholder={t("Search by name, make, model, brand…","ابحث بالاسم، الماركة، الموديل…")} value={srch} onChange={e=>setSrch(e.target.value)} style={{background:"white",border:"1.5px solid var(--bdr)"}}/>
-            </div>
-            <div className="frow">
-              <div className="typetog">
-                {PTYPES.map((pt,i)=>(
-                  <button key={pt} className={`ttbtn ${ar?"ar":"en"} ${ptype===pt?"on":""}`} onClick={()=>setPtype(pt)}>{ar?PTYPES_AR[i]:pt}</button>
-                ))}
-              </div>
-              {CATS.map((c,i)=>(
-                <button key={c} className={`pill ${ar?"ar":"en"} ${cat===c?"on":""}`} onClick={()=>setCat(c)}>{ar?CATS_AR[i]:c}</button>
-              ))}
-            </div>
-            <div className="frow">
-              {MAKES.map((m,i)=>(
-                <button key={m} className={`pill ${ar?"ar":"en"} ${make===m?"on":""}`} onClick={()=>setMake(m)}>{ar?MAKES_AR[i]:m}</button>
-              ))}
-            </div>
-            {filtered.length===0
-              ?<div className="empty">
-                  <div style={{fontSize:"2.2rem",marginBottom:"0.6rem"}}>🔎</div>
-                  <h3 className={ar?"ar":""}>{t("No parts found","لا توجد قطع")}</h3>
-                  <p style={{fontSize:"0.82rem",color:"var(--mut)",marginBottom:"1rem",fontFamily:ar?"'Cairo'":"'Barlow'"}}>{t("Submit a request and we will source it for you","أرسل طلباً وسنوفرها لك")}</p>
-                  <RFQForm ar={ar} onClose={()=>setCat("All")} searchTerm={srch}/>
-                </div>
-              :<div className="pgrid">{filtered.map(p=><PartCard key={p.id} part={p} ar={ar} onClick={()=>setSelPart(p)}/>)}</div>}
-          </div>
-        </div>
-      )}
-
-      {/* ── SUPPLIER PORTAL ── */}
-      {tab==="supplier"&&(
-        <div className="sport">
-          <div className="sport-hero">
-            <h2 className={ar?"ar":""}>{t("List Your Parts on Wasel Auto","أضف قطعك على وصل أوتو")}</h2>
-            <p className={ar?"ar":""}>{t("Reach garages across Bahrain. Free to list. We review and approve within 24 hours.","وصّل قطعك لورش البحرين. مجاني للإدراج. نراجع ونوافق خلال 24 ساعة.")}</p>
-          </div>
-          {pending.length>0&&(
-            <div className="panel">
-              <div className="phead"><div className="phead-ico">⏳</div><div><div className={`phead-title ${ar?"ar":""}`}>{t("Pending Approval","بانتظار الموافقة")}</div><div className={`phead-sub ${ar?"ar":""}`}>{t("Being reviewed by Wasel Auto","قيد المراجعة من وصل أوتو")}</div></div></div>
-              <div className="pbody">
-                {pending.map(p=>(
-                  <div key={p.id} className="pending-card">
-                    <div style={{fontFamily:ar?"'Cairo'":"'Barlow'",fontWeight:700,fontSize:"0.9rem"}}>{ar?p.nameAr:p.name}</div>
-                    <div style={{fontSize:"0.72rem",color:"var(--mut)",marginTop:3}}>{p.make} {p.model} · {p.price.toFixed(3)} BHD</div>
-                    <div style={{display:"inline-flex",alignItems:"center",gap:5,background:"#fff8e1",border:"1px solid #f59e0b",color:"#b45309",fontSize:"0.68rem",fontWeight:700,padding:"2px 8px",borderRadius:4,marginTop:6,fontFamily:ar?"'Cairo'":"'Barlow'"}}>⏳ {t("Awaiting Wasel Auto Approval","بانتظار موافقة وصل أوتو")}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <div className="panel">
-            <div className="phead"><div className="phead-ico">📦</div><div><div className={`phead-title ${ar?"ar":""}`}>{t("New Part Listing","إدراج قطعة جديدة")}</div><div className={`phead-sub ${ar?"ar":""}`}>{t("Goes live after Wasel Auto review","يُنشر بعد مراجعة وصل أوتو")}</div></div></div>
-            <div className="pbody">
-              <div className="fsec"><div className={`fsec-t ${ar?"ar":""}`}>{t("Part Details","تفاصيل القطعة")}</div>
-                <div className="fgrid">
-                  <div className="ig ff"><label className={`il ${ar?"ar":""}`}>{t("Part Name (English) *","اسم القطعة (إنجليزي) *")}</label><input className="ifield" placeholder="e.g. Toyota Genuine Brake Pads" value={sf.name} onChange={e=>upS("name",e.target.value)}/></div>
-                  <div className="ig ff"><label className="il ar">اسم القطعة (عربي)</label><input className="ifield ar" dir="rtl" placeholder="مثال: تيل فرامل تويوتا أصلي" value={sf.nameAr} onChange={e=>upS("nameAr",e.target.value)}/></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Part Type","نوع القطعة")}</label><select className={`sel ${ar?"ar":""}`} value={sf.type} onChange={e=>upS("type",e.target.value)}><option value="Genuine">{t("Genuine","أصلي")}</option><option value="Aftermarket">{t("Aftermarket","بديل")}</option></select></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Category","التصنيف")}</label><select className={`sel ${ar?"ar":""}`} value={sf.cat} onChange={e=>upS("cat",e.target.value)}>{CATS.filter(c=>c!=="All").map((c,i)=><option key={c} value={c}>{ar?CATS_AR[i+1]:c}</option>)}</select></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Brand","الماركة")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Toyota, Bosch","تويوتا، بوش")} value={sf.brand} onChange={e=>upS("brand",e.target.value)}/></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Qty in Stock","الكمية المتوفرة")}</label><input className="ifield" type="number" placeholder="1" value={sf.qty} onChange={e=>upS("qty",e.target.value)} dir="ltr"/></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Warranty","الضمان")}</label><select className={`sel ${ar?"ar":""}`} value={sf.warranty} onChange={e=>upS("warranty",e.target.value)}><option value="N/A">{t("No warranty","لا يوجد")}</option><option value="3 months">{t("3 months","3 أشهر")}</option><option value="6 months">{t("6 months","6 أشهر")}</option><option value="12 months">{t("12 months","12 شهر")}</option><option value="24 months">{t("24 months","24 شهر")}</option></select></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Price (BHD) *","السعر (دينار) *")}</label><input className="ifield" type="number" step="0.001" placeholder="0.000" value={sf.price} onChange={e=>upS("price",e.target.value)} dir="ltr"/></div>
-                </div>
-              </div>
-              <div className="fsec"><div className={`fsec-t ${ar?"ar":""}`}>{t("Vehicle Compatibility","توافق السيارة")}</div>
-                <div className="fgrid">
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Make","الشركة")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Toyota","تويوتا")} value={sf.make} onChange={e=>upS("make",e.target.value)}/></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Model","الموديل")}</label><input className={`ifield ${ar?"ar":""}`} placeholder={t("e.g. Land Cruiser","لاند كروزر")} value={sf.model} onChange={e=>upS("model",e.target.value)}/></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Year From","من سنة")}</label><input className="ifield" type="number" placeholder="2018" value={sf.yf} onChange={e=>upS("yf",e.target.value)} dir="ltr"/></div>
-                  <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("Year To","إلى سنة")}</label><input className="ifield" type="number" placeholder="2025" value={sf.yt} onChange={e=>upS("yt",e.target.value)} dir="ltr"/></div>
-                </div>
-              </div>
-              <div className="fsec"><div className={`fsec-t ${ar?"ar":""}`}>{t("Contact Details","بيانات التواصل")}</div>
-                <div className="ig"><label className={`il ${ar?"ar":""}`}>{t("WhatsApp Number *","رقم واتساب *")}</label><input className="ifield" type="tel" placeholder="+973 XXXX XXXX" value={sf.phone} onChange={e=>upS("phone",e.target.value)} dir="ltr"/></div>
-              </div>
-              <div style={{background:"#fffbeb",border:"1px solid #f59e0b",borderRadius:8,padding:"0.85rem",marginBottom:"1rem",fontSize:"0.78rem",color:"#92400e",lineHeight:1.6,fontFamily:ar?"'Cairo'":"'Barlow'"}}>
-                ⏳ {t("After submitting, Wasel Auto will review and approve your listing within 24 hours before it goes live.","بعد الإرسال، سيراجع وصل أوتو ويوافق على إدراجك خلال 24 ساعة قبل النشر.")}
-              </div>
-              <button className={`btn btn-r btn-lg btn-full ${ar?"ar":"en"}`} onClick={submitSupplier}>{t("✓ Submit for Approval","✓ أرسل للموافقة")}</button>
-              <div style={{marginTop:"0.8rem",textAlign:"center",fontSize:"0.78rem",color:"var(--mut)",fontFamily:ar?"'Cairo'":"'Barlow'"}}>
-                {t("Questions? ","أسئلة؟ ")}<a href="https://wa.me/97333844859" style={{color:"var(--red)",fontWeight:700}}>WhatsApp</a>{t(" or ","  أو  ")}<a href="tel:+97333844859" style={{color:"var(--red)",fontWeight:700}}>{t("Call","اتصل")}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ── INVOICE ── */}
-      {tab==="invoice"&&<InvoiceTool ar={ar} initialItems={invoiceItems}/>}
-
-      <PartModal part={selPart} ar={ar} onClose={()=>setSelPart(null)} onAddToInvoice={addToInvoice}/>
-      {toast&&<div className={`toast ${ar?"ar":""}`}>{toast}</div>}
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-</script>
-</body>
-</html>
+              {log.map((l,i)=>(
+                <div key={i} className="admin-log-row">
+                  <div><span className="admin-log-label">Invoice</span><span style={{fontFamily:"'JetBrains Mono'",fontSize:"0.78rem",fontWeight:700,color:"var(--dark)"}}>{l.invNum}</span><br/><span style={{fontFamily:"'JetBrains Mono'",fontSize:"0.68rem",color:"var(--mut)"}}>{l.ref}</span></div>
+                  <div><span className="admin-log-label">Garage</span><span style={{fontSize:"0.8rem",fontWeight:600}}>{l.garage?.name||"—"}</span><br/><span style={{fontSize:
