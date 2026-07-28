@@ -3,110 +3,143 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Wasel Auto | وصل أوتو — Find Auto Parts in Bahrain</title>
+<title>Wasel Auto | وصل أوتو — Auto Parts Marketplace Bahrain</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;600&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--red:#CE1126;--red2:#e8253a;--dark:#111;--dark2:#1e1e1e;--bg:#f5f5f5;--surf:#fff;--surf2:#f0f0f0;--bdr:#e0e0e0;--txt:#111;--mut:#777;--grn:#15803d;--grn2:#dcfce7;--gold:#b45309;}
+:root{--red:#CE1126;--red2:#e8253a;--dark:#111;--dark2:#1e1e1e;--bg:#f5f5f5;--surf:#fff;--surf2:#f0f0f0;--bdr:#e0e0e0;--txt:#111;--mut:#777;--grn:#15803d;--grn2:#dcfce7;--gold:#b45309;--gold2:#fef3c7;--blue:#1d4ed8;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-height:100vh;}
+/* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem;height:58px;background:var(--dark);border-bottom:3px solid var(--red);position:sticky;top:0;z-index:300;}
 .logo{display:flex;align-items:flex-end;cursor:pointer;text-decoration:none;}
 .lw{font-family:'Barlow';font-weight:900;font-size:1.6rem;color:white;letter-spacing:-1px;line-height:1;}
 .la{font-family:'Barlow';font-weight:700;font-size:0.85rem;color:var(--red);font-style:italic;margin-left:4px;margin-bottom:2px;}
-.nav-actions{display:flex;gap:6px;align-items:center;}
-.lang-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:5px 11px;border-radius:5px;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;}
+.nav-right{display:flex;gap:8px;align-items:center;}
+.cart-btn{background:var(--red);border:none;color:white;padding:6px 14px;border-radius:6px;font-family:'Barlow';font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;text-transform:uppercase;}
+.cart-count{background:white;color:var(--red);border-radius:99px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;}
+.lang-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:5px 11px;border-radius:5px;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'Cairo';}
+/* TABS */
 .apptabs{display:flex;background:var(--dark2);border-bottom:2px solid var(--red);overflow-x:auto;}
-.apptab{flex:1;min-width:60px;padding:10px 4px;border:none;background:transparent;color:#888;font-weight:700;cursor:pointer;font-size:0.72rem;border-bottom:3px solid transparent;white-space:nowrap;font-family:'Barlow',sans-serif;text-transform:uppercase;}
+.apptab{flex:1;min-width:60px;padding:9px 4px;border:none;background:transparent;color:#888;font-weight:700;cursor:pointer;font-size:0.7rem;border-bottom:3px solid transparent;white-space:nowrap;font-family:'Barlow';text-transform:uppercase;}
 .apptab.on{color:white;border-bottom-color:var(--red);background:rgba(255,255,255,0.04);}
-.tabico{display:block;font-size:0.95rem;margin-bottom:2px;}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;font-weight:700;transition:all 0.15s;white-space:nowrap;text-decoration:none;font-size:0.85rem;font-family:'Barlow',sans-serif;text-transform:uppercase;}
+.tabico{display:block;font-size:0.9rem;margin-bottom:2px;}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;font-weight:700;transition:all 0.15s;white-space:nowrap;text-decoration:none;font-size:0.85rem;font-family:'Barlow';text-transform:uppercase;}
 .btn-r{background:var(--red);color:white;}.btn-r:hover{background:var(--red2);transform:translateY(-1px);}
 .btn-r:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
-.btn-d{background:var(--dark);color:white;}
-.btn-ol{background:transparent;color:var(--red);border:2px solid var(--red);}.btn-ol:hover{background:var(--red);color:white;}
+.btn-d{background:var(--dark);color:white;}.btn-d:hover{background:var(--dark2);}
 .btn-gh{background:var(--surf2);color:var(--txt);border:1.5px solid var(--bdr);}.btn-gh:hover{border-color:var(--red);color:var(--red);}
-.btn-wa{background:#25D366;color:white;}
+.btn-wa{background:#25D366;color:white;}.btn-wa:hover{background:#1ebe5d;}
 .btn-gold{background:var(--gold);color:white;}
-.btn-sm{padding:6px 12px;font-size:0.75rem;}
+.btn-grn{background:var(--grn);color:white;}
+.btn-ol{background:transparent;color:var(--red);border:2px solid var(--red);}.btn-ol:hover{background:var(--red);color:white;}
+.btn-sm{padding:5px 12px;font-size:0.75rem;}
 .btn-lg{padding:12px 24px;font-size:0.9rem;}
 .btn-full{width:100%;justify-content:center;}
-.shero{background:var(--dark);padding:1.8rem 1.2rem;border-bottom:3px solid var(--red);}
-.shero-inner{max-width:700px;margin:0 auto;}
-.shero-title{font-family:'Barlow';font-weight:900;font-size:clamp(1.4rem,4vw,2rem);color:white;margin-bottom:4px;}
-.shero-sub{color:#999;font-size:0.88rem;margin-bottom:1.2rem;}
-.sbox{background:white;border-radius:10px;padding:1rem;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
-.srow{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.7rem;}
-.ig{display:flex;flex-direction:column;gap:4px;margin-bottom:0;}
-.il{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;color:var(--mut);text-transform:uppercase;}
-.ifield{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:9px 12px;color:var(--txt);font-size:0.88rem;outline:none;transition:border 0.15s;width:100%;font-family:'Barlow',sans-serif;}
+/* FORM */
+.ig{display:flex;flex-direction:column;gap:4px;}
+.il{font-size:0.64rem;font-weight:700;letter-spacing:0.08em;color:var(--mut);text-transform:uppercase;}
+.ifield{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:9px 12px;color:var(--txt);font-size:0.88rem;outline:none;transition:border 0.15s;width:100%;font-family:'Barlow';}
 .ifield:focus{border-color:var(--red);background:white;}
 .ifield::placeholder{color:#bbb;}
-.sel{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:9px 12px;color:var(--txt);font-size:0.88rem;outline:none;cursor:pointer;appearance:none;width:100%;font-family:'Barlow',sans-serif;}
+.sel{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:9px 12px;color:var(--txt);font-size:0.88rem;outline:none;cursor:pointer;appearance:none;width:100%;font-family:'Barlow';}
 .sel:focus{border-color:var(--red);}
-.psec{max-width:1200px;margin:0 auto;padding:1.2rem;}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:0.9rem;}
-.pcard{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1rem;cursor:pointer;transition:all 0.15s;position:relative;}
-.pcard:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px rgba(206,17,38,0.1);}
-.pcard.hl{border-color:var(--red);}
-.ptype{position:absolute;top:9px;right:9px;font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;font-family:'Barlow';}
-.ptype-g{background:var(--dark);color:white;}
-.ptype-a{background:var(--red);color:white;}
-.pcard-cat{font-size:0.62rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;font-family:'JetBrains Mono';}
-.pcard-name{font-family:'Barlow';font-weight:700;font-size:0.92rem;margin-bottom:2px;line-height:1.3;padding-right:54px;}
-.pcard-brand{font-size:0.72rem;color:var(--mut);font-weight:600;margin-bottom:5px;}
-.pcard-compat{font-size:0.72rem;color:var(--mut);margin-bottom:8px;}
-.pcard-price{font-family:'Barlow';font-size:1.3rem;font-weight:900;color:var(--dark);}
-.pcard-price span{font-size:0.7rem;color:var(--mut);margin-left:2px;font-weight:600;}
-.pcard-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);}
-.war-tag{font-size:0.62rem;font-weight:700;color:var(--grn);background:var(--grn2);padding:2px 7px;border-radius:4px;}
-.pcard-cta{font-size:0.7rem;color:var(--red);margin-top:5px;font-weight:700;}
-.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
-.pill{padding:5px 12px;border-radius:99px;border:1.5px solid var(--bdr);background:white;color:var(--mut);font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Barlow';text-transform:uppercase;}
-.pill.on{background:var(--dark);color:white;border-color:var(--dark);}
-.pill:hover:not(.on){border-color:var(--red);color:var(--red);}
-.typetog{display:flex;background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;overflow:hidden;}
-.ttbtn{padding:5px 12px;border:none;background:transparent;font-size:0.72rem;font-weight:700;cursor:pointer;color:var(--mut);font-family:'Barlow';text-transform:uppercase;}
-.ttbtn.on{background:var(--dark);color:white;}
-.ov{position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;}
-.mod{background:white;border-radius:14px;max-width:480px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.25);max-height:92vh;overflow-y:auto;}
-.mod-head{background:var(--dark);color:white;padding:1.2rem 1.4rem;border-bottom:3px solid var(--red);position:relative;}
-.mod-close{position:absolute;top:0.9rem;right:0.9rem;background:rgba(255,255,255,0.1);border:none;color:white;border-radius:5px;width:28px;height:28px;cursor:pointer;}
-.mod-pname{font-family:'Barlow';font-size:1.1rem;font-weight:900;margin-top:4px;}
-.mod-price{font-family:'Barlow';font-size:1.8rem;font-weight:900;color:var(--red);margin-top:2px;}
-.mod-body{padding:1.2rem 1.4rem;}
-.mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:0.83rem;}
-.mrow:last-of-type{border-bottom:none;}
-.mrl{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--mut);}
-.mod-notice{background:#fff8f8;border:1px solid rgba(206,17,38,0.2);border-radius:8px;padding:0.9rem;font-size:0.78rem;color:var(--mut);line-height:1.6;margin-top:0.9rem;}
-.mod-actions{padding:0 1.4rem 1.4rem;display:flex;flex-direction:column;gap:8px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+.ff{grid-column:1/-1;}
+.fsec-t{font-size:0.63rem;font-weight:700;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;margin-bottom:0.7rem;padding-bottom:5px;border-bottom:2px solid var(--bdr);}
+/* PANELS */
 .panel{background:white;border:1.5px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:1rem;}
 .phead{background:var(--dark);padding:0.9rem 1.2rem;display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--red);}
 .phead-ico{width:30px;height:30px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
 .phead-title{font-family:'Barlow';font-weight:700;font-size:0.88rem;color:white;text-transform:uppercase;}
 .phead-sub{font-size:0.67rem;color:#aaa;margin-top:1px;}
 .pbody{padding:1.2rem;}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
-.ff{grid-column:1/-1;}
-.fsec{margin-bottom:1.3rem;}
-.fsec-t{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;margin-bottom:0.7rem;padding-bottom:5px;border-bottom:2px solid var(--bdr);}
+/* SEARCH / HERO */
+.shero{background:var(--dark);padding:1.8rem 1.2rem;border-bottom:3px solid var(--red);}
+.shero-inner{max-width:700px;margin:0 auto;}
+.shero-title{font-family:'Barlow';font-weight:900;font-size:clamp(1.3rem,4vw,1.9rem);color:white;margin-bottom:4px;}
+.shero-sub{color:#999;font-size:0.85rem;margin-bottom:1.2rem;}
+.sbox{background:white;border-radius:10px;padding:1rem;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.7rem;}
+/* PARTS */
+.psec{max-width:1200px;margin:0 auto;padding:1.2rem;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:0.9rem;}
+.pcard{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1rem;cursor:pointer;transition:all 0.15s;position:relative;}
+.pcard:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px rgba(206,17,38,0.1);}
+.pcard.hl{border-color:var(--red);}
+.ptype{position:absolute;top:9px;right:9px;font-size:0.58rem;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;font-family:'Barlow';}
+.ptype-g{background:var(--dark);color:white;}
+.ptype-a{background:var(--red);color:white;}
+.pcard-cat{font-size:0.6rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;font-family:'JetBrains Mono';}
+.pcard-name{font-family:'Barlow';font-weight:700;font-size:0.9rem;margin-bottom:2px;line-height:1.3;padding-right:52px;}
+.pcard-brand{font-size:0.7rem;color:var(--mut);font-weight:600;margin-bottom:5px;}
+.pcard-compat{font-size:0.7rem;color:var(--mut);margin-bottom:8px;}
+.pcard-price{font-family:'Barlow';font-size:1.25rem;font-weight:900;color:var(--dark);}
+.pcard-price span{font-size:0.68rem;color:var(--mut);margin-left:2px;font-weight:600;}
+.pcard-price-lock{font-family:'Barlow';font-size:0.82rem;font-weight:700;color:var(--mut);background:var(--surf2);border:1.5px dashed var(--bdr);border-radius:6px;padding:6px 10px;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.pcard-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);}
+.war-tag{font-size:0.6rem;font-weight:700;color:var(--grn);background:var(--grn2);padding:2px 6px;border-radius:4px;}
+.pcard-cta{font-size:0.68rem;color:var(--red);margin-top:5px;font-weight:700;}
+/* FILTERS */
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
+.pill{padding:4px 11px;border-radius:99px;border:1.5px solid var(--bdr);background:white;color:var(--mut);font-size:0.7rem;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Barlow';text-transform:uppercase;}
+.pill.on{background:var(--dark);color:white;border-color:var(--dark);}
+.pill:hover:not(.on){border-color:var(--red);color:var(--red);}
+.typetog{display:flex;background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;overflow:hidden;}
+.ttbtn{padding:5px 11px;border:none;background:transparent;font-size:0.7rem;font-weight:700;cursor:pointer;color:var(--mut);font-family:'Barlow';text-transform:uppercase;}
+.ttbtn.on{background:var(--dark);color:white;}
+/* MEMBER LOGIN */
+.member-gate{background:var(--dark);border-radius:14px;padding:2rem;text-align:center;border:2px solid var(--gold);max-width:480px;margin:2rem auto;}
+.member-gate h2{font-family:'Barlow';font-weight:900;font-size:1.3rem;color:white;margin-bottom:0.5rem;}
+.member-gate p{color:#999;font-size:0.85rem;margin-bottom:1.5rem;line-height:1.7;}
+.pin-inputs{display:flex;gap:10px;justify-content:center;margin-bottom:1rem;}
+.pin-input{width:56px;height:64px;border:2px solid #333;background:#1a1a1a;border-radius:9px;color:white;font-family:'JetBrains Mono';font-size:1.6rem;font-weight:700;text-align:center;outline:none;transition:border 0.15s;}
+.pin-input:focus{border-color:var(--gold);}
+.member-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(21,128,61,0.15);border:1px solid rgba(21,128,61,0.35);color:#4ade80;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:99px;font-family:'Barlow';text-transform:uppercase;}
+/* MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.mod{background:white;border-radius:14px;max-width:480px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.25);max-height:92vh;overflow-y:auto;}
+.mod-head{background:var(--dark);color:white;padding:1.2rem 1.4rem;border-bottom:3px solid var(--red);position:relative;}
+.mod-close{position:absolute;top:0.9rem;right:0.9rem;background:rgba(255,255,255,0.1);border:none;color:white;border-radius:5px;width:28px;height:28px;cursor:pointer;font-size:0.9rem;}
+.mod-pname{font-family:'Barlow';font-size:1.05rem;font-weight:900;margin-top:4px;}
+.mod-price{font-family:'Barlow';font-size:1.7rem;font-weight:900;color:var(--red);margin-top:2px;}
+.mod-body{padding:1.2rem 1.4rem;}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:0.83rem;}
+.mrow:last-of-type{border-bottom:none;}
+.mrl{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--mut);}
+.mod-notice{background:#fff8f8;border:1px solid rgba(206,17,38,0.2);border-radius:8px;padding:0.9rem;font-size:0.78rem;color:var(--mut);line-height:1.6;margin-top:0.9rem;}
+.mod-actions{padding:0 1.4rem 1.4rem;display:flex;flex-direction:column;gap:8px;}
+/* CART */
+.cart-wrap{max-width:800px;margin:0 auto;padding:1.2rem;}
+.cart-item{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1rem;display:flex;gap:12px;align-items:flex-start;margin-bottom:0.8rem;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-family:'Barlow';font-weight:700;font-size:0.9rem;margin-bottom:2px;}
+.cart-item-meta{font-size:0.72rem;color:var(--mut);margin-bottom:6px;}
+.cart-item-price{font-family:'Barlow';font-weight:900;font-size:1.1rem;color:var(--dark);}
+.cart-qty{display:flex;align-items:center;gap:8px;}
+.qty-btn{width:28px;height:28px;border:1.5px solid var(--bdr);border-radius:5px;background:white;cursor:pointer;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.qty-btn:hover{border-color:var(--red);color:var(--red);}
+.cart-summary{background:white;border:1.5px solid var(--bdr);border-radius:10px;padding:1.2rem;}
+.summary-row{display:flex;justify-content:space-between;padding:6px 0;font-size:0.85rem;border-bottom:1px solid var(--bdr);}
+.summary-row:last-of-type{border-bottom:none;}
+.summary-row.total{font-family:'Barlow';font-weight:900;font-size:1rem;padding-top:10px;margin-top:4px;border-top:2px solid var(--dark);}
+/* AI BOX */
 .aibox{background:var(--dark);border-radius:9px;padding:1.1rem;margin-top:0.9rem;border-left:4px solid var(--red);}
 .aiconf{font-size:0.62rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;font-family:'JetBrains Mono';}
 .aiconf.high{background:rgba(21,128,61,0.2);color:#4ade80;border:1px solid rgba(21,128,61,0.4);}
 .aiconf.medium{background:rgba(206,17,38,0.2);color:#ff9090;border:1px solid rgba(206,17,38,0.3);}
 .ainm{font-family:'Barlow';font-size:1.1rem;font-weight:900;color:white;margin-top:3px;}
 .aitags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
-.aitag{font-size:0.66rem;font-family:'JetBrains Mono';background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:2px 7px;color:#ccc;}
-.ainotes{margin-top:7px;font-size:0.78rem;color:#888;line-height:1.6;}
-.hlbanner{background:rgba(206,17,38,0.05);border:1.5px solid rgba(206,17,38,0.18);border-radius:7px;padding:0.55rem 1rem;display:flex;align-items:center;gap:8px;margin-bottom:0.9rem;font-size:0.78rem;color:var(--red);font-weight:700;}
+.aitag{font-size:0.65rem;font-family:'JetBrains Mono';background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:2px 7px;color:#ccc;}
+.ainotes{margin-top:7px;font-size:0.77rem;color:#888;line-height:1.5;}
+.hlbanner{background:rgba(206,17,38,0.05);border:1.5px solid rgba(206,17,38,0.18);border-radius:7px;padding:0.5rem 1rem;margin-bottom:0.9rem;font-size:0.78rem;color:var(--red);font-weight:700;}
 .not-found-box{background:white;border:2px dashed var(--bdr);border-radius:12px;padding:1.5rem;text-align:center;margin-top:1rem;}
 .rfq-form{background:var(--surf2);border-radius:9px;padding:1rem;text-align:left;margin-top:0.8rem;}
 .rfq-sent{background:var(--grn2);border:1.5px solid var(--grn);border-radius:9px;padding:1rem;text-align:center;}
 .loading{display:flex;align-items:center;gap:9px;color:var(--red);font-size:0.82rem;padding:0.8rem 0;font-weight:600;}
 .spin{width:15px;height:15px;border:2px solid var(--bdr);border-top-color:var(--red);border-radius:50%;animation:sp 0.65s linear infinite;flex-shrink:0;}
 @keyframes sp{to{transform:rotate(360deg);}}
-.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--dark);color:white;padding:0.8rem 1.1rem;border-radius:8px;font-size:0.8rem;z-index:9999;animation:su 0.25s ease;border-left:3px solid var(--red);font-weight:600;max-width:300px;}
-@keyframes su{from{transform:translateY(16px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 .dzone{border:2px dashed var(--bdr);border-radius:9px;padding:1.2rem;text-align:center;cursor:pointer;background:var(--surf2);}
 .dzone.drag{border-color:var(--red);background:rgba(206,17,38,0.03);}
 .dzone img{max-height:110px;border-radius:7px;object-fit:cover;}
@@ -114,11 +147,60 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .sport-hero{background:var(--dark);border-radius:12px;padding:1.5rem;margin-bottom:1.2rem;border-bottom:3px solid var(--red);}
 .sport-hero h2{font-family:'Barlow';font-weight:900;font-size:1.3rem;color:white;margin-bottom:4px;}
 .sport-hero p{color:#999;font-size:0.85rem;}
-.pending-card{background:white;border:1.5px solid #f59e0b;border-radius:10px;padding:1rem;margin-bottom:0.8rem;border-left:4px solid #f59e0b;}
-.hiw{max-width:700px;margin:0 auto;padding:0 1.2rem 2rem;}
-.hiwgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;}
-.hiwcard{background:white;border:1.5px solid var(--bdr);border-top:3px solid var(--red);border-radius:9px;padding:0.9rem;text-align:center;}
-/* INVOICE */
+.pending-card{background:white;border:1.5px solid #f59e0b;border-left:4px solid #f59e0b;border-radius:10px;padding:1rem;margin-bottom:0.8rem;}
+/* DOCUMENT STYLES (PDF) */
+.doc-wrap{max-width:800px;margin:0 auto;padding:1.2rem;}
+.doc-actions{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;}
+/* Quotation / Invoice PDF appearance */
+.pdf-doc{background:white;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:1rem;font-family:'Barlow',sans-serif;}
+.pdf-topbar{height:8px;background:var(--red);}
+.pdf-body{padding:2rem;}
+.pdf-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px solid var(--bdr);}
+.pdf-logo{font-family:'Barlow';font-weight:900;font-size:1.8rem;color:var(--dark);letter-spacing:-1px;}
+.pdf-logo span{color:var(--red);font-style:italic;}
+.pdf-logo-sub{font-size:0.68rem;color:var(--mut);font-family:'JetBrains Mono';margin-top:2px;}
+.pdf-right{text-align:right;}
+.pdf-doc-type{font-family:'Barlow';font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:2px;}
+.pdf-doc-type.quotation{color:var(--gold);}
+.pdf-doc-type.invoice{color:var(--red);}
+.pdf-doc-type.paid{color:var(--grn);}
+.pdf-ref{font-family:'JetBrains Mono';font-size:0.78rem;color:var(--mut);margin-top:4px;}
+.pdf-date{font-family:'JetBrains Mono';font-size:0.72rem;color:var(--mut);margin-top:2px;}
+.pdf-status-badge{margin-top:6px;display:inline-block;font-size:0.62rem;font-weight:700;padding:2px 10px;border-radius:4px;text-transform:uppercase;font-family:'JetBrains Mono';}
+.badge-quot{background:rgba(180,83,9,0.1);color:var(--gold);border:1px solid rgba(180,83,9,0.3);}
+.badge-paid{background:rgba(21,128,61,0.1);color:var(--grn);border:1px solid rgba(21,128,61,0.3);}
+.badge-pending{background:rgba(206,17,38,0.1);color:var(--red);border:1px solid rgba(206,17,38,0.3);}
+.pdf-parties{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
+.pdf-party-lbl{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;color:var(--mut);text-transform:uppercase;margin-bottom:5px;font-family:'JetBrains Mono';}
+.pdf-party-name{font-family:'Barlow';font-weight:700;font-size:0.92rem;}
+.pdf-party-detail{font-size:0.73rem;color:var(--mut);margin-top:2px;}
+.pdf-table{width:100%;border-collapse:collapse;margin-bottom:1.2rem;font-size:0.82rem;}
+.pdf-table thead tr{background:var(--dark);color:white;}
+.pdf-table th{padding:9px 12px;text-align:left;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono';}
+.pdf-table td{padding:10px 12px;border-bottom:1px solid var(--bdr);}
+.pdf-table tr:nth-child(even) td{background:#fafafa;}
+.pdf-totals{display:flex;justify-content:flex-end;margin-bottom:1rem;}
+.pdf-totals-box{min-width:270px;}
+.pdf-total-row{display:flex;justify-content:space-between;padding:5px 0;font-size:0.83rem;border-bottom:1px solid var(--bdr);}
+.pdf-total-row.grand{font-family:'Barlow';font-weight:900;font-size:1rem;padding-top:8px;margin-top:4px;border-top:2px solid var(--dark);border-bottom:none;}
+.pdf-benefit-box{background:var(--gold2);border:1.5px solid var(--gold);border-radius:9px;padding:1rem;margin-bottom:1rem;}
+.pdf-benefit-title{font-family:'Barlow';font-weight:700;font-size:0.85rem;color:var(--gold);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.05em;}
+.pdf-benefit-detail{font-size:0.8rem;color:#92400e;line-height:1.7;}
+.pdf-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.8rem;}
+.pdf-footer-note{font-size:0.68rem;color:var(--mut);line-height:1.6;}
+.pdf-bottombar{height:6px;background:var(--red);}
+/* GARAGE CUSTOMER INVOICE — clean, no margins visible */
+.cust-inv{background:white;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;font-family:'Barlow',sans-serif;}
+.cust-inv-topbar{height:8px;background:var(--dark);}
+.cust-inv-body{padding:2rem;}
+.cust-inv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px solid var(--bdr);}
+.cust-inv-garage-name{font-family:'Barlow';font-weight:900;font-size:1.5rem;color:var(--dark);}
+.cust-inv-garage-sub{font-size:0.72rem;color:var(--mut);margin-top:3px;}
+.cust-inv-right{text-align:right;}
+.cust-inv-title{font-family:'Barlow';font-weight:900;font-size:1.3rem;color:var(--dark);text-transform:uppercase;letter-spacing:2px;}
+.cust-inv-ref{font-family:'JetBrains Mono';font-size:0.75rem;color:var(--mut);margin-top:4px;}
+.cust-inv-bottombar{height:6px;background:var(--dark);}
+/* INVOICE TOOL */
 .inv-wrap{max-width:860px;margin:0 auto;padding:1.2rem;}
 .inv-lock{background:var(--dark);border-radius:12px;padding:2rem;text-align:center;border:2px solid var(--gold);}
 .ref-input{background:#1a1a1a;border:2px solid #333;border-radius:7px;padding:10px 14px;color:white;font-family:'JetBrains Mono';font-size:1rem;outline:none;flex:1;letter-spacing:0.1em;}
@@ -127,1063 +209,1102 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .ref-step{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.8rem;color:#888;}
 .ref-step:last-child{border-bottom:none;}
 .ref-step-num{width:22px;height:22px;border-radius:50%;background:var(--gold);color:white;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;flex-shrink:0;margin-top:1px;}
-.inv-hero{background:linear-gradient(135deg,var(--dark),var(--dark2));border-radius:12px;padding:1.2rem;margin-bottom:1rem;border-left:4px solid var(--gold);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-.inv-ref-badge{background:var(--gold);color:white;font-family:'JetBrains Mono';font-size:0.78rem;font-weight:700;padding:5px 12px;border-radius:6px;}
-.inv-doc{background:white;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:1rem;}
-.inv-doc-topbar{background:var(--red);height:8px;}
-.inv-doc-body{padding:2rem;}
-.inv-doc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px solid var(--bdr);}
-.inv-doc-logo{font-family:'Barlow';font-weight:900;font-size:1.8rem;color:var(--dark);letter-spacing:-1px;}
-.inv-doc-logo span{color:var(--red);font-style:italic;}
-.inv-doc-logo-sub{font-size:0.7rem;color:var(--mut);margin-top:2px;font-family:'JetBrains Mono';}
-.inv-doc-right{text-align:right;}
-.inv-doc-title{font-family:'Barlow';font-weight:900;font-size:1.4rem;color:var(--red);text-transform:uppercase;letter-spacing:2px;}
-.inv-doc-ref{font-family:'JetBrains Mono';font-size:0.78rem;color:var(--mut);margin-top:4px;}
-.inv-parties{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
-.inv-party-lbl{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;color:var(--mut);text-transform:uppercase;margin-bottom:5px;font-family:'JetBrains Mono';}
-.inv-party-name{font-family:'Barlow';font-weight:700;font-size:0.92rem;}
-.inv-party-detail{font-size:0.75rem;color:var(--mut);margin-top:2px;}
-.inv-table{width:100%;border-collapse:collapse;margin-bottom:1.2rem;font-size:0.82rem;}
-.inv-table thead tr{background:var(--dark);color:white;}
-.inv-table th{padding:9px 12px;text-align:left;font-size:0.67rem;text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono';}
-.inv-table td{padding:10px 12px;border-bottom:1px solid var(--bdr);}
-.inv-table tr:nth-child(even) td{background:#fafafa;}
-.inv-totals-box{min-width:260px;margin-left:auto;}
-.inv-total-row{display:flex;justify-content:space-between;padding:5px 0;font-size:0.83rem;border-bottom:1px solid var(--bdr);}
-.inv-total-row.grand{font-family:'Barlow';font-weight:900;font-size:1rem;padding-top:8px;margin-top:4px;border-top:2px solid var(--dark);border-bottom:none;}
-.inv-profit-private{margin-top:0.8rem;background:var(--grn2);border:1px solid var(--grn);border-radius:6px;padding:7px 12px;display:flex;justify-content:space-between;font-size:0.78rem;color:var(--grn);font-weight:700;}
-.inv-doc-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.8rem;}
-.inv-doc-footer-note{font-size:0.7rem;color:var(--mut);line-height:1.6;}
-.inv-doc-bottombar{background:var(--red);height:6px;}
-.inv-add-item{background:var(--surf2);border:2px dashed var(--bdr);border-radius:9px;padding:1rem;margin-bottom:0.8rem;}
-.inv-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;}
-.wasel-fee-note{background:#fef3c7;border:1px solid var(--gold);border-radius:7px;padding:0.75rem 1rem;font-size:0.78rem;color:var(--gold);font-weight:600;margin-bottom:0.8rem;}
+.inv-profit-note{background:var(--grn2);border:1px solid var(--grn);border-radius:7px;padding:0.75rem;font-size:0.78rem;color:var(--grn);font-weight:600;margin-bottom:0.8rem;}
 /* ADMIN */
 .admin-wrap{max-width:1100px;margin:0 auto;padding:1.2rem;}
 .admin-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:1.2rem;}
 .admin-stat{background:white;border-radius:8px;padding:0.8rem;border:1px solid var(--bdr);}
-.admin-stat-lbl{font-size:0.62rem;font-family:'JetBrains Mono';color:var(--mut);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+.admin-stat-lbl{font-size:0.6rem;font-family:'JetBrains Mono';color:var(--mut);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
 .admin-stat-val{font-family:'Barlow';font-weight:900;font-size:1rem;}
-.admin-log-row{padding:0.8rem 1.2rem;border-bottom:1px solid var(--bdr);font-size:0.78rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0.5rem;}
-.admin-log-row:last-child{border-bottom:none;}
-.admin-log-label{font-size:0.62rem;color:var(--mut);font-family:'JetBrains Mono';text-transform:uppercase;display:block;margin-bottom:1px;}
-@media print{.nav,.apptabs,.inv-lock,.inv-hero,.inv-actions,.wasel-fee-note,.inv-add-item,.inv-profit-private{display:none!important;}.inv-doc{border:none;}}
-@media(max-width:520px){.srow,.fgrid,.hiwgrid,.inv-parties,.admin-summary{grid-template-columns:1fr;}.apptab .tabico{display:none;}.inv-doc-header{flex-direction:column;}.inv-doc-right{text-align:left;}.inv-totals-box{min-width:100%;}}
+.admin-qt-row{padding:0.8rem 1.2rem;border-bottom:1px solid var(--bdr);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.5rem;align-items:center;}
+.admin-qt-row:last-child{border-bottom:none;}
+.admin-lbl{font-size:0.6rem;color:var(--mut);font-family:'JetBrains Mono';text-transform:uppercase;display:block;margin-bottom:1px;}
+/* TOAST */
+.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--dark);color:white;padding:0.8rem 1.1rem;border-radius:8px;font-size:0.8rem;z-index:9999;animation:su 0.25s ease;border-left:3px solid var(--red);font-weight:600;max-width:300px;}
+@keyframes su{from{transform:translateY(16px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+/* MEMBER LOCK BANNER */
+.lock-banner{background:var(--dark2);border:1.5px solid var(--gold);border-radius:10px;padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+.lock-banner-text{color:white;font-size:0.85rem;font-weight:600;}
+.lock-banner-sub{color:#888;font-size:0.75rem;margin-top:2px;}
+/* PRINT */
+@media print{
+  .nav,.apptabs,.doc-actions,.inv-wrap .btn,.admin-wrap,.lock-banner,.inv-profit-note{display:none!important;}
+  .pdf-doc,.cust-inv{border:none;box-shadow:none;}
+  body{background:white;}
+}
+@media(max-width:520px){
+  .srow,.fgrid,.pdf-parties,.admin-summary{grid-template-columns:1fr;}
+  .apptab .tabico{display:none;}
+  .pdf-header,.cust-inv-header{flex-direction:column;}
+  .pdf-right,.cust-inv-right{text-align:left;}
+  .pdf-totals{justify-content:flex-start;}
+  .pdf-totals-box{min-width:100%;}
+}
 </style>
 </head>
 <body>
-
 <div id="app"></div>
-
 <script>
-// ─── DATA ──────────────────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════
+// WASEL AUTO — COMPLETE PLATFORM
+// ══════════════════════════════════════════════════════════════════════
+
+// ── MEMBER PINS (you send these to garages via WhatsApp) ─────────────
+// Format: { pin: "XXXX", garageName: "...", phone: "..." }
+var MEMBER_PINS = [
+  { pin: "1234", garageName: "Demo Garage — Test Account", phone: "+973 0000 0000", memberSince: "July 2026", tier: "Demo" },
+  { pin: "5678", garageName: "VIP Auto Garage", phone: "+973 1749 0211", memberSince: "July 2026", tier: "Member" },
+];
+
+// ── PARTS DATA ────────────────────────────────────────────────────────
 var PARTS = [
-  {id:1,name:"Toyota Genuine Oil Filter",nameAr:"فلتر زيت تويوتا أصلي",cat:"Filters",make:"Toyota",model:"Land Cruiser",yf:2018,yt:2025,price:4.800,type:"Genuine",brand:"Toyota",qty:24,warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:2,name:"Nissan Genuine Brake Pads Front",nameAr:"تيل فرامل نيسان أصلي أمامي",cat:"Brakes",make:"Nissan",model:"Patrol",yf:2016,yt:2025,price:38.500,type:"Genuine",brand:"Nissan",qty:12,warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:3,name:"BMW Genuine Alternator 180A",nameAr:"دينامو BMW أصلي 180A",cat:"Electronics",make:"BMW",model:"X5",yf:2019,yt:2024,price:285.000,type:"Genuine",brand:"BMW",qty:3,warranty:"24 months",warrantyAr:"24 شهر"},
-  {id:4,name:"Mercedes Genuine Radiator",nameAr:"رادياتور مرسيدس أصلي",cat:"Cooling",make:"Mercedes",model:"C-Class",yf:2018,yt:2023,price:320.000,type:"Genuine",brand:"Mercedes-Benz",qty:2,warranty:"24 months",warrantyAr:"24 شهر"},
-  {id:5,name:"Honda Genuine Timing Belt Kit",nameAr:"طقم تايمنغ هوندا أصلي",cat:"Engine",make:"Honda",model:"CR-V",yf:2017,yt:2022,price:95.000,type:"Genuine",brand:"Honda",qty:6,warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:6,name:"Bosch Brake Pads — All Makes",nameAr:"تيل فرامل بوش جميع الماركات",cat:"Brakes",make:"Toyota",model:"Corolla",yf:2015,yt:2024,price:12.900,type:"Aftermarket",brand:"Bosch",qty:30,warranty:"6 months",warrantyAr:"6 أشهر"},
-  {id:7,name:"Denso Spark Plugs Set 4x",nameAr:"شمعات دنسو طقم 4 حبة",cat:"Engine",make:"Nissan",model:"Altima",yf:2014,yt:2023,price:8.500,type:"Aftermarket",brand:"Denso",qty:40,warranty:"6 months",warrantyAr:"6 أشهر"},
-  {id:8,name:"Mann Air Filter Premium",nameAr:"فلتر هواء مان بريميوم",cat:"Filters",make:"BMW",model:"3 Series",yf:2017,yt:2024,price:9.800,type:"Aftermarket",brand:"Mann",qty:18,warranty:"6 months",warrantyAr:"6 أشهر"},
-  {id:9,name:"Gates Timing Belt",nameAr:"تايمنغ بيلت جيتس",cat:"Engine",make:"Honda",model:"Civic",yf:2016,yt:2022,price:22.000,type:"Aftermarket",brand:"Gates",qty:10,warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:10,name:"TRW Front Shock Absorbers Pair",nameAr:"امورتيزير أمامي TRW زوج",cat:"Suspension",make:"Mercedes",model:"E-Class",yf:2016,yt:2023,price:78.000,type:"Aftermarket",brand:"TRW",qty:5,warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:11,name:"Toyota Suspension Kit Front",nameAr:"طقم مقص تويوتا أمامي",cat:"Suspension",make:"Toyota",model:"Camry",yf:2018,yt:2024,price:145.000,type:"Genuine",brand:"Toyota",qty:4,warranty:"12 months",warrantyAr:"12 شهر"},
-  {id:12,name:"Castrol GTX 5W-40 Engine Oil 4L",nameAr:"زيت محرك كاسترول GTX 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,price:6.500,type:"Aftermarket",brand:"Castrol",qty:50,warranty:"N/A",warrantyAr:"—"},
-  {id:13,name:"Toyota Coolant Antifreeze 1L",nameAr:"سائل تبريد تويوتا 1 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2005,yt:2025,price:2.800,type:"Genuine",brand:"Toyota",qty:30,warranty:"N/A",warrantyAr:"—"},
-  {id:14,name:"Front Bumper — Toyota Camry 2019",nameAr:"بمبر أمامي تويوتا كامري 2019",cat:"Body Parts",make:"Toyota",model:"Camry",yf:2019,yt:2021,price:85.000,type:"Genuine",brand:"Toyota",qty:2,warranty:"3 months",warrantyAr:"3 أشهر"},
-  {id:15,name:"Right Front Door — Nissan Patrol",nameAr:"باب أمامي يمين نيسان باترول",cat:"Body Parts",make:"Nissan",model:"Patrol",yf:2016,yt:2020,price:220.000,type:"Genuine",brand:"Nissan",qty:1,warranty:"3 months",warrantyAr:"3 أشهر"},
-  {id:16,name:"Mobil 1 5W-30 Full Synthetic 4L",nameAr:"زيت موبيل 1 تخليقي كامل 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,price:9.200,type:"Aftermarket",brand:"Mobil",qty:24,warranty:"N/A",warrantyAr:"—"},
+  {id:1,name:"Toyota Genuine Oil Filter",nameAr:"فلتر زيت تويوتا أصلي",cat:"Filters",make:"Toyota",model:"Land Cruiser",yf:2018,yt:2025,waselPrice:4.800,retailPrice:5.500,type:"Genuine",brand:"Toyota",qty:24,warranty:"12 months"},
+  {id:2,name:"Nissan Genuine Brake Pads Front",nameAr:"تيل فرامل نيسان أصلي أمامي",cat:"Brakes",make:"Nissan",model:"Patrol",yf:2016,yt:2025,waselPrice:38.500,retailPrice:45.000,type:"Genuine",brand:"Nissan",qty:12,warranty:"12 months"},
+  {id:3,name:"BMW Genuine Alternator 180A",nameAr:"دينامو BMW أصلي 180A",cat:"Electronics",make:"BMW",model:"X5",yf:2019,yt:2024,waselPrice:285.000,retailPrice:330.000,type:"Genuine",brand:"BMW",qty:3,warranty:"24 months"},
+  {id:4,name:"Mercedes Genuine Radiator",nameAr:"رادياتور مرسيدس أصلي",cat:"Cooling",make:"Mercedes",model:"C-Class",yf:2018,yt:2023,waselPrice:320.000,retailPrice:380.000,type:"Genuine",brand:"Mercedes-Benz",qty:2,warranty:"24 months"},
+  {id:5,name:"Honda Genuine Timing Belt Kit",nameAr:"طقم تايمنغ هوندا أصلي",cat:"Engine",make:"Honda",model:"CR-V",yf:2017,yt:2022,waselPrice:95.000,retailPrice:115.000,type:"Genuine",brand:"Honda",qty:6,warranty:"12 months"},
+  {id:6,name:"Bosch Brake Pads — All Makes",nameAr:"تيل فرامل بوش جميع الماركات",cat:"Brakes",make:"Toyota",model:"Corolla",yf:2015,yt:2024,waselPrice:12.900,retailPrice:16.000,type:"Aftermarket",brand:"Bosch",qty:30,warranty:"6 months"},
+  {id:7,name:"Denso Spark Plugs Set 4x",nameAr:"شمعات دنسو طقم 4 حبة",cat:"Engine",make:"Nissan",model:"Altima",yf:2014,yt:2023,waselPrice:8.500,retailPrice:11.000,type:"Aftermarket",brand:"Denso",qty:40,warranty:"6 months"},
+  {id:8,name:"Mann Air Filter Premium",nameAr:"فلتر هواء مان بريميوم",cat:"Filters",make:"BMW",model:"3 Series",yf:2017,yt:2024,waselPrice:9.800,retailPrice:12.500,type:"Aftermarket",brand:"Mann",qty:18,warranty:"6 months"},
+  {id:9,name:"Gates Timing Belt",nameAr:"تايمنغ بيلت جيتس",cat:"Engine",make:"Honda",model:"Civic",yf:2016,yt:2022,waselPrice:22.000,retailPrice:27.000,type:"Aftermarket",brand:"Gates",qty:10,warranty:"12 months"},
+  {id:10,name:"TRW Front Shock Absorbers Pair",nameAr:"امورتيزير أمامي TRW زوج",cat:"Suspension",make:"Mercedes",model:"E-Class",yf:2016,yt:2023,waselPrice:78.000,retailPrice:95.000,type:"Aftermarket",brand:"TRW",qty:5,warranty:"12 months"},
+  {id:11,name:"Toyota Suspension Kit Front",nameAr:"طقم مقص تويوتا أمامي",cat:"Suspension",make:"Toyota",model:"Camry",yf:2018,yt:2024,waselPrice:145.000,retailPrice:175.000,type:"Genuine",brand:"Toyota",qty:4,warranty:"12 months"},
+  {id:12,name:"Castrol GTX 5W-40 Engine Oil 4L",nameAr:"زيت محرك كاسترول GTX 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,waselPrice:6.500,retailPrice:8.000,type:"Aftermarket",brand:"Castrol",qty:50,warranty:"N/A"},
+  {id:13,name:"Toyota Coolant Antifreeze 1L",nameAr:"سائل تبريد تويوتا 1 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2005,yt:2025,waselPrice:2.800,retailPrice:3.500,type:"Genuine",brand:"Toyota",qty:30,warranty:"N/A"},
+  {id:14,name:"Front Bumper — Toyota Camry 2019",nameAr:"بمبر أمامي تويوتا كامري 2019",cat:"Body Parts",make:"Toyota",model:"Camry",yf:2019,yt:2021,waselPrice:85.000,retailPrice:105.000,type:"Genuine",brand:"Toyota",qty:2,warranty:"3 months"},
+  {id:15,name:"Right Front Door — Nissan Patrol",nameAr:"باب أمامي يمين نيسان باترول",cat:"Body Parts",make:"Nissan",model:"Patrol",yf:2016,yt:2020,waselPrice:220.000,retailPrice:270.000,type:"Genuine",brand:"Nissan",qty:1,warranty:"3 months"},
+  {id:16,name:"Mobil 1 5W-30 Full Synthetic 4L",nameAr:"زيت موبيل 1 تخليقي كامل 4 لتر",cat:"Oils & Fluids",make:"Universal",model:"All",yf:2000,yt:2025,waselPrice:9.200,retailPrice:11.500,type:"Aftermarket",brand:"Mobil",qty:24,warranty:"N/A"},
 ];
 
 var CATS = ["All","Engine","Brakes","Filters","Oils & Fluids","Suspension","Body Parts","Cooling","Electronics"];
-var CATS_AR = ["الكل","المحرك","الفرامل","الفلاتر","زيوت وسوائل","التعليق","قطع الهيكل","التبريد","الكهرباء"];
 var PTYPES = ["All Types","Genuine","Aftermarket"];
-var PTYPES_AR = ["جميع الأنواع","أصلي","بديل"];
 var MAKES = ["All Makes","Toyota","Nissan","BMW","Mercedes","Honda","Ford"];
-var MAKES_AR = ["جميع الماركات","تويوتا","نيسان","BMW","مرسيدس","هوندا","فورد"];
 
-// ─── STATE ─────────────────────────────────────────────────────────────────────
-var state = {
-  ar: false, tab: "search",
-  parts: PARTS, pending: [],
-  cat: "All", ptype: "All Types", make: "All Makes", srch: "",
-  selPart: null, toast: null,
-  vin: "", desc: "", imgSrc: null, imgB64: null, drag: false,
-  aiRes: null, aiLoad: false, hls: [], showRFQ: false,
+// ── HELPERS ───────────────────────────────────────────────────────────
+function genRef(prefix){
+  var now=new Date();
+  var y=now.getFullYear().toString().slice(-2);
+  var m=String(now.getMonth()+1).padStart(2,"0");
+  var d=String(now.getDate()).padStart(2,"0");
+  return (prefix||"WA")+"-"+y+m+d+"-"+Math.floor(Math.random()*9000+1000);
+}
+function today(){ return new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase(); }
+function fmtBHD(n){ return Number(n).toFixed(3)+" BHD"; }
+function getLog(k){ try{return JSON.parse(localStorage.getItem(k)||"[]");}catch(e){return[];} }
+function saveLog(k,d){ try{localStorage.setItem(k,JSON.stringify(d.slice(0,200)));}catch(e){} }
+
+// ── STATE ─────────────────────────────────────────────────────────────
+var S = {
+  ar:false, tab:"search",
+  // member
+  member:null, pinInput:["","","",""], pinError:"", showLoginModal:false,
+  // parts/filter
+  parts:PARTS, cat:"All", ptype:"All Types", make:"All Makes", srch:"",
+  // cart
+  cart:[], // [{part, qty}]
+  // ai search
+  vin:"", desc:"", imgSrc:null, imgB64:null, drag:false,
+  aiRes:null, aiLoad:false, hls:[], showRFQ:false,
   rfqPart:"", rfqMake:"", rfqModel:"", rfqPhone:"", rfqUrgent:false, rfqSent:false,
-  supForm: {name:"",nameAr:"",brand:"",make:"",model:"",yf:"",yt:"",price:"",type:"Genuine",cat:"Engine",qty:"",warranty:"12 months",phone:""},
-  invUnlocked: false, invRef: "", invRefInput: "", invRefError: "",
-  invNum: "WAI-" + Date.now().toString().slice(-6),
-  invGarage: {name:"",phone:"",vehicle:"",plate:""},
-  invItems: [], invNote: "", invNewDesc:"", invNewCost:"", invNewMargin:"20", invNewQty:"1",
-  invLogged: false, preloadParts: [],
-  adminAuth: false, adminPw: "", adminLog: [], genRef: "", generatedRefs: [],
+  // part modal
+  selPart:null,
+  // quotation
+  quotations:[], // stored quotations
+  activeQuotation:null,
+  // invoice tool (garage margin)
+  invUnlocked:false, invRefInput:"", invRefError:"", invRef:"", invNum:"",
+  invGarage:{name:"",phone:"",vehicle:"",plate:""},
+  invItems:[], invNote:"", invNewDesc:"", invNewCost:"", invNewMargin:"20", invNewQty:"1",
+  invLogged:false, preloadParts:[],
+  // supplier form
+  supForm:{name:"",nameAr:"",brand:"",make:"",model:"",yf:"",yt:"",price:"",type:"Genuine",cat:"Engine",qty:"",warranty:"12 months",phone:""},
+  pending:[],
+  // admin
+  adminAuth:false, adminPw:"", adminGenRef:"", adminGenRefs:[],
+  toast:null,
+  // checkout
+  checkoutStep:0, // 0=cart, 1=details, 2=quotation generated
+  checkoutGarage:{name:"",phone:"",vehicle:"",notes:""},
+  checkoutDelivery:"pickup",
+  activeQT:null,
 };
 
-function generateRef() {
-  var now = new Date();
-  var y = now.getFullYear().toString().slice(-2);
-  var m = String(now.getMonth()+1).padStart(2,"0");
-  var d = String(now.getDate()).padStart(2,"0");
-  var rand = Math.floor(Math.random()*9000+1000);
-  return "WA-" + y + m + d + "-" + rand;
-}
+S.pending=getLog("wasel_pending_parts");
+S.quotations=getLog("wasel_quotations");
 
-function getInvLog() { try { return JSON.parse(localStorage.getItem("wasel_inv_log")||"[]"); } catch(e) { return []; } }
-function saveInvLog(l) { try { localStorage.setItem("wasel_inv_log", JSON.stringify(l.slice(0,200))); } catch(e) {} }
-function logInvoice(data) {
-  var log = getInvLog();
-  log.unshift(Object.assign({}, data, {at: new Date().toLocaleString()}));
-  saveInvLog(log);
-}
+function showToast(m){S.toast=m;render();setTimeout(function(){S.toast=null;render();},3000);}
 
-// ─── RENDER ────────────────────────────────────────────────────────────────────
-function t(en, ar) { return state.ar ? ar : en; }
-
-function el(tag, attrs, children) {
-  var e = document.createElement(tag);
-  if (attrs) {
-    Object.keys(attrs).forEach(function(k) {
-      if (k === "className") e.className = attrs[k];
-      else if (k === "style" && typeof attrs[k] === "object") Object.assign(e.style, attrs[k]);
-      else if (k.startsWith("on") && typeof attrs[k] === "function") e.addEventListener(k.slice(2).toLowerCase(), attrs[k]);
-      else if (k === "href") e.href = attrs[k];
-      else if (k === "target") e.target = attrs[k];
-      else if (k === "rel") e.rel = attrs[k];
-      else if (k === "type" && (tag==="input"||tag==="button")) e.type = attrs[k];
-      else if (k === "placeholder") e.placeholder = attrs[k];
-      else if (k === "value") e.value = attrs[k];
-      else if (k === "disabled") e.disabled = attrs[k];
-      else if (k === "dir") e.dir = attrs[k];
-      else if (k === "rows") e.rows = attrs[k];
-      else if (k === "checked") e.checked = attrs[k];
-      else e.setAttribute(k, attrs[k]);
+// ── DOM HELPERS ───────────────────────────────────────────────────────
+function el(tag,attrs,children){
+  var e=document.createElement(tag);
+  if(attrs){
+    Object.keys(attrs).forEach(function(k){
+      if(k==="className")e.className=attrs[k];
+      else if(k==="style"&&typeof attrs[k]==="object")Object.assign(e.style,attrs[k]);
+      else if(k.startsWith("on")&&typeof attrs[k]==="function")e.addEventListener(k.slice(2).toLowerCase(),attrs[k]);
+      else if(["href","target","rel","placeholder","type","dir","rows","maxlength","step","min","max","accept"].includes(k))e.setAttribute(k,attrs[k]);
+      else if(k==="value")e.value=attrs[k];
+      else if(k==="disabled")e.disabled=attrs[k];
+      else if(k==="checked")e.checked=attrs[k];
+      else e.setAttribute(k,attrs[k]);
     });
   }
-  if (children) {
-    (Array.isArray(children) ? children : [children]).forEach(function(c) {
-      if (c === null || c === undefined || c === false) return;
-      if (typeof c === "string" || typeof c === "number") e.appendChild(document.createTextNode(c));
-      else e.appendChild(c);
-    });
-  }
-  return e;
-}
-
-function div(cls, children, extra) {
-  return el("div", Object.assign({className: cls||""}, extra||{}), children);
-}
-
-function span(cls, text, extra) {
-  return el("span", Object.assign({className: cls||""}, extra||{}), [text]);
-}
-
-function btn(cls, text, onclick, disabled) {
-  return el("button", {className:"btn " + (cls||""), onClick: onclick, disabled: !!disabled}, [text]);
-}
-
-function inp(cls, placeholder, value, onchange, extra) {
-  var attrs = Object.assign({className:"ifield " + (cls||""), placeholder: placeholder||"", value: value||""}, extra||{});
-  var e = el("input", attrs);
-  if (onchange) e.addEventListener("input", function() { onchange(e.value); });
-  return e;
-}
-
-function sel(cls, options, value, onchange) {
-  var e = el("select", {className: "sel " + (cls||"")});
-  options.forEach(function(o) {
-    var opt = el("option", {value: o.val !== undefined ? o.val : o.label}, [o.label]);
-    if ((o.val !== undefined ? o.val : o.label) === value) opt.selected = true;
-    e.appendChild(opt);
+  if(children)(Array.isArray(children)?children:[children]).forEach(function(c){
+    if(c==null||c===false)return;
+    if(typeof c==="string"||typeof c==="number")e.appendChild(document.createTextNode(String(c)));
+    else e.appendChild(c);
   });
-  e.addEventListener("change", function() { onchange(e.value); });
   return e;
 }
-
-function pill(cls, text, onclick, active) {
-  var e = el("button", {className: "pill" + (active?" on":"") + " " + (cls||""), onClick: onclick}, [text]);
+function div(cls,children,extra){return el("div",Object.assign({className:cls||""},extra||{}),children);}
+function span(cls,txt,extra){return el("span",Object.assign({className:cls||""},extra||{}),[txt]);}
+function btn(cls,txt,onclick,disabled){return el("button",{className:"btn "+(cls||""),onClick:onclick,disabled:!!disabled},[txt]);}
+function inp(cls,ph,val,onchange,extra){
+  var e=el("input",Object.assign({className:"ifield "+(cls||""),placeholder:ph||"",value:val||""},extra||{}));
+  if(onchange)e.addEventListener("input",function(){onchange(e.value);});
   return e;
 }
-
-function ig(labelText, input) {
-  var d = div("ig");
-  d.appendChild(el("label", {className:"il"}, [labelText]));
-  d.appendChild(input);
-  return d;
+function seldrop(cls,opts,val,onchange){
+  var e=el("select",{className:"sel "+(cls||"")});
+  opts.forEach(function(o){var opt=el("option",{value:o.val!==undefined?o.val:o.label},[o.label]);if((o.val!==undefined?o.val:o.label)===val)opt.selected=true;e.appendChild(opt);});
+  e.addEventListener("change",function(){onchange(e.value);});
+  return e;
 }
+function ig(lbl,input){var d=div("ig");d.appendChild(el("label",{className:"il"},[lbl]));d.appendChild(input);return d;}
+function pill(txt,onclick,active){return el("button",{className:"pill"+(active?" on":""),onClick:onclick},[txt]);}
+function fsecT(txt){return el("div",{className:"fsec-t"},[txt]);}
 
-function showToast(msg) {
-  state.toast = msg;
-  render();
-  setTimeout(function() { state.toast = null; render(); }, 3000);
-}
-
-function render() {
-  var app = document.getElementById("app");
-  app.innerHTML = "";
-  app.dir = state.ar ? "rtl" : "ltr";
-  app.style.fontFamily = state.ar ? "'Cairo', sans-serif" : "'Barlow', sans-serif";
-
+// ── RENDER ────────────────────────────────────────────────────────────
+function render(){
+  var app=document.getElementById("app");
+  app.innerHTML="";
+  app.dir=S.ar?"rtl":"ltr";
   // NAV
-  var nav = el("nav", {className:"nav", dir:"ltr"});
-  var logo = el("a", {href:"#", className:"logo", onClick:function(e){e.preventDefault();state.tab="search";render();}});
-  logo.appendChild(span("lw","Wasel"));
-  logo.appendChild(span("la","Auto"));
+  var nav=el("nav",{className:"nav",dir:"ltr"});
+  var logo=el("a",{href:"#",className:"logo",onClick:function(e){e.preventDefault();S.tab="search";render();}});
+  logo.appendChild(span("lw","Wasel"));logo.appendChild(span("la","Auto"));
   nav.appendChild(logo);
-  var navActs = div("nav-actions");
-  var langBtn = el("button", {className:"lang-btn", onClick:function(){state.ar=!state.ar;render();}}, [state.ar?"English":"عربي"]);
-  navActs.appendChild(langBtn);
-  var regBtn = el("a", {href:"/loi.html", className:"btn btn-r btn-sm"}, [t("Register Interest","سجّل اهتمامك")]);
-  navActs.appendChild(regBtn);
-  nav.appendChild(navActs);
+  var nr=div("nav-right");
+  nr.appendChild(el("button",{className:"lang-btn",onClick:function(){S.ar=!S.ar;render();}},[S.ar?"English":"عربي"]));
+  if(S.member){
+    // cart button
+    var cc=S.cart.reduce(function(a,i){return a+i.qty;},0);
+    var cb=el("button",{className:"cart-btn",onClick:function(){S.tab="cart";render();}},["🛒 Cart",cc>0?el("span",{className:"cart-count"},[cc]):null]);
+    nr.appendChild(cb);
+    nr.appendChild(el("span",{style:{color:"#4ade80",fontSize:"0.72rem",fontFamily:"'JetBrains Mono'",fontWeight:"700"}},["✓ "+S.member.garageName.split(" ")[0]]));
+    nr.appendChild(el("button",{className:"btn btn-gh btn-sm",onClick:function(){S.member=null;S.cart=[];render();}},["Logout"]));
+  } else {
+    nr.appendChild(el("button",{className:"btn btn-gold btn-sm",onClick:function(){S.showLoginModal=true;render();}},["🔐 Member Login"]));
+  }
+  nr.appendChild(el("a",{href:"/loi.html",className:"btn btn-r btn-sm"},["Register Interest"]));
+  nav.appendChild(nr);
   app.appendChild(nav);
-
   // TABS
-  var tabs = div("apptabs");
-  var tabDefs = [
-    ["search","🔍",t("Find Parts","ابحث")],
-    ["browse","🏪",t("All Parts","القطع")],
-    ["supplier","➕",t("List Parts","أضف")],
-    ["invoice","🧾",t("Invoice","فاتورة")],
-    ["admin","⚙️","Admin"],
-  ];
-  tabDefs.forEach(function(td) {
-    var tb = el("button", {className:"apptab" + (state.tab===td[0]?" on":""), onClick:function(){state.tab=td[0];render();}});
-    tb.appendChild(el("span",{className:"tabico"},[td[1]]));
-    tb.appendChild(document.createTextNode(td[2]));
+  var tabs=div("apptabs");
+  var td=[["search","🔍","Find Parts"],["browse","🏪","All Parts"],["supplier","➕","List Parts"]];
+  if(S.member)td.push(["cart","🛒","Cart"+(S.cart.length>0?" ("+S.cart.reduce(function(a,i){return a+i.qty;},0)+")":"")],["invoices","🧾","My Invoices"]);
+  td.push(["admin","⚙️","Admin"]);
+  td.forEach(function(t){
+    var tb=el("button",{className:"apptab"+(S.tab===t[0]?" on":""),onClick:function(){S.tab=t[0];render();}});
+    tb.appendChild(el("span",{className:"tabico"},[t[1]]));
+    tb.appendChild(document.createTextNode(t[2]));
     tabs.appendChild(tb);
   });
   app.appendChild(tabs);
-
-  // PAGE CONTENT
-  if (state.tab === "search") app.appendChild(renderSearch());
-  if (state.tab === "browse") app.appendChild(renderBrowse());
-  if (state.tab === "supplier") app.appendChild(renderSupplier());
-  if (state.tab === "invoice") app.appendChild(renderInvoice());
-  if (state.tab === "admin") app.appendChild(renderAdmin());
-
-  // MODAL
-  if (state.selPart) app.appendChild(renderModal(state.selPart));
-
-  // TOAST
-  if (state.toast) {
-    var toastEl = div("toast", [state.toast]);
-    app.appendChild(toastEl);
-  }
+  // PAGE
+  if(S.tab==="search")app.appendChild(renderSearch());
+  else if(S.tab==="browse")app.appendChild(renderBrowse());
+  else if(S.tab==="supplier")app.appendChild(renderSupplier());
+  else if(S.tab==="cart")app.appendChild(renderCart());
+  else if(S.tab==="invoices")app.appendChild(renderInvoices());
+  else if(S.tab==="admin")app.appendChild(renderAdmin());
+  // MODALS
+  if(S.showLoginModal)app.appendChild(renderLoginModal());
+  if(S.selPart)app.appendChild(renderPartModal(S.selPart));
+  if(S.toast){var t=div("toast",[S.toast]);app.appendChild(t);}
 }
 
-// ─── SEARCH TAB ────────────────────────────────────────────────────────────────
-function renderSearch() {
-  var wrap = div("");
-
-  // Hero
-  var hero = div("shero");
-  var inner = div("shero-inner");
-  inner.appendChild(div("shero-title", [t("Find Any Car Part in Bahrain","ابحث عن أي قطعة غيار في البحرين")]));
-  inner.appendChild(div("shero-sub", [t("Enter VIN, describe the part, or upload a photo — we find it instantly","أدخل رقم الشاسيه، صف القطعة، أو ارفع صورة — نجدها فوراً")]));
-
-  var sbox = div("sbox");
-  var srow = div("srow");
-
-  var vinInput = inp("", t("e.g. JTDZN3EU0E329","مثال: JTDZN3EU0E329"), state.vin, function(v){state.vin=v;});
-  vinInput.addEventListener("keydown", function(e){if(e.key==="Enter")doAISearch();});
-  srow.appendChild(ig(t("🚗 VIN / Chassis Number","🚗 رقم الشاسيه"), vinInput));
-
-  var descInput = inp("", t("e.g. front brake pads","مثال: تيل فرامل أمامي"), state.desc, function(v){state.desc=v;});
-  descInput.addEventListener("keydown", function(e){if(e.key==="Enter")doAISearch();});
-  srow.appendChild(ig(t("📝 Part Description","📝 وصف القطعة"), descInput));
-  sbox.appendChild(srow);
-
-  // Drop zone
-  var dzLabel = el("label", {className:"il"}, [t("📷 Part Photo (optional)","📷 صورة القطعة (اختياري)")]);
-  sbox.appendChild(dzLabel);
-  var fileInp = el("input", {type:"file", style:{display:"none"}});
-  var dzone = div("dzone" + (state.drag?" drag":""));
-  if (state.imgSrc) {
-    dzone.appendChild(el("img", {src:state.imgSrc, style:{maxHeight:"110px",borderRadius:"7px",objectFit:"cover"}}));
-  } else {
-    dzone.appendChild(div("", [el("div",{style:{fontSize:"1.6rem"}},["📷"]), el("div",{style:{color:"var(--mut)",fontSize:"0.77rem",marginTop:"5px"}},[t("Drop photo here or tap to browse","اسحب صورة هنا أو اضغط للاختيار")])]));
+// ── LOGIN MODAL ───────────────────────────────────────────────────────
+function renderLoginModal(){
+  var ov=div("ov");
+  ov.addEventListener("click",function(){S.showLoginModal=false;S.pinError="";render();});
+  var box=div("member-gate");
+  box.addEventListener("click",function(e){e.stopPropagation();});
+  box.appendChild(el("div",{style:{fontSize:"2.5rem",marginBottom:"0.8rem"}},["🔐"]));
+  box.appendChild(el("h2",{},[S.ar?"تسجيل دخول الأعضاء":"Member Garage Login"]));
+  box.appendChild(el("p",{},[S.ar?"أدخل رمز PIN الخاص بك المرسل من وصل أوتو عبر واتساب":"Enter your 4-digit PIN sent by Wasel Auto via WhatsApp"]));
+  // Garage name
+  var garNameInp=inp("",S.ar?"اسم الورشة":"Your Garage Name","",function(v){S._loginGarage=v;});
+  garNameInp.style.textAlign="center";garNameInp.style.marginBottom="0.8rem";garNameInp.style.background="#1a1a1a";garNameInp.style.border="2px solid #333";garNameInp.style.color="white";garNameInp.style.borderRadius="9px";
+  box.appendChild(garNameInp);
+  // PIN inputs
+  var pinRow=div("pin-inputs");
+  var pinEls=[];
+  for(var i=0;i<4;i++){
+    (function(idx){
+      var pi=el("input",{className:"pin-input",type:"tel",maxlength:"1",value:S.pinInput[idx]||""});
+      pi.addEventListener("input",function(){
+        var v=pi.value.replace(/\D/g,"").slice(-1);
+        S.pinInput[idx]=v;pi.value=v;
+        if(v&&idx<3)pinEls[idx+1].focus();
+      });
+      pi.addEventListener("keydown",function(e){if(e.key==="Backspace"&&!S.pinInput[idx]&&idx>0){S.pinInput[idx-1]="";pinEls[idx-1].focus();render();}});
+      pinEls.push(pi);
+      pinRow.appendChild(pi);
+    })(i);
   }
-  dzone.addEventListener("click", function(){fileInp.click();});
-  dzone.addEventListener("dragover", function(e){e.preventDefault();state.drag=true;render();});
-  dzone.addEventListener("dragleave", function(){state.drag=false;render();});
-  dzone.addEventListener("drop", function(e){e.preventDefault();handleImageFile(e.dataTransfer.files[0]);});
-  fileInp.addEventListener("change", function(){handleImageFile(fileInp.files[0]);});
-  sbox.appendChild(dzone);
-  sbox.appendChild(fileInp);
-
-  // Buttons
-  var btnRow = div("", null, {style:{display:"flex",gap:"7px",marginTop:"0.8rem"}});
-  var searchBtn = el("button", {
-    className:"btn btn-r btn-lg btn-full",
-    disabled: state.aiLoad || (!state.vin && !state.desc && !state.imgB64),
-    onClick: doAISearch
-  }, [state.aiLoad ? t("Searching…","جارٍ البحث…") : t("🔍 Find This Part","🔍 ابحث عن القطعة")]);
-  btnRow.appendChild(searchBtn);
-  if (state.vin||state.desc||state.imgSrc) {
-    btnRow.appendChild(btn("btn-gh", t("Clear","مسح"), function(){state.vin="";state.desc="";state.imgSrc=null;state.imgB64=null;state.aiRes=null;state.hls=[];state.showRFQ=false;render();}));
-  }
-  sbox.appendChild(btnRow);
-
-  if (state.aiLoad) {
-    var loadEl = div("loading", [el("div",{className:"spin"}), t("Searching Bahrain parts network…","البحث في شبكة القطع بالبحرين…")]);
-    sbox.appendChild(loadEl);
-  }
-
-  if (state.aiRes) {
-    var aibox = div("aibox", null, {dir:"ltr"});
-    var aiTop = div("", null, {style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}});
-    var aiLeft = div("");
-    aiLeft.appendChild(el("div",{style:{fontSize:".6rem",color:"#666",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}},["AI IDENTIFIED"]));
-    aiLeft.appendChild(div("ainm", [state.ar ? (state.aiRes.partNameAr||state.aiRes.partName) : state.aiRes.partName]));
-    aiTop.appendChild(aiLeft);
-    var conf = state.aiRes.confidence||"medium";
-    aiTop.appendChild(el("span",{className:"aiconf "+conf},[conf]));
-    aibox.appendChild(aiTop);
-    var tags = div("aitags");
-    (state.aiRes.makes||[]).forEach(function(m){tags.appendChild(el("span",{className:"aitag"},["🚘 "+m]));});
-    (state.aiRes.models||[]).forEach(function(m){tags.appendChild(el("span",{className:"aitag"},["📋 "+m]));});
-    if (state.aiRes.yearRange) tags.appendChild(el("span",{className:"aitag"},["📅 "+state.aiRes.yearRange.from+"–"+state.aiRes.yearRange.to]));
-    aibox.appendChild(tags);
-    var notes = state.ar ? state.aiRes.notesAr : state.aiRes.notes;
-    if (notes) aibox.appendChild(div("ainotes",["💡 "+notes]));
-    if (state.hls.length > 0) {
-      aibox.appendChild(el("div",{style:{marginTop:".8rem",padding:"6px 10px",background:"rgba(21,128,61,.12)",border:"1px solid rgba(21,128,61,.3)",borderRadius:"6px",fontSize:".74rem",color:"#4ade80",fontWeight:"700"}},[t("✓ "+state.hls.length+" parts found","✓ "+state.hls.length+" قطعة وُجدت")]));
+  box.appendChild(pinRow);
+  if(S.pinError)box.appendChild(el("div",{style:{color:"#ff9090",fontSize:"0.78rem",fontFamily:"'JetBrains Mono'",marginBottom:"0.8rem"}},[S.pinError]));
+  box.appendChild(btn("btn-gold btn-full","Unlock Member Access",function(){
+    var pin=S.pinInput.join("");
+    var garName=(S._loginGarage||"").trim();
+    if(!garName){S.pinError="Please enter your garage name";render();return;}
+    if(pin.length<4){S.pinError="Please enter all 4 digits";render();return;}
+    var found=MEMBER_PINS.find(function(m){return m.pin===pin;});
+    if(found){
+      S.member=Object.assign({},found,{garageName:garName||found.garageName});
+      S.showLoginModal=false;S.pinInput=["","","",""];S.pinError="";S._loginGarage="";
+      showToast("✓ Welcome, "+S.member.garageName+"! Member access unlocked.");
+      S.tab="browse";render();
     } else {
-      aibox.appendChild(el("div",{style:{marginTop:".8rem",padding:"6px 10px",background:"rgba(255,200,0,.08)",border:"1px solid rgba(255,200,0,.2)",borderRadius:"6px",fontSize:".74rem",color:"#fbbf24",fontWeight:"700"}},[t("⚡ Not in current stock — submit request below","⚡ غير متوفر — أرسل طلباً أدناه")]));
+      S.pinError="Incorrect PIN. Contact Wasel Auto on WhatsApp: +973 3384 4859";render();
     }
-    sbox.appendChild(aibox);
+  }));
+  box.appendChild(el("div",{style:{marginTop:"1rem",display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}},[
+    el("a",{href:"https://wa.me/97333844859",target:"_blank",rel:"noopener",className:"btn btn-wa btn-sm"},["💬 Get My PIN"]),
+    el("button",{className:"btn btn-gh btn-sm",onClick:function(){S.showLoginModal=false;S.pinError="";render();}},["Close"]),
+  ]));
+  ov.appendChild(box);
+  return ov;
+}
+
+// ── MEMBER LOCK BANNER ────────────────────────────────────────────────
+function memberLockBanner(){
+  var b=div("lock-banner");
+  var txt=div("");
+  txt.appendChild(el("div",{className:"lock-banner-text"},["🔒 "+S.ar?"يجب أن تكون عضواً لرؤية الأسعار وإضافة القطع للسلة":"Member pricing — log in to view prices and add to cart"]));
+  txt.appendChild(el("div",{className:"lock-banner-sub"},[S.ar?"تواصل مع وصل أوتو للانضمام — 4973 3384 4859+":"Contact Wasel Auto on WhatsApp to become a member — +973 3384 4859"]));
+  b.appendChild(txt);
+  b.appendChild(btn("btn-gold btn-sm",S.ar?"تسجيل دخول":"Member Login",function(){S.showLoginModal=true;render();}));
+  return b;
+}
+
+// ── SEARCH TAB ────────────────────────────────────────────────────────
+function renderSearch(){
+  var wrap=div("");
+  var hero=div("shero");
+  var inner=div("shero-inner");
+  inner.appendChild(el("div",{className:"shero-title"},[S.ar?"ابحث عن أي قطعة غيار في البحرين":"Find Any Car Part in Bahrain"]));
+  inner.appendChild(el("div",{className:"shero-sub"},[S.ar?"أدخل رقم الشاسيه، صف القطعة، أو ارفع صورة":"Enter VIN, describe the part, or upload a photo — we find it instantly"]));
+  var sbox=div("sbox");
+  var srow=div("srow");
+  var vi=inp("",S.ar?"مثال: JTDZN3EU0E329":"e.g. JTDZN3EU0E329",S.vin,function(v){S.vin=v;});
+  vi.addEventListener("keydown",function(e){if(e.key==="Enter")doAI();});
+  srow.appendChild(ig(S.ar?"🚗 رقم الشاسيه":"🚗 VIN / Chassis Number",vi));
+  var di=inp("",S.ar?"مثال: تيل فرامل أمامي":"e.g. front brake pads, oil filter…",S.desc,function(v){S.desc=v;});
+  di.addEventListener("keydown",function(e){if(e.key==="Enter")doAI();});
+  srow.appendChild(ig(S.ar?"📝 وصف القطعة":"📝 Part Description",di));
+  sbox.appendChild(srow);
+  var fileInp=el("input",{type:"file",accept:"image/*",style:{display:"none"}});
+  var dzone=div("dzone"+(S.drag?" drag":""));
+  if(S.imgSrc){dzone.appendChild(el("img",{src:S.imgSrc,style:{maxHeight:"110px",borderRadius:"7px",objectFit:"cover"}}));}
+  else{dzone.appendChild(div("",[el("div",{style:{fontSize:"1.5rem"}},["📷"]),el("div",{style:{color:"var(--mut)",fontSize:"0.77rem",marginTop:"5px"}},[S.ar?"اسحب صورة هنا أو اضغط للاختيار":"Drop photo here or tap to browse"])]));}
+  dzone.addEventListener("click",function(){fileInp.click();});
+  dzone.addEventListener("dragover",function(e){e.preventDefault();S.drag=true;render();});
+  dzone.addEventListener("dragleave",function(){S.drag=false;render();});
+  dzone.addEventListener("drop",function(e){e.preventDefault();handleImg(e.dataTransfer.files[0]);});
+  fileInp.addEventListener("change",function(){handleImg(fileInp.files[0]);});
+  sbox.appendChild(el("label",{className:"il",style:{marginTop:"0.7rem",display:"block"}},[S.ar?"📷 صورة القطعة (اختياري)":"📷 Part Photo (optional)"]));
+  sbox.appendChild(dzone);sbox.appendChild(fileInp);
+  var brow=div("",null,{style:{display:"flex",gap:"7px",marginTop:"0.8rem"}});
+  brow.appendChild(btn("btn-r btn-lg btn-full",S.aiLoad?S.ar?"جارٍ البحث…":"Searching…":S.ar?"🔍 ابحث عن القطعة":"🔍 Find This Part",doAI,S.aiLoad||(!S.vin&&!S.desc&&!S.imgB64)));
+  if(S.vin||S.desc||S.imgSrc)brow.appendChild(btn("btn-gh",S.ar?"مسح":"Clear",function(){S.vin="";S.desc="";S.imgSrc=null;S.imgB64=null;S.aiRes=null;S.hls=[];S.showRFQ=false;render();}));
+  sbox.appendChild(brow);
+  if(S.aiLoad)sbox.appendChild(div("loading",[div("spin"),S.ar?"البحث في شبكة القطع…":"Searching Bahrain parts network…"]));
+  if(S.aiRes){
+    var ab=div("aibox",null,{dir:"ltr"});
+    var at=div("",null,{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}});
+    var al=div("");
+    al.appendChild(el("div",{style:{fontSize:".6rem",color:"#666",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}},["AI IDENTIFIED"]));
+    al.appendChild(div("ainm",[S.ar?(S.aiRes.partNameAr||S.aiRes.partName):S.aiRes.partName]));
+    at.appendChild(al);at.appendChild(span("aiconf "+(S.aiRes.confidence||"medium"),S.aiRes.confidence||"medium"));ab.appendChild(at);
+    var tgs=div("aitags");
+    (S.aiRes.makes||[]).forEach(function(m){tgs.appendChild(span("aitag","🚘 "+m));});
+    (S.aiRes.models||[]).forEach(function(m){tgs.appendChild(span("aitag","📋 "+m));});
+    if(S.aiRes.yearRange)tgs.appendChild(span("aitag","📅 "+S.aiRes.yearRange.from+"–"+S.aiRes.yearRange.to));
+    ab.appendChild(tgs);
+    if(S.aiRes.notes)ab.appendChild(div("ainotes",["💡 "+S.aiRes.notes]));
+    if(S.hls.length>0)ab.appendChild(el("div",{style:{marginTop:".8rem",padding:"6px 10px",background:"rgba(21,128,61,.12)",border:"1px solid rgba(21,128,61,.3)",borderRadius:"6px",fontSize:".74rem",color:"#4ade80",fontWeight:"700"}},["✓ "+S.hls.length+" parts found in stock"]));
+    else ab.appendChild(el("div",{style:{marginTop:".8rem",padding:"6px 10px",background:"rgba(255,200,0,.08)",border:"1px solid rgba(255,200,0,.2)",borderRadius:"6px",fontSize:".74rem",color:"#fbbf24",fontWeight:"700"}},["⚡ Not in current stock — submit a request below"]));
+    sbox.appendChild(ab);
   }
-
-  inner.appendChild(sbox);
-  hero.appendChild(inner);
-  wrap.appendChild(hero);
-
-  // Results
-  if (state.hls.length > 0) {
-    var psec = div("psec");
-    psec.appendChild(div("hlbanner", ["⚡ "+state.hls.length+" "+t("parts found","قطعة وُجدت")]));
-    var pgrid = div("pgrid");
-    PARTS.filter(function(p){return state.hls.indexOf(p.id)>-1;}).forEach(function(p){pgrid.appendChild(makePartCard(p,true));});
-    psec.appendChild(pgrid);
-    wrap.appendChild(psec);
+  inner.appendChild(sbox);hero.appendChild(inner);wrap.appendChild(hero);
+  if(S.hls.length>0){
+    var ps=div("psec");
+    ps.appendChild(div("hlbanner",["⚡ "+S.hls.length+" parts found matching your search"]));
+    var pg=div("pgrid");
+    allParts().filter(function(p){return S.hls.indexOf(p.id)>-1;}).forEach(function(p){pg.appendChild(makeCard(p,true));});
+    ps.appendChild(pg);wrap.appendChild(ps);
   }
-
-  // RFQ
-  if (state.showRFQ || (state.aiRes && state.hls.length === 0)) {
-    var rfqSec = div("psec");
-    rfqSec.appendChild(renderRFQBox());
-    wrap.appendChild(rfqSec);
-  }
-
-  // How it works
-  if (!state.aiRes) {
-    var hiw = div("hiw", null, {style:{marginTop:"1.5rem"}});
-    hiw.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1rem",textTransform:"uppercase",color:"var(--mut)",marginBottom:"0.9rem"}},[t("How Wasel Auto Works","كيف يعمل وصل أوتو")]));
-    var hiwgrid = div("hiwgrid");
-    [
-      ["🔍",t("Search","ابحث"),t("Search catalogue or submit a part request","ابحث أو أرسل طلب قطعة")],
-      ["📞",t("We Source It","نوفرها"),t("We check suppliers and confirm within 2 hours","نتحقق مع الموردين خلال ساعتين")],
-      ["🧾",t("Invoice Ready","فاتورة جاهزة"),t("After payment get your invoice reference to bill your customer","بعد الدفع احصل على مرجع فاتورتك")],
+  if(S.showRFQ||(S.aiRes&&S.hls.length===0)){var rs=div("psec");rs.appendChild(rfqBox());wrap.appendChild(rs);}
+  if(!S.aiRes){
+    var hiw=div("hiw",null,{style:{maxWidth:"700px",margin:"1.5rem auto 0",padding:"0 1.2rem 2rem"}});
+    hiw.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1rem",textTransform:"uppercase",color:"var(--mut)",marginBottom:"0.9rem"}},["How Wasel Auto Works"]));
+    var hg=div("",null,{style:{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0.8rem"}});
+    [["🔍","Search or Request","Search our catalogue or submit a request for any part"],
+     ["📞","We Source It","We check suppliers and confirm price within 2 hours"],
+     ["🛒","Cart & Quotation","Add to cart, get a quotation with Benefit Pay details, pay and receive your invoice"]
     ].forEach(function(hw){
-      var c = div("hiwcard");
+      var c=div("hiwcard",null,{style:{background:"white",border:"1.5px solid var(--bdr)",borderTop:"3px solid var(--red)",borderRadius:"9px",padding:"0.9rem",textAlign:"center"}});
       c.appendChild(el("div",{style:{fontSize:"1.3rem",marginBottom:"3px"}},[hw[0]]));
       c.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.82rem",margin:"3px 0"}},[hw[1]]));
       c.appendChild(el("div",{style:{fontSize:"0.73rem",color:"var(--mut)",lineHeight:"1.5"}},[hw[2]]));
-      hiwgrid.appendChild(c);
+      hg.appendChild(c);
     });
-    hiw.appendChild(hiwgrid);
-
-    var ctaBar = el("div",{style:{marginTop:"1rem",background:"white",border:"1.5px solid var(--bdr)",borderRadius:"10px",padding:"1rem",display:"flex",gap:"10px",alignItems:"center",flexWrap:"wrap"}});
-    var ctaText = el("div",{style:{flex:"1"}});
-    ctaText.appendChild(el("div",{style:{fontWeight:"700",fontSize:"0.88rem",marginBottom:"3px"}},[t("Can't find your part? We source it.","ما تلقيت القطعة؟ نوفرها.")]));
-    ctaText.appendChild(el("div",{style:{fontSize:"0.78rem",color:"var(--mut)"}},[t("WhatsApp or call — we respond fast.","واتساب أو اتصال — نردّ بسرعة.")]));
-    ctaBar.appendChild(ctaText);
-    var ctaBtns = el("div",{style:{display:"flex",gap:"7px"}});
-    ctaBtns.appendChild(el("a",{href:"https://wa.me/97333844859",target:"_blank",rel:"noopener",className:"btn btn-wa btn-sm"},["💬 WhatsApp"]));
-    ctaBtns.appendChild(el("a",{href:"tel:+97333844859",className:"btn btn-d btn-sm"},["📞 "+t("Call","اتصل")]));
-    ctaBar.appendChild(ctaBtns);
-    hiw.appendChild(ctaBar);
-    wrap.appendChild(hiw);
+    hiw.appendChild(hg);wrap.appendChild(hiw);
   }
-
   return wrap;
 }
 
-function renderRFQBox() {
-  var box = div("not-found-box");
-  box.appendChild(el("div",{style:{fontSize:"2.2rem",marginBottom:"0.6rem"}},["🔍"]));
-  box.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1rem",marginBottom:"0.4rem"}},[t("Part Not in Current Stock","غير متوفر في المخزون")]));
-  box.appendChild(el("div",{style:{fontSize:"0.82rem",color:"var(--mut)",marginBottom:"1rem",lineHeight:"1.6"}},[t("Submit a request — we check with our supplier network and get back within 2 hours.","أرسل طلباً — نتحقق مع الموردين ونردّ خلال ساعتين.")]));
-
-  if (state.rfqSent) {
-    var sent = div("rfq-sent");
-    sent.appendChild(el("div",{style:{fontSize:"2rem",marginBottom:"0.5rem"}},["✅"]));
-    sent.appendChild(el("div",{style:{fontWeight:"700",color:"var(--grn)",marginBottom:"0.4rem"}},[t("Request Sent!","تم الإرسال!")]));
-    sent.appendChild(el("div",{style:{fontSize:"0.8rem",color:"var(--grn)",marginBottom:"0.8rem"}},[t("We'll check with suppliers and WhatsApp you back within 2 hours.","سنردّ خلال ساعتين.")]));
-    var waMsg = encodeURIComponent(t("Hi Wasel Auto,\nPart Request:\nPart: "+state.rfqPart+"\nVehicle: "+state.rfqMake+" "+state.rfqModel+"\nMy WhatsApp: "+state.rfqPhone+(state.rfqUrgent?"\n⚡ URGENT":""),
-      "مرحباً وصل أوتو،\nطلب قطعة:\nالقطعة: "+state.rfqPart+"\nالسيارة: "+state.rfqMake+" "+state.rfqModel+"\nواتسابي: "+state.rfqPhone+(state.rfqUrgent?"\n⚡ عاجل":"")));
-    var sentBtns = el("div",{style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}});
-    sentBtns.appendChild(el("a",{href:"https://wa.me/97333844859?text="+waMsg,target:"_blank",rel:"noopener",className:"btn btn-wa btn-sm"},["💬 "+t("Also Send on WhatsApp","أرسل واتساب أيضاً")]));
-    sentBtns.appendChild(btn("btn-gh btn-sm",t("Close","إغلاق"),function(){state.rfqSent=false;state.showRFQ=false;render();}));
-    sent.appendChild(sentBtns);
-    box.appendChild(sent);
-    return box;
-  }
-
-  var form = div("rfq-form");
-  var fg = div("fgrid",null,{style:{gap:"0.6rem",marginBottom:"0.6rem"}});
-
-  var pi = inp("ff",t("e.g. Front brake pads","تيل فرامل أمامي"),state.rfqPart,function(v){state.rfqPart=v;});
-  var pgrid = div("ff"); pgrid.appendChild(el("label",{className:"il"},[t("Part Name *","اسم القطعة *")])); pgrid.appendChild(pi); fg.appendChild(pgrid);
-
-  var mi = inp("",t("e.g. Toyota","تويوتا"),state.rfqMake,function(v){state.rfqMake=v;});
-  var mgrid = div(""); mgrid.appendChild(el("label",{className:"il"},[t("Make","الماركة")])); mgrid.appendChild(mi); fg.appendChild(mgrid);
-
-  var modi = inp("",t("e.g. Camry 2020","كامري 2020"),state.rfqModel,function(v){state.rfqModel=v;});
-  var modgrid = div(""); modgrid.appendChild(el("label",{className:"il"},[t("Model & Year","الموديل والسنة")])); modgrid.appendChild(modi); fg.appendChild(modgrid);
-
-  var phi = inp("ff","+973 XXXX XXXX",state.rfqPhone,function(v){state.rfqPhone=v;},{dir:"ltr"});
-  var phgrid = div("ff"); phgrid.appendChild(el("label",{className:"il"},[t("Your WhatsApp *","واتساب *")])); phgrid.appendChild(phi); fg.appendChild(phgrid);
-
-  form.appendChild(fg);
-
-  var urgRow = el("div",{style:{display:"flex",alignItems:"center",gap:"8px",marginBottom:"0.8rem",cursor:"pointer"},onClick:function(){state.rfqUrgent=!state.rfqUrgent;render();}});
-  var urgBox = el("div",{style:{width:"18px",height:"18px",borderRadius:"4px",border:"2px solid "+(state.rfqUrgent?"var(--red)":"var(--bdr)"),background:state.rfqUrgent?"var(--red)":"white",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:"0"}});
-  if (state.rfqUrgent) urgBox.appendChild(el("span",{style:{color:"white",fontSize:"0.7rem"}},["✓"]));
-  urgRow.appendChild(urgBox);
-  urgRow.appendChild(el("span",{style:{fontSize:"0.8rem",color:"var(--mut)"}},[t("⚡ Urgent — needed today","⚡ عاجل — مطلوب اليوم")]));
-  form.appendChild(urgRow);
-
-  var submitMsg = encodeURIComponent(t("Hi Wasel Auto,\nPart Request:\nPart: "+state.rfqPart+"\nVehicle: "+state.rfqMake+" "+state.rfqModel+"\nMy WhatsApp: "+state.rfqPhone+(state.rfqUrgent?"\n⚡ URGENT":""),
-    "مرحباً وصل أوتو،\nطلب قطعة:\nالقطعة: "+state.rfqPart+"\nالسيارة: "+state.rfqMake+" "+state.rfqModel+"\nواتسابي: "+state.rfqPhone+(state.rfqUrgent?"\n⚡ عاجل":"")));
-  var fbtns = el("div",{style:{display:"flex",gap:"8px"}});
-  fbtns.appendChild(btn("btn-r", t("Send Request","أرسل الطلب"), function(){
-    if(!state.rfqPart||!state.rfqPhone){showToast(t("Please enter part name and WhatsApp number","أدخل اسم القطعة ورقم واتساب"));return;}
-    state.rfqSent=true;render();
-  }));
-  fbtns.appendChild(el("a",{href:"https://wa.me/97333844859?text="+submitMsg,target:"_blank",rel:"noopener",className:"btn btn-wa"},["💬"]));
-  form.appendChild(fbtns);
-  box.appendChild(form);
-  return box;
-}
-
-// ─── BROWSE TAB ────────────────────────────────────────────────────────────────
-function renderBrowse() {
-  var wrap = div("psec", null, {style:{paddingTop:"0.8rem"}});
-  var hdr = div("", null, {style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1rem",flexWrap:"wrap",gap:"8px"}});
-  hdr.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.1rem",textTransform:"uppercase"}},[t("Parts Catalogue","كتالوج القطع")]));
-
-  var filtered = PARTS.filter(function(p){
-    var mc = state.cat==="All"||p.cat===state.cat;
-    var mt = state.ptype==="All Types"||p.type===state.ptype;
-    var mm = state.make==="All Makes"||p.make===state.make||p.make==="Universal";
-    var ms = !state.srch||[p.name,p.nameAr,p.make,p.model,p.brand].some(function(v){return v.toLowerCase().includes(state.srch.toLowerCase());});
-    return mc&&mt&&mm&&ms;
+// ── BROWSE TAB ────────────────────────────────────────────────────────
+function renderBrowse(){
+  var wrap=div("psec",null,{style:{paddingTop:"0.8rem"}});
+  var hdr=div("",null,{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1rem",flexWrap:"wrap",gap:"8px"}});
+  hdr.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.1rem",textTransform:"uppercase"}},[S.ar?"كتالوج القطع":"Parts Catalogue"]));
+  var filtered=allParts().filter(function(p){
+    return (S.cat==="All"||p.cat===S.cat)&&(S.ptype==="All Types"||p.type===S.ptype)&&(S.make==="All Makes"||p.make===S.make||p.make==="Universal")&&
+    (!S.srch||[p.name,p.nameAr,p.make,p.model,p.brand].some(function(v){return v.toLowerCase().includes(S.srch.toLowerCase());}));
   });
-
-  hdr.appendChild(el("span",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.75rem",color:"var(--mut)",background:"var(--surf2)",padding:"3px 10px",borderRadius:"99px",border:"1px solid var(--bdr)"}},[filtered.length+" "+t("parts","قطعة")]));
+  hdr.appendChild(el("span",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.75rem",color:"var(--mut)",background:"var(--surf2)",padding:"3px 10px",borderRadius:"99px",border:"1px solid var(--bdr)"}},[filtered.length+" parts"]));
   wrap.appendChild(hdr);
-
-  var srchInp = inp("", t("Search by name, make, model, brand…","ابحث بالاسم، الماركة، الموديل…"), state.srch, function(v){state.srch=v;render();}, {style:{background:"white",border:"1.5px solid var(--bdr)",marginBottom:"0.8rem"}});
-  wrap.appendChild(srchInp);
-
-  var frow1 = div("frow");
-  var ttog = div("typetog");
-  PTYPES.forEach(function(pt,i){
-    var tb = el("button",{className:"ttbtn"+(state.ptype===pt?" on":""),onClick:function(){state.ptype=pt;render();}},[state.ar?PTYPES_AR[i]:pt]);
-    ttog.appendChild(tb);
-  });
-  frow1.appendChild(ttog);
-  CATS.forEach(function(c,i){frow1.appendChild(pill("",state.ar?CATS_AR[i]:c,function(){state.cat=c;render();},state.cat===c));});
-  wrap.appendChild(frow1);
-
-  var frow2 = div("frow");
-  MAKES.forEach(function(m,i){frow2.appendChild(pill("",state.ar?MAKES_AR[i]:m,function(){state.make=m;render();},state.make===m));});
-  wrap.appendChild(frow2);
-
-  if (filtered.length === 0) {
-    var empty = div("empty");
-    empty.appendChild(el("div",{style:{fontSize:"2.2rem",marginBottom:"0.6rem"}},["🔎"]));
-    empty.appendChild(el("h3",{style:{fontFamily:"'Barlow'",fontWeight:"900",marginBottom:"0.3rem"}},[t("No parts found","لا توجد قطع")]));
-    empty.appendChild(el("p",{style:{fontSize:"0.82rem",color:"var(--mut)",margin:"0.5rem 0 1rem"}},[t("Submit a request and we will source it","أرسل طلباً وسنوفرها")]));
-    empty.appendChild(renderRFQBox());
-    wrap.appendChild(empty);
+  if(!S.member)wrap.appendChild(memberLockBanner());
+  var si=inp("",S.ar?"ابحث بالاسم، الماركة، الموديل…":"Search by name, make, model, brand…",S.srch,function(v){S.srch=v;render();},{style:{background:"white",border:"1.5px solid var(--bdr)",marginBottom:"0.8rem"}});
+  wrap.appendChild(si);
+  var fr=div("frow");
+  var tt=div("typetog");
+  PTYPES.forEach(function(pt){var tb=el("button",{className:"ttbtn"+(S.ptype===pt?" on":""),onClick:function(){S.ptype=pt;render();}},[pt]);tt.appendChild(tb);});
+  fr.appendChild(tt);
+  CATS.forEach(function(c){fr.appendChild(pill(c,function(){S.cat=c;render();},S.cat===c));});
+  wrap.appendChild(fr);
+  var fr2=div("frow");
+  MAKES.forEach(function(m){fr2.appendChild(pill(m,function(){S.make=m;render();},S.make===m));});
+  wrap.appendChild(fr2);
+  if(filtered.length===0){
+    var emp=div("empty",null,{style:{textAlign:"center",padding:"3rem",color:"var(--mut)"}});
+    emp.appendChild(el("div",{style:{fontSize:"2.2rem",marginBottom:"0.6rem"}},["🔎"]));
+    emp.appendChild(el("h3",{style:{fontFamily:"'Barlow'",fontWeight:"900",marginBottom:"0.3rem"}},["No parts found"]));
+    emp.appendChild(rfqBox());
+    wrap.appendChild(emp);
   } else {
-    var pgrid = div("pgrid");
-    filtered.forEach(function(p){pgrid.appendChild(makePartCard(p,false));});
-    wrap.appendChild(pgrid);
+    var pg=div("pgrid");
+    filtered.forEach(function(p){pg.appendChild(makeCard(p,false));});
+    wrap.appendChild(pg);
   }
   return wrap;
 }
 
-// ─── PART CARD ─────────────────────────────────────────────────────────────────
-function makePartCard(part, hl) {
-  var card = div("pcard"+(hl?" hl":""));
-  card.addEventListener("click", function(){state.selPart=part;render();});
-  var typeLabel = state.ar?(part.type==="Genuine"?"أصلي":"بديل"):part.type;
-  card.appendChild(el("div",{className:"ptype "+(part.type==="Genuine"?"ptype-g":"ptype-a")},[typeLabel]));
-  var catIdx = CATS.indexOf(part.cat);
-  card.appendChild(div("pcard-cat",[state.ar?(CATS_AR[catIdx]||part.cat):part.cat]));
-  card.appendChild(div("pcard-name",[state.ar?part.nameAr:part.name]));
+// ── PART CARD ─────────────────────────────────────────────────────────
+function makeCard(part,hl){
+  var card=div("pcard"+(hl?" hl":""));
+  card.addEventListener("click",function(){S.selPart=part;render();});
+  card.appendChild(el("div",{className:"ptype "+(part.type==="Genuine"?"ptype-g":"ptype-a")},[part.type]));
+  card.appendChild(div("pcard-cat",[part.cat]));
+  card.appendChild(div("pcard-name",[S.ar?part.nameAr:part.name]));
   card.appendChild(div("pcard-brand",[part.brand]));
-  var compat = part.make==="Universal"?(state.ar?"جميع السيارات":"Universal All"):part.make+" "+part.model+" · "+part.yf+"–"+part.yt;
+  var compat=part.make==="Universal"?"Universal — All Vehicles":part.make+" "+part.model+" · "+part.yf+"–"+part.yt;
   card.appendChild(div("pcard-compat",[compat]));
-  var priceEl = el("div",{className:"pcard-price"});
-  priceEl.appendChild(document.createTextNode(part.price.toFixed(3)+" "));
-  priceEl.appendChild(el("span",{},[part.warranty==="N/A"?"":"BHD"]));
-  priceEl.appendChild(document.createTextNode(" BHD"));
-  card.appendChild(el("div",{className:"pcard-price"},[part.price.toFixed(3)+" ",el("span",{},["BHD"])]));
-  var footer = div("pcard-footer");
-  footer.appendChild(el("span",{className:"war-tag"},[state.ar?"✓ "+part.warrantyAr:"✓ "+part.warranty]));
-  footer.appendChild(el("span",{style:{fontSize:"0.65rem",color:"var(--mut)"}},["Available ✓"]));
-  card.appendChild(footer);
-  card.appendChild(div("pcard-cta",[state.ar?"📞 استفسر عبر وصل أوتو":"📞 Enquire via Wasel Auto"]));
+  if(S.member){
+    var pr=div("pcard-price",[part.waselPrice.toFixed(3)," ",el("span",{},["BHD"])]);
+    var save=((part.retailPrice-part.waselPrice)/part.retailPrice*100).toFixed(0);
+    card.appendChild(pr);
+    card.appendChild(el("div",{style:{fontSize:"0.65rem",color:"var(--grn)",fontWeight:"700",marginTop:"2px"}},["You save "+save+"% vs retail ("+part.retailPrice.toFixed(3)+" BHD)"]));
+  } else {
+    card.appendChild(div("pcard-price-lock",["🔒 Members Only — Login to view price"]));
+  }
+  var ft=div("pcard-footer");
+  ft.appendChild(span("war-tag","✓ "+part.warranty));
+  ft.appendChild(el("span",{style:{fontSize:"0.65rem",color:"var(--mut)"}},["Available ✓"]));
+  card.appendChild(ft);
+  card.appendChild(div("pcard-cta",[S.member?"📞 Tap to enquire / add to cart":"📞 Enquire via Wasel Auto"]));
   return card;
 }
 
-// ─── PART MODAL ────────────────────────────────────────────────────────────────
-function renderModal(part) {
-  var ov = div("ov");
-  ov.addEventListener("click", function(){state.selPart=null;render();});
-  var mod = div("mod");
-  mod.addEventListener("click", function(e){e.stopPropagation();});
-
-  var mh = div("mod-head");
-  var closeBtn = el("button",{className:"mod-close",onClick:function(){state.selPart=null;render();}},["✕"]);
-  mh.appendChild(closeBtn);
-  var mhTop = el("div",{style:{display:"flex",gap:"10px",alignItems:"flex-start"}});
-  var typeBadge = el("div",{className:"ptype "+(part.type==="Genuine"?"ptype-g":"ptype-a"),style:{position:"static",fontSize:"0.65rem"}},[(state.ar?(part.type==="Genuine"?"أصلي":"بديل"):part.type)]);
-  var mhInfo = el("div",{});
-  mhInfo.appendChild(el("div",{style:{fontSize:".62rem",color:"#888",fontFamily:"'JetBrains Mono'",marginBottom:"3px"}},[part.brand+" · "+part.cat]));
-  mhInfo.appendChild(el("div",{className:"mod-pname"},[state.ar?part.nameAr:part.name]));
-  mhTop.appendChild(typeBadge);
-  mhTop.appendChild(mhInfo);
-  mh.appendChild(mhTop);
-  mh.appendChild(el("div",{className:"mod-price"},[part.price.toFixed(3)+" ",el("span",{style:{fontSize:"0.85rem",color:"#aaa"}},["BHD"])]));
+// ── PART MODAL ────────────────────────────────────────────────────────
+function renderPartModal(part){
+  var ov=div("ov");
+  ov.addEventListener("click",function(){S.selPart=null;render();});
+  var mod=div("mod");
+  mod.addEventListener("click",function(e){e.stopPropagation();});
+  var mh=div("mod-head");
+  mh.appendChild(el("button",{className:"mod-close",onClick:function(){S.selPart=null;render();}},["✕"]));
+  mh.appendChild(el("div",{style:{display:"flex",gap:"10px",alignItems:"flex-start"}},[
+    el("div",{className:"ptype "+(part.type==="Genuine"?"ptype-g":"ptype-a"),style:{position:"static",fontSize:"0.65rem"}},[part.type]),
+    el("div",{},[el("div",{style:{fontSize:".62rem",color:"#888",fontFamily:"'JetBrains Mono'",marginBottom:"3px"}},[part.brand+" · "+part.cat]),el("div",{className:"mod-pname"},[S.ar?part.nameAr:part.name])])
+  ]));
+  if(S.member){
+    mh.appendChild(el("div",{className:"mod-price"},[part.waselPrice.toFixed(3)," ",el("span",{style:{fontSize:"0.85rem",color:"#aaa"}},["BHD"])]));
+    mh.appendChild(el("div",{style:{fontSize:"0.72rem",color:"#4ade80",marginTop:"2px"}},["✓ You save "+((part.retailPrice-part.waselPrice)/part.retailPrice*100).toFixed(0)+"% vs retail price of "+part.retailPrice.toFixed(3)+" BHD"]));
+  } else {
+    mh.appendChild(div("pcard-price-lock",["🔒 Login as member to view price"]));
+  }
   mod.appendChild(mh);
-
-  var mb = div("mod-body");
-  [[t("Warranty","الضمان"),state.ar?part.warrantyAr:part.warranty],
-   [t("Fits","يناسب"),part.make==="Universal"?(state.ar?"جميع السيارات":"Universal"):`${part.make} ${part.model} (${part.yf}–${part.yt})`],
-   [t("Category","التصنيف"),state.ar?(CATS_AR[CATS.indexOf(part.cat)]||part.cat):part.cat]
-  ].forEach(function(row){
-    var r = div("mrow");
-    r.appendChild(el("span",{className:"mrl"},[row[0]]));
-    r.appendChild(el("span",{style:{fontSize:".83rem",fontWeight:"600"}},[row[1]]));
-    mb.appendChild(r);
+  var mb=div("mod-body");
+  [[S.ar?"الضمان":"Warranty",part.warranty],[S.ar?"يناسب":"Fits",part.make==="Universal"?"Universal — All":part.make+" "+part.model+" ("+part.yf+"–"+part.yt+")"],[S.ar?"التصنيف":"Category",part.cat]].forEach(function(r){
+    var rr=div("mrow",[el("span",{className:"mrl"},[r[0]]),el("span",{style:{fontSize:".83rem",fontWeight:"600"}},[r[1]])]);
+    mb.appendChild(rr);
   });
-  mb.appendChild(div("mod-notice",[t("🔒 All enquiries go through Wasel Auto only. We protect supplier confidentiality and confirm final price within minutes.","🔒 جميع الطلبات تمر عبر وصل أوتو فقط. نحمي خصوصية الموردين ونؤكد السعر خلال دقائق.")]));
+  mb.appendChild(div("mod-notice",["🔒 All enquiries go through Wasel Auto only. We protect supplier confidentiality and confirm final price within minutes."]));
   mod.appendChild(mb);
-
-  var waMsg = encodeURIComponent(t("Hi Wasel Auto,\nEnquiring about: "+part.name+"\nVehicle: "+part.make+" "+part.model+" ("+part.yf+"–"+part.yt+")\nListed price: "+part.price.toFixed(3)+" BHD\nPlease confirm availability.",
-    "مرحباً وصل أوتو،\nأستفسر عن: "+part.nameAr+"\nالسيارة: "+part.make+" "+part.model+" ("+part.yf+"–"+part.yt+")\nالسعر: "+part.price.toFixed(3)+" BHD\nأرجو التأكيد."));
-
-  var acts = div("mod-actions");
-  acts.appendChild(el("a",{href:"https://wa.me/97333844859?text="+waMsg,target:"_blank",rel:"noopener",className:"btn btn-wa btn-full"},["💬 "+t("WhatsApp Enquiry — Wasel Auto","استفسار واتساب — وصل أوتو")]));
-  acts.appendChild(el("a",{href:"tel:+97333844859",className:"btn btn-d btn-full"},["📞 "+t("Call Wasel Auto","اتصل بوصل أوتو")]));
-  acts.appendChild(btn("btn-gold btn-full",t("🧾 Add to Invoice (After Payment)","🧾 أضف للفاتورة (بعد الدفع)"),function(){
-    state.preloadParts.push(part);
-    state.selPart=null;
-    state.tab="invoice";
-    showToast(t("Added — unlock invoice with your order reference","أُضيف — افتح الفاتورة برقم مرجعك"));
-  }));
-  acts.appendChild(btn("btn-gh btn-full",t("Close","إغلاق"),function(){state.selPart=null;render();}));
+  var acts=div("mod-actions");
+  var waMsg=encodeURIComponent("Hi Wasel Auto,\nEnquiring about: "+part.name+"\nVehicle: "+part.make+" "+part.model+" ("+part.yf+"–"+part.yt+")\nPlease confirm availability and price.");
+  acts.appendChild(el("a",{href:"https://wa.me/97333844859?text="+waMsg,target:"_blank",rel:"noopener",className:"btn btn-wa btn-full"},["💬 WhatsApp Enquiry — Wasel Auto"]));
+  if(S.member){
+    acts.appendChild(btn("btn-r btn-full","🛒 Add to Cart",function(){
+      var ex=S.cart.find(function(i){return i.part.id===part.id;});
+      if(ex)ex.qty+=1;else S.cart.push({part:part,qty:1});
+      S.selPart=null;
+      showToast("✓ "+part.name+" added to cart");
+    }));
+  } else {
+    acts.appendChild(btn("btn-gold btn-full","🔐 Login to Add to Cart",function(){S.selPart=null;S.showLoginModal=true;render();}));
+  }
+  acts.appendChild(btn("btn-gh btn-full","Close",function(){S.selPart=null;render();}));
   mod.appendChild(acts);
   ov.appendChild(mod);
   return ov;
 }
 
-// ─── SUPPLIER TAB ──────────────────────────────────────────────────────────────
-function renderSupplier() {
-  var wrap = div("sport");
-  var hero = div("sport-hero");
-  hero.appendChild(el("h2",{},[t("List Your Parts on Wasel Auto","أضف قطعك على وصل أوتو")]));
-  hero.appendChild(el("p",{},[t("Free to list. We review and approve within 24 hours.","مجاني. نراجع ونوافق خلال 24 ساعة.")]));
-  wrap.appendChild(hero);
-
-  if (state.pending.length > 0) {
-    var pp = div("panel");
-    pp.appendChild(makePanel("⏳",t("Pending Approval","بانتظار الموافقة"),t("Being reviewed","قيد المراجعة")));
-    var pb = div("pbody");
-    state.pending.forEach(function(p){
-      var pc = div("pending-card");
-      pc.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.9rem"}},[state.ar?p.nameAr:p.name]));
-      pc.appendChild(el("div",{style:{fontSize:"0.72rem",color:"var(--mut)",marginTop:"3px"}},[p.make+" "+p.model+" · "+Number(p.price).toFixed(3)+" BHD"]));
-      pc.appendChild(el("div",{style:{display:"inline-flex",alignItems:"center",background:"#fff8e1",border:"1px solid #f59e0b",color:"#b45309",fontSize:"0.68rem",fontWeight:"700",padding:"2px 8px",borderRadius:"4px",marginTop:"6px"}},[t("⏳ Awaiting Wasel Auto Approval","⏳ بانتظار موافقة وصل أوتو")]));
-      pb.appendChild(pc);
-    });
-    pp.appendChild(pb);
-    wrap.appendChild(pp);
-  }
-
-  var fp = div("panel");
-  fp.appendChild(makePanel("📦",t("New Part Listing","إدراج قطعة جديدة"),t("Goes live after Wasel Auto review","يُنشر بعد مراجعة وصل أوتو")));
-  var pb = div("pbody");
-  var sf = state.supForm;
-
-  // Part details section
-  pb.appendChild(fsecTitle(t("Part Details","تفاصيل القطعة")));
-  var fg = div("fgrid");
-  var ni = inp("ff","e.g. Toyota Genuine Brake Pads",sf.name,function(v){state.supForm.name=v;});
-  var niw = div("ff"); niw.appendChild(el("label",{className:"il"},[t("Part Name (English) *","اسم القطعة إنجليزي *")])); niw.appendChild(ni); fg.appendChild(niw);
-  var nai = inp("","مثال: تيل فرامل تويوتا",sf.nameAr,function(v){state.supForm.nameAr=v;},{dir:"rtl"});
-  var naw = div("ff"); naw.appendChild(el("label",{className:"il"},["اسم القطعة (عربي)"])); naw.appendChild(nai); fg.appendChild(naw);
-  fg.appendChild(ig(t("Part Type","نوع القطعة"),sel("",[ {val:"Genuine",label:t("Genuine","أصلي")},{val:"Aftermarket",label:t("Aftermarket","بديل")}],sf.type,function(v){state.supForm.type=v;})));
-  fg.appendChild(ig(t("Category","التصنيف"),sel("",CATS.filter(function(c){return c!=="All";}).map(function(c,i){return{val:c,label:c};}),sf.cat,function(v){state.supForm.cat=v;})));
-  fg.appendChild(ig(t("Brand","الماركة"),inp("",t("e.g. Toyota, Bosch","تويوتا، بوش"),sf.brand,function(v){state.supForm.brand=v;})));
-  fg.appendChild(ig(t("Qty","الكمية"),inp("","1",sf.qty,function(v){state.supForm.qty=v;},{type:"number",dir:"ltr"})));
-  fg.appendChild(ig(t("Warranty","الضمان"),sel("",[{val:"N/A",label:"N/A"},{val:"3 months",label:t("3 months","3 أشهر")},{val:"6 months",label:t("6 months","6 أشهر")},{val:"12 months",label:t("12 months","12 شهر")},{val:"24 months",label:t("24 months","24 شهر")}],sf.warranty,function(v){state.supForm.warranty=v;})));
-  fg.appendChild(ig(t("Price (BHD) *","السعر (دينار) *"),inp("","0.000",sf.price,function(v){state.supForm.price=v;},{type:"number",step:"0.001",dir:"ltr"})));
-  pb.appendChild(fg);
-
-  pb.appendChild(fsecTitle(t("Vehicle Compatibility","توافق السيارة")));
-  var fg2 = div("fgrid");
-  fg2.appendChild(ig(t("Make","الشركة"),inp("",t("e.g. Toyota","تويوتا"),sf.make,function(v){state.supForm.make=v;})));
-  fg2.appendChild(ig(t("Model","الموديل"),inp("",t("e.g. Land Cruiser","لاند كروزر"),sf.model,function(v){state.supForm.model=v;})));
-  fg2.appendChild(ig(t("Year From","من سنة"),inp("","2018",sf.yf,function(v){state.supForm.yf=v;},{type:"number",dir:"ltr"})));
-  fg2.appendChild(ig(t("Year To","إلى سنة"),inp("","2025",sf.yt,function(v){state.supForm.yt=v;},{type:"number",dir:"ltr"})));
-  pb.appendChild(fg2);
-
-  pb.appendChild(fsecTitle(t("Contact","التواصل")));
-  pb.appendChild(ig(t("WhatsApp Number *","رقم واتساب *"),inp("","+973 XXXX XXXX",sf.phone,function(v){state.supForm.phone=v;},{type:"tel",dir:"ltr"})));
-
-  pb.appendChild(el("div",{style:{background:"#fffbeb",border:"1px solid #f59e0b",borderRadius:"8px",padding:"0.85rem",marginTop:"0.8rem",marginBottom:"1rem",fontSize:"0.78rem",color:"#92400e",lineHeight:"1.6"}},[t("⏳ Submitted parts are reviewed by Wasel Auto before going live.","⏳ القطع المرسلة تُراجع من وصل أوتو قبل النشر.")]));
-  pb.appendChild(btn("btn-r btn-lg btn-full",t("✓ Submit for Approval","✓ أرسل للموافقة"),function(){
-    if(!state.supForm.name||!state.supForm.price||!state.supForm.phone){showToast(t("Please fill required fields","يرجى تعبئة الحقول المطلوبة"));return;}
-    state.pending.push(Object.assign({},state.supForm,{id:Date.now()}));
-    showToast(t("✓ Submitted! Wasel Auto will review within 24 hours.","✓ تم الإرسال!"));
-    state.supForm={name:"",nameAr:"",brand:"",make:"",model:"",yf:"",yt:"",price:"",type:"Genuine",cat:"Engine",qty:"",warranty:"12 months",phone:""};
-    render();
-  }));
-  fp.appendChild(pb);
-  wrap.appendChild(fp);
-  return wrap;
-}
-
-function fsecTitle(text) {
-  return el("div",{className:"fsec-t",style:{marginBottom:"0.7rem",marginTop:"0.5rem"}},[text]);
-}
-
-function makePanel(ico, title, sub) {
-  var ph = div("phead");
-  ph.appendChild(el("div",{className:"phead-ico"},[ico]));
-  var phInfo = el("div",{});
-  phInfo.appendChild(el("div",{className:"phead-title"},[title]));
-  phInfo.appendChild(el("div",{className:"phead-sub"},[sub]));
-  ph.appendChild(phInfo);
-  return ph;
-}
-
-// ─── INVOICE TAB ───────────────────────────────────────────────────────────────
-function renderInvoice() {
-  var wrap = div("inv-wrap");
-  if (!state.invUnlocked) {
-    var lock = div("inv-lock");
-    lock.appendChild(el("div",{style:{fontSize:"3rem",marginBottom:"0.8rem"}},["🔐"]));
-    lock.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.2rem",color:"white",marginBottom:"0.5rem"}},[t("Invoice Tool — Wasel Auto Customers Only","أداة الفاتورة — لعملاء وصل أوتو فقط")]));
-    lock.appendChild(el("div",{style:{color:"#999",fontSize:"0.85rem",marginBottom:"1.5rem",lineHeight:"1.7"}},[t("After completing payment with Wasel Auto, we will send you a unique Order Reference via WhatsApp. Enter it below to unlock your invoice.","بعد إتمام الدفع لوصل أوتو، سنرسل لك رقم مرجع الطلب عبر واتساب. أدخله أدناه لفتح الفاتورة.")]));
-
-    var lockBox = el("div",{style:{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"10px",padding:"1.2rem",marginBottom:"1.2rem",textAlign:"left"}});
-    lockBox.appendChild(el("div",{style:{fontSize:"0.72rem",color:"#aaa",fontFamily:"'JetBrains Mono'",letterSpacing:"0.1em",marginBottom:"0.6rem",textTransform:"uppercase"}},[t("Enter Your Order Reference","أدخل رقم مرجع طلبك")]));
-
-    var refRow = el("div",{style:{display:"flex",gap:"8px",alignItems:"center"}});
-    var refInp = el("input",{className:"ref-input",placeholder:"WA-260725-XXXX",dir:"ltr",maxlength:"16"});
-    refInp.value = state.invRefInput;
-    refInp.addEventListener("input",function(){state.invRefInput=refInp.value.toUpperCase();refInp.value=state.invRefInput;});
-    refInp.addEventListener("keydown",function(e){if(e.key==="Enter")validateRef();});
-    refRow.appendChild(refInp);
-    refRow.appendChild(btn("btn-gold",t("Unlock","فتح"),validateRef));
-    lockBox.appendChild(refRow);
-    if (state.invRefError) lockBox.appendChild(el("div",{className:"ref-error"},["⚠ "+state.invRefError]));
-
-    var steps = el("div",{style:{marginTop:"1rem"}});
-    [t("Order your parts through Wasel Auto (WhatsApp or call)","اطلب قطعك عبر وصل أوتو"),
-     t("Complete payment — cash or bank transfer","أتمّ الدفع — نقداً أو تحويل بنكي"),
-     t("Wasel Auto sends your Order Reference via WhatsApp","يرسل وصل أوتو رقم المرجع عبر واتساب"),
-     t("Enter the reference here to create your invoice","أدخل الرقم هنا لإنشاء فاتورتك")
-    ].forEach(function(s,i){
-      var step = div("ref-step");
-      step.appendChild(el("div",{className:"ref-step-num"},[i+1]));
-      step.appendChild(el("div",{},[s]));
-      steps.appendChild(step);
-    });
-    lockBox.appendChild(steps);
-    lock.appendChild(lockBox);
-
-    var lbtns = el("div",{style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}});
-    lbtns.appendChild(el("a",{href:"https://wa.me/97333844859",target:"_blank",rel:"noopener",className:"btn btn-wa"},["💬 "+t("Order via WhatsApp","اطلب عبر واتساب")]));
-    lbtns.appendChild(el("a",{href:"tel:+97333844859",className:"btn btn-gh"},["📞 "+t("Call Wasel Auto","اتصل بوصل أوتو")]));
-    lock.appendChild(lbtns);
-    wrap.appendChild(lock);
-    return wrap;
-  }
-
-  // Unlocked
-  var hero = div("inv-hero");
-  var hl = el("div",{});
-  hl.appendChild(el("h3",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1rem",color:"white",marginBottom:"2px"}},[t("Invoice Tool","أداة الفاتورة")]));
-  hl.appendChild(el("p",{style:{color:"#999",fontSize:"0.78rem"}},[t("Add your margin — your profit stays private","أضف هامشك — أرباحك سرية")]));
-  hero.appendChild(hl);
-  var hr = el("div",{style:{display:"flex",gap:"8px",flexWrap:"wrap"}});
-  hr.appendChild(el("div",{className:"inv-ref-badge"},[state.invRef]));
-  hr.appendChild(el("div",{style:{background:"rgba(255,255,255,0.08)",borderRadius:"6px",padding:"5px 10px",fontFamily:"'JetBrains Mono'",fontSize:"0.72rem",color:"#aaa"}},["#"+state.invNum]));
-  hero.appendChild(hr);
-  wrap.appendChild(hero);
-
-  // Customer panel
-  var cp = div("panel");
-  cp.appendChild(makePanel("👤",t("Customer Details","بيانات العميل"),t("Optional","اختياري")));
-  var cpb = div("pbody");
-  var cg = div("fgrid");
-  var cust = state.invGarage;
-  cg.appendChild(ig(t("Customer Name","اسم العميل"),inp("",t("e.g. Ahmed Al-Mannai","أحمد المنيع"),cust.name,function(v){state.invGarage.name=v;})));
-  cg.appendChild(ig(t("Phone","هاتف"),inp("","+973 XXXX XXXX",cust.phone,function(v){state.invGarage.phone=v;},{dir:"ltr"})));
-  cg.appendChild(ig(t("Vehicle","السيارة"),inp("",t("e.g. Toyota Camry 2020","تويوتا كامري 2020"),cust.vehicle,function(v){state.invGarage.vehicle=v;})));
-  cg.appendChild(ig(t("Plate Number","رقم اللوحة"),inp("","e.g. 12345",cust.plate,function(v){state.invGarage.plate=v;},{dir:"ltr"})));
-  cpb.appendChild(cg);
-  cp.appendChild(cpb);
-  wrap.appendChild(cp);
-
-  // Parts panel
-  var pp2 = div("panel");
-  pp2.appendChild(makePanel("📦",t("Parts & Your Margin","القطع وهامشك"),t("Your selling price stays private","سعر بيعك سري")));
-  var ppb = div("pbody");
-
-  state.invItems.forEach(function(item) {
-    var row = el("div",{style:{background:"var(--surf2)",borderRadius:"9px",padding:"0.9rem",marginBottom:"0.7rem",border:"1.5px solid var(--bdr)"}});
-    var rt = el("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px",marginBottom:"0.6rem"}});
-    var di = inp("",item.desc,item.desc,function(v){item.desc=v;});
-    di.style.background="white";
-    rt.appendChild(di);
-    var rmBtn = el("button",{style:{background:"rgba(206,17,38,0.1)",border:"1px solid rgba(206,17,38,0.2)",color:"var(--red)",borderRadius:"5px",width:"28px",height:"28px",cursor:"pointer",flexShrink:"0"},onClick:function(){state.invItems=state.invItems.filter(function(i){return i.id!==item.id;});render();}},["✕"]);
-    rt.appendChild(rmBtn);
-    row.appendChild(rt);
-    var rg = el("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:"0.5rem"}});
-    var costInp = inp("","0.000",item.cost,function(v){item.cost=v;render();},{type:"number",step:"0.001",dir:"ltr"});
-    costInp.style.background="white";
-    var margInp = inp("","20",item.margin,function(v){item.margin=v;render();},{type:"number",dir:"ltr"});
-    margInp.style.background="white";
-    var qtyInp = inp("","1",item.qty,function(v){item.qty=v;render();},{type:"number",dir:"ltr"});
-    qtyInp.style.background="white";
-    var sell = (Number(item.cost)*(1+Number(item.margin)/100)*Number(item.qty)).toFixed(3);
-    var sellEl = el("div",{style:{background:"white",border:"1.5px solid var(--grn)",borderRadius:"7px",padding:"9px 10px",fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.85rem",color:"var(--grn)"}},[sell]);
-    rg.appendChild(ig(t("Cost BHD","التكلفة"),costInp));
-    rg.appendChild(ig(t("Margin %","هامش %"),margInp));
-    rg.appendChild(ig(t("Qty","كمية"),qtyInp));
-    rg.appendChild(ig(t("Sell Price","سعر البيع"),sellEl));
-    row.appendChild(rg);
-    ppb.appendChild(row);
+// ── CART & CHECKOUT ───────────────────────────────────────────────────
+function renderCart(){
+  var wrap=div("cart-wrap");
+  if(!S.member){wrap.appendChild(memberLockBanner());return wrap;}
+  // Steps
+  var steps=el("div",{style:{display:"flex",gap:"0",marginBottom:"1.5rem",background:"white",border:"1.5px solid var(--bdr)",borderRadius:"9px",overflow:"hidden"}});
+  [["Cart","🛒",0],["Details","📋",1],["Quotation","📄",2]].forEach(function(st){
+    var s=el("div",{style:{flex:"1",padding:"0.75rem",textAlign:"center",background:S.checkoutStep===st[2]?"var(--dark)":"white",color:S.checkoutStep===st[2]?"white":"var(--mut)",fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.78rem",textTransform:"uppercase",borderRight:"1px solid var(--bdr)"}});
+    s.appendChild(el("div",{style:{fontSize:"1.1rem"}},[st[1]]));
+    s.appendChild(document.createTextNode(st[0]));
+    steps.appendChild(s);
   });
+  wrap.appendChild(steps);
 
-  // Add item
-  var addBox = div("inv-add-item");
-  addBox.appendChild(el("div",{className:"fsec-t",style:{marginBottom:"0.6rem"}},[t("+ Add Part / Labour / Service","+ أضف قطعة / عمالة / خدمة")]));
-  var ag = el("div",{style:{display:"grid",gridTemplateColumns:"2fr 1fr 1fr",gap:"0.5rem",marginBottom:"0.5rem"}});
-  var adesc = inp("ff",t("Description…","الوصف…"),state.invNewDesc,function(v){state.invNewDesc=v;},{style:{background:"white",gridColumn:"1/-1"}});
-  adesc.style.background="white";
-  var acost = inp("","0.000",state.invNewCost,function(v){state.invNewCost=v;},{type:"number",step:"0.001",dir:"ltr"});
-  acost.style.background="white";
-  var amarg = inp("","20",state.invNewMargin,function(v){state.invNewMargin=v;},{type:"number",dir:"ltr"});
-  amarg.style.background="white";
-  var aqty = inp("","1",state.invNewQty,function(v){state.invNewQty=v;},{type:"number",dir:"ltr"});
-  aqty.style.background="white";
-  var descRow = el("div",{style:{gridColumn:"1/-1"}});
-  descRow.appendChild(el("label",{className:"il"},[t("Description","الوصف")]));
-  descRow.appendChild(adesc);
-  ag.appendChild(descRow);
-  ag.appendChild(ig(t("Cost BHD","التكلفة"),acost));
-  ag.appendChild(ig(t("Margin %","هامش %"),amarg));
-  ag.appendChild(ig(t("Qty","كمية"),aqty));
-  addBox.appendChild(ag);
-  addBox.appendChild(btn("btn-r btn-sm btn-full",t("+ Add","+ أضف"),function(){
-    if(!state.invNewDesc||!state.invNewCost)return;
-    state.invItems.push({id:Date.now(),desc:state.invNewDesc,cost:state.invNewCost,margin:state.invNewMargin,qty:state.invNewQty});
-    state.invNewDesc="";state.invNewCost="";state.invNewMargin="20";state.invNewQty="1";
-    render();
-  }));
-  ppb.appendChild(addBox);
-
-  var noteInp = el("textarea",{className:"ifield",rows:"2",placeholder:t("Note to customer…","ملاحظة للعميل…"),style:{resize:"vertical"}});
-  noteInp.value = state.invNote;
-  noteInp.addEventListener("input",function(){state.invNote=noteInp.value;});
-  ppb.appendChild(ig(t("Note to Customer","ملاحظة للعميل"),noteInp));
-  pp2.appendChild(ppb);
-  wrap.appendChild(pp2);
-
-  // Totals calculation
-  var subtotal = state.invItems.reduce(function(a,i){return a+Number(i.cost)*(1+Number(i.margin)/100)*Number(i.qty);},0);
-  var totalCost = state.invItems.reduce(function(a,i){return a+Number(i.cost)*Number(i.qty);},0);
-  var profit = subtotal - totalCost;
-  var waselFee = totalCost * 0.045;
-
-  if (state.invItems.length > 0) {
-    wrap.appendChild(el("div",{className:"wasel-fee-note"},[t("💡 Wasel Auto service fee (4.5%) on your cost: "+waselFee.toFixed(3)+" BHD. Your profit on this invoice: "+profit.toFixed(3)+" BHD","💡 عمولة وصل أوتو (4.5%) على تكلفتك: "+waselFee.toFixed(3)+" BHD. ربحك: "+profit.toFixed(3)+" BHD")]));
-
-    // Invoice document
-    var doc = div("inv-doc");
-    doc.appendChild(div("inv-doc-topbar"));
-    var db = div("inv-doc-body");
-    var dh = div("inv-doc-header");
-    var dl = el("div",{});
-    dl.appendChild(el("div",{className:"inv-doc-logo"},["Wasel ",el("span",{},["Auto"])]));
-    dl.appendChild(el("div",{className:"inv-doc-logo-sub"},["wasel-auto.vercel.app · +973 3384 4859"]));
-    dl.appendChild(el("div",{className:"inv-doc-logo-sub"},["waselauto26@gmail.com · Manama, Bahrain"]));
-    dh.appendChild(dl);
-    var today = new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase();
-    var dr = el("div",{className:"inv-doc-right"});
-    dr.appendChild(el("div",{className:"inv-doc-title"},["Invoice"]));
-    dr.appendChild(el("div",{className:"inv-doc-ref"},["#"+state.invNum]));
-    dr.appendChild(el("div",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.75rem",color:"var(--mut)",marginTop:"2px"}},[today]));
-    dr.appendChild(el("div",{style:{marginTop:"6px",background:"rgba(206,17,38,0.08)",border:"1px solid rgba(206,17,38,0.2)",borderRadius:"4px",padding:"2px 8px",fontSize:"0.62rem",color:"var(--red)",fontFamily:"'JetBrains Mono'",fontWeight:"700"}},["ORDER: "+state.invRef]));
-    dh.appendChild(dr);
-    db.appendChild(dh);
-
-    var dp = div("inv-parties");
-    var df = el("div",{});
-    df.appendChild(el("div",{className:"inv-party-lbl"},["From"]));
-    df.appendChild(el("div",{className:"inv-party-name"},["Wasel Auto"]));
-    df.appendChild(el("div",{className:"inv-party-detail"},["Manama, Kingdom of Bahrain"]));
-    df.appendChild(el("div",{className:"inv-party-detail"},["+973 3384 4859"]));
-    dp.appendChild(df);
-    var dt = el("div",{});
-    dt.appendChild(el("div",{className:"inv-party-lbl"},["Bill To"]));
-    dt.appendChild(el("div",{className:"inv-party-name"},[state.invGarage.name||t("Customer","العميل")]));
-    if(state.invGarage.phone) dt.appendChild(el("div",{className:"inv-party-detail"},[state.invGarage.phone]));
-    if(state.invGarage.vehicle) dt.appendChild(el("div",{className:"inv-party-detail"},[state.invGarage.vehicle+(state.invGarage.plate?" · Plate: "+state.invGarage.plate:"")]));
-    dp.appendChild(dt);
-    db.appendChild(dp);
-
-    var tbl = el("table",{className:"inv-table"});
-    var thead = el("thead",{});
-    var thr = el("tr",{});
-    ["Description","Qty","Unit Price","Total"].forEach(function(h){thr.appendChild(el("th",{},[h]));});
-    thead.appendChild(thr);
-    tbl.appendChild(thead);
-    var tbody = el("tbody",{});
-    state.invItems.forEach(function(item){
-      var tr = el("tr",{});
-      var sp = Number(item.cost)*(1+Number(item.margin)/100);
-      var lt = sp*Number(item.qty);
-      tr.appendChild(el("td",{style:{fontWeight:"600"}},[item.desc]));
-      tr.appendChild(el("td",{},[item.qty]));
-      tr.appendChild(el("td",{dir:"ltr"},[sp.toFixed(3)+" BHD"]));
-      tr.appendChild(el("td",{dir:"ltr",style:{fontWeight:"700"}},[lt.toFixed(3)+" BHD"]));
-      tbody.appendChild(tr);
+  if(S.checkoutStep===0){
+    if(S.cart.length===0){
+      var emp=div("",null,{style:{textAlign:"center",padding:"3rem",background:"white",borderRadius:"12px",border:"1.5px solid var(--bdr)"}});
+      emp.appendChild(el("div",{style:{fontSize:"2.5rem",marginBottom:"0.8rem"}},["🛒"]));
+      emp.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.1rem",marginBottom:"0.5rem"}},["Your cart is empty"]));
+      emp.appendChild(el("div",{style:{color:"var(--mut)",fontSize:"0.85rem",marginBottom:"1rem"}},["Browse parts and add them to your cart"]));
+      emp.appendChild(btn("btn-r",S.ar?"تصفح القطع":"Browse Parts",function(){S.tab="browse";render();}));
+      wrap.appendChild(emp);
+      return wrap;
+    }
+    // Cart items
+    S.cart.forEach(function(item){
+      var ci=div("cart-item");
+      var info=div("cart-item-info");
+      info.appendChild(el("div",{className:"cart-item-name"},[S.ar?item.part.nameAr:item.part.name]));
+      info.appendChild(el("div",{className:"cart-item-meta"},[item.part.brand+" · "+item.part.cat]));
+      info.appendChild(el("div",{className:"cart-item-price"},[item.part.waselPrice.toFixed(3)+" BHD per unit"]));
+      ci.appendChild(info);
+      var qc=div("cart-qty");
+      qc.appendChild(el("button",{className:"qty-btn",onClick:function(){if(item.qty>1)item.qty--;else S.cart=S.cart.filter(function(i){return i.part.id!==item.part.id;});render();}},["−"]));
+      qc.appendChild(el("span",{style:{fontFamily:"'JetBrains Mono'",fontWeight:"700",minWidth:"24px",textAlign:"center"}},[item.qty]));
+      qc.appendChild(el("button",{className:"qty-btn",onClick:function(){item.qty++;render();}},["＋"]));
+      var del=btn("btn-gh btn-sm","🗑",function(){S.cart=S.cart.filter(function(i){return i.part.id!==item.part.id;});render();});
+      del.style.marginLeft="8px";
+      qc.appendChild(del);
+      ci.appendChild(qc);
+      ci.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.1rem",color:"var(--dark)",marginLeft:"auto",paddingLeft:"12px"}},[fmtBHD(item.part.waselPrice*item.qty)]));
+      wrap.appendChild(ci);
     });
-    tbl.appendChild(tbody);
-    db.appendChild(tbl);
-
-    var totbox = el("div",{style:{display:"flex",justifyContent:"flex-end"}});
-    var tbox = div("inv-totals-box");
-    [[t("Subtotal","المجموع الفرعي"),subtotal.toFixed(3)+" BHD"],
-     [t("VAT (0% — Wasel Auto)","ضريبة القيمة المضافة 0%"),"0.000 BHD"],
-    ].forEach(function(row){
-      var r = div("inv-total-row");
-      r.appendChild(el("span",{style:{color:"var(--mut)"}},[row[0]]));
-      r.appendChild(el("span",{dir:"ltr"},[row[1]]));
-      tbox.appendChild(r);
+    // Summary
+    var sub=S.cart.reduce(function(a,i){return a+i.part.waselPrice*i.qty;},0);
+    var fee=sub*0.045;
+    var total=sub+fee;
+    var cs=div("cart-summary");
+    [[S.ar?"المجموع الفرعي":"Subtotal",fmtBHD(sub)],[S.ar?"رسوم الخدمة (4.5%)":"Service Fee (4.5%)",fmtBHD(fee)]].forEach(function(r){
+      cs.appendChild(div("summary-row",[el("span",{},[r[0]]),el("span",{style:{fontWeight:"600"}},[r[1]])]));
     });
-    var gRow = div("inv-total-row grand");
-    gRow.appendChild(el("span",{},[t("TOTAL DUE","الإجمالي المستحق")]));
-    gRow.appendChild(el("span",{dir:"ltr"},[subtotal.toFixed(3)+" BHD"]));
-    tbox.appendChild(gRow);
-    var profRow = div("inv-profit-private");
-    profRow.appendChild(el("span",{},[t("🔒 Your Profit (Private)","🔒 ربحك الخاص (سري)")]));
-    profRow.appendChild(el("span",{dir:"ltr"},[profit.toFixed(3)+" BHD"]));
-    tbox.appendChild(profRow);
-    totbox.appendChild(tbox);
-    db.appendChild(totbox);
-
-    if(state.invNote) db.appendChild(el("div",{style:{background:"var(--surf2)",borderRadius:"7px",padding:"0.75rem",margin:"0.8rem 0",fontSize:"0.78rem",color:"var(--mut)"}},[el("strong",{},["Note: "]),state.invNote]));
-
-    var dfoot = div("inv-doc-footer");
-    dfoot.appendChild(el("div",{className:"inv-doc-footer-note"},["Parts sourced through Wasel Auto — Bahrain's Auto Parts Marketplace\nwasel-auto.vercel.app · +973 3384 4859"]));
-    dfoot.appendChild(el("div",{style:{textAlign:"right",fontSize:"0.7rem",color:"var(--mut)",fontFamily:"'JetBrains Mono'"}},["Order Ref: "+state.invRef+"\nInvoice: #"+state.invNum]));
-    db.appendChild(dfoot);
-    doc.appendChild(db);
-    doc.appendChild(div("inv-doc-bottombar"));
-    wrap.appendChild(doc);
-
-    // Actions
-    var waInv = "🧾 *INVOICE — Wasel Auto*\n━━━━━━━━━━━━━━━━━━━\nRef: #"+state.invNum+"\nOrder: "+state.invRef+"\nDate: "+today+"\n\n👤 Customer: "+(state.invGarage.name||"—")+"\n📞 "+(state.invGarage.phone||"—")+"\n🚗 "+(state.invGarage.vehicle||"—")+(state.invGarage.plate?" | Plate: "+state.invGarage.plate:"")+"\n\n📦 PARTS:\n"+state.invItems.map(function(i){var sp=(Number(i.cost)*(1+Number(i.margin)/100)*Number(i.qty)).toFixed(3);return "• "+i.desc+" (x"+i.qty+") — "+sp+" BHD";}).join("\n")+"\n\n━━━━━━━━━━━━━━━━━━━\n*TOTAL: "+subtotal.toFixed(3)+" BHD*\n━━━━━━━━━━━━━━━━━━━\n"+(state.invNote?"📝 "+state.invNote+"\n\n":"")+"_Wasel Auto 🇧🇭 wasel-auto.vercel.app_";
-    var acts = div("inv-actions");
-    acts.appendChild(btn("btn-d",t("🖨️ Print / PDF","🖨️ طباعة"),function(){
-      if(!state.invLogged){logInvoice({invNum:state.invNum,ref:state.invRef,garage:state.invGarage,items:state.invItems,subtotal:subtotal,profit:profit,waselFee:waselFee,date:today});state.invLogged=true;}
-      window.print();
-    }));
-    acts.appendChild(el("a",{href:"https://wa.me/?text="+encodeURIComponent(waInv),target:"_blank",rel:"noopener",className:"btn btn-wa",onClick:function(){if(!state.invLogged){logInvoice({invNum:state.invNum,ref:state.invRef,garage:state.invGarage,items:state.invItems,subtotal:subtotal,profit:profit,waselFee:waselFee,date:today});state.invLogged=true;}}},["💬 "+t("Send via WhatsApp","أرسل واتساب")]));
-    wrap.appendChild(acts);
+    var gr=div("summary-row total");
+    gr.appendChild(el("span",{},[S.ar?"الإجمالي":"TOTAL"]));
+    gr.appendChild(el("span",{style:{color:"var(--red)"}},[fmtBHD(total)]));
+    cs.appendChild(gr);
+    cs.appendChild(el("div",{style:{fontSize:"0.72rem",color:"var(--grn)",fontWeight:"600",marginTop:"8px"}},["✓ You save "+fmtBHD(S.cart.reduce(function(a,i){return a+(i.part.retailPrice-i.part.waselPrice)*i.qty;},0))+" vs retail prices"]));
+    wrap.appendChild(cs);
+    wrap.appendChild(el("div",{style:{display:"flex",gap:"8px",marginTop:"1rem"}},[
+      btn("btn-gh","← Continue Shopping",function(){S.tab="browse";render();}),
+      btn("btn-r btn-lg","Request Quotation →",function(){S.checkoutStep=1;render();}),
+    ]));
   }
 
+  if(S.checkoutStep===1){
+    var dp=div("panel");
+    dp.appendChild(makePHead("📋","Order Details","Fill in your details for the quotation"));
+    var db=div("pbody");
+    var cg=S.checkoutGarage;
+    var dg=div("fgrid");
+    dg.appendChild(ig("Garage / Company Name",inp("","e.g. VIP Auto Garage",cg.name,function(v){S.checkoutGarage.name=v;})));
+    dg.appendChild(ig("WhatsApp Number",inp("","+973 XXXX XXXX",cg.phone,function(v){S.checkoutGarage.phone=v;},{type:"tel",dir:"ltr"})));
+    dg.appendChild(ig("Vehicle (if applicable)",inp("","e.g. Toyota Camry 2020 for customer",cg.vehicle,function(v){S.checkoutGarage.vehicle=v;})));
+    dg.appendChild(ig("Delivery Preference",seldrop("",[{val:"pickup",label:"Pickup from Wasel Auto"},{val:"cod",label:"Cash on Delivery (COD)"}],S.checkoutDelivery,function(v){S.checkoutDelivery=v;})));
+    dg.appendChild(ig("Notes",inp("","Any special instructions…",cg.notes,function(v){S.checkoutGarage.notes=v;})));
+    db.appendChild(dg);
+    dp.appendChild(db);
+    wrap.appendChild(dp);
+    wrap.appendChild(el("div",{style:{display:"flex",gap:"8px"}},[
+      btn("btn-gh","← Back to Cart",function(){S.checkoutStep=0;render();}),
+      btn("btn-r btn-lg","Generate Quotation →",function(){
+        if(!S.checkoutGarage.name||!S.checkoutGarage.phone){showToast("Please fill garage name and WhatsApp number");return;}
+        generateQuotation();
+      }),
+    ]));
+  }
+
+  if(S.checkoutStep===2&&S.activeQT){
+    wrap.appendChild(renderQuotationDoc(S.activeQT));
+    var btnRow=div("doc-actions");
+    btnRow.appendChild(btn("btn-d","🖨️ Print / Download PDF",function(){window.print();}));
+    var qtWA=buildQTWhatsApp(S.activeQT);
+    btnRow.appendChild(el("a",{href:"https://wa.me/97333844859?text="+encodeURIComponent(qtWA),target:"_blank",rel:"noopener",className:"btn btn-wa"},["💬 Send to Wasel Auto"]));
+    btnRow.appendChild(btn("btn-gh","🛒 New Order",function(){S.cart=[];S.checkoutStep=0;S.activeQT=null;S.tab="browse";render();}));
+    wrap.appendChild(btnRow);
+    wrap.appendChild(el("div",{style:{background:"var(--gold2)",border:"1.5px solid var(--gold)",borderRadius:"10px",padding:"1rem",fontSize:"0.82rem",color:"#92400e",lineHeight:"1.7"}},[
+      el("strong",{},["Next Steps:"]),el("br"),
+      "1. Download or print your quotation above",el("br"),
+      "2. Pay via Benefit Pay to +973 3384 4859 (Sahaam) quoting ref: ",el("strong",{},[S.activeQT.ref]),el("br"),
+      "3. Send your payment screenshot to Wasel Auto WhatsApp: +973 3384 4859",el("br"),
+      "4. We confirm payment and send you your Invoice Number",el("br"),
+      "5. Go to ",el("strong",{},["My Invoices tab"])," → enter invoice number → download your paid invoice",
+    ]));
+  }
   return wrap;
 }
 
-function validateRef() {
-  var clean = state.invRefInput.trim().toUpperCase();
-  if (!clean) { state.invRefError = t("Please enter your order reference.","أدخل رقم المرجع."); render(); return; }
-  if (!clean.startsWith("WA-") || clean.length < 12) { state.invRefError = t("Invalid format. Example: WA-260725-1234","صيغة غير صحيحة. مثال: WA-260725-1234"); render(); return; }
-  state.invRefError = "";
-  state.invRef = clean;
-  state.invUnlocked = true;
-  if (state.preloadParts.length > 0) {
-    state.preloadParts.forEach(function(p){state.invItems.push({id:Date.now()+Math.random(),desc:p.name,cost:p.price,margin:20,qty:1});});
-    state.preloadParts = [];
-  }
-  render();
+function buildQTWhatsApp(qt){
+  var lines=["Hi Wasel Auto, here is my quotation request:","Ref: "+qt.ref,"Garage: "+(qt.garage.name||""),"Phone: "+(qt.garage.phone||""),""];
+  qt.items.forEach(function(it){lines.push("• "+it.name+" x"+it.qty+" — "+it.total.toFixed(3)+" BHD");});
+  lines.push("","Subtotal: "+qt.subtotal.toFixed(3)+" BHD");
+  lines.push("Service Fee: "+qt.serviceFee.toFixed(3)+" BHD");
+  lines.push("TOTAL: "+qt.total.toFixed(3)+" BHD");
+  lines.push("Delivery: "+(qt.delivery||"Pickup"));
+  if(qt.garage.notes)lines.push("Notes: "+qt.garage.notes);
+  lines.push("","I will pay via Benefit Pay and send the screenshot with this reference number.");
+  return lines.join("\n");
 }
 
-// ─── ADMIN TAB ─────────────────────────────────────────────────────────────────
-function renderAdmin() {
-  var wrap = div("admin-wrap");
-  if (!state.adminAuth) {
-    var lp = el("div",{style:{maxWidth:"400px",margin:"2rem auto",background:"white",borderRadius:"12px",border:"1.5px solid var(--bdr)",padding:"1.5rem"}});
-    lp.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1rem",textTransform:"uppercase",marginBottom:"1rem"}},["🔐 Wasel Auto — Admin Access"]));
-    var pwInp = el("input",{type:"password",className:"ifield",placeholder:"Enter admin password"});
-    pwInp.addEventListener("input",function(){state.adminPw=pwInp.value;});
-    pwInp.addEventListener("keydown",function(e){if(e.key==="Enter")doAdminLogin();});
-    lp.appendChild(ig("Password",pwInp));
-    lp.appendChild(el("div",{style:{height:"0.8rem"}}));
-    lp.appendChild(btn("btn-r btn-full","Login",doAdminLogin));
-    wrap.appendChild(lp);
-    return wrap;
-  }
-
-  var hdr = el("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1.2rem",flexWrap:"wrap",gap:"10px"}});
-  hdr.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.2rem",textTransform:"uppercase"}},["📊 Wasel Auto — Admin Dashboard"]));
-  hdr.appendChild(el("div",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.72rem",color:"var(--grn)",background:"var(--grn2)",padding:"4px 10px",borderRadius:"5px"}},["✓ Logged In"]));
-  wrap.appendChild(hdr);
-
-  // Ref generator
-  var rp = div("panel");
-  var rph = div("phead",null,{style:{background:"#0f172a",borderBottom:"2px solid var(--gold)"}});
-  rph.appendChild(el("div",{className:"phead-ico",style:{background:"var(--gold)"}},["🎫"]));
-  var rphI = el("div",{});
-  rphI.appendChild(el("div",{className:"phead-title"},["Order Reference Generator"]));
-  rphI.appendChild(el("div",{className:"phead-sub"},["Generate a unique ref for each paid order — send to garage via WhatsApp"]));
-  rph.appendChild(rphI);
-  rp.appendChild(rph);
-  var rpb = div("pbody");
-  var genRow = el("div",{style:{display:"flex",gap:"10px",alignItems:"center",flexWrap:"wrap",marginBottom:"1rem"}});
-  genRow.appendChild(btn("btn-gold","⚡ Generate New Reference",function(){
-    var ref = generateRef();
-    state.genRef = ref;
-    state.generatedRefs.unshift({ref:ref,date:new Date().toLocaleString()});
-    if(state.generatedRefs.length>20) state.generatedRefs.pop();
-    render();
-  }));
-  if (state.genRef) {
-    genRow.appendChild(el("div",{style:{background:"#0f172a",borderRadius:"8px",padding:"10px 16px",fontFamily:"'JetBrains Mono'",fontSize:"1.1rem",fontWeight:"700",color:"#4ade80",letterSpacing:"0.1em"}},[state.genRef]));
-    genRow.appendChild(btn("btn-d btn-sm","📋 Copy",function(){try{navigator.clipboard.writeText(state.genRef);}catch(e){} showToast("Copied: "+state.genRef);}));
-    var sendMsg = encodeURIComponent("Hi,\n\nYour Wasel Auto Order Reference:\n*"+state.genRef+"*\n\nGo to wasel-auto.vercel.app → Invoice tab → enter this reference to create your invoice.\n\nThank you for your order!\nWasel Auto 🇧🇭");
-    genRow.appendChild(el("a",{href:"https://wa.me/?text="+sendMsg,target:"_blank",rel:"noopener",className:"btn btn-wa btn-sm"},["💬 Send via WhatsApp"]));
-  }
-  rpb.appendChild(genRow);
-  rpb.appendChild(el("div",{style:{fontSize:"0.75rem",color:"var(--mut)",background:"var(--surf2)",padding:"0.75rem",borderRadius:"7px",lineHeight:"1.6"}},["How to use: After a garage pays (cash or transfer), click Generate → Copy the reference → Send it to the garage via WhatsApp. They enter it in the Invoice tab. Every reference is unique — no duplicates possible."]));
-  if (state.generatedRefs.length > 0) {
-    var rl = el("div",{style:{marginTop:"1rem"}});
-    rl.appendChild(el("div",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.68rem",color:"var(--mut)",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"0.5rem"}},["Recently Generated"]));
-    state.generatedRefs.slice(0,5).forEach(function(r){
-      var rr = el("div",{style:{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid var(--bdr)",fontSize:"0.78rem"}});
-      rr.appendChild(el("span",{style:{fontFamily:"'JetBrains Mono'",fontWeight:"700",color:"var(--grn)"}},[r.ref]));
-      rr.appendChild(el("span",{style:{color:"var(--mut)"}},[r.date]));
-      rl.appendChild(rr);
-    });
-    rpb.appendChild(rl);
-  }
-  rp.appendChild(rpb);
-  wrap.appendChild(rp);
-
-  // Invoice log
-  var log = getInvLog();
-  var lp2 = div("panel");
-  var lph = div("phead",null,{style:{background:"#0f172a"}});
-  lph.appendChild(el("div",{className:"phead-ico"},["📋"]));
-  var lphi = el("div",{});
-  lphi.appendChild(el("div",{className:"phead-title"},["Invoice Log — All Garages"]));
-  lphi.appendChild(el("div",{className:"phead-sub"},[log.length+" invoice"+(log.length!==1?"s":"")+" created"]));
-  lph.appendChild(lphi);
-  lp2.appendChild(lph);
-  var lpb = div("pbody");
-
-  if (log.length === 0) {
-    lpb.appendChild(el("div",{style:{textAlign:"center",padding:"2rem",color:"var(--mut)",fontSize:"0.85rem"}},["No invoices yet. They will appear here once garages use the invoice tool."]));
-  } else {
-    var sum = div("admin-summary");
-    var totalRev = log.reduce(function(a,l){return a+(l.subtotal||0);},0);
-    var totalFee = log.reduce(function(a,l){return a+(l.waselFee||0);},0);
-    [["Total Invoices",log.length],["Total Revenue",totalRev.toFixed(3)+" BHD"],["Wasel Fee (4.5%)",totalFee.toFixed(3)+" BHD"],["Avg Garage Profit",log.length>0?((log.reduce(function(a,l){return a+(l.profit||0);},0)/log.length).toFixed(3)+" BHD"):"—"]].forEach(function(s){
-      var sc = div("admin-stat");
-      sc.appendChild(el("div",{className:"admin-stat-lbl"},[s[0]]));
-      sc.appendChild(el("div",{className:"admin-stat-val"},[s[1]]));
-      sum.appendChild(sc);
-    });
-    lpb.appendChild(sum);
-    log.forEach(function(l){
-      var lr = div("admin-log-row");
-      var c1 = el("div",{}); c1.appendChild(el("span",{className:"admin-log-label"},["Invoice"])); c1.appendChild(el("span",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.78rem",fontWeight:"700"}},[l.invNum])); c1.appendChild(el("br")); c1.appendChild(el("span",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.68rem",color:"var(--mut)"}},[l.ref])); lr.appendChild(c1);
-      var c2 = el("div",{}); c2.appendChild(el("span",{className:"admin-log-label"},["Garage"])); c2.appendChild(el("span",{style:{fontSize:"0.8rem",fontWeight:"600"}},[(l.garage&&l.garage.name)||"—"])); c2.appendChild(el("br")); c2.appendChild(el("span",{style:{fontSize:"0.72rem",color:"var(--mut)"}},[(l.garage&&l.garage.phone)||""])); lr.appendChild(c2);
-      var c3 = el("div",{}); c3.appendChild(el("span",{className:"admin-log-label"},["Vehicle"])); c3.appendChild(el("span",{style:{fontSize:"0.78rem"}},[(l.garage&&l.garage.vehicle)||"—"])); c3.appendChild(el("br")); c3.appendChild(el("span",{style:{fontSize:"0.72rem",color:"var(--mut)"}},[l.date])); lr.appendChild(c3);
-      var c4 = el("div",{}); c4.appendChild(el("span",{className:"admin-log-label"},["Total / Profit"])); c4.appendChild(el("span",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.85rem"}},[(l.subtotal||0).toFixed(3)+" BHD"])); c4.appendChild(el("br")); c4.appendChild(el("span",{style:{fontSize:"0.72rem",color:"var(--grn)",fontWeight:"700"}},["Garage: +"+(l.profit||0).toFixed(3)+" BHD"])); lr.appendChild(c4);
-      lpb.appendChild(lr);
-    });
-  }
-  lp2.appendChild(lpb);
-  wrap.appendChild(lp2);
-  return wrap;
-}
-
-function doAdminLogin() {
-  if (state.adminPw === "wasel2026admin") { state.adminAuth = true; render(); }
-  else { showToast("Wrong password"); }
-}
-
-// ─── IMAGE HANDLER ─────────────────────────────────────────────────────────────
-function handleImageFile(file) {
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    state.imgSrc = ev.target.result;
-    state.imgB64 = ev.target.result.split(",")[1];
-    render();
+function generateQuotation(){
+  var sub=S.cart.reduce(function(a,i){return a+i.part.waselPrice*i.qty;},0);
+  var fee=sub*0.045;
+  var total=sub+fee;
+  var qt={
+    ref:genRef("QT"),date:today(),status:"pending_payment",
+    garage:Object.assign({},S.checkoutGarage),
+    delivery:S.checkoutDelivery,
+    items:S.cart.map(function(i){return{name:i.part.name,brand:i.part.brand,cat:i.part.cat,warranty:i.part.warranty,qty:i.qty,unitPrice:i.part.waselPrice,total:i.part.waselPrice*i.qty};}),
+    subtotal:sub,serviceFee:fee,total:total,
+    member:S.member?S.member.garageName:"Unknown",
   };
+  var log=getLog("wasel_quotations");log.unshift(qt);saveLog("wasel_quotations",log);
+  S.quotations=log;S.activeQT=qt;S.checkoutStep=2;render();
+}
+
+function renderQuotationDoc(qt){
+  var isInvoice=qt.status==="paid";
+  var wrap=div("pdf-doc");
+  wrap.appendChild(div("pdf-topbar"));
+  var body=div("pdf-body");
+  var hdr=div("pdf-header");
+  var ll=div("");
+  ll.appendChild(el("div",{className:"pdf-logo"},["Wasel ",el("span",{},["Auto"])]));
+  ll.appendChild(el("div",{className:"pdf-logo-sub"},["wasel-auto.vercel.app · +973 3384 4859"]));
+  ll.appendChild(el("div",{className:"pdf-logo-sub"},["waselauto26@gmail.com · Manama, Bahrain"]));
+  hdr.appendChild(ll);
+  var rr=div("pdf-right");
+  rr.appendChild(el("div",{className:"pdf-doc-type "+(isInvoice?"invoice":"quotation")},[isInvoice?"INVOICE":"QUOTATION"]));
+  rr.appendChild(el("div",{className:"pdf-ref"},[qt.ref]));
+  rr.appendChild(el("div",{className:"pdf-date"},[qt.date]));
+  rr.appendChild(el("div",{className:"pdf-status-badge "+(isInvoice?"badge-paid":qt.status==="pending_payment"?"badge-quot":"badge-pending")},[isInvoice?"✓ PAID":qt.status==="pending_payment"?"Awaiting Payment":"Pending"]));
+  if(qt.invoiceNum)rr.appendChild(el("div",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.68rem",color:"var(--grn)",marginTop:"4px",fontWeight:"700"}},["Invoice: "+qt.invoiceNum]));
+  hdr.appendChild(rr);body.appendChild(hdr);
+  var pp=div("pdf-parties");
+  var pf=div("");
+  pf.appendChild(el("div",{className:"pdf-party-lbl"},["From"]));
+  pf.appendChild(el("div",{className:"pdf-party-name"},["Wasel Auto"]));
+  pf.appendChild(el("div",{className:"pdf-party-detail"},["Manama, Kingdom of Bahrain"]));
+  pf.appendChild(el("div",{className:"pdf-party-detail"},["+973 3384 4859"]));
+  pp.appendChild(pf);
+  var pt=div("");
+  pt.appendChild(el("div",{className:"pdf-party-lbl"},["Bill To"]));
+  pt.appendChild(el("div",{className:"pdf-party-name"},[qt.garage.name||qt.member]));
+  if(qt.garage.phone)pt.appendChild(el("div",{className:"pdf-party-detail"},[qt.garage.phone]));
+  if(qt.garage.vehicle)pt.appendChild(el("div",{className:"pdf-party-detail"},["Vehicle: "+qt.garage.vehicle]));
+  pt.appendChild(el("div",{className:"pdf-party-detail"},["Delivery: "+qt.delivery]));
+  pp.appendChild(pt);body.appendChild(pp);
+  var tbl=el("table",{className:"pdf-table"});
+  var thead=el("thead",{});
+  var thr=el("tr",{});
+  ["Description","Brand","Category","Warranty","Qty","Unit Price BHD","Total BHD"].forEach(function(h){thr.appendChild(el("th",{},[h]));});
+  thead.appendChild(thr);tbl.appendChild(thead);
+  var tbody=el("tbody",{});
+  qt.items.forEach(function(item){
+    var tr=el("tr",{});
+    [item.name,item.brand,item.cat,item.warranty,item.qty,item.unitPrice.toFixed(3),item.total.toFixed(3)].forEach(function(v){tr.appendChild(el("td",{},[v]));});
+    tbody.appendChild(tr);
+  });
+  tbl.appendChild(tbody);body.appendChild(tbl);
+  var totbox=el("div",{style:{display:"flex",justifyContent:"flex-end"}});
+  var tbox=div("pdf-totals-box");
+  [["Subtotal",qt.subtotal.toFixed(3)+" BHD"],["Service Fee (4.5%)",qt.serviceFee.toFixed(3)+" BHD"]].forEach(function(r){
+    var rr2=div("pdf-total-row");rr2.appendChild(el("span",{style:{color:"var(--mut)"}},[r[0]]));rr2.appendChild(el("span",{},[r[1]]));tbox.appendChild(rr2);
+  });
+  var gr=div("pdf-total-row grand");gr.appendChild(el("span",{},[isInvoice?"TOTAL PAID":"TOTAL DUE"]));gr.appendChild(el("span",{style:{color:isInvoice?"var(--grn)":"var(--red)"}},[qt.total.toFixed(3)+" BHD"]));tbox.appendChild(gr);
+  totbox.appendChild(tbox);body.appendChild(totbox);
+  if(!isInvoice){
+    var bb=div("pdf-benefit-box");
+    bb.appendChild(el("div",{className:"pdf-benefit-title"},["Payment Instructions — Benefit Pay"]));
+    bb.appendChild(el("div",{className:"pdf-benefit-detail"},[
+      "Please pay the total amount of ",el("strong",{},[qt.total.toFixed(3)+" BHD"])," via Benefit Pay to:",el("br"),el("br"),
+      el("strong",{},["Account Number: +973 3384 4859"]),el("br"),
+      el("strong",{},["Account Name: Sahaam"]),el("br"),el("br"),
+      "⚠️ IMPORTANT: In the payment reference or note, write: ",el("strong",{},[qt.ref]),el("br"),
+      "Then WhatsApp your payment screenshot to +973 3384 4859 with this reference number.",el("br"),
+      "We will confirm and send your Invoice Number within 1–2 hours.",
+    ]));
+    body.appendChild(bb);
+  }
+  if(qt.garage.notes)body.appendChild(el("div",{style:{background:"var(--surf2)",borderRadius:"7px",padding:"0.75rem",marginBottom:"0.8rem",fontSize:"0.78rem",color:"var(--mut)"}},[el("strong",{},["Notes: "]),qt.garage.notes]));
+  var foot=div("pdf-footer");
+  foot.appendChild(el("div",{className:"pdf-footer-note"},["Parts sourced through Wasel Auto — Bahrain's Auto Parts Marketplace",el("br"),"wasel-auto.vercel.app · +973 3384 4859 · waselauto26@gmail.com"]));
+  body.appendChild(foot);
+  wrap.appendChild(body);
+  wrap.appendChild(div("pdf-bottombar"));
+  return wrap;
+}
+
+// ── VIN DECODE (free, static WMI prefix table — no API cost) ───────────
+var VIN_WMI = {
+  "JTD":"Toyota","JTM":"Toyota","JTN":"Toyota","JTE":"Toyota","JT":"Toyota",
+  "JN1":"Nissan","JN6":"Nissan","JN8":"Nissan","JN":"Nissan",
+  "WBA":"BMW","WBS":"BMW","WBY":"BMW","WBX":"BMW",
+  "WDD":"Mercedes","WDC":"Mercedes","WDB":"Mercedes","WDF":"Mercedes",
+  "1HG":"Honda","JHM":"Honda","SHH":"Honda","SHS":"Honda",
+  "1FA":"Ford","1FM":"Ford","1FT":"Ford","MAJ":"Ford",
+};
+function decodeVinMake(vin){
+  vin=(vin||"").toUpperCase().replace(/\s/g,"");
+  if(vin.length<2)return null;
+  if(VIN_WMI[vin.slice(0,3)])return VIN_WMI[vin.slice(0,3)];
+  if(VIN_WMI[vin.slice(0,2)])return VIN_WMI[vin.slice(0,2)];
+  return null;
+}
+
+// ── CATALOGUE HELPER (merges hardcoded PARTS with admin-approved supplier parts) ─
+function allParts(){
+  return PARTS.concat(getLog("wasel_extra_parts"));
+}
+
+// ── IMAGE UPLOAD (client-side only, free — no image is ever uploaded anywhere) ──
+function handleImg(file){
+  S.drag=false;
+  if(!file||!file.type||file.type.indexOf("image/")!==0){showToast("Please upload an image file");render();return;}
+  var reader=new FileReader();
+  reader.onload=function(e){S.imgSrc=e.target.result;S.imgB64=e.target.result;render();};
   reader.readAsDataURL(file);
 }
 
-// ─── AI SEARCH ────────────────────────────────────────────────────────────────
-async function doAISearch() {
-  if (!state.vin && !state.desc && !state.imgB64) return;
-  state.aiLoad = true; state.aiRes = null; state.hls = []; state.showRFQ = false;
-  render();
-  try {
-    var content = [];
-    if (state.imgB64) content.push({type:"image",source:{type:"base64",media_type:"image/jpeg",data:state.imgB64}});
-    content.push({type:"text",text:"VIN/Chassis: "+(state.vin||"not provided")+"\nDescription: "+(state.desc||"not provided")+(state.imgB64?"\nImage attached.":"")});
-    var res = await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:800,
-        system:"You are a GCC automotive parts expert. Identify parts from VIN, description or image. Respond ONLY with valid JSON no markdown: {\"partName\":\"string\",\"partNameAr\":\"string\",\"category\":\"string\",\"makes\":[\"string\"],\"models\":[\"string\"],\"yearRange\":{\"from\":0,\"to\":0},\"confidence\":\"high\",\"notes\":\"string\",\"notesAr\":\"string\"}",
-        messages:[{role:"user",content:content}]})
+// ── AI PART FINDER (free rule-based matcher — VIN prefix + keyword scoring) ────
+function doAI(){
+  if(!S.vin&&!S.desc&&!S.imgB64)return;
+  S.aiLoad=true;S.aiRes=null;S.hls=[];S.showRFQ=false;render();
+  setTimeout(function(){
+    var pool=allParts();
+    var vinMake=S.vin?decodeVinMake(S.vin):null;
+    var kw=(S.desc||"").toLowerCase().split(/\s+/).filter(function(w){return w.length>1;});
+    function score(p){
+      var s=0;
+      if(vinMake&&p.make===vinMake)s+=3;
+      if(kw.length){
+        var hay=(p.name+" "+p.nameAr+" "+p.cat+" "+p.make+" "+p.model+" "+p.brand).toLowerCase();
+        kw.forEach(function(w){if(hay.indexOf(w)>-1)s+=1;});
+      }
+      return s;
+    }
+    var scored=pool.map(function(p){return{p:p,s:score(p)};}).filter(function(x){return x.s>0;});
+    scored.sort(function(a,b){return b.s-a.s;});
+    var matches=scored.map(function(x){return x.p;}).slice(0,8);
+    S.hls=matches.map(function(p){return p.id;});
+    var makesFound=[],modelsFound=[];
+    matches.forEach(function(p){
+      if(p.make!=="Universal"&&makesFound.indexOf(p.make)===-1)makesFound.push(p.make);
+      if(p.model!=="All"&&modelsFound.indexOf(p.model)===-1)modelsFound.push(p.model);
     });
-    var data = await res.json();
-    var text = (data.content||[]).map(function(b){return b.text||"";}).join("");
-    var result = JSON.parse(text.replace(/```json|```/g,"").trim());
-    state.aiRes = result;
-    var ids = PARTS.filter(function(p){
-      return (result.models||[]).some(function(m){return p.model.toLowerCase().includes(m.toLowerCase());}) ||
-             (result.makes||[]).some(function(m){return p.make.toLowerCase().includes(m.toLowerCase());}) ||
-             (result.category && p.cat.toLowerCase() === result.category.toLowerCase()) ||
-             (result.partName && p.name.toLowerCase().includes(result.partName.toLowerCase().split(" ")[0]));
-    }).map(function(p){return p.id;});
-    state.hls = ids;
-    if (ids.length === 0) state.showRFQ = true;
-  } catch(e) { console.error(e); state.showRFQ = true; }
-  state.aiLoad = false;
-  render();
+    var yrs=matches.filter(function(p){return p.make!=="Universal";});
+    var yearRange=yrs.length?{from:Math.min.apply(null,yrs.map(function(p){return p.yf;})),to:Math.max.apply(null,yrs.map(function(p){return p.yt;}))}:null;
+    var guessName=S.desc?S.desc:(vinMake?vinMake+" — matching parts":(S.imgB64?"Part from photo":"Your search"));
+    var notes=[];
+    if(vinMake)notes.push("VIN suggests "+vinMake+".");
+    else if(S.vin)notes.push("Couldn't identify make from this VIN — try adding a description too.");
+    if(S.imgB64)notes.push("Photo attached — our team will visually confirm the exact match over WhatsApp.");
+    if(matches.length===0)notes.push("No exact match in our current catalogue — submit a request below and we'll source it from our supplier network in Bahrain, UAE & KSA.");
+    S.aiRes={
+      partName:guessName,partNameAr:guessName,
+      confidence:matches.length>=1&&matches.length<=2?"high":"medium",
+      makes:makesFound,models:modelsFound,yearRange:yearRange,
+      notes:notes.join(" "),
+    };
+    S.showRFQ=matches.length===0;
+    S.aiLoad=false;render();
+  },600);
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
+// ── PANEL HEADER HELPER ──────────────────────────────────────────────
+function makePHead(icon,title,sub){
+  var ph=div("phead");
+  ph.appendChild(el("div",{className:"phead-ico"},[icon]));
+  var t=div("");
+  t.appendChild(el("div",{className:"phead-title"},[title]));
+  if(sub)t.appendChild(el("div",{className:"phead-sub"},[sub]));
+  ph.appendChild(t);
+  return ph;
+}
+
+// ── RFQ BOX (request a part not found in catalogue) ─────────────────
+function rfqBox(){
+  var wrap=div("not-found-box");
+  if(S.rfqSent){
+    var sent=div("rfq-sent");
+    sent.appendChild(el("div",{style:{fontSize:"1.8rem",marginBottom:"6px"}},["✅"]));
+    sent.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1rem"}},[S.ar?"تم إرسال طلبك":"Request Sent!"]));
+    sent.appendChild(el("div",{style:{fontSize:"0.8rem",color:"var(--mut)",marginTop:"4px"}},[S.ar?"سنتواصل معك خلال ساعتين عبر واتساب":"We'll get back to you within 2 hours on WhatsApp"]));
+    wrap.appendChild(sent);
+    return wrap;
+  }
+  wrap.appendChild(el("div",{style:{fontSize:"1.6rem",marginBottom:"6px"}},["🔍"]));
+  wrap.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"0.95rem",marginBottom:"4px"}},[S.ar?"لم نجد القطعة؟ اطلبها الآن":"Can't find it? Request it"]));
+  wrap.appendChild(el("div",{style:{fontSize:"0.78rem",color:"var(--mut)",marginBottom:"0.8rem"}},[S.ar?"سنبحث عنها في شبكة الموردين لدينا":"We'll search our supplier network in Bahrain, UAE & KSA"]));
+  var form=div("rfq-form");
+  var g1=div("fgrid");
+  g1.appendChild(ig(S.ar?"اسم القطعة":"Part Needed",inp("",S.ar?"مثال: تيل فرامل":"e.g. front brake pads",S.rfqPart,function(v){S.rfqPart=v;})));
+  g1.appendChild(ig(S.ar?"الماركة":"Make",inp("","e.g. Toyota",S.rfqMake,function(v){S.rfqMake=v;})));
+  g1.appendChild(ig(S.ar?"الموديل":"Model",inp("","e.g. Camry 2020",S.rfqModel,function(v){S.rfqModel=v;})));
+  g1.appendChild(ig(S.ar?"رقم واتساب":"WhatsApp Number",inp("","+973 XXXX XXXX",S.rfqPhone,function(v){S.rfqPhone=v;},{type:"tel",dir:"ltr"})));
+  form.appendChild(g1);
+  var urg=div("",null,{style:{display:"flex",alignItems:"center",gap:"6px",marginTop:"0.6rem"}});
+  var cb=el("input",{type:"checkbox"});cb.checked=S.rfqUrgent;
+  cb.addEventListener("change",function(){S.rfqUrgent=cb.checked;});
+  urg.appendChild(cb);urg.appendChild(el("span",{style:{fontSize:"0.78rem"}},[S.ar?"عاجل":"This is urgent"]));
+  form.appendChild(urg);
+  form.appendChild(btn("btn-r btn-full",S.ar?"إرسال الطلب عبر واتساب":"Send Request via WhatsApp",function(){
+    if(!S.rfqPart||!S.rfqPhone){showToast("Please fill part name and phone number");return;}
+    var log=getLog("wasel_rfqs");
+    log.unshift({ref:genRef("RFQ"),date:today(),part:S.rfqPart,make:S.rfqMake,model:S.rfqModel,phone:S.rfqPhone,urgent:S.rfqUrgent,hadPhoto:!!S.imgB64,vin:S.vin,desc:S.desc});
+    saveLog("wasel_rfqs",log);
+    var msg="Hi Wasel Auto, I need a part:\nPart: "+S.rfqPart+"\nMake: "+S.rfqMake+"\nModel: "+S.rfqModel+(S.rfqUrgent?"\n⚡ URGENT":"")+(S.imgB64?"\n📷 I have a photo of the part I'll attach here":"");
+    window.open("https://wa.me/97333844859?text="+encodeURIComponent(msg),"_blank");
+    S.rfqSent=true;render();
+  }));
+  wrap.appendChild(form);
+  return wrap;
+}
+
+// ── SUPPLIER TAB ──────────────────────────────────────────────────────
+function renderSupplier(){
+  var wrap=div("psec");
+  var hero=div("sport-hero");
+  hero.appendChild(el("h2",{},[S.ar?"أضف قطعك إلى وصل أوتو":"List Your Parts on Wasel Auto"]));
+  hero.appendChild(el("p",{},[S.ar?"انضم كمورد ووصل قطعك لورش في جميع أنحاء البحرين":"Join as a supplier and reach garages across Bahrain — we handle all buyer communication for you"]));
+  wrap.appendChild(hero);
+  if(S._supplierSent){
+    var ok=div("rfq-sent");
+    ok.appendChild(el("div",{style:{fontSize:"1.8rem",marginBottom:"6px"}},["✅"]));
+    ok.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900"}},[S.ar?"تم استلام طلبك":"Submission Received"]));
+    ok.appendChild(el("div",{style:{fontSize:"0.8rem",color:"var(--mut)",marginTop:"4px",marginBottom:"0.8rem"}},[S.ar?"سيقوم فريق وصل أوتو بمراجعة قطعتك وإضافتها للكتالوج":"Our team will review and add your part to the live catalogue within 24 hours"]));
+    ok.appendChild(btn("btn-gh btn-sm",S.ar?"أضف قطعة أخرى":"List Another Part",function(){S._supplierSent=false;render();}));
+    wrap.appendChild(ok);
+    return wrap;
+  }
+  var panel=div("panel");
+  panel.appendChild(makePHead("➕","New Part Listing","Wasel Auto will contact you to confirm before it goes live"));
+  var body=div("pbody");
+  var f=S.supForm;
+  var g=div("fgrid");
+  g.appendChild(el("div",{className:"ff"},[fsecT("Part Details")]));
+  g.appendChild(ig("Part Name (English)",inp("","e.g. Toyota Genuine Oil Filter",f.name,function(v){f.name=v;})));
+  g.appendChild(ig("Part Name (Arabic)",inp("","مثال: فلتر زيت تويوتا",f.nameAr,function(v){f.nameAr=v;},{dir:"rtl"})));
+  g.appendChild(ig("Brand",inp("","e.g. Toyota, Bosch, Denso",f.brand,function(v){f.brand=v;})));
+  g.appendChild(ig("Category",seldrop("",CATS.filter(function(c){return c!=="All";}).map(function(c){return{label:c};}),f.cat,function(v){f.cat=v;})));
+  g.appendChild(el("div",{className:"ff"},[fsecT("Compatibility")]));
+  g.appendChild(ig("Make",inp("","e.g. Toyota",f.make,function(v){f.make=v;})));
+  g.appendChild(ig("Model",inp("","e.g. Land Cruiser",f.model,function(v){f.model=v;})));
+  g.appendChild(ig("Year From",inp("","e.g. 2015",f.yf,function(v){f.yf=v;},{type:"number"})));
+  g.appendChild(ig("Year To",inp("","e.g. 2024",f.yt,function(v){f.yt=v;},{type:"number"})));
+  g.appendChild(el("div",{className:"ff"},[fsecT("Pricing & Stock")]));
+  g.appendChild(ig("Your Price (BHD)",inp("","e.g. 25.000",f.price,function(v){f.price=v;},{type:"number",step:"0.001"})));
+  g.appendChild(ig("Part Type",seldrop("",[{label:"Genuine"},{label:"Aftermarket"}],f.type,function(v){f.type=v;})));
+  g.appendChild(ig("Quantity Available",inp("","e.g. 5",f.qty,function(v){f.qty=v;},{type:"number"})));
+  g.appendChild(ig("Warranty",inp("","e.g. 12 months",f.warranty,function(v){f.warranty=v;})));
+  g.appendChild(el("div",{className:"ff"},[fsecT("Your Contact")]));
+  g.appendChild(ig("WhatsApp Number",inp("","+973 XXXX XXXX",f.phone,function(v){f.phone=v;},{type:"tel",dir:"ltr"})));
+  body.appendChild(g);
+  panel.appendChild(body);
+  wrap.appendChild(panel);
+  wrap.appendChild(btn("btn-r btn-lg btn-full","Submit Part Listing",function(){
+    if(!f.name||!f.make||!f.price||!f.phone){showToast("Please fill part name, make, price and phone number");return;}
+    var entry=Object.assign({},f,{id:"P"+Date.now(),submittedDate:today(),status:"pending_review"});
+    var log=getLog("wasel_pending_parts");log.unshift(entry);saveLog("wasel_pending_parts",log);
+    S.pending=log;
+    S.supForm={name:"",nameAr:"",brand:"",make:"",model:"",yf:"",yt:"",price:"",type:"Genuine",cat:"Engine",qty:"",warranty:"12 months",phone:""};
+    S._supplierSent=true;render();
+  }));
+  return wrap;
+}
+
+// ── CUSTOMER-FACING INVOICE PREVIEW (no cost/margin ever shown) ──────
+function renderCustomerInvoicePreview(){
+  var wrap=div("cust-inv",null,{style:{marginTop:"1.2rem"}});
+  wrap.appendChild(div("cust-inv-topbar"));
+  var body=div("cust-inv-body");
+  var hdr=div("cust-inv-header");
+  var l=div("");
+  l.appendChild(el("div",{className:"cust-inv-garage-name"},[S.member?S.member.garageName:"Your Garage"]));
+  l.appendChild(el("div",{className:"cust-inv-garage-sub"},[S.invGarage.phone?("Contact: "+S.invGarage.phone):""]));
+  hdr.appendChild(l);
+  var r=div("cust-inv-right");
+  r.appendChild(el("div",{className:"cust-inv-title"},["INVOICE"]));
+  r.appendChild(el("div",{className:"cust-inv-ref"},[today()]));
+  hdr.appendChild(r);
+  body.appendChild(hdr);
+  var pp=div("pdf-parties");
+  var pt=div("");
+  pt.appendChild(el("div",{className:"pdf-party-lbl"},["Bill To"]));
+  pt.appendChild(el("div",{className:"pdf-party-name"},[S.invGarage.name||"Customer"]));
+  if(S.invGarage.phone)pt.appendChild(el("div",{className:"pdf-party-detail"},[S.invGarage.phone]));
+  if(S.invGarage.vehicle)pt.appendChild(el("div",{className:"pdf-party-detail"},["Vehicle: "+S.invGarage.vehicle]));
+  if(S.invGarage.plate)pt.appendChild(el("div",{className:"pdf-party-detail"},["Plate: "+S.invGarage.plate]));
+  pp.appendChild(pt);body.appendChild(pp);
+  var tbl=el("table",{className:"pdf-table"});
+  var thead=el("thead",{});var thr=el("tr",{});
+  ["Description","Qty","Unit Price BHD","Total BHD"].forEach(function(h){thr.appendChild(el("th",{},[h]));});
+  thead.appendChild(thr);tbl.appendChild(thead);
+  var tbody=el("tbody",{});
+  S.invItems.forEach(function(item){
+    var sell=item.cost*(1+(item.margin||0)/100);
+    var tr=el("tr",{});
+    [item.desc,item.qty,sell.toFixed(3),(sell*item.qty).toFixed(3)].forEach(function(v){tr.appendChild(el("td",{},[String(v)]));});
+    tbody.appendChild(tr);
+  });
+  tbl.appendChild(tbody);body.appendChild(tbl);
+  var total=S.invItems.reduce(function(a,i){return a+i.cost*(1+(i.margin||0)/100)*i.qty;},0);
+  var totbox=el("div",{style:{display:"flex",justifyContent:"flex-end"}});
+  var tb=div("pdf-totals-box");
+  var gr=div("pdf-total-row grand");gr.appendChild(el("span",{},["TOTAL"]));gr.appendChild(el("span",{},[total.toFixed(3)+" BHD"]));tb.appendChild(gr);
+  totbox.appendChild(tb);body.appendChild(totbox);
+  if(S.invNote)body.appendChild(el("div",{style:{background:"var(--surf2)",borderRadius:"7px",padding:"0.75rem",fontSize:"0.78rem",color:"var(--mut)"}},[S.invNote]));
+  body.appendChild(el("div",{style:{marginTop:"1rem",fontSize:"0.68rem",color:"var(--mut)"}},["Thank you for your business."]));
+  wrap.appendChild(body);
+  wrap.appendChild(div("cust-inv-bottombar"));
+  return wrap;
+}
+
+// ── MY INVOICES TAB (garage invoice builder — margin hidden from customer) ──
+function renderInvoices(){
+  var wrap=div("inv-wrap");
+  if(!S.member){wrap.appendChild(memberLockBanner());return wrap;}
+  if(!S.invUnlocked){
+    var lock=div("inv-lock");
+    lock.appendChild(el("div",{style:{fontSize:"2.2rem",marginBottom:"0.6rem"}},["🧾"]));
+    lock.appendChild(el("h2",{style:{fontFamily:"'Barlow'",fontWeight:"900",color:"white",fontSize:"1.2rem",marginBottom:"0.5rem"}},[S.ar?"أداة فاتورة الورشة":"Garage Invoice Builder"]));
+    lock.appendChild(el("p",{style:{color:"#999",fontSize:"0.83rem",marginBottom:"1.2rem",lineHeight:"1.7"}},[S.ar?"أدخل رقم مرجع الفاتورة من وصل أوتو لبناء فاتورة عميلك":"Enter your Wasel Auto reference number to pull in your paid items and build your own customer invoice — your margin stays private."]));
+    var row=div("",null,{style:{display:"flex",gap:"8px"}});
+    var refI=el("input",{className:"ref-input",placeholder:"e.g. WA-260727-1234"});refI.value=S.invRefInput;
+    refI.addEventListener("input",function(){S.invRefInput=refI.value;});
+    refI.addEventListener("keydown",function(e){if(e.key==="Enter")unlockInv();});
+    row.appendChild(refI);
+    function unlockInv(){
+      var ref=(S.invRefInput||"").trim().toUpperCase();
+      if(!ref){S.invRefError="Please enter a reference number";render();return;}
+      var log=getLog("wasel_quotations");
+      var found=log.find(function(q){return q.ref.toUpperCase()===ref;});
+      if(!found){S.invRefError="Reference not found. Check your quotation document.";render();return;}
+      S.invRef=found.ref;S.invNum=found.invoiceNum||"";
+      S.invGarage={name:found.garage.name||"",phone:found.garage.phone||"",vehicle:found.garage.vehicle||"",plate:""};
+      S.invItems=found.items.map(function(it){return{desc:it.name,cost:it.unitPrice,margin:20,qty:it.qty};});
+      S.invRefError="";S.invUnlocked=true;render();
+    }
+    row.appendChild(btn("btn-gold","Unlock",unlockInv));
+    lock.appendChild(row);
+    if(S.invRefError)lock.appendChild(el("div",{className:"ref-error"},[S.invRefError]));
+    var stepsWrap=div("",null,{style:{marginTop:"1.2rem",textAlign:"left"}});
+    ["Complete your parts order and pay via Benefit Pay","Receive your Wasel Auto reference number","Enter it here to unlock your items","Add your service margin — your customer only ever sees the final price"].forEach(function(s,i){
+      var st=div("ref-step");
+      st.appendChild(el("div",{className:"ref-step-num"},[String(i+1)]));
+      st.appendChild(el("div",{},[s]));
+      stepsWrap.appendChild(st);
+    });
+    lock.appendChild(stepsWrap);
+    wrap.appendChild(lock);
+    return wrap;
+  }
+  wrap.appendChild(btn("btn-gh btn-sm","🔓 "+S.invRef+" — Change Reference",function(){S.invUnlocked=false;S.invRefInput="";S.invItems=[];render();}));
+  var cp=div("panel",null,{style:{marginTop:"0.8rem"}});
+  cp.appendChild(makePHead("👤","Customer Details","Shown on the invoice sent to your customer"));
+  var cb2=div("pbody");
+  var g0=div("fgrid");
+  var ig1=S.invGarage;
+  g0.appendChild(ig("Customer Name",inp("","Customer name",ig1.name,function(v){S.invGarage.name=v;})));
+  g0.appendChild(ig("Customer Phone",inp("","+973 XXXX XXXX",ig1.phone,function(v){S.invGarage.phone=v;},{type:"tel",dir:"ltr"})));
+  g0.appendChild(ig("Vehicle",inp("","e.g. Toyota Camry 2020",ig1.vehicle,function(v){S.invGarage.vehicle=v;})));
+  g0.appendChild(ig("Plate Number",inp("","e.g. 12345",ig1.plate,function(v){S.invGarage.plate=v;})));
+  cb2.appendChild(g0);cp.appendChild(cb2);wrap.appendChild(cp);
+
+  var ip=div("panel");
+  ip.appendChild(makePHead("📦","Items & Your Margin","Cost is what you paid Wasel Auto — margin is your profit, never shown to the customer"));
+  var ib=div("pbody");
+  S.invItems.forEach(function(item,idx){
+    var row=div("",null,{style:{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 0.7fr auto",gap:"8px",alignItems:"center",marginBottom:"8px",paddingBottom:"8px",borderBottom:"1px solid var(--bdr)"}});
+    row.appendChild(inp("","Description",item.desc,function(v){item.desc=v;}));
+    row.appendChild(inp("","Cost",item.cost,function(v){item.cost=parseFloat(v)||0;render();},{type:"number",step:"0.001"}));
+    row.appendChild(inp("","Margin %",item.margin,function(v){item.margin=parseFloat(v)||0;render();},{type:"number"}));
+    row.appendChild(inp("","Qty",item.qty,function(v){item.qty=parseInt(v)||1;render();},{type:"number"}));
+    row.appendChild(btn("btn-gh btn-sm","🗑",function(){S.invItems.splice(idx,1);render();}));
+    ib.appendChild(row);
+  });
+  var addRow=div("",null,{style:{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 0.7fr auto",gap:"8px",alignItems:"center",marginTop:"6px"}});
+  addRow.appendChild(inp("","New item description",S.invNewDesc,function(v){S.invNewDesc=v;}));
+  addRow.appendChild(inp("","Cost",S.invNewCost,function(v){S.invNewCost=v;},{type:"number",step:"0.001"}));
+  addRow.appendChild(inp("","Margin %",S.invNewMargin,function(v){S.invNewMargin=v;},{type:"number"}));
+  addRow.appendChild(inp("","Qty",S.invNewQty,function(v){S.invNewQty=v;},{type:"number"}));
+  addRow.appendChild(btn("btn-d btn-sm","＋",function(){
+    if(!S.invNewDesc||!S.invNewCost){showToast("Enter description and cost");return;}
+    S.invItems.push({desc:S.invNewDesc,cost:parseFloat(S.invNewCost)||0,margin:parseFloat(S.invNewMargin)||0,qty:parseInt(S.invNewQty)||1});
+    S.invNewDesc="";S.invNewCost="";S.invNewMargin="20";S.invNewQty="1";render();
+  }));
+  ib.appendChild(addRow);
+  ip.appendChild(ib);wrap.appendChild(ip);
+
+  var np=div("panel");
+  np.appendChild(makePHead("📝","Notes","Optional — shown on the customer invoice"));
+  var nb=div("pbody");
+  nb.appendChild(inp("","Any notes for the customer…",S.invNote,function(v){S.invNote=v;}));
+  np.appendChild(nb);wrap.appendChild(np);
+
+  var totalCost=S.invItems.reduce(function(a,i){return a+i.cost*i.qty;},0);
+  var totalSell=S.invItems.reduce(function(a,i){return a+i.cost*(1+(i.margin||0)/100)*i.qty;},0);
+  wrap.appendChild(el("div",{className:"inv-profit-note"},["💰 Your cost: "+fmtBHD(totalCost)+"  →  Customer pays: "+fmtBHD(totalSell)+"  →  Your profit: "+fmtBHD(totalSell-totalCost)]));
+  wrap.appendChild(btn("btn-r btn-lg btn-full","🖨️ Print / Download Customer Invoice",function(){
+    if(S.invItems.length===0){showToast("Add at least one item");return;}
+    window.print();
+  }));
+  wrap.appendChild(renderCustomerInvoicePreview());
+  return wrap;
+}
+
+// ── ADMIN DASHBOARD ───────────────────────────────────────────────────
+function renderAdmin(){
+  var wrap=div("admin-wrap");
+  if(!S.adminAuth){
+    var lock=div("member-gate",null,{style:{border:"2px solid var(--red)"}});
+    lock.appendChild(el("div",{style:{fontSize:"2rem",marginBottom:"0.6rem"}},["⚙️"]));
+    lock.appendChild(el("h2",{},["Admin Access"]));
+    lock.appendChild(el("p",{},["Enter admin password to manage quotations, suppliers and part requests"]));
+    var pw=el("input",{type:"password",className:"ref-input",placeholder:"Password",style:{marginBottom:"0.8rem",width:"100%"}});
+    pw.value=S.adminPw;
+    pw.addEventListener("input",function(){S.adminPw=pw.value;});
+    function tryAdmin(){
+      if(S.adminPw==="wasel2026"){S.adminAuth=true;S.adminPw="";render();}
+      else{showToast("Incorrect password");}
+    }
+    pw.addEventListener("keydown",function(e){if(e.key==="Enter")tryAdmin();});
+    lock.appendChild(pw);
+    lock.appendChild(btn("btn-r btn-full","Unlock",tryAdmin));
+    wrap.appendChild(lock);
+    return wrap;
+  }
+  wrap.appendChild(el("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1rem"}},[
+    el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.2rem"}},["Admin Dashboard"]),
+    btn("btn-gh btn-sm","Logout",function(){S.adminAuth=false;render();}),
+  ]));
+  var qLog=getLog("wasel_quotations");
+  var pending=getLog("wasel_pending_parts");
+  var rfqs=getLog("wasel_rfqs");
+  var totalRev=qLog.filter(function(q){return q.status==="paid";}).reduce(function(a,q){return a+q.total;},0);
+  var stats=div("admin-summary");
+  [["Total Quotations",qLog.length],["Awaiting Payment",qLog.filter(function(q){return q.status==="pending_payment";}).length],["Paid Invoices",qLog.filter(function(q){return q.status==="paid";}).length],["Revenue (Paid)",totalRev.toFixed(3)+" BHD"]].forEach(function(s){
+    var c=div("admin-stat");
+    c.appendChild(el("div",{className:"admin-stat-lbl"},[s[0]]));
+    c.appendChild(el("div",{className:"admin-stat-val"},[String(s[1])]));
+    stats.appendChild(c);
+  });
+  wrap.appendChild(stats);
+
+  var qp=div("panel");
+  qp.appendChild(makePHead("📄","Quotations",qLog.length+" total"));
+  var qb=div("pbody",null,{style:{padding:"0"}});
+  if(qLog.length===0)qb.appendChild(el("div",{style:{padding:"1rem",color:"var(--mut)",fontSize:"0.85rem"}},["No quotations yet"]));
+  qLog.forEach(function(q){
+    var row=div("admin-qt-row");
+    var c1=div("");c1.appendChild(el("span",{className:"admin-lbl"},["Ref"]));c1.appendChild(el("div",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.78rem",fontWeight:"700"}},[q.ref]));
+    var c2=div("");c2.appendChild(el("span",{className:"admin-lbl"},["Garage"]));c2.appendChild(el("div",{style:{fontSize:"0.8rem"}},[q.garage.name||q.member]));
+    var c3=div("");c3.appendChild(el("span",{className:"admin-lbl"},["Total / Status"]));c3.appendChild(el("div",{style:{fontSize:"0.8rem",fontWeight:"700"}},[q.total.toFixed(3)+" BHD — "+q.status]));
+    row.appendChild(c1);row.appendChild(c2);row.appendChild(c3);
+    var actions=div("",null,{style:{display:"flex",gap:"6px"}});
+    if(q.status!=="paid"){
+      actions.appendChild(btn("btn-grn btn-sm","Mark Paid",function(){
+        var idx=qLog.findIndex(function(x){return x.ref===q.ref;});
+        qLog[idx].status="paid";qLog[idx].invoiceNum=genRef("INV");
+        saveLog("wasel_quotations",qLog);
+        showToast("✓ Marked paid — Invoice "+qLog[idx].invoiceNum);render();
+      }));
+    } else {
+      actions.appendChild(el("span",{style:{fontSize:"0.7rem",color:"var(--grn)",fontWeight:"700"}},["✓ "+q.invoiceNum]));
+    }
+    row.appendChild(actions);
+    qb.appendChild(row);
+  });
+  qp.appendChild(qb);wrap.appendChild(qp);
+
+  var sp=div("panel");
+  sp.appendChild(makePHead("➕","Pending Supplier Listings",pending.length+" awaiting review"));
+  var sb=div("pbody",null,{style:{padding:"0.8rem"}});
+  if(pending.length===0)sb.appendChild(el("div",{style:{color:"var(--mut)",fontSize:"0.85rem"}},["No pending listings"]));
+  pending.forEach(function(p,idx){
+    var card=div("pending-card");
+    card.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.88rem"}},[p.name]));
+    card.appendChild(el("div",{style:{fontSize:"0.75rem",color:"var(--mut)",margin:"4px 0"}},[p.make+" "+p.model+" ("+p.yf+"–"+p.yt+") · "+p.brand+" · "+p.price+" BHD · Qty "+p.qty]));
+    card.appendChild(el("div",{style:{fontSize:"0.72rem",color:"var(--mut)"}},["Contact: "+p.phone]));
+    var acts=div("",null,{style:{display:"flex",gap:"6px",marginTop:"8px"}});
+    acts.appendChild(btn("btn-grn btn-sm","✓ Approve & List",function(){
+      var extra=getLog("wasel_extra_parts");
+      extra.unshift({id:"E"+Date.now(),name:p.name,nameAr:p.nameAr||p.name,cat:p.cat,make:p.make,model:p.model,yf:parseInt(p.yf)||2000,yt:parseInt(p.yt)||2025,waselPrice:parseFloat(p.price)||0,retailPrice:(parseFloat(p.price)||0)*1.15,type:p.type,brand:p.brand,qty:parseInt(p.qty)||1,warranty:p.warranty});
+      saveLog("wasel_extra_parts",extra);
+      var newPending=pending.filter(function(x,i){return i!==idx;});
+      saveLog("wasel_pending_parts",newPending);
+      showToast("✓ Listed in catalogue");render();
+    }));
+    acts.appendChild(btn("btn-gh btn-sm","✕ Reject",function(){
+      var newPending=pending.filter(function(x,i){return i!==idx;});
+      saveLog("wasel_pending_parts",newPending);render();
+    }));
+    card.appendChild(acts);
+    sb.appendChild(card);
+  });
+  sp.appendChild(sb);wrap.appendChild(sp);
+
+  var rp=div("panel");
+  rp.appendChild(makePHead("🔍","Customer Part Requests",rfqs.length+" received"));
+  var rb=div("pbody",null,{style:{padding:"0"}});
+  if(rfqs.length===0)rb.appendChild(el("div",{style:{padding:"1rem",color:"var(--mut)",fontSize:"0.85rem"}},["No requests yet"]));
+  rfqs.forEach(function(r){
+    var row=div("admin-qt-row",null,{style:{gridTemplateColumns:"1fr 1fr 1fr"}});
+    row.appendChild(div("",[el("span",{className:"admin-lbl"},["Part"]),el("div",{style:{fontSize:"0.8rem"}},[r.part+(r.urgent?" ⚡":"")])]));
+    row.appendChild(div("",[el("span",{className:"admin-lbl"},["Vehicle"]),el("div",{style:{fontSize:"0.8rem"}},[(r.make||"")+" "+(r.model||"")])]));
+    row.appendChild(div("",[el("span",{className:"admin-lbl"},["Contact"]),el("div",{style:{fontSize:"0.8rem"}},[r.phone])]));
+    rb.appendChild(row);
+  });
+  rp.appendChild(rb);wrap.appendChild(rp);
+  return wrap;
+}
+
 render();
 </script>
 </body>
