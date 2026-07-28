@@ -129,6 +129,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .aiconf{font-size:0.62rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;font-family:'JetBrains Mono';}
 .aiconf.high{background:rgba(21,128,61,0.2);color:#4ade80;border:1px solid rgba(21,128,61,0.4);}
 .aiconf.medium{background:rgba(206,17,38,0.2);color:#ff9090;border:1px solid rgba(206,17,38,0.3);}
+.aiconf.low{background:rgba(255,200,0,0.12);color:#fbbf24;border:1px solid rgba(255,200,0,0.3);}
 .ainm{font-family:'Barlow';font-size:1.1rem;font-weight:900;color:white;margin-top:3px;}
 .aitags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
 .aitag{font-size:0.65rem;font-family:'JetBrains Mono';background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:2px 7px;color:#ccc;}
@@ -255,6 +256,9 @@ var MEMBER_PINS = [
   { pin: "1234", garageName: "Demo Garage — Test Account", phone: "+973 0000 0000", memberSince: "July 2026", tier: "Demo" },
   { pin: "5678", garageName: "VIP Auto Garage", phone: "+973 1749 0211", memberSince: "July 2026", tier: "Member" },
 ];
+function allMemberPins(){
+  return MEMBER_PINS.concat(getLog("wasel_garage_pins"));
+}
 
 // ── PARTS DATA ────────────────────────────────────────────────────────
 var PARTS = [
@@ -460,7 +464,7 @@ function renderLoginModal(){
     var garName=(S._loginGarage||"").trim();
     if(!garName){S.pinError="Please enter your garage name";render();return;}
     if(pin.length<4){S.pinError="Please enter all 4 digits";render();return;}
-    var found=MEMBER_PINS.find(function(m){return m.pin===pin;});
+    var found=allMemberPins().find(function(m){return m.pin===pin;});
     if(found){
       S.member=Object.assign({},found,{garageName:garName||found.garageName});
       S.showLoginModal=false;S.pinInput=["","","",""];S.pinError="";S._loginGarage="";
@@ -525,7 +529,7 @@ function renderSearch(){
     var ab=div("aibox",null,{dir:"ltr"});
     var at=div("",null,{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}});
     var al=div("");
-    al.appendChild(el("div",{style:{fontSize:".6rem",color:"#666",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}},["AI IDENTIFIED"]));
+    al.appendChild(el("div",{style:{fontSize:".6rem",color:"#666",letterSpacing:".15em",textTransform:"uppercase",fontWeight:700}},[S.aiRes.label||"AI IDENTIFIED"]));
     al.appendChild(div("ainm",[S.ar?(S.aiRes.partNameAr||S.aiRes.partName):S.aiRes.partName]));
     at.appendChild(al);at.appendChild(span("aiconf "+(S.aiRes.confidence||"medium"),S.aiRes.confidence||"medium"));ab.appendChild(at);
     var tgs=div("aitags");
@@ -913,6 +917,9 @@ function handleImg(file){
 }
 
 // ── AI PART FINDER (free rule-based matcher — VIN prefix + keyword scoring) ────
+// IMPORTANT: this does NOT read photos — true image recognition needs a paid vision
+// model. A description is what actually drives matching; photos are attached to the
+// WhatsApp handoff for manual human confirmation instead of a fake "AI" claim.
 function doAI(){
   if(!S.vin&&!S.desc&&!S.imgB64)return;
   S.aiLoad=true;S.aiRes=null;S.hls=[];S.showRFQ=false;render();
@@ -921,15 +928,18 @@ function doAI(){
     var vinMake=S.vin?decodeVinMake(S.vin):null;
     var kw=(S.desc||"").toLowerCase().split(/\s+/).filter(function(w){return w.length>1;});
     function score(p){
-      var s=0;
+      var s=0,kwHit=false;
       if(vinMake&&p.make===vinMake)s+=3;
       if(kw.length){
         var hay=(p.name+" "+p.nameAr+" "+p.cat+" "+p.make+" "+p.model+" "+p.brand).toLowerCase();
-        kw.forEach(function(w){if(hay.indexOf(w)>-1)s+=1;});
+        kw.forEach(function(w){if(hay.indexOf(w)>-1){s+=2;kwHit=true;}});
       }
-      return s;
+      return{s:s,kwHit:kwHit};
     }
-    var scored=pool.map(function(p){return{p:p,s:score(p)};}).filter(function(x){return x.s>0;});
+    var scored=pool.map(function(p){var sc=score(p);return{p:p,s:sc.s,kwHit:sc.kwHit};}).filter(function(x){
+      // if a description was typed, it must actually text-match — a VIN match alone isn't enough once the person said what they need
+      return kw.length>0?x.kwHit:x.s>0;
+    });
     scored.sort(function(a,b){return b.s-a.s;});
     var matches=scored.map(function(x){return x.p;}).slice(0,8);
     S.hls=matches.map(function(p){return p.id;});
@@ -940,19 +950,34 @@ function doAI(){
     });
     var yrs=matches.filter(function(p){return p.make!=="Universal";});
     var yearRange=yrs.length?{from:Math.min.apply(null,yrs.map(function(p){return p.yf;})),to:Math.max.apply(null,yrs.map(function(p){return p.yt;}))}:null;
-    var guessName=S.desc?S.desc:(vinMake?vinMake+" — matching parts":(S.imgB64?"Part from photo":"Your search"));
+
+    var hasDesc=kw.length>0;
+    var label,guessName;
+    if(hasDesc){label="AI MATCHED";guessName=S.desc;}
+    else if(vinMake){label="COMPATIBLE WITH YOUR VEHICLE";guessName=vinMake+" — parts in this vehicle's range";}
+    else{label="PHOTO RECEIVED";guessName="Awaiting description";}
+
     var notes=[];
     if(vinMake)notes.push("VIN suggests "+vinMake+".");
-    else if(S.vin)notes.push("Couldn't identify make from this VIN — try adding a description too.");
-    if(S.imgB64)notes.push("Photo attached — our team will visually confirm the exact match over WhatsApp.");
-    if(matches.length===0)notes.push("No exact match in our current catalogue — submit a request below and we'll source it from our supplier network in Bahrain, UAE & KSA.");
+    else if(S.vin)notes.push("Couldn't identify the make from this VIN — try adding a text description too.");
+    if(S.imgB64&&!hasDesc)notes.push("We can't auto-read part photos yet (that needs a paid AI vision model) — type a short description above (e.g. \"fuel pump\") for an exact match, or submit the request below and our team will check your photo manually over WhatsApp.");
+    else if(S.imgB64)notes.push("Photo attached — our team will visually confirm the exact match over WhatsApp.");
+    if(!hasDesc&&vinMake)notes.push("These are all parts compatible with your vehicle, not a specific match — add a description to narrow it down.");
+    if(matches.length===0)notes.push("No match in our current catalogue — submit a request below and we'll source it from our supplier network in Bahrain, UAE & KSA.");
+
+    var confidence;
+    if(matches.length===0)confidence="low";
+    else if(hasDesc&&matches.length<=2)confidence="high";
+    else if(hasDesc)confidence="medium";
+    else confidence="low";
+
     S.aiRes={
-      partName:guessName,partNameAr:guessName,
-      confidence:matches.length>=1&&matches.length<=2?"high":"medium",
+      label:label,partName:guessName,partNameAr:guessName,
+      confidence:confidence,
       makes:makesFound,models:modelsFound,yearRange:yearRange,
       notes:notes.join(" "),
     };
-    S.showRFQ=matches.length===0;
+    S.showRFQ=matches.length===0||!hasDesc;
     S.aiLoad=false;render();
   },600);
 }
@@ -1236,6 +1261,48 @@ function renderAdmin(){
     stats.appendChild(c);
   });
   wrap.appendChild(stats);
+
+  var gp=div("panel");
+  gp.appendChild(makePHead("🔑","Garage Members & PINs","Generate login PINs for real garages — they use this PIN + their garage name to log in"));
+  var gb=div("pbody");
+  var genPins=getLog("wasel_garage_pins");
+  var allPinsList=MEMBER_PINS.concat(genPins);
+  var glist=div("",null,{style:{marginBottom:"1rem"}});
+  allPinsList.forEach(function(m,idx){
+    var row=div("admin-qt-row",null,{style:{gridTemplateColumns:"1fr 1fr 1fr auto"}});
+    row.appendChild(div("",[el("span",{className:"admin-lbl"},["Garage"]),el("div",{style:{fontSize:"0.8rem",fontWeight:"700"}},[m.garageName])]));
+    row.appendChild(div("",[el("span",{className:"admin-lbl"},["PIN"]),el("div",{style:{fontFamily:"'JetBrains Mono'",fontSize:"0.85rem",fontWeight:"700",letterSpacing:"2px"}},[m.pin])]));
+    row.appendChild(div("",[el("span",{className:"admin-lbl"},["Phone"]),el("div",{style:{fontSize:"0.78rem"}},[m.phone||""])]));
+    var isBuiltIn=idx<MEMBER_PINS.length;
+    if(isBuiltIn){
+      row.appendChild(el("span",{style:{fontSize:"0.68rem",color:"var(--mut)"}},["Built-in"]));
+    } else {
+      row.appendChild(btn("btn-gh btn-sm","🗑 Remove",function(){
+        var gIdx=idx-MEMBER_PINS.length;
+        var updated=genPins.filter(function(x,i){return i!==gIdx;});
+        saveLog("wasel_garage_pins",updated);render();
+      }));
+    }
+    glist.appendChild(row);
+  });
+  gb.appendChild(glist);
+
+  var newRow=div("fgrid");
+  newRow.appendChild(ig("Garage Name",inp("","e.g. Al Manama Auto Repair",S._newPinGarage||"",function(v){S._newPinGarage=v;})));
+  newRow.appendChild(ig("WhatsApp Phone",inp("","+973 XXXX XXXX",S._newPinPhone||"",function(v){S._newPinPhone=v;},{type:"tel",dir:"ltr"})));
+  gb.appendChild(newRow);
+  gb.appendChild(btn("btn-gold btn-full","🔑 Generate New PIN",function(){
+    if(!S._newPinGarage){showToast("Enter a garage name first");return;}
+    var existingPins=allMemberPins().map(function(m){return m.pin;});
+    var pin;
+    do{pin=String(Math.floor(1000+Math.random()*9000));}while(existingPins.indexOf(pin)>-1);
+    var entry={pin:pin,garageName:S._newPinGarage,phone:S._newPinPhone||"",memberSince:today(),tier:"Member"};
+    var log=getLog("wasel_garage_pins");log.push(entry);saveLog("wasel_garage_pins",log);
+    S._newPinGarage="";S._newPinPhone="";
+    showToast("✓ PIN "+pin+" created for "+entry.garageName+" — share it with them on WhatsApp");
+    render();
+  }));
+  gp.appendChild(gb);wrap.appendChild(gp);
 
   var qp=div("panel");
   qp.appendChild(makePHead("📄","Quotations",qLog.length+" total"));
