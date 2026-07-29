@@ -309,6 +309,7 @@ var S = {
   // ai search
   vin:"", desc:"", imgSrc:null, imgB64:null, drag:false,
   aiRes:null, aiLoad:false, hls:[], showRFQ:false,
+  searchMode:"single", bulkText:"", bulkResults:null,
   rfqPart:"", rfqMake:"", rfqModel:"", rfqPhone:"", rfqUrgent:false, rfqSent:false,
   // part modal
   selPart:null,
@@ -501,6 +502,31 @@ function renderSearch(){
   inner.appendChild(el("div",{className:"shero-title"},[S.ar?"ابحث عن أي قطعة غيار في البحرين":"Find Any Car Part in Bahrain"]));
   inner.appendChild(el("div",{className:"shero-sub"},[S.ar?"أدخل رقم الشاسيه، صف القطعة، أو ارفع صورة":"Enter VIN, describe the part, or upload a photo — we find it instantly"]));
   var sbox=div("sbox");
+  var modeRow=div("",null,{style:{display:"flex",gap:"6px",marginBottom:"0.9rem"}});
+  var singleBtn=btn(S.searchMode!=="bulk"?"btn-r btn-sm":"btn-gh btn-sm",S.ar?"🔍 قطعة واحدة":"🔍 Single Part",function(){S.searchMode="single";render();});
+  var bulkBtn=btn(S.searchMode==="bulk"?"btn-r btn-sm":"btn-gh btn-sm",S.ar?"📋 قائمة قطع":"📋 Multiple Parts List",function(){S.searchMode="bulk";render();});
+  modeRow.appendChild(singleBtn);modeRow.appendChild(bulkBtn);
+  sbox.appendChild(modeRow);
+
+  if(S.searchMode==="bulk"){
+    var bvi=inp("",S.ar?"مثال: JNRAZ2NY4E9041626":"e.g. JNRAZ2NY4E9041626",S.vin,function(v){S.vin=v;});
+    sbox.appendChild(ig(S.ar?"🚗 رقم الشاسيه (اختياري)":"🚗 VIN / Chassis Number (optional)",bvi));
+    var bTa=el("textarea",{rows:"8",placeholder:"Paste your parts list — one part per line, e.g.:\nPiston\nPiston Rings\nCrankshaft Bearings\nOil Pump\nSpark Plugs x4\nTiming Chain Kit",style:{width:"100%",padding:"10px",border:"1.5px solid var(--bdr)",borderRadius:"8px",fontFamily:"inherit",fontSize:"0.85rem",resize:"vertical"}});
+    bTa.value=S.bulkText||"";
+    bTa.addEventListener("input",function(){S.bulkText=bTa.value;});
+    sbox.appendChild(el("label",{className:"il",style:{marginTop:"0.7rem",display:"block"}},[S.ar?"📋 قائمة القطع المطلوبة":"📋 Parts Needed (one per line)"]));
+    sbox.appendChild(bTa);
+    sbox.appendChild(el("div",{style:{fontSize:"0.72rem",color:"var(--mut)",marginTop:"6px"}},["We match every line against our catalogue in one go — like pasting a garage enquiry list straight from WhatsApp. Numbers, dashes and quantities (e.g. \"x2\", \"2 Pcs\") are handled automatically."]));
+    var bbrow=div("",null,{style:{display:"flex",gap:"7px",marginTop:"0.8rem"}});
+    bbrow.appendChild(btn("btn-r btn-lg btn-full",S.aiLoad?"Searching…":"🔍 Find These Parts",doBulkAI,S.aiLoad||!S.bulkText||!S.bulkText.trim()));
+    if(S.bulkResults&&S.bulkResults.length>0)bbrow.appendChild(btn("btn-gh","Clear",function(){S.bulkText="";S.bulkResults=null;render();}));
+    sbox.appendChild(bbrow);
+    if(S.aiLoad)sbox.appendChild(div("loading",[div("spin"),"Matching your list against our catalogue…"]));
+    inner.appendChild(sbox);hero.appendChild(inner);wrap.appendChild(hero);
+    if(S.bulkResults&&S.bulkResults.length>0)wrap.appendChild(renderBulkResults());
+    return wrap;
+  }
+
   var srow=div("srow");
   var vi=inp("",S.ar?"مثال: JTDZN3EU0E329":"e.g. JTDZN3EU0E329",S.vin,function(v){S.vin=v;});
   vi.addEventListener("keydown",function(e){if(e.key==="Enter")doAI();});
@@ -665,7 +691,7 @@ function renderPartModal(part){
   if(S.member){
     acts.appendChild(btn("btn-r btn-full","🛒 Add to Cart",function(){
       var ex=S.cart.find(function(i){return i.part.id===part.id;});
-      if(ex)ex.qty+=1;else S.cart.push({part:part,qty:1});
+      if(ex)ex.qty+=1;else S.cart.push({part:part,qty:1,margin:20});
       S.selPart=null;
       showToast("✓ "+part.name+" added to cart");
     }));
@@ -708,7 +734,15 @@ function renderCart(){
       var info=div("cart-item-info");
       info.appendChild(el("div",{className:"cart-item-name"},[S.ar?item.part.nameAr:item.part.name]));
       info.appendChild(el("div",{className:"cart-item-meta"},[item.part.brand+" · "+item.part.cat]));
-      info.appendChild(el("div",{className:"cart-item-price"},[item.part.waselPrice.toFixed(3)+" BHD per unit"]));
+      info.appendChild(el("div",{className:"cart-item-price"},[item.part.waselPrice.toFixed(3)+" BHD per unit (Wasel price)"]));
+      var mrow=div("",null,{style:{display:"flex",alignItems:"center",gap:"6px",marginTop:"4px"}});
+      mrow.appendChild(el("span",{style:{fontSize:"0.68rem",color:"var(--mut)"}},[S.ar?"هامشك %":"Your margin %"]));
+      var mInp=el("input",{type:"number",value:item.margin!=null?item.margin:20,style:{width:"56px",padding:"3px 6px",fontSize:"0.75rem",border:"1px solid var(--bdr)",borderRadius:"5px"}});
+      mInp.addEventListener("input",function(){item.margin=parseFloat(mInp.value)||0;render();});
+      mrow.appendChild(mInp);
+      var sell=item.part.waselPrice*(1+(item.margin!=null?item.margin:20)/100);
+      mrow.appendChild(el("span",{style:{fontSize:"0.68rem",color:"var(--grn)",fontWeight:"600"}},["→ "+sell.toFixed(3)+" BHD to your customer"]));
+      info.appendChild(mrow);
       ci.appendChild(info);
       var qc=div("cart-qty");
       qc.appendChild(el("button",{className:"qty-btn",onClick:function(){if(item.qty>1)item.qty--;else S.cart=S.cart.filter(function(i){return i.part.id!==item.part.id;});render();}},["−"]));
@@ -721,6 +755,8 @@ function renderCart(){
       ci.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"900",fontSize:"1.1rem",color:"var(--dark)",marginLeft:"auto",paddingLeft:"12px"}},[fmtBHD(item.part.waselPrice*item.qty)]));
       wrap.appendChild(ci);
     });
+    var yourProfit=S.cart.reduce(function(a,i){return a+(i.part.waselPrice*((i.margin!=null?i.margin:20)/100))*i.qty;},0);
+    wrap.appendChild(el("div",{className:"inv-profit-note",style:{marginBottom:"1rem"}},["💰 Set your margin per item above — your estimated profit on this order: "+fmtBHD(yourProfit)+". This is for your reference only — it never appears on the Wasel Auto quotation or on your customer's invoice."]));
     // Summary
     var sub=S.cart.reduce(function(a,i){return a+i.part.waselPrice*i.qty;},0);
     var fee=sub*0.045;
@@ -804,7 +840,7 @@ function generateQuotation(){
     ref:genRef("QT"),date:today(),status:"pending_payment",
     garage:Object.assign({},S.checkoutGarage),
     delivery:S.checkoutDelivery,
-    items:S.cart.map(function(i){return{name:i.part.name,brand:i.part.brand,cat:i.part.cat,warranty:i.part.warranty,qty:i.qty,unitPrice:i.part.waselPrice,total:i.part.waselPrice*i.qty};}),
+    items:S.cart.map(function(i){return{name:i.part.name,brand:i.part.brand,cat:i.part.cat,warranty:i.part.warranty,qty:i.qty,unitPrice:i.part.waselPrice,total:i.part.waselPrice*i.qty,margin:i.margin!=null?i.margin:20};}),
     subtotal:sub,serviceFee:fee,total:total,
     member:S.member?S.member.garageName:"Unknown",
   };
@@ -926,6 +962,7 @@ function doAI(){
   setTimeout(function(){
     var pool=allParts();
     var vinMake=S.vin?decodeVinMake(S.vin):null;
+    if(vinMake)pool=pool.filter(function(p){return p.make===vinMake||p.make==="Universal";});
     var kw=(S.desc||"").toLowerCase().split(/\s+/).filter(function(w){return w.length>1;});
     function score(p){
       var s=0,kwHit=false;
@@ -982,7 +1019,123 @@ function doAI(){
   },600);
 }
 
-// ── PANEL HEADER HELPER ──────────────────────────────────────────────
+// ── BULK PART LIST PARSING ──────────────────────────────────────────
+// Handles pasted enquiry lists like: "1  Piston  _" or "Spark Plugs x4" or "AC Delco Sealant  3 Pcs"
+function parseBulkLine(raw){
+  var line=raw;
+  line=line.replace(/^\s*(sr\.?\s*no\.?|item)?\s*\d+[\.\):\-]?\s*/i,"");
+  var qty=1;
+  var parts=line.split(/\t|\s{2,}/).map(function(s){return s.trim();}).filter(Boolean);
+  if(parts.length>1){
+    var last=parts[parts.length-1];
+    if(/^\d+$/.test(last)){qty=parseInt(last)||1;parts.pop();}
+    else if(/^x?\s*\d+\s*(pcs|pieces|units)?\.?$/i.test(last)){qty=parseInt(last.replace(/\D/g,""))||1;parts.pop();}
+    else if(last==="_"||last==="-"){parts.pop();}
+    line=parts.join(" ");
+  } else {
+    var m=line.match(/\s+x\s*(\d+)\s*$/i)||line.match(/\s+(\d+)\s*pcs\.?\s*$/i);
+    if(m){qty=parseInt(m[1])||1;line=line.slice(0,m.index).trim();}
+  }
+  line=line.replace(/\s+/g," ").replace(/^[-_.\s]+|[-_.\s]+$/g,"").trim();
+  return{desc:line,qty:qty||1};
+}
+
+function doBulkAI(){
+  if(!S.bulkText||!S.bulkText.trim())return;
+  S.aiLoad=true;S.bulkResults=null;render();
+  setTimeout(function(){
+    var pool=allParts();
+    var vinMake=S.vin?decodeVinMake(S.vin):null;
+    if(vinMake)pool=pool.filter(function(p){return p.make===vinMake||p.make==="Universal";});
+    var lines=S.bulkText.split("\n").map(function(l){return l.trim();}).filter(Boolean);
+    var results=lines.map(function(raw){
+      var parsed=parseBulkLine(raw);
+      if(!parsed.desc)return null;
+      var kw=parsed.desc.toLowerCase().split(/\s+/).filter(function(w){return w.length>1;});
+      var best=null,bestScore=0;
+      pool.forEach(function(p){
+        var hay=(p.name+" "+p.nameAr+" "+p.cat+" "+p.make+" "+p.model+" "+p.brand).toLowerCase();
+        var s=0,hit=false;
+        kw.forEach(function(w){if(hay.indexOf(w)>-1){s+=2;hit=true;}});
+        if(vinMake&&p.make===vinMake)s+=1;
+        if(hit&&s>bestScore){bestScore=s;best=p;}
+      });
+      return{query:raw.trim(),desc:parsed.desc,qty:parsed.qty,match:best,selected:!!best};
+    }).filter(Boolean);
+    S.bulkResults=results;
+    S.aiLoad=false;render();
+  },700);
+}
+
+function renderBulkResults(){
+  var wrap=div("psec");
+  var matched=S.bulkResults.filter(function(r){return r.match;});
+  var missing=S.bulkResults.filter(function(r){return!r.match;});
+  wrap.appendChild(div("hlbanner",["⚡ "+matched.length+" of "+S.bulkResults.length+" parts found in our catalogue"]));
+  var panel=div("panel");
+  panel.appendChild(makePHead("📋","Match Results","Uncheck anything you don't need — matched items can be added to cart in one go"));
+  var pb=div("pbody",null,{style:{padding:"0"}});
+  S.bulkResults.forEach(function(r){
+    var row=div("",null,{style:{display:"flex",alignItems:"center",gap:"10px",padding:"0.7rem 1rem",borderBottom:"1px solid var(--bdr)",flexWrap:"wrap"}});
+    if(r.match){
+      var cb=el("input",{type:"checkbox"});cb.checked=r.selected;
+      cb.addEventListener("change",function(){r.selected=cb.checked;});
+      row.appendChild(cb);
+      var info=div("",null,{style:{flex:"1",minWidth:"160px"}});
+      info.appendChild(el("div",{style:{fontSize:"0.75rem",color:"var(--mut)"}},["You asked: "+r.query]));
+      info.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.88rem"}},["✓ "+r.match.name]));
+      info.appendChild(el("div",{style:{fontSize:"0.75rem",color:"var(--grn)",fontWeight:"600"}},[S.member?fmtBHD(r.match.waselPrice)+" per unit":"🔒 Login to view price"]));
+      row.appendChild(info);
+      var qInp=el("input",{type:"number",min:"1",style:{width:"52px",padding:"4px 6px",fontSize:"0.78rem",border:"1px solid var(--bdr)",borderRadius:"5px"}});
+      qInp.value=r.qty;
+      qInp.addEventListener("input",function(){r.qty=parseInt(qInp.value)||1;});
+      row.appendChild(qInp);
+    } else {
+      row.appendChild(el("span",{style:{fontSize:"1rem"}},["⚠️"]));
+      var info2=div("",null,{style:{flex:"1"}});
+      info2.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.88rem"}},[r.desc]));
+      info2.appendChild(el("div",{style:{fontSize:"0.75rem",color:"#fbbf24"}},["Not in current catalogue — will be requested from suppliers"]));
+      row.appendChild(info2);
+    }
+    pb.appendChild(row);
+  });
+  panel.appendChild(pb);wrap.appendChild(panel);
+
+  var actRow=div("",null,{style:{display:"flex",gap:"8px",marginTop:"0.9rem",flexWrap:"wrap"}});
+  if(matched.length>0){
+    actRow.appendChild(btn(S.member?"btn-r btn-lg":"btn-gold btn-lg",S.member?"🛒 Add Selected to Cart":"🔐 Login to Add to Cart",function(){
+      if(!S.member){S.showLoginModal=true;render();return;}
+      var added=0;
+      S.bulkResults.forEach(function(r){
+        if(r.match&&r.selected){
+          var ex=S.cart.find(function(i){return i.part.id===r.match.id;});
+          if(ex)ex.qty+=r.qty;else S.cart.push({part:r.match,qty:r.qty,margin:20});
+          added++;
+        }
+      });
+      showToast("✓ "+added+" parts added to cart");render();
+    }));
+  }
+  if(missing.length>0){
+    actRow.appendChild(btn("btn-d btn-lg","💬 Request "+missing.length+" Missing Part(s) via WhatsApp",function(){
+      var log=getLog("wasel_rfqs");
+      missing.forEach(function(r){
+        log.unshift({ref:genRef("RFQ"),date:today(),part:r.desc,make:vinMakeSafe(),model:"",phone:S.member?S.member.phone:"",urgent:false,hadPhoto:false,vin:S.vin,desc:r.desc,batch:true});
+      });
+      saveLog("wasel_rfqs",log);
+      var lines=["Hi Wasel Auto, I need these parts:"];
+      if(S.vin)lines.push("VIN: "+S.vin);
+      missing.forEach(function(r,i){lines.push((i+1)+". "+r.desc+(r.qty>1?" x"+r.qty:""));});
+      lines.push("","Please confirm availability and price.");
+      window.open("https://wa.me/97333844859?text="+encodeURIComponent(lines.join("\n")),"_blank");
+      showToast("✓ Request logged and sent");render();
+    }));
+  }
+  wrap.appendChild(actRow);
+  return wrap;
+}
+function vinMakeSafe(){try{return decodeVinMake(S.vin)||"";}catch(e){return"";}}
+
 function makePHead(icon,title,sub){
   var ph=div("phead");
   ph.appendChild(el("div",{className:"phead-ico"},[icon]));
@@ -1153,14 +1306,14 @@ function renderInvoices(){
       if(!found){S.invRefError="Reference not found. Check your quotation document.";render();return;}
       S.invRef=found.ref;S.invNum=found.invoiceNum||"";
       S.invGarage={name:found.garage.name||"",phone:found.garage.phone||"",vehicle:found.garage.vehicle||"",plate:""};
-      S.invItems=found.items.map(function(it){return{desc:it.name,cost:it.unitPrice,margin:20,qty:it.qty};});
+      S.invItems=found.items.map(function(it){return{desc:it.name,cost:it.unitPrice,margin:it.margin!=null?it.margin:20,qty:it.qty};});
       S.invRefError="";S.invUnlocked=true;render();
     }
     row.appendChild(btn("btn-gold","Unlock",unlockInv));
     lock.appendChild(row);
     if(S.invRefError)lock.appendChild(el("div",{className:"ref-error"},[S.invRefError]));
     var stepsWrap=div("",null,{style:{marginTop:"1.2rem",textAlign:"left"}});
-    ["Complete your parts order and pay via Benefit Pay","Receive your Wasel Auto reference number","Enter it here to unlock your items","Add your service margin — your customer only ever sees the final price"].forEach(function(s,i){
+    ["Complete your parts order and pay via Benefit Pay","Receive your Wasel Auto reference number","Enter it here to unlock your items — your margins from checkout carry over automatically","Adjust anything if needed — your customer only ever sees the final price"].forEach(function(s,i){
       var st=div("ref-step");
       st.appendChild(el("div",{className:"ref-step-num"},[String(i+1)]));
       st.appendChild(el("div",{},[s]));
