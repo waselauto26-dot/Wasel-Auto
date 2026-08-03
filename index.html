@@ -1522,6 +1522,39 @@ function renderAdmin(){
     rb.appendChild(row);
   });
   rp.appendChild(rb);wrap.appendChild(rp);
+
+  var loiLog=getLog("wasel_loi_registrations");
+  var lp=div("panel");
+  lp.appendChild(makePHead("🤝","LOI Registrations",loiLog.length+" supplier/garage sign-ups from wasel-auto.vercel.app/loi"));
+  var lb=div("pbody",null,{style:{padding:"0"}});
+  if(loiLog.length===0)lb.appendChild(el("div",{style:{padding:"1rem",color:"var(--mut)",fontSize:"0.85rem"}},["No registrations yet"]));
+  loiLog.forEach(function(r,idx){
+    var card=div("pending-card",null,{style:{borderColor:r.contacted?"var(--grn)":"#f59e0b"}});
+    var top=div("",null,{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}});
+    var left=div("");
+    left.appendChild(el("span",{className:"pdf-status-badge "+(r.type==="supplier"?"badge-quot":"badge-paid")},[r.typeLabel]));
+    left.appendChild(el("div",{style:{fontFamily:"'Barlow'",fontWeight:"700",fontSize:"0.9rem",marginTop:"4px"}},[r.company]));
+    left.appendChild(el("div",{style:{fontSize:"0.78rem",color:"var(--mut)"}},[r.contact+(r.role?" — "+r.role:"")+" · "+r.phone]));
+    if(r.email)left.appendChild(el("div",{style:{fontSize:"0.75rem",color:"var(--mut)"}},[r.email]));
+    left.appendChild(el("div",{style:{fontSize:"0.72rem",color:"var(--mut)",marginTop:"2px"}},[r.location+" · "+r.date+" · "+r.ref]));
+    var specKeys=Object.keys(r.specific||{});
+    var specText=specKeys.map(function(k){return r.specific[k]?k+": "+r.specific[k]:null;}).filter(Boolean).join(" · ");
+    if(specText)left.appendChild(el("div",{style:{fontSize:"0.72rem",color:"var(--mut)",marginTop:"4px",fontStyle:"italic"}},[specText]));
+    top.appendChild(left);
+    top.appendChild(el("span",{style:{fontSize:"0.68rem",fontWeight:"700",color:r.contacted?"var(--grn)":"#f59e0b",whiteSpace:"nowrap"}},[r.contacted?"✓ Contacted":"⏳ New"]));
+    card.appendChild(top);
+    var acts=div("",null,{style:{display:"flex",gap:"6px",marginTop:"8px"}});
+    acts.appendChild(el("a",{href:"https://wa.me/"+r.phone.replace(/[^0-9]/g,"")+"?text="+encodeURIComponent("Hi "+r.contact+", thank you for registering with Wasel Auto (ref "+r.ref+"). Let's get you set up — "),target:"_blank",rel:"noopener",className:"btn btn-wa btn-sm"},["💬 WhatsApp"]));
+    if(!r.contacted){
+      acts.appendChild(btn("btn-grn btn-sm","✓ Mark Contacted",function(){
+        loiLog[idx].contacted=true;saveLog("wasel_loi_registrations",loiLog);render();
+      }));
+    }
+    card.appendChild(acts);
+    lb.appendChild(card);
+  });
+  lp.appendChild(lb);wrap.appendChild(lp);
+
   return wrap;
 }
 
