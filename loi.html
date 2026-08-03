@@ -449,6 +449,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 <script>
 let currentType='supplier';
 
+function getLoiLog(){try{return JSON.parse(localStorage.getItem('wasel_loi_registrations')||'[]');}catch(e){return[];}}
+function saveLoiLog(d){try{localStorage.setItem('wasel_loi_registrations',JSON.stringify(d.slice(0,300)));}catch(e){}}
+
 function switchType(type,btn){
   currentType=type;
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
@@ -481,19 +484,26 @@ function generateLOI(){
   const typeLabel=currentType==='supplier'?'Parts Supplier':'Garage';
 
   let specificHTML='';
+  let specificData={};
   if(currentType==='supplier'){
     const s=document.getElementById('speciality').value;
     const i=document.getElementById('inventory').value;
     const p=document.getElementById('partsType').value;
     const y=document.getElementById('years').value;
     specificHTML=(s?'<div><strong>Parts Speciality:</strong> '+s+'</div>':'')+(p?'<div><strong>Parts Type:</strong> '+p+'</div>':'')+(i?'<div><strong>Inventory Size:</strong> '+i+'</div>':'')+(y?'<div><strong>Years in Business:</strong> '+y+'</div>':'');
+    specificData={speciality:s,inventory:i,partsType:p,years:y};
   } else {
     const m=document.getElementById('mechanics').value;
     const v=document.getElementById('vehicles').value;
     const sp=document.getElementById('spend').value;
     const c=document.getElementById('challenge').value;
     specificHTML=(m?'<div><strong>Number of Mechanics:</strong> '+m+'</div>':'')+(v?'<div><strong>Vehicle Types:</strong> '+v+'</div>':'')+(sp?'<div><strong>Monthly Parts Spend:</strong> '+sp+'</div>':'')+(c?'<div><strong>Main Challenge:</strong> '+c+'</div>':'');
+    specificData={mechanics:m,vehicles:v,spend:sp,challenge:c};
   }
+
+  const log=getLoiLog();
+  log.unshift({ref:ref,date:dateStr,timestamp:now.toISOString(),type:currentType,typeLabel:typeLabel,company:company,contact:contact,role:role,phone:phone,email:email,location:location,specific:specificData,contacted:false});
+  saveLoiLog(log);
 
   document.getElementById('successName').textContent=contact;
   document.getElementById('successPhone').textContent=phone;
