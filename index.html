@@ -245,7 +245,45 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 </head>
 <body>
 <div id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+// ── REAL PDF DOWNLOAD (free, client-side — html2canvas + jsPDF, no server) ──
+function downloadPDF(selector,filename){
+  var node=document.querySelector(selector);
+  if(!node){showToast("Nothing to download yet");return;}
+  if(typeof html2canvas==="undefined"||typeof window.jspdf==="undefined"){
+    showToast("PDF tool still loading — opening print dialog instead, choose \"Save as PDF\" there");
+    window.print();
+    return;
+  }
+  showToast("Preparing your PDF…");
+  html2canvas(node,{scale:2,useCORS:true,backgroundColor:"#ffffff"}).then(function(canvas){
+    var imgData=canvas.toDataURL("image/png");
+    var jsPDFCtor=window.jspdf.jsPDF;
+    var pdfW=210,pageH=297;
+    var pdfH=canvas.height*pdfW/canvas.width;
+    var pdf=new jsPDFCtor({orientation:"p",unit:"mm",format:"a4"});
+    if(pdfH<=pageH){
+      pdf.addImage(imgData,"PNG",0,0,pdfW,pdfH);
+    } else {
+      var heightLeft=pdfH,position=0;
+      pdf.addImage(imgData,"PNG",0,position,pdfW,pdfH);
+      heightLeft-=pageH;
+      while(heightLeft>0){
+        position=heightLeft-pdfH;
+        pdf.addPage();
+        pdf.addImage(imgData,"PNG",0,position,pdfW,pdfH);
+        heightLeft-=pageH;
+      }
+    }
+    pdf.save(filename);
+    showToast("✓ Downloaded "+filename);
+  }).catch(function(err){
+    showToast("Couldn't build the PDF — opening print dialog instead");
+    window.print();
+  });
+}
 // ══════════════════════════════════════════════════════════════════════
 // WASEL AUTO — COMPLETE PLATFORM
 // ══════════════════════════════════════════════════════════════════════
@@ -803,9 +841,10 @@ function renderCart(){
   if(S.checkoutStep===2&&S.activeQT){
     wrap.appendChild(renderQuotationDoc(S.activeQT));
     var btnRow=div("doc-actions");
-    btnRow.appendChild(btn("btn-d","🖨️ Print / Download PDF",function(){window.print();}));
+    btnRow.appendChild(btn("btn-d","⬇️ Download PDF",function(){downloadPDF(".pdf-doc","Wasel-Auto-Quotation-"+S.activeQT.ref+".pdf");}));
     var qtWA=buildQTWhatsApp(S.activeQT);
     btnRow.appendChild(el("a",{href:"https://wa.me/97333844859?text="+encodeURIComponent(qtWA),target:"_blank",rel:"noopener",className:"btn btn-wa"},["💬 Send to Wasel Auto"]));
+    btnRow.appendChild(btn("btn-gh btn-sm","🖨️ Print instead",function(){window.print();}));
     btnRow.appendChild(btn("btn-gh","🛒 New Order",function(){S.cart=[];S.checkoutStep=0;S.activeQT=null;S.tab="browse";render();}));
     wrap.appendChild(btnRow);
     wrap.appendChild(el("div",{style:{background:"var(--gold2)",border:"1.5px solid var(--gold)",borderRadius:"10px",padding:"1rem",fontSize:"0.82rem",color:"#92400e",lineHeight:"1.7"}},[
@@ -1369,7 +1408,11 @@ function renderInvoices(){
   var totalCost=S.invItems.reduce(function(a,i){return a+i.cost*i.qty;},0);
   var totalSell=S.invItems.reduce(function(a,i){return a+i.cost*(1+(i.margin||0)/100)*i.qty;},0);
   wrap.appendChild(el("div",{className:"inv-profit-note"},["💰 Your cost: "+fmtBHD(totalCost)+"  →  Customer pays: "+fmtBHD(totalSell)+"  →  Your profit: "+fmtBHD(totalSell-totalCost)]));
-  wrap.appendChild(btn("btn-r btn-lg btn-full","🖨️ Print / Download Customer Invoice",function(){
+  wrap.appendChild(btn("btn-r btn-lg btn-full","⬇️ Download Customer Invoice PDF",function(){
+    if(S.invItems.length===0){showToast("Add at least one item");return;}
+    downloadPDF(".cust-inv","Wasel-Auto-Invoice-"+(S.invRef||"customer")+".pdf");
+  }));
+  wrap.appendChild(btn("btn-gh btn-sm","🖨️ Print instead",function(){
     if(S.invItems.length===0){showToast("Add at least one item");return;}
     window.print();
   }));
@@ -1389,7 +1432,7 @@ function renderAdmin(){
     pw.value=S.adminPw;
     pw.addEventListener("input",function(){S.adminPw=pw.value;});
     function tryAdmin(){
-      if(S.adminPw==="wasel2026"){S.adminAuth=true;S.adminPw="";render();}
+      if(S.adminPw==="11Wasel@uto22"){S.adminAuth=true;S.adminPw="";render();}
       else{showToast("Incorrect password");}
     }
     pw.addEventListener("keydown",function(e){if(e.key==="Enter")tryAdmin();});
