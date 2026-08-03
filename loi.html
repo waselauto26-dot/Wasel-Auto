@@ -51,6 +51,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .ig{display:flex;flex-direction:column;gap:5px;}
 .il{font-size:0.67rem;font-weight:700;letter-spacing:0.1em;color:var(--mut);text-transform:uppercase;}
 .ifield{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:10px 13px;color:var(--txt);font-family:'Barlow';font-size:0.88rem;outline:none;transition:border 0.15s;width:100%;}
+.cat-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.cat-chip{display:flex;align-items:center;gap:6px;border:1.5px solid var(--bdr);padding:7px 12px;border-radius:99px;font-size:0.8rem;cursor:pointer;user-select:none;transition:.15s;background:var(--surf2);}
+.cat-chip.on{background:var(--red);color:white;border-color:var(--red);}
+.cat-chip input{accent-color:var(--red);}
 .ifield:focus{border-color:var(--red);background:white;}
 .ifield::placeholder{color:#bbb;}
 .sel{background:var(--surf2);border:1.5px solid var(--bdr);border-radius:7px;padding:10px 13px;color:var(--txt);font-family:'Barlow';font-size:0.88rem;font-weight:600;outline:none;cursor:pointer;appearance:none;width:100%;transition:border 0.15s;}
@@ -222,9 +226,25 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
       <div class="fsec" id="supplierFields">
         <div class="fsec-title">Parts & Inventory Details</div>
         <div class="fgrid">
+          <div class="ig" style="grid-column:1/-1;">
+            <label class="il">Parts Categories You Supply (select all that apply)</label>
+            <div class="cat-chips" id="catChips">
+              <label class="cat-chip"><input type="checkbox" value="Engine" onchange="toggleChip(this)"/> Engine</label>
+              <label class="cat-chip"><input type="checkbox" value="Brakes" onchange="toggleChip(this)"/> Brakes</label>
+              <label class="cat-chip"><input type="checkbox" value="Filters" onchange="toggleChip(this)"/> Filters</label>
+              <label class="cat-chip"><input type="checkbox" value="Oils & Fluids" onchange="toggleChip(this)"/> Oils &amp; Fluids</label>
+              <label class="cat-chip"><input type="checkbox" value="Suspension" onchange="toggleChip(this)"/> Suspension</label>
+              <label class="cat-chip"><input type="checkbox" value="Body Parts" onchange="toggleChip(this)"/> Body Parts</label>
+              <label class="cat-chip"><input type="checkbox" value="Cooling" onchange="toggleChip(this)"/> Cooling</label>
+              <label class="cat-chip"><input type="checkbox" value="Electronics" onchange="toggleChip(this)"/> Electronics</label>
+              <label class="cat-chip"><input type="checkbox" value="Tires & Wheels" onchange="toggleChip(this)"/> Tires &amp; Wheels</label>
+              <label class="cat-chip"><input type="checkbox" value="Interior" onchange="toggleChip(this)"/> Interior</label>
+              <label class="cat-chip"><input type="checkbox" value="Other" onchange="toggleChip(this)"/> Other</label>
+            </div>
+          </div>
           <div class="ig">
-            <label class="il">Parts Speciality</label>
-            <input class="ifield" id="speciality" placeholder="e.g. Toyota, BMW, Brakes…"/>
+            <label class="il">Makes / Brands You Specialise In</label>
+            <input class="ifield" id="speciality" placeholder="e.g. Toyota, BMW, Nissan…"/>
           </div>
           <div class="ig">
             <label class="il">Inventory Size</label>
@@ -439,18 +459,55 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
         <a class="wa-btn" id="waLink" href="#" target="_blank">
           💬 Send to Wasel Auto via WhatsApp
         </a>
-        <button class="sec-btn" onclick="window.print()">🖨️ Save as PDF / Print</button>
+        <button class="sec-btn" onclick="downloadLoiPDF()">⬇️ Download PDF</button>
+        <button class="sec-btn" onclick="window.print()">🖨️ Print instead</button>
         <button class="sec-btn" onclick="resetForm()">← Submit Another Registration</button>
       </div>
     </div>
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 let currentType='supplier';
 
 function getLoiLog(){try{return JSON.parse(localStorage.getItem('wasel_loi_registrations')||'[]');}catch(e){return[];}}
 function saveLoiLog(d){try{localStorage.setItem('wasel_loi_registrations',JSON.stringify(d.slice(0,300)));}catch(e){}}
+
+function toggleChip(input){
+  input.closest('.cat-chip').classList.toggle('on',input.checked);
+}
+
+function downloadLoiPDF(){
+  const node=document.getElementById('loiDoc');
+  if(!node)return;
+  if(typeof html2canvas==='undefined'||typeof window.jspdf==='undefined'){
+    window.print();return;
+  }
+  html2canvas(node,{scale:2,useCORS:true,backgroundColor:'#ffffff'}).then(function(canvas){
+    const imgData=canvas.toDataURL('image/png');
+    const jsPDFCtor=window.jspdf.jsPDF;
+    const pdfW=210,pageH=297;
+    const pdfH=canvas.height*pdfW/canvas.width;
+    const pdf=new jsPDFCtor({orientation:'p',unit:'mm',format:'a4'});
+    if(pdfH<=pageH){
+      pdf.addImage(imgData,'PNG',0,0,pdfW,pdfH);
+    } else {
+      let heightLeft=pdfH,position=0;
+      pdf.addImage(imgData,'PNG',0,position,pdfW,pdfH);
+      heightLeft-=pageH;
+      while(heightLeft>0){
+        position=heightLeft-pdfH;
+        pdf.addPage();
+        pdf.addImage(imgData,'PNG',0,position,pdfW,pdfH);
+        heightLeft-=pageH;
+      }
+    }
+    const ref=document.getElementById('refNum')?document.getElementById('refNum').innerText:'registration';
+    pdf.save('Wasel-Auto-LOI-'+ref+'.pdf');
+  }).catch(function(){window.print();});
+}
 
 function switchType(type,btn){
   currentType=type;
@@ -490,8 +547,9 @@ function generateLOI(){
     const i=document.getElementById('inventory').value;
     const p=document.getElementById('partsType').value;
     const y=document.getElementById('years').value;
-    specificHTML=(s?'<div><strong>Parts Speciality:</strong> '+s+'</div>':'')+(p?'<div><strong>Parts Type:</strong> '+p+'</div>':'')+(i?'<div><strong>Inventory Size:</strong> '+i+'</div>':'')+(y?'<div><strong>Years in Business:</strong> '+y+'</div>':'');
-    specificData={speciality:s,inventory:i,partsType:p,years:y};
+    const cats=Array.from(document.querySelectorAll('#catChips input:checked')).map(c=>c.value);
+    specificHTML=(cats.length?'<div><strong>Parts Categories:</strong> '+cats.join(', ')+'</div>':'')+(s?'<div><strong>Makes/Brands:</strong> '+s+'</div>':'')+(p?'<div><strong>Parts Type:</strong> '+p+'</div>':'')+(i?'<div><strong>Inventory Size:</strong> '+i+'</div>':'')+(y?'<div><strong>Years in Business:</strong> '+y+'</div>':'');
+    specificData={categories:cats,speciality:s,inventory:i,partsType:p,years:y};
   } else {
     const m=document.getElementById('mechanics').value;
     const v=document.getElementById('vehicles').value;
@@ -554,6 +612,11 @@ function resetForm(){
     const el=document.getElementById(id);
     if(el) el.value='';
   });
+  ['inventory','partsType','years','mechanics','vehicles','spend','challenge'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  document.querySelectorAll('#catChips input').forEach(c=>{c.checked=false;c.closest('.cat-chip').classList.remove('on');});
   document.getElementById('agree').checked=false;
   window.scrollTo(0,0);
 }
