@@ -229,9 +229,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 .lock-banner-sub{color:#888;font-size:0.75rem;margin-top:2px;}
 /* PRINT */
 @media print{
-  .nav,.apptabs,.doc-actions,.inv-wrap .btn,.admin-wrap,.lock-banner,.inv-profit-note{display:none!important;}
+  .nav,.apptabs,.doc-actions,.inv-wrap .btn,.admin-wrap,.lock-banner,.inv-profit-note,.inv-wrap>.panel{display:none!important;}
   .pdf-doc,.cust-inv{border:none;box-shadow:none;}
   body{background:white;}
+  @page{size:A4;margin:12mm;}
 }
 @media(max-width:520px){
   .srow,.fgrid,.pdf-parties,.admin-summary{grid-template-columns:1fr;}
@@ -245,45 +246,234 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;min-h
 </head>
 <body>
 <div id="app"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// ── REAL PDF DOWNLOAD (free, client-side — html2canvas + jsPDF, no server) ──
-function downloadPDF(selector,filename){
-  var node=document.querySelector(selector);
-  if(!node){showToast("Nothing to download yet");return;}
-  if(typeof html2canvas==="undefined"||typeof window.jspdf==="undefined"){
-    showToast("PDF tool still loading — opening print dialog instead, choose \"Save as PDF\" there");
-    window.print();
-    return;
-  }
-  showToast("Preparing your PDF…");
-  html2canvas(node,{scale:2,useCORS:true,backgroundColor:"#ffffff"}).then(function(canvas){
-    var imgData=canvas.toDataURL("image/png");
-    var jsPDFCtor=window.jspdf.jsPDF;
-    var pdfW=210,pageH=297;
-    var pdfH=canvas.height*pdfW/canvas.width;
-    var pdf=new jsPDFCtor({orientation:"p",unit:"mm",format:"a4"});
-    if(pdfH<=pageH){
-      pdf.addImage(imgData,"PNG",0,0,pdfW,pdfH);
-    } else {
-      var heightLeft=pdfH,position=0;
-      pdf.addImage(imgData,"PNG",0,position,pdfW,pdfH);
-      heightLeft-=pageH;
-      while(heightLeft>0){
-        position=heightLeft-pdfH;
-        pdf.addPage();
-        pdf.addImage(imgData,"PNG",0,position,pdfW,pdfH);
-        heightLeft-=pageH;
-      }
-    }
-    pdf.save(filename);
-    showToast("✓ Downloaded "+filename);
-  }).catch(function(err){
-    showToast("Couldn't build the PDF — opening print dialog instead");
-    window.print();
-  });
+// ── NATIVE PDF GENERATION (pure jsPDF — no DOM screenshotting, no CDN image-render
+// quirks. Draws the document directly so it's always clean, single-page when it fits,
+// and can NEVER accidentally include on-screen editing panels or margin data.) ────
+var PDF_RED="#CE1126",PDF_DARK="#111111",PDF_MUT="#777777",PDF_GOLD="#b45309",PDF_GRN="#15803d",PDF_BDR="#e0e0e0";
+var PAGE_W=210,PAGE_H=297,MARGIN=15,CONTENT_W=PAGE_W-MARGIN*2;
+
+function pdfReady(){return typeof window.jspdf!=="undefined";}
+
+function newPdfDoc(){
+  var jsPDFCtor=window.jspdf.jsPDF;
+  return new jsPDFCtor({orientation:"p",unit:"mm",format:"a4"});
 }
+
+function pdfHeader(doc,docType,ref,dateStr,statusText,statusColor){
+  doc.setFont("helvetica","bold");doc.setFontSize(19);doc.setTextColor(PDF_DARK);
+  doc.text("Wasel",MARGIN,22);
+  var w1=doc.getTextWidth("Wasel ");
+  doc.setTextColor(PDF_RED);doc.text("Auto",MARGIN+w1,22);
+  doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_MUT);
+  doc.text("wasel-auto.vercel.app  ·  +973 3384 4859",MARGIN,28);
+  doc.text("waselauto26@gmail.com  ·  Manama, Bahrain",MARGIN,32.5);
+
+  doc.setFont("helvetica","bold");doc.setFontSize(15);doc.setTextColor(PDF_RED);
+  doc.text(docType,PAGE_W-MARGIN,20,{align:"right"});
+  doc.setFont("courier","normal");doc.setFontSize(9);doc.setTextColor(PDF_DARK);
+  doc.text(ref,PAGE_W-MARGIN,25.5,{align:"right"});
+  doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_MUT);
+  doc.text(dateStr,PAGE_W-MARGIN,30,{align:"right"});
+  if(statusText){
+    doc.setFillColor(statusColor);
+    var sw=doc.getTextWidth(statusText)+6;
+    doc.roundedRect(PAGE_W-MARGIN-sw,32.5,sw,5.5,1.2,1.2,"F");
+    doc.setFont("helvetica","bold");doc.setFontSize(6.5);doc.setTextColor("#ffffff");
+    doc.text(statusText,PAGE_W-MARGIN-sw/2,36.2,{align:"center"});
+  }
+  doc.setDrawColor(PDF_RED);doc.setLineWidth(1);
+  doc.line(MARGIN,41,PAGE_W-MARGIN,41);
+  return 41;
+}
+
+function pdfParties(doc,y,fromName,fromLines,toLabel,toName,toLines){
+  doc.setFont("helvetica","bold");doc.setFontSize(7);doc.setTextColor(PDF_MUT);
+  doc.text("FROM",MARGIN,y+7);
+  doc.text(toLabel,MARGIN+95,y+7);
+  doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(PDF_DARK);
+  doc.text(fromName,MARGIN,y+13);
+  doc.text(toName,MARGIN+95,y+13);
+  doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_MUT);
+  var yy=y+18;
+  fromLines.forEach(function(l){doc.text(l,MARGIN,yy);yy+=4.2;});
+  var yy2=y+18;
+  toLines.forEach(function(l){doc.text(l,MARGIN+95,yy2);yy2+=4.2;});
+  return y+18+Math.max(fromLines.length,toLines.length)*4.2+4;
+}
+
+function pdfTableHeader(doc,y,cols){
+  doc.setFillColor(PDF_DARK);
+  doc.rect(MARGIN,y,CONTENT_W,7,"F");
+  doc.setFont("helvetica","bold");doc.setFontSize(6.8);doc.setTextColor("#ffffff");
+  var x=MARGIN+2;
+  cols.forEach(function(c){
+    doc.text(c.label,x,y+4.6,{align:c.align||"left"});
+    x+=c.w;
+  });
+  return y+7;
+}
+
+function pdfFooter(doc,pageNum,totalPages){
+  doc.setFont("helvetica","normal");doc.setFontSize(6.5);doc.setTextColor(PDF_MUT);
+  doc.text("Parts sourced through Wasel Auto — Bahrain's Auto Parts Marketplace",MARGIN,PAGE_H-10);
+  doc.text("wasel-auto.vercel.app  ·  +973 3384 4859",MARGIN,PAGE_H-6.5);
+  doc.text("Page "+pageNum+" of "+totalPages,PAGE_W-MARGIN,PAGE_H-6.5,{align:"right"});
+}
+
+function buildQuotationPDF(qt){
+  var doc=newPdfDoc();
+  var isInvoice=qt.status==="paid";
+  var statusText=isInvoice?"PAID":qt.status==="pending_payment"?"AWAITING PAYMENT":"PENDING";
+  var statusColor=isInvoice?PDF_GRN:qt.status==="pending_payment"?PDF_GOLD:PDF_RED;
+  var y=pdfHeader(doc,isInvoice?"INVOICE":"QUOTATION",qt.ref,qt.date,statusText,statusColor);
+  if(qt.invoiceNum){
+    doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(PDF_GRN);
+    doc.text("Invoice: "+qt.invoiceNum,PAGE_W-MARGIN,y-3,{align:"right"});
+  }
+  y=pdfParties(doc,y,"Wasel Auto",["Manama, Kingdom of Bahrain","+973 3384 4859"],"BILL TO",qt.garage.name,[qt.garage.phone,qt.garage.address?("Deliver to: "+qt.garage.address):""].filter(Boolean));
+
+  var cols=[
+    {label:"DESCRIPTION",w:52,align:"left"},
+    {label:"BRAND",w:24,align:"left"},
+    {label:"CATEGORY",w:24,align:"left"},
+    {label:"WARRANTY",w:22,align:"left"},
+    {label:"QTY",w:12,align:"center"},
+    {label:"UNIT",w:22,align:"right"},
+    {label:"TOTAL",w:22,align:"right"},
+  ];
+  var pageNum=1;
+  y=pdfTableHeader(doc,y,cols);
+  doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_DARK);
+  qt.items.forEach(function(item){
+    var descLines=doc.splitTextToSize(item.name,cols[0].w-3);
+    var rowH=Math.max(7,descLines.length*4+3);
+    if(y+rowH>PAGE_H-30){
+      doc.addPage();pageNum++;y=MARGIN;
+      y=pdfTableHeader(doc,y,cols);
+      doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_DARK);
+    }
+    var x=MARGIN+2;
+    doc.text(descLines,x,y+4.5);x+=cols[0].w;
+    doc.text(item.brand||"",x,y+4.5);x+=cols[1].w;
+    doc.text(item.cat||"",x,y+4.5);x+=cols[2].w;
+    doc.text(item.warranty||"",x,y+4.5);x+=cols[3].w;
+    doc.text(String(item.qty),x+cols[4].w-2,y+4.5,{align:"right"});x+=cols[4].w;
+    doc.text(item.unitPrice.toFixed(3),x+cols[5].w-2,y+4.5,{align:"right"});x+=cols[5].w;
+    doc.text(item.total.toFixed(3),x+cols[6].w-2,y+4.5,{align:"right"});
+    doc.setDrawColor(PDF_BDR);doc.setLineWidth(0.2);
+    doc.line(MARGIN,y+rowH,PAGE_W-MARGIN,y+rowH);
+    y+=rowH;
+  });
+  y+=4;
+  if(y>PAGE_H-60){doc.addPage();pageNum++;y=MARGIN;}
+  var totalsX=PAGE_W-MARGIN-55;
+  doc.setFont("helvetica","normal");doc.setFontSize(8.5);doc.setTextColor(PDF_MUT);
+  doc.text("Subtotal",totalsX,y+5);
+  doc.text(qt.subtotal.toFixed(3)+" BHD",PAGE_W-MARGIN,y+5,{align:"right"});
+  doc.text("Service Fee ("+((qt.serviceFeeRate||4.5))+"%)",totalsX,y+10.5);
+  doc.text(qt.serviceFee.toFixed(3)+" BHD",PAGE_W-MARGIN,y+10.5,{align:"right"});
+  doc.setDrawColor(PDF_DARK);doc.setLineWidth(0.3);
+  doc.line(totalsX,y+13.5,PAGE_W-MARGIN,y+13.5);
+  doc.setFont("helvetica","bold");doc.setFontSize(11);doc.setTextColor(PDF_DARK);
+  doc.text("TOTAL DUE",totalsX,y+20);
+  doc.setTextColor(PDF_RED);
+  doc.text(qt.total.toFixed(3)+" BHD",PAGE_W-MARGIN,y+20,{align:"right"});
+  y+=28;
+
+  if(!isInvoice){
+    if(y>PAGE_H-70){doc.addPage();pageNum++;y=MARGIN;}
+    doc.setFillColor("#fef3c7");doc.setDrawColor(PDF_GOLD);doc.setLineWidth(0.4);
+    var boxH=38;
+    doc.roundedRect(MARGIN,y,CONTENT_W,boxH,2,2,"FD");
+    doc.setFont("helvetica","bold");doc.setFontSize(9);doc.setTextColor("#92400e");
+    doc.text("PAYMENT INSTRUCTIONS — BENEFIT PAY",MARGIN+5,y+7);
+    doc.setFont("helvetica","normal");doc.setFontSize(7.8);
+    var lines=[
+      "Please pay 100% in advance — the full amount of "+qt.total.toFixed(3)+" BHD — via Benefit Pay to:",
+      "Account Number: +973 3384 4859      Account Name: Sahaam",
+      "IMPORTANT: In the payment reference or note, write: "+qt.ref,
+      "Then WhatsApp your payment screenshot to +973 3384 4859 with this reference number.",
+      "We will confirm and send your Invoice Number and Invoice PIN within 1–2 hours.",
+    ];
+    var ly=y+14;
+    lines.forEach(function(l){doc.text(l,MARGIN+5,ly);ly+=5.2;});
+  }
+
+  var totalPages=doc.internal.getNumberOfPages();
+  for(var i=1;i<=totalPages;i++){doc.setPage(i);pdfFooter(doc,i,totalPages);}
+  return doc;
+}
+
+function buildInvoicePDF(garageName,garageContact,invGarage,items,note){
+  var doc=newPdfDoc();
+  var y=pdfHeader(doc,"INVOICE",today(),new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase(),null,null);
+  // overwrite left header block with garage identity instead of Wasel Auto (this is the garage's own invoice to their customer)
+  doc.setFillColor("#ffffff");doc.rect(MARGIN,10,95,25,"F");
+  doc.setFont("helvetica","bold");doc.setFontSize(17);doc.setTextColor(PDF_DARK);
+  doc.text(garageName||"Your Garage",MARGIN,20);
+  doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_MUT);
+  if(garageContact)doc.text("Contact: "+garageContact,MARGIN,26);
+
+  y=pdfParties(doc,y,null,[],"BILL TO",invGarage.name||"Customer",[invGarage.phone||"",invGarage.vehicle?("Vehicle: "+invGarage.vehicle):"",invGarage.plate?("Plate: "+invGarage.plate):""].filter(Boolean));
+
+  var cols=[
+    {label:"DESCRIPTION",w:96,align:"left"},
+    {label:"QTY",w:22,align:"center"},
+    {label:"UNIT PRICE BHD",w:31,align:"right"},
+    {label:"TOTAL BHD",w:31,align:"right"},
+  ];
+  var pageNum=1;
+  y=pdfTableHeader(doc,y,cols);
+  doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_DARK);
+  var grandTotal=0;
+  items.forEach(function(item){
+    var sell=item.cost*(1+(item.margin||0)/100);
+    var lineTotal=sell*item.qty;
+    grandTotal+=lineTotal;
+    var descLines=doc.splitTextToSize(item.desc,cols[0].w-3);
+    var rowH=Math.max(7,descLines.length*4+3);
+    if(y+rowH>PAGE_H-30){
+      doc.addPage();pageNum++;y=MARGIN;
+      y=pdfTableHeader(doc,y,cols);
+      doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(PDF_DARK);
+    }
+    var x=MARGIN+2;
+    doc.text(descLines,x,y+4.5);x+=cols[0].w;
+    doc.text(String(item.qty),x+cols[1].w-2,y+4.5,{align:"right"});x+=cols[1].w;
+    doc.text(sell.toFixed(3),x+cols[2].w-2,y+4.5,{align:"right"});x+=cols[2].w;
+    doc.text(lineTotal.toFixed(3),x+cols[3].w-2,y+4.5,{align:"right"});
+    doc.setDrawColor(PDF_BDR);doc.setLineWidth(0.2);
+    doc.line(MARGIN,y+rowH,PAGE_W-MARGIN,y+rowH);
+    y+=rowH;
+  });
+  y+=6;
+  if(y>PAGE_H-45){doc.addPage();pageNum++;y=MARGIN;}
+  var totalsX=PAGE_W-MARGIN-55;
+  doc.setDrawColor(PDF_DARK);doc.setLineWidth(0.3);
+  doc.line(totalsX,y,PAGE_W-MARGIN,y);
+  doc.setFont("helvetica","bold");doc.setFontSize(11);doc.setTextColor(PDF_DARK);
+  doc.text("TOTAL",totalsX,y+7);
+  doc.text(grandTotal.toFixed(3)+" BHD",PAGE_W-MARGIN,y+7,{align:"right"});
+  y+=16;
+  if(note){
+    doc.setFont("helvetica","normal");doc.setFontSize(7.8);doc.setTextColor(PDF_MUT);
+    var noteLines=doc.splitTextToSize(note,CONTENT_W-6);
+    if(y+noteLines.length*4.2+8>PAGE_H-25){doc.addPage();pageNum++;y=MARGIN;}
+    doc.setFillColor("#f0f0f0");
+    doc.rect(MARGIN,y,CONTENT_W,noteLines.length*4.2+6,"F");
+    doc.text(noteLines,MARGIN+4,y+6);
+    y+=noteLines.length*4.2+10;
+  }
+  doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.setTextColor(PDF_MUT);
+  doc.text("Thank you for your business.",MARGIN,y+2);
+
+  var totalPages=doc.internal.getNumberOfPages();
+  for(var i=1;i<=totalPages;i++){doc.setPage(i);pdfFooter(doc,i,totalPages);}
+  return doc;
+}
+
 // ══════════════════════════════════════════════════════════════════════
 // WASEL AUTO — COMPLETE PLATFORM
 // ══════════════════════════════════════════════════════════════════════
@@ -355,7 +545,8 @@ var S = {
   quotations:[], // stored quotations
   activeQuotation:null,
   // invoice tool (garage margin)
-  invUnlocked:false, invRefInput:"", invRefError:"", invRef:"", invNum:"",
+  invUnlocked:false, invRefInput:"", invPinInput:"", invRefError:"", invRef:"", invNum:"",
+  invMarginMode:"item", invOverallMargin:20,
   invGarage:{name:"",phone:"",vehicle:"",plate:""},
   invItems:[], invNote:"", invNewDesc:"", invNewCost:"", invNewMargin:"20", invNewQty:"1",
   invLogged:false, preloadParts:[],
@@ -367,8 +558,8 @@ var S = {
   toast:null,
   // checkout
   checkoutStep:0, // 0=cart, 1=details, 2=quotation generated
-  checkoutGarage:{name:"",phone:"",vehicle:"",notes:""},
-  checkoutDelivery:"pickup",
+  checkoutGarage:{name:"",phone:"",vehicle:"",address:"",notes:""},
+  marginMode:"item",overallMargin:20,
   activeQT:null,
 };
 
@@ -766,6 +957,26 @@ function renderCart(){
       wrap.appendChild(emp);
       return wrap;
     }
+    // Margin mode toggle
+    var mmRow=div("",null,{style:{display:"flex",gap:"6px",marginBottom:"0.9rem",alignItems:"center",flexWrap:"wrap"}});
+    mmRow.appendChild(el("span",{style:{fontSize:"0.75rem",color:"var(--mut)",fontWeight:"600"}},["Margin:"]));
+    mmRow.appendChild(btn(S.marginMode!=="overall"?"btn-r btn-sm":"btn-gh btn-sm","Per Item",function(){S.marginMode="item";render();}));
+    mmRow.appendChild(btn(S.marginMode==="overall"?"btn-r btn-sm":"btn-gh btn-sm","One Overall %",function(){
+      S.marginMode="overall";
+      S.cart.forEach(function(i){i.margin=S.overallMargin!=null?S.overallMargin:20;});
+      render();
+    }));
+    if(S.marginMode==="overall"){
+      var omInp=el("input",{type:"number",value:S.overallMargin!=null?S.overallMargin:20,style:{width:"60px",padding:"4px 7px",fontSize:"0.8rem",border:"1px solid var(--bdr)",borderRadius:"5px"}});
+      omInp.addEventListener("input",function(){
+        S.overallMargin=parseFloat(omInp.value)||0;
+        S.cart.forEach(function(i){i.margin=S.overallMargin;});
+        render();
+      });
+      mmRow.appendChild(omInp);
+      mmRow.appendChild(el("span",{style:{fontSize:"0.75rem",color:"var(--mut)"}},["% applied to every item"]));
+    }
+    wrap.appendChild(mmRow);
     // Cart items
     S.cart.forEach(function(item){
       var ci=div("cart-item");
@@ -775,7 +986,7 @@ function renderCart(){
       info.appendChild(el("div",{className:"cart-item-price"},[item.part.waselPrice.toFixed(3)+" BHD per unit (Wasel price)"]));
       var mrow=div("",null,{style:{display:"flex",alignItems:"center",gap:"6px",marginTop:"4px"}});
       mrow.appendChild(el("span",{style:{fontSize:"0.68rem",color:"var(--mut)"}},[S.ar?"هامشك %":"Your margin %"]));
-      var mInp=el("input",{type:"number",value:item.margin!=null?item.margin:20,style:{width:"56px",padding:"3px 6px",fontSize:"0.75rem",border:"1px solid var(--bdr)",borderRadius:"5px"}});
+      var mInp=el("input",{type:"number",value:item.margin!=null?item.margin:20,disabled:S.marginMode==="overall",style:{width:"56px",padding:"3px 6px",fontSize:"0.75rem",border:"1px solid var(--bdr)",borderRadius:"5px",opacity:S.marginMode==="overall"?"0.5":"1"}});
       mInp.addEventListener("input",function(){item.margin=parseFloat(mInp.value)||0;render();});
       mrow.appendChild(mInp);
       var sell=item.part.waselPrice*(1+(item.margin!=null?item.margin:20)/100);
@@ -824,15 +1035,16 @@ function renderCart(){
     dg.appendChild(ig("Garage / Company Name",inp("","e.g. VIP Auto Garage",cg.name,function(v){S.checkoutGarage.name=v;})));
     dg.appendChild(ig("WhatsApp Number",inp("","+973 XXXX XXXX",cg.phone,function(v){S.checkoutGarage.phone=v;},{type:"tel",dir:"ltr"})));
     dg.appendChild(ig("Vehicle (if applicable)",inp("","e.g. Toyota Camry 2020 for customer",cg.vehicle,function(v){S.checkoutGarage.vehicle=v;})));
-    dg.appendChild(ig("Delivery Preference",seldrop("",[{val:"pickup",label:"Pickup from Wasel Auto"},{val:"cod",label:"Cash on Delivery (COD)"}],S.checkoutDelivery,function(v){S.checkoutDelivery=v;})));
+    dg.appendChild(ig("Delivery Address",inp("","e.g. Garage name, Road, Block, Area",cg.address,function(v){S.checkoutGarage.address=v;})));
     dg.appendChild(ig("Notes",inp("","Any special instructions…",cg.notes,function(v){S.checkoutGarage.notes=v;})));
     db.appendChild(dg);
+    db.appendChild(el("div",{style:{fontSize:"0.75rem",color:"var(--mut)",marginTop:"0.6rem"}},["💳 Full payment is required via Benefit Pay before we source and deliver your parts — delivery starts once payment is confirmed."]));
     dp.appendChild(db);
     wrap.appendChild(dp);
     wrap.appendChild(el("div",{style:{display:"flex",gap:"8px"}},[
       btn("btn-gh","← Back to Cart",function(){S.checkoutStep=0;render();}),
       btn("btn-r btn-lg","Generate Quotation →",function(){
-        if(!S.checkoutGarage.name||!S.checkoutGarage.phone){showToast("Please fill garage name and WhatsApp number");return;}
+        if(!S.checkoutGarage.name||!S.checkoutGarage.phone||!S.checkoutGarage.address){showToast("Please fill garage name, WhatsApp number and delivery address");return;}
         generateQuotation();
       }),
     ]));
@@ -841,7 +1053,15 @@ function renderCart(){
   if(S.checkoutStep===2&&S.activeQT){
     wrap.appendChild(renderQuotationDoc(S.activeQT));
     var btnRow=div("doc-actions");
-    btnRow.appendChild(btn("btn-d","⬇️ Download PDF",function(){downloadPDF(".pdf-doc","Wasel-Auto-Quotation-"+S.activeQT.ref+".pdf");}));
+    btnRow.appendChild(btn("btn-d","⬇️ Download PDF",function(){
+      if(!pdfReady()){showToast("PDF tool still loading — please try again in a second");return;}
+      showToast("Preparing your PDF…");
+      try{
+        var doc=buildQuotationPDF(S.activeQT);
+        doc.save("Wasel-Auto-Quotation-"+S.activeQT.ref+".pdf");
+        showToast("✓ Downloaded");
+      }catch(e){showToast("Couldn't build the PDF — try Print instead");}
+    }));
     var qtWA=buildQTWhatsApp(S.activeQT);
     btnRow.appendChild(el("a",{href:"https://wa.me/97333844859?text="+encodeURIComponent(qtWA),target:"_blank",rel:"noopener",className:"btn btn-wa"},["💬 Send to Wasel Auto"]));
     btnRow.appendChild(btn("btn-gh btn-sm","🖨️ Print instead",function(){window.print();}));
@@ -865,7 +1085,7 @@ function buildQTWhatsApp(qt){
   lines.push("","Subtotal: "+qt.subtotal.toFixed(3)+" BHD");
   lines.push("Service Fee: "+qt.serviceFee.toFixed(3)+" BHD");
   lines.push("TOTAL: "+qt.total.toFixed(3)+" BHD");
-  lines.push("Delivery: "+(qt.delivery||"Pickup"));
+  lines.push("Deliver to: "+(qt.garage.address||"—"));
   if(qt.garage.notes)lines.push("Notes: "+qt.garage.notes);
   lines.push("","I will pay via Benefit Pay and send the screenshot with this reference number.");
   return lines.join("\n");
@@ -878,7 +1098,7 @@ function generateQuotation(){
   var qt={
     ref:genRef("QT"),date:today(),status:"pending_payment",
     garage:Object.assign({},S.checkoutGarage),
-    delivery:S.checkoutDelivery,
+    delivery:"Delivery after Benefit Pay confirmation",
     items:S.cart.map(function(i){return{name:i.part.name,brand:i.part.brand,cat:i.part.cat,warranty:i.part.warranty,qty:i.qty,unitPrice:i.part.waselPrice,total:i.part.waselPrice*i.qty,margin:i.margin!=null?i.margin:20};}),
     subtotal:sub,serviceFee:fee,total:total,
     member:S.member?S.member.garageName:"Unknown",
@@ -917,7 +1137,7 @@ function renderQuotationDoc(qt){
   pt.appendChild(el("div",{className:"pdf-party-name"},[qt.garage.name||qt.member]));
   if(qt.garage.phone)pt.appendChild(el("div",{className:"pdf-party-detail"},[qt.garage.phone]));
   if(qt.garage.vehicle)pt.appendChild(el("div",{className:"pdf-party-detail"},["Vehicle: "+qt.garage.vehicle]));
-  pt.appendChild(el("div",{className:"pdf-party-detail"},["Delivery: "+qt.delivery]));
+  if(qt.garage.address)pt.appendChild(el("div",{className:"pdf-party-detail"},["Deliver to: "+qt.garage.address]));
   pp.appendChild(pt);body.appendChild(pp);
   var tbl=el("table",{className:"pdf-table"});
   var thead=el("thead",{});
@@ -942,12 +1162,12 @@ function renderQuotationDoc(qt){
     var bb=div("pdf-benefit-box");
     bb.appendChild(el("div",{className:"pdf-benefit-title"},["Payment Instructions — Benefit Pay"]));
     bb.appendChild(el("div",{className:"pdf-benefit-detail"},[
-      "Please pay the total amount of ",el("strong",{},[qt.total.toFixed(3)+" BHD"])," via Benefit Pay to:",el("br"),el("br"),
+      "Please pay ",el("strong",{},["100% in advance"])," — the full amount of ",el("strong",{},[qt.total.toFixed(3)+" BHD"])," — via Benefit Pay to:",el("br"),el("br"),
       el("strong",{},["Account Number: +973 3384 4859"]),el("br"),
       el("strong",{},["Account Name: Sahaam"]),el("br"),el("br"),
       "⚠️ IMPORTANT: In the payment reference or note, write: ",el("strong",{},[qt.ref]),el("br"),
       "Then WhatsApp your payment screenshot to +973 3384 4859 with this reference number.",el("br"),
-      "We will confirm and send your Invoice Number within 1–2 hours.",
+      "We will confirm and send your Invoice Number and Invoice PIN within 1–2 hours.",
     ]));
     body.appendChild(bb);
   }
@@ -1331,18 +1551,25 @@ function renderInvoices(){
     var lock=div("inv-lock");
     lock.appendChild(el("div",{style:{fontSize:"2.2rem",marginBottom:"0.6rem"}},["🧾"]));
     lock.appendChild(el("h2",{style:{fontFamily:"'Barlow'",fontWeight:"900",color:"white",fontSize:"1.2rem",marginBottom:"0.5rem"}},[S.ar?"أداة فاتورة الورشة":"Garage Invoice Builder"]));
-    lock.appendChild(el("p",{style:{color:"#999",fontSize:"0.83rem",marginBottom:"1.2rem",lineHeight:"1.7"}},[S.ar?"أدخل رقم مرجع الفاتورة من وصل أوتو لبناء فاتورة عميلك":"Enter your Wasel Auto reference number to pull in your paid items and build your own customer invoice — your margin stays private."]));
-    var row=div("",null,{style:{display:"flex",gap:"8px"}});
-    var refI=el("input",{className:"ref-input",placeholder:"e.g. WA-260727-1234"});refI.value=S.invRefInput;
+    lock.appendChild(el("p",{style:{color:"#999",fontSize:"0.83rem",marginBottom:"1.2rem",lineHeight:"1.7"}},[S.ar?"أدخل رقم مرجع الفاتورة والرقم السري من وصل أوتو لبناء فاتورة عميلك":"Enter your Wasel Auto reference number and the secret Invoice PIN we send you after payment — your margin stays private."]));
+    var row=div("",null,{style:{display:"flex",gap:"8px",flexWrap:"wrap"}});
+    var refI=el("input",{className:"ref-input",placeholder:"e.g. QT-260804-8325"});refI.value=S.invRefInput;
     refI.addEventListener("input",function(){S.invRefInput=refI.value;});
     refI.addEventListener("keydown",function(e){if(e.key==="Enter")unlockInv();});
     row.appendChild(refI);
+    var pinI=el("input",{className:"ref-input",placeholder:"Secret Invoice PIN",style:{maxWidth:"160px"}});pinI.value=S.invPinInput||"";
+    pinI.addEventListener("input",function(){S.invPinInput=pinI.value;});
+    pinI.addEventListener("keydown",function(e){if(e.key==="Enter")unlockInv();});
+    row.appendChild(pinI);
     function unlockInv(){
       var ref=(S.invRefInput||"").trim().toUpperCase();
-      if(!ref){S.invRefError="Please enter a reference number";render();return;}
+      var pin=(S.invPinInput||"").trim();
+      if(!ref||!pin){S.invRefError="Please enter both the reference number and the Invoice PIN";render();return;}
       var log=getLog("wasel_quotations");
       var found=log.find(function(q){return q.ref.toUpperCase()===ref;});
       if(!found){S.invRefError="Reference not found. Check your quotation document.";render();return;}
+      if(found.status!=="paid"){S.invRefError="This quotation hasn't been marked as paid yet — please wait for payment confirmation.";render();return;}
+      if(!found.invoicePin||found.invoicePin!==pin){S.invRefError="Incorrect Invoice PIN. Check the message Wasel Auto sent you.";render();return;}
       S.invRef=found.ref;S.invNum=found.invoiceNum||"";
       S.invGarage={name:found.garage.name||"",phone:found.garage.phone||"",vehicle:found.garage.vehicle||"",plate:""};
       S.invItems=found.items.map(function(it){return{desc:it.name,cost:it.unitPrice,margin:it.margin!=null?it.margin:20,qty:it.qty};});
@@ -1352,7 +1579,7 @@ function renderInvoices(){
     lock.appendChild(row);
     if(S.invRefError)lock.appendChild(el("div",{className:"ref-error"},[S.invRefError]));
     var stepsWrap=div("",null,{style:{marginTop:"1.2rem",textAlign:"left"}});
-    ["Complete your parts order and pay via Benefit Pay","Receive your Wasel Auto reference number","Enter it here to unlock your items — your margins from checkout carry over automatically","Adjust anything if needed — your customer only ever sees the final price"].forEach(function(s,i){
+    ["Complete your parts order and pay via Benefit Pay","Wasel Auto confirms payment and sends your reference number + secret Invoice PIN","Enter both here to unlock your items — your margins from checkout carry over automatically","Adjust anything if needed — your customer only ever sees the final price"].forEach(function(s,i){
       var st=div("ref-step");
       st.appendChild(el("div",{className:"ref-step-num"},[String(i+1)]));
       st.appendChild(el("div",{},[s]));
@@ -1362,7 +1589,7 @@ function renderInvoices(){
     wrap.appendChild(lock);
     return wrap;
   }
-  wrap.appendChild(btn("btn-gh btn-sm","🔓 "+S.invRef+" — Change Reference",function(){S.invUnlocked=false;S.invRefInput="";S.invItems=[];render();}));
+  wrap.appendChild(btn("btn-gh btn-sm","🔓 "+S.invRef+" — Change Reference",function(){S.invUnlocked=false;S.invRefInput="";S.invPinInput="";S.invItems=[];render();}));
   var cp=div("panel",null,{style:{marginTop:"0.8rem"}});
   cp.appendChild(makePHead("👤","Customer Details","Shown on the invoice sent to your customer"));
   var cb2=div("pbody");
@@ -1377,11 +1604,32 @@ function renderInvoices(){
   var ip=div("panel");
   ip.appendChild(makePHead("📦","Items & Your Margin","Cost is what you paid Wasel Auto — margin is your profit, never shown to the customer"));
   var ib=div("pbody");
+  var immRow=div("",null,{style:{display:"flex",gap:"6px",marginBottom:"0.9rem",alignItems:"center",flexWrap:"wrap"}});
+  immRow.appendChild(el("span",{style:{fontSize:"0.75rem",color:"var(--mut)",fontWeight:"600"}},["Margin:"]));
+  immRow.appendChild(btn(S.invMarginMode!=="overall"?"btn-r btn-sm":"btn-gh btn-sm","Per Item",function(){S.invMarginMode="item";render();}));
+  immRow.appendChild(btn(S.invMarginMode==="overall"?"btn-r btn-sm":"btn-gh btn-sm","One Overall %",function(){
+    S.invMarginMode="overall";
+    S.invItems.forEach(function(i){i.margin=S.invOverallMargin!=null?S.invOverallMargin:20;});
+    render();
+  }));
+  if(S.invMarginMode==="overall"){
+    var iomInp=el("input",{type:"number",value:S.invOverallMargin!=null?S.invOverallMargin:20,style:{width:"60px",padding:"4px 7px",fontSize:"0.8rem",border:"1px solid var(--bdr)",borderRadius:"5px"}});
+    iomInp.addEventListener("input",function(){
+      S.invOverallMargin=parseFloat(iomInp.value)||0;
+      S.invItems.forEach(function(i){i.margin=S.invOverallMargin;});
+      render();
+    });
+    immRow.appendChild(iomInp);
+    immRow.appendChild(el("span",{style:{fontSize:"0.75rem",color:"var(--mut)"}},["% applied to every item"]));
+  }
+  ib.appendChild(immRow);
   S.invItems.forEach(function(item,idx){
     var row=div("",null,{style:{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 0.7fr auto",gap:"8px",alignItems:"center",marginBottom:"8px",paddingBottom:"8px",borderBottom:"1px solid var(--bdr)"}});
     row.appendChild(inp("","Description",item.desc,function(v){item.desc=v;}));
     row.appendChild(inp("","Cost",item.cost,function(v){item.cost=parseFloat(v)||0;render();},{type:"number",step:"0.001"}));
-    row.appendChild(inp("","Margin %",item.margin,function(v){item.margin=parseFloat(v)||0;render();},{type:"number"}));
+    var mgInp=inp("","Margin %",item.margin,function(v){item.margin=parseFloat(v)||0;render();},{type:"number"});
+    if(S.invMarginMode==="overall"){mgInp.disabled=true;mgInp.style.opacity="0.5";}
+    row.appendChild(mgInp);
     row.appendChild(inp("","Qty",item.qty,function(v){item.qty=parseInt(v)||1;render();},{type:"number"}));
     row.appendChild(btn("btn-gh btn-sm","🗑",function(){S.invItems.splice(idx,1);render();}));
     ib.appendChild(row);
@@ -1410,7 +1658,13 @@ function renderInvoices(){
   wrap.appendChild(el("div",{className:"inv-profit-note"},["💰 Your cost: "+fmtBHD(totalCost)+"  →  Customer pays: "+fmtBHD(totalSell)+"  →  Your profit: "+fmtBHD(totalSell-totalCost)]));
   wrap.appendChild(btn("btn-r btn-lg btn-full","⬇️ Download Customer Invoice PDF",function(){
     if(S.invItems.length===0){showToast("Add at least one item");return;}
-    downloadPDF(".cust-inv","Wasel-Auto-Invoice-"+(S.invRef||"customer")+".pdf");
+    if(!pdfReady()){showToast("PDF tool still loading — please try again in a second");return;}
+    showToast("Preparing your PDF…");
+    try{
+      var doc=buildInvoicePDF(S.member?S.member.garageName:"Your Garage",S.invGarage.phone,S.invGarage,S.invItems,S.invNote);
+      doc.save("Wasel-Auto-Invoice-"+(S.invRef||"customer")+".pdf");
+      showToast("✓ Downloaded");
+    }catch(e){showToast("Couldn't build the PDF — try Print instead");}
   }));
   wrap.appendChild(btn("btn-gh btn-sm","🖨️ Print instead",function(){
     if(S.invItems.length===0){showToast("Add at least one item");return;}
@@ -1514,12 +1768,20 @@ function renderAdmin(){
     if(q.status!=="paid"){
       actions.appendChild(btn("btn-grn btn-sm","Mark Paid",function(){
         var idx=qLog.findIndex(function(x){return x.ref===q.ref;});
-        qLog[idx].status="paid";qLog[idx].invoiceNum=genRef("INV");
+        var pin=String(Math.floor(1000+Math.random()*9000));
+        qLog[idx].status="paid";qLog[idx].invoiceNum=genRef("INV");qLog[idx].invoicePin=pin;
         saveLog("wasel_quotations",qLog);
-        showToast("✓ Marked paid — Invoice "+qLog[idx].invoiceNum);render();
+        showToast("✓ Marked paid — Invoice "+qLog[idx].invoiceNum+" · PIN "+pin);render();
       }));
     } else {
-      actions.appendChild(el("span",{style:{fontSize:"0.7rem",color:"var(--grn)",fontWeight:"700"}},["✓ "+q.invoiceNum]));
+      var paidInfo=div("",null,{style:{textAlign:"right"}});
+      paidInfo.appendChild(el("div",{style:{fontSize:"0.7rem",color:"var(--grn)",fontWeight:"700"}},["✓ "+q.invoiceNum]));
+      paidInfo.appendChild(el("div",{style:{fontSize:"0.68rem",color:"var(--mut)",fontFamily:"'JetBrains Mono'"}},["PIN: "+(q.invoicePin||"—")]));
+      actions.appendChild(paidInfo);
+      if(q.invoicePin){
+        var pinMsg="Hi "+(q.garage.name||"")+", your Wasel Auto payment is confirmed ✅\n\nRef: "+q.ref+"\nInvoice Number: "+q.invoiceNum+"\nSecret Invoice PIN: "+q.invoicePin+"\n\nGo to My Invoices on the Wasel Auto app, enter both to build and download your customer invoice.";
+        actions.appendChild(el("a",{href:"https://wa.me/"+(q.garage.phone||"").replace(/[^0-9]/g,"")+"?text="+encodeURIComponent(pinMsg),target:"_blank",rel:"noopener",className:"btn btn-wa btn-sm"},["💬 Send PIN"]));
+      }
     }
     row.appendChild(actions);
     qb.appendChild(row);
